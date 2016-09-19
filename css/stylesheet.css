@@ -6,9 +6,9 @@ body {
     padding: 0;
     margin: 0;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 16px;
     line-height: 1.5;
     color: #606c71;
+    position: relative;
 }
 
 a {
@@ -24,21 +24,6 @@ h1 {
     border-bottom: 1px solid #1eb9c5;
 }
 
-h2,h3 {
-    padding-left: 15px;
-}
-
-h4, p {
-    padding-left: 60px;
-}
-
-ol, ul {
-    padding-left: 80px;
-}
-
-ol > li, ul > li {
-    padding-left: 10px;
-}
 
 .nice {
     border-radius: 5px;
@@ -77,7 +62,6 @@ ol > li, ul > li {
 @media screen and (min-width: 42em) and (max-width: 64em) {
     .btn {
         padding: 0.6rem 0.9rem;
-        font-size: 0.9rem;
     }
 }
 
@@ -86,7 +70,6 @@ ol > li, ul > li {
         display: block;
         width: 100%;
         padding: 0.75rem;
-        font-size: 0.9rem;
     }
 
     .btn + .btn {
@@ -102,23 +85,6 @@ ol > li, ul > li {
     background-image: linear-gradient(120deg, #57595a, #1eb9c4);
 }
 
-@media screen and (min-width: 64em) {
-    .page-header {
-        padding: 5rem 6rem;
-    }
-}
-
-@media screen and (min-width: 42em) and (max-width: 64em) {
-    .page-header {
-        padding: 3rem 4rem;
-    }
-}
-
-@media screen and (max-width: 42em) {
-    .page-header {
-        padding: 2rem 1rem;
-    }
-}
 
 .project-name {
     margin-top: 0;
@@ -129,19 +95,16 @@ ol > li, ul > li {
 
 @media screen and (min-width: 64em) {
     .project-name {
-        font-size: 3.25rem;
     }
 }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
     .project-name {
-        font-size: 2.25rem;
     }
 }
 
 @media screen and (max-width: 42em) {
     .project-name {
-        font-size: 1.75rem;
     }
 }
 
@@ -153,29 +116,65 @@ ol > li, ul > li {
 
 @media screen and (min-width: 64em) {
     .project-tagline {
-        font-size: 1.25rem;
     }
 }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
     .project-tagline {
-        font-size: 1.15rem;
     }
 }
 
 @media screen and (max-width: 42em) {
     .project-tagline {
-        font-size: 1rem;
     }
 }
 
 
 .menu {
     background-color: white;
-    border: black;
-    bottom: 0;
-    right: 0;
-    padding: 10px 100px 10px 10px;
+    border-right: 2px solid #526163;
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+    padding: 0;
+    z-index: 10;
+}
+
+.navbar {
+    border: none;
+}
+
+.navbar .nav>.active>a, .navbar .nav>.active>a:hover, .navbar .nav>.active>a:focus {
+    color: #555;
+    background-color: #e7e7e7;
+}
+.navbar-header {
+    width: 100%;
+}
+
+.h2item {
+    display: none;
+    margin-left: 15px;
+}
+
+.h3item {
+    display: none;
+    margin-left: 30px;
+}
+
+.active > .h2item, .h2item > .active, .active > .h2item > .h3item, .active > .h3item    {
+    display: block;
+}
+
+.navbar-collapse {
+    padding: 0;
+}
+
+.nav>li>a {
+    position: inherit;
+    display: -webkit-inline-box;
 }
 
 .main-content :first-child {
@@ -200,7 +199,6 @@ ol > li, ul > li {
 .main-content code {
     padding: 2px 4px;
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 0.9rem;
     color: #383e41;
     background-color: #f3f6fa;
     border-radius: 0.3rem;
@@ -221,7 +219,6 @@ ol > li, ul > li {
 .main-content pre > code {
     padding: 0;
     margin: 0;
-    font-size: 0.9rem;
     color: #567482;
     word-break: normal;
     white-space: pre;
@@ -241,7 +238,6 @@ ol > li, ul > li {
 .main-content .highlight pre, .main-content pre {
     padding: 0.8rem;
     overflow: auto;
-    font-size: 0.9rem;
     line-height: 1.45;
     border-radius: 0.3rem;
 }
@@ -268,7 +264,6 @@ ol > li, ul > li {
 
 .main-content blockquote {
     padding: 0 1rem;
-    margin-left: 0;
     color: #819198;
     border-left: 0.3rem solid #dce6f0;
 }
@@ -305,7 +300,6 @@ ol > li, ul > li {
 .main-content dl dt {
     padding: 0;
     margin-top: 1rem;
-    font-size: 1rem;
     font-weight: bold;
 }
 
@@ -324,24 +318,19 @@ ol > li, ul > li {
 
 @media screen and (min-width: 64em) {
     .main-content {
-        max-width: 64rem;
         padding: 2rem 6rem;
-        margin: 0 auto;
-        font-size: 1.1rem;
     }
 }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
     .main-content {
         padding: 2rem 4rem;
-        font-size: 1.1rem;
     }
 }
 
 @media screen and (max-width: 42em) {
     .main-content {
         padding: 2rem 1rem;
-        font-size: 1rem;
     }
 }
 
@@ -362,19 +351,16 @@ ol > li, ul > li {
 
 @media screen and (min-width: 64em) {
     .site-footer {
-        font-size: 1rem;
     }
 }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
     .site-footer {
-        font-size: 1rem;
     }
 }
 
 @media screen and (max-width: 42em) {
     .site-footer {
-        font-size: 0.9rem;
     }
 }
 
