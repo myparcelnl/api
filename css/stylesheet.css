@@ -12,12 +12,15 @@ body {
 }
 
 a {
-    color: #1e6bb8;
+    color: #1eb9c5;
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
+}
+a:hover, a:focus {
+    color: #526263;
 }
 
 h1 {
@@ -132,7 +135,7 @@ h1 {
 
 .menu {
     background-color: white;
-    border-right: 2px solid #526163;
+    border-right: 1px solid #526163;
     top: 0;
     left: 0;
     position: fixed;
