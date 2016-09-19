@@ -174,7 +174,7 @@ h1 {
 
 .nav>li>a {
     position: inherit;
-    display: -webkit-inline-box;
+    display: block;
 }
 
 .main-content :first-child {
