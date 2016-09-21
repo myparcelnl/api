@@ -30,9 +30,9 @@
                 MyParcel API Documentatie
             </h1>
             <h2 class="project-tagline">
-                Beta version 2.0.4
+                <span id="current_version"></span>
             </h2>
-            <!--     <a target="_blank" class="btn" href="https://github.com/myparcelnl/Magento1">GitHub</a> -->
+            <a target="_blank" class="btn" href="https://github.com/myparcelnl/api/releases">Laatste updates</a>
         </section>
         <section class="main-content col-xs-8 col-xs-offset-4 col-lg-7 col-lg-offset-4">
 
@@ -3463,8 +3463,16 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8{
 
                 <h1 id="11">11. Document changes</h1>
                 <p>
-                    <a target="_blank" href="https://github.com/myparcelnl/api/releases">Klik hier</a> voor de laatste updates van de API. De laatste aanpassing is gedaan op ....
+                    <a target="_blank" href="https://github.com/myparcelnl/api/releases">Klik hier</a> voor de laatste updates van de API. De laatste aanpassing is gedaan op <span id="current_version_date"></span>.
                 </p>
+                <script>
+                    $.get('https://api.github.com/repos/myparcelnl/api/releases/latest', function (data) {
+                        var day = data.published_at.split('T')[0];
+                        var parts = day.split('-');
+                        $('#current_version_date').html(parts[2] + '-' + parts[1] + '-' + parts[0]);
+                        $('#current_version').html(data.name);
+                    });
+                </script>
 
 
                 <footer class="site-footer">
