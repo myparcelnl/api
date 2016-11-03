@@ -1662,6 +1662,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
          "results":50
       }
    }
+<<<<<<< Updated upstream
 }</pre>
                 </p>
 
@@ -1747,6 +1748,149 @@ Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=</pre>
                 </p>
 
                 <p><strong>Response</strong><br>
+=======
+}</pre></p>
+
+        <h2 id="6_F">6.F Get Shipment label</h2>
+        <h3 id="6_F_1">6.F.1 Reference </h3>
+            <table>
+            <tr><th>URI</th> <td>https://api.myparcel.nl/shipment_labels/ID[;ID]</td></tr>
+            <tr><th>Methods</th> <td><u>GET</u></td></tr>
+            <tr><th rowspan="3">Required request headers</th> <td><u>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</u></td></tr>
+            <tr><td>Accept: application/json; charset=utf8 (For shipment download link)</td></tr>
+            <tr><td>Accept: application/pdf (For the PDF binary. This is the default.)</td></tr>
+            <tr><th>URI parameters</th> <td>ID= <u>Shipment.id.</u></td></tr>
+            <tr><th rowspan="2">Request parameters</th> <td>FORMAT = <u>paper size</u></td></tr>
+            <tr><td>POSITIONS = <u>label position</u></td></tr>
+            <tr><th>Request body</th> <td>None.</td></tr>
+            <tr><th rowspan="2">Response</th><td>HTTP/1.1 200 OK
+                Content-Disposition: attachment; filename="<PDF_FILE>"
+                Content-Type: application/pdf</td></tr>
+            <tr><td>HTTP/1.1 402 Payment Required
+                Content-Type: application/json (When payment is required.)</td></tr>
+            <tr><th rowspan="2">Response body</th><td>Shipment label PDF</td></tr>
+            <tr><td><u>Transaction</u> (When payment is required)</td></tr>
+            <tr><th>Error response</th><td>HTTP/1.1 4xx < MESSAGE> </td></tr>
+            <tr><th>Error response body</th><td><u>Error</u></td></tr>
+        </table>
+
+        <h3 id="6_F_2">6.F.2 Overview </h3>
+        <p>Get shipment label. You can specify label format and starting position of labels on
+        the first page with the FORMAT and POSITION query parameters. The POSITION
+        query only works when you specify the A4 format and is only applied on the first
+        page with labels. <br>See <u>Shipment label</u> for more information on position and format.
+        Accounts with <u>Postpayment</u> payment methods can fetch multiple labels in one call.
+        For accounts with <u>Prepayment</u> payment method an HTTP/1.1 402 Payment
+        Required with an <u>Transaction</u> object is returned if the label has not been paid for
+        yet.<br><br>
+        Upon error HTTP/1.1 4xx <MESSAGE> with a response body containing an Error is
+        returned.</p>
+
+        <h3 id="6_F_3">6.F.3 Parameters </h3>
+
+        <p><strong>ID</strong><br>
+        Data type: <u>Shipment.id</u><br>
+        This is the shipment id. You can specify multiple shipment ids by semi-colon
+        separating them on the URI.</p>
+
+        <p><strong>FORMAT</strong><br>
+        Data type: <u>paper_size</u><br>
+        The paper size of the PDF. Currently A4 and A6 are supported. When A4 is chosenyou can specify the label position.<br>
+		See <u>Shipment label</u> for more information on position and format.</p>
+
+        <p><strong>POSITIONS</strong><br>
+        Data type: <u>label_position</u><br>
+        The position of the label on an A4 sheet. You can specify multiple positions by semi-colon separating them on the URI. Positioning is only applied on the first page with labels. All subsequent pages will use the default positioning 1,2,3,4.</p>
+
+        
+        <h3 id="6_F_4">6.F.4 Example </h3>
+        <p><strong>Json</strong><br>
+        <p><strong>Search for shipments</strong><br> Search shipments for fields containing 'Niels' with status 'pending'. The first
+        shipment has 'Jan' in the person field.</p>
+
+        <p><strong>Request</strong></p>
+        <pre>GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1 
+        Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=</pre></p>
+
+        <p><strong>Response</strong></p>
+        <pre>HTTP/1.1 200 OK Content-Disposition: attachment; filename="123123123.pdf" Content-Type: application/pdf
+(...PDF content)</pre>
+
+	<p><strong>Get shipment label download link</strong></p>
+	<p><strong>Request</strong></p>
+	<pre>GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1 Authorization: basic
+SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc= Accept: application/json;charset=utf-8</pre>
+
+	<p><strong>Response</strong></p>
+	<pre>HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8{  
+   "data":{  
+      "pdfs":{  
+         "url":"/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
+      }
+   }
+}</pre>
+
+	<p><strong>Get shipment label with different format and position</strong><br>
+	Get label for shipment with ID 2. The label will be printed on an A4 sheet and the
+	label position will be at the bottom-right.</p>
+
+	<p><strong>Request</strong></p>
+	<pre>GET https://api.myparcel.nl/shipment_labels/2?format=A4&positions=3;4 HTTP/1.1 Authorization: basic
+SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=</pre>
+
+	<p><strong>Response</strong></p>
+	<pre>HTTP/1.1 200 OK Content-Disposition: attachment; filename="456456456456.pdf" Content-Type:
+application/pdf (...PDF content)</pre>
+
+
+<h2 id="6_G">6.G Track Shipment</h2>
+        <h3 id="6_G_1">6.G.1 Reference </h3>
+            <table>
+            <tr><th>URI</th> <td>https://api.myparcel.nl/tracktraces/[:ID[;ID]]</td></tr>
+            <tr><th>Methods</th> <td><u>GET</u></td></tr>
+            <tr> <th>Required request headers</th><td><u>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</u></td></tr>
+            <tr><th>URI parameters</th> <td>ID= <u>Shipment.id.</u></td></tr>
+            <tr><th>Request parameters</th> <td><u>paging uri parameters</u></td></tr>
+            <tr><th>Request body</th> <td>None.</td></tr>
+            <tr><th rowspan="2">Response</th><td>HTTP/1.1 200 OK</td></tr>
+            <tr><td>Content-Type: application/json; charset=utf-8</td></tr>
+            <tr><th>Response body</th><td>Array of <u>TrackTrace</u> objects.</td></tr>
+            <tr><th>Error response</th><td>HTTP/1.1 4xx < MESSAGE> </td></tr>
+            <tr><th>Error response body</th><td><u>Error</u></td></tr>
+        </table>
+
+        <h3 id="6_G_2">6.G.2 Overview </h3>
+        <p>Get detailed track and trace information for a shipment. Upon success HTTP/1.1 200 OK is returned with an array of <u>TrackTrace</u> objects.</p>
+        <h3 id="6_G_3">6.G.3 Parameters </h3>
+
+        <p><strong>ID</strong><br>
+        Data type: <u>Shipment.id</u><br>
+        This is the shipment id. You can specify multiple shipment ids by semi-colon
+        separating them on the URI.</p>
+
+        <p><strong>page</strong><br>
+        Data type: <u>integer</u><br>
+        Page number. Maximum value is 1000 and minimum is 1. Defaults to 1.</p>
+
+        <p><strong>size</strong><br>
+        Data type: <u>integer</u><br>
+        Items per page. Maximum value is 200 and minimum is 30. Defaults to 30.</p>
+
+        <p><strong>sort</strong><br>
+        Data type: <u>string</u><br>
+        TrackTrace object field to sort on. See <u>TrackTrace</u></p>
+
+        <p><strong>order</strong><br>
+        Data type: <u>sort_order</u><br>
+        Sort order for sort filter. Defaults to ASC.</p>
+
+        <h3 id="6_G_4">6.G.4 Example </h3>
+        <p><strong>Request</strong><br>
+        <pre>GET https://api.myparcel.nl/tracktraces/12 HTTP/1.1 
+Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=</pre></p>
+
+        <p><strong>Response</strong><br>
+
         <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
