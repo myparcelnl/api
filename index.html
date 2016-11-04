@@ -1662,96 +1662,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
          "results":50
       }
    }
-<<<<<<< Updated upstream
 }</pre>
                 </p>
 
-                <h2 id="6_G">6.G Track Shipment</h2>
-                <h3 id="6_G_1">6.G.1 Reference </h3>
-                <table>
-                    <tr>
-                        <th>URI</th>
-                        <td>https://api.myparcel.nl/tracktraces/[:ID[;ID]]</td>
-                    </tr>
-                    <tr>
-                        <th>Methods</th>
-                        <td><u>GET</u></td>
-                    </tr>
-                    <tr>
-                        <th>Required request headers</th>
-                        <td><u>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</u></td>
-                    </tr>
-                    <tr>
-                        <th>URI parameters</th>
-                        <td>ID= <u>Shipment.id.</u></td>
-                    </tr>
-                    <tr>
-                        <th>Request parameters</th>
-                        <td><u>paging uri parameters</u></td>
-                    </tr>
-                    <tr>
-                        <th>Request body</th>
-                        <td>None.</td>
-                    </tr>
-                    <tr>
-                        <th rowspan="2">Response</th>
-                        <td>HTTP/1.1 200 OK</td>
-                    </tr>
-                    <tr>
-                        <td>Content-Type: application/json; charset=utf-8</td>
-                    </tr>
-                    <tr>
-                        <th>Response body</th>
-                        <td>Array of <u>TrackTrace</u> objects.</td>
-                    </tr>
-                    <tr>
-                        <th>Error response</th>
-                        <td>HTTP/1.1 4xx < MESSAGE></td>
-                    </tr>
-                    <tr>
-                        <th>Error response body</th>
-                        <td><u>Error</u></td>
-                    </tr>
-                </table>
-
-                <h3 id="6_G_2">6.G.2 Overview </h3>
-                <p>Get detailed track and trace information for a shipment. Upon success HTTP/1.1 200 OK is returned
-                    with an
-                    array of <u>TrackTrace</u> objects.</p>
-                <h3 id="6_G_3">6.G.3 Parameters </h3>
-
-                <p><strong>ID</strong><br>
-                    Data type: <u>Shipment.id</u><br>
-                    This is the shipment id. You can specify multiple shipment ids by semi-colon
-                    separating them on the URI.</p>
-
-                <p><strong>page</strong><br>
-                    Data type: <u>integer</u><br>
-                    Page number. Maximum value is 1000 and minimum is 1. Defaults to 1.</p>
-
-                <p><strong>size</strong><br>
-                    Data type: <u>integer</u><br>
-                    Items per page. Maximum value is 200 and minimum is 30. Defaults to 30.</p>
-
-                <p><strong>sort</strong><br>
-                    Data type: <u>string</u><br>
-                    TrackTrace object field to sort on. See <u>TrackTrace</u></p>
-
-                <p><strong>order</strong><br>
-                    Data type: <u>sort_order</u><br>
-                    Sort order for sort filter. Defaults to ASC.</p>
-
-                <h3 id="6_G_4">6.G.4 Example </h3>
-                <p><strong>Request</strong><br>
-        <pre>GET https://api.myparcel.nl/tracktraces/12 HTTP/1.1
-Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=</pre>
-                </p>
-
-                <p><strong>Response</strong><br>
-=======
-}</pre></p>
 
         <h2 id="6_F">6.F Get Shipment label</h2>
+
         <h3 id="6_F_1">6.F.1 Reference </h3>
             <table>
             <tr><th>URI</th> <td>https://api.myparcel.nl/shipment_labels/ID[;ID]</td></tr>
@@ -1804,9 +1720,7 @@ Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=</pre>
 
         
         <h3 id="6_F_4">6.F.4 Example </h3>
-        <p><strong>Json</strong><br>
-        <p><strong>Search for shipments</strong><br> Search shipments for fields containing 'Niels' with status 'pending'. The first
-        shipment has 'Jan' in the person field.</p>
+        <p><strong>Get Shipment label</strong></p>
 
         <p><strong>Request</strong></p>
         <pre>GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1 
