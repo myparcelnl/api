@@ -1183,6 +1183,7 @@ charset=utf-8 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=
                "city":"Hoofddorp",
                "street":"Hoofdweg",
                "number":"679",
+               "number_prefix":"A",
                "postal_code":"2131BC",
                "person":"Mr. Parcel",
                "phone":"0213030315",
@@ -1711,8 +1712,8 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 
         <p><strong>FORMAT</strong><br>
         Data type: <u>paper_size</u><br>
-        The paper size of the PDF. Currently A4 and A6 are supported. When A4 is chosenyou can specify the label position.<br>
-		See <u>Shipment label</u> for more information on position and format.</p>
+        The paper size of the PDF. Currently A4 and A6 are supported. When A4 is chosen you can specify the label position.<br>
+		When requesting the label for a shipment that contains a custom form, you can only request a A4 format.</p>
 
         <p><strong>POSITIONS</strong><br>
         Data type: <u>label_position</u><br>
