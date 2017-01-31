@@ -38,15 +38,16 @@
 
             <h1>Introduction</h1>
             <p>
-                This is the interface documentation for the MyParcel.nl API (previously known as Core API).
-                our API is build in such a way to easily handle bulk operations. We try to follow the REST
+                This is the documentation for the MyParcel.nl Core API.
+                Our API is build in such a way to easily handle bulk operations.
+                We try to follow the REST
                 architecture as much as possible but deviate from it when we need to achieve high performance.
             </p>
             <p>
                 The Base URL for all requests is: <a target="_blank" href="https://api.myparcel.nl">https://api.myparcel.nl</a>
             </p>
             <p>
-                Currently you’re looking at the most up-to-date version of the Documentation of the MyParcel.nl API as parts of our system are always evolving... it's hard to keep up
+                Currently you’re looking at the most up-to-date version of the Documentation of the MyParcel.nl API.
             </p>
             <ol>
                 <li>
@@ -117,11 +118,8 @@ Upgrade-Insecure-Requests: 1
 Accept-Encoding: gzip, deflate, sdch, br
 </pre>
 
-<strong>Request:</strong>
+<strong>Response:</strong>
 <pre>
-Response:
-
-
 {
   "title":"MyParcel API",
   "status":"OK"
@@ -181,7 +179,9 @@ Connection: keep-alive
                 <h3>2.A.III 401 - Unauthorized</h3>
                 <p>
                     No credentials have been sent with the request. Or the wrong credentials are send.
-                    Tip: check if the API key is properly attached in the header (i.e. <code>Authorization: basic d2FudF90b193b3JrX2Zvcl91cz9fY29udGFjdF91c192aWFfd2Vic2l0ZQ==</code>).
+                    Tip: check if the API key is properly attached in the header <br>
+
+                    <code>Authorization: basic d2FudF90b193b3JrX2Zvcl91cz9fY29udGFjdF91c192aWFfd2Vic2l0ZQ==</code>
                 </p>
 
                 <h3>2.A.III 402 - Payment Required</h3>
