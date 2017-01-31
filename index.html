@@ -104,37 +104,37 @@
                 <p>Example of a 200 Status code in our API (you can try this in your browser, then you know our API is online)</p>
                 <p>
                   <strong>Request:</strong>
-                  <pre>
-                  GET https://api.myparcel.nl/
+<pre>
+GET https://api.myparcel.nl/
 
-                  Request Headers (example!):
-                  GET / HTTP/1.1
-                  Host: api.myparcel.nl
-                  Connection: keep-alive
-                  Pragma: no-cache
-                  Cache-Control: no-cache
-                  Upgrade-Insecure-Requests: 1
-                  Accept-Encoding: gzip, deflate, sdch, br
-                  </pre>
+Request Headers (example!):
+GET / HTTP/1.1
+Host: api.myparcel.nl
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+Upgrade-Insecure-Requests: 1
+Accept-Encoding: gzip, deflate, sdch, br
+</pre>
 
-                  <strong>Request:</strong>
-                  <pre>
-                  Response:
+<strong>Request:</strong>
+<pre>
+Response:
 
 
-                  {
-                    "title":"MyParcel API",
-                    "status":"OK"
-                  }
+{
+  "title":"MyParcel API",
+  "status":"OK"
+}
 
-                  Response Headers (example!)
+Response Headers (example!)
 
-                  HTTP/1.1 200 OK
-                  Date: Tue, 31 Jan 2017 13:37:00 GMT
-                  Content-Type: application/json;charset=utf-8
-                  Transfer-Encoding: chunked
-                  Connection: keep-alive
-                  </pre>
+HTTP/1.1 200 OK
+Date: Tue, 31 Jan 2017 13:37:00 GMT
+Content-Type: application/json;charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+</pre>
 
                 </p>
 
@@ -914,7 +914,8 @@
   			}
   		}]
   	}
-  }</pre>
+  }
+</pre>
                 <p>Only package type 1 can be insured so package type is set to 1. Insurance amount needs to be
                     specified
                     in cents and needs to be one of these amounts (5000, 25000, 50000, 500000, >= 500000). The package
@@ -2217,91 +2218,91 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 
                 <h3 id=7_B_2>7.B.2 Example</h3>
                 <p>Example a</p>
-                <pre>
-                  {
-                  	"cc": "NL",
-                  	"city": "Hoofddorp",
-                  	"street": "Siriusdreef",
-                  	"number": "66-68",
-                  	"postal_code": "2132WT",
-                  	"person": "Mr. Parcel",
-                  	"phone": "0213030315",
-                  	"email": "parcel@myparcel.nl"
-                  }
-                </pre>
+<pre>
+{
+	"cc": "NL",
+	"city": "Hoofddorp",
+	"street": "Siriusdreef",
+	"number": "66-68",
+	"postal_code": "2132WT",
+	"person": "Mr. Parcel",
+	"phone": "0213030315",
+	"email": "parcel@myparcel.nl"
+}
+</pre>
 
                 <p>Example b</p>
-                <pre>
-                  {
-                  	"cc": "NL",
-                  	"city": "Hoofddorp",
-                  	"street": "Siriusdreef",
-                  	"number": "66",
-                  	"number_suffix": "-68",
-                  	"postal_code": "2132WT",
-                  	"person": "Mrs. Parcel",
-                  	"phone": "0213030315",
-                  	"email": "parcel@myparcel.nl"
-                  }
-                </pre>
+<pre>
+  {
+  	"cc": "NL",
+  	"city": "Hoofddorp",
+  	"street": "Siriusdreef",
+  	"number": "66",
+  	"number_suffix": "-68",
+  	"postal_code": "2132WT",
+  	"person": "Mrs. Parcel",
+  	"phone": "0213030315",
+  	"email": "parcel@myparcel.nl"
+  }
+</pre>
 
 
                 <p>Example c</p>
-                <pre>
-                  {
-                  	"cc": "FR",
-                  	"city": "Paris",
-                  	"street": "rue du Grenier-Saint-Lazare 22",
-                  	"person": "Claus Stuter",
-                  	"company": "Renault",
-                  	"email": "claus@paris.nl",
-                  	"postal_code": "75008",
-                  	"phone": "0033142723122"
-                  }
-                </pre>
+<pre>
+  {
+  	"cc": "FR",
+  	"city": "Paris",
+  	"street": "rue du Grenier-Saint-Lazare 22",
+  	"person": "Claus Stuter",
+  	"company": "Renault",
+  	"email": "claus@paris.nl",
+  	"postal_code": "75008",
+  	"phone": "0033142723122"
+  }
+</pre>
 
                 <p>Example d</p>
-    <pre>
-      {
-      	"cc": "NL",
-      	"city": "Zoetermeer",
-      	"street": "Louiarmstrongrode",
-      	"number": "18",
-      	"postal_code": "2717NH",
-      	"person": "Pato otap",
-      	"phone": "0790880808",
-      	"email": "pato@otap.nl"
-      }
-    </pre>
+<pre>
+  {
+  	"cc": "NL",
+  	"city": "Zoetermeer",
+  	"street": "Louiarmstrongrode",
+  	"number": "18",
+  	"postal_code": "2717NH",
+  	"person": "Pato otap",
+  	"phone": "0790880808",
+  	"email": "pato@otap.nl"
+  }
+</pre>
                 <p>Example e</p>
-    <pre>
-      {
-      	"cc": "NL",
-      	"city": "Hoofddorp",
-      	"street": "Siriusdreef",
-      	"number": "66",
-      	"person": "Jan Peter",
-      	"company": "MyParcel B.V.",
-      	"email": "janpeter@bedrijven.nl",
-      	"phone": "0203030315"
-      }
-    </pre>
+<pre>
+  {
+  	"cc": "NL",
+  	"city": "Hoofddorp",
+  	"street": "Siriusdreef",
+  	"number": "66",
+  	"person": "Jan Peter",
+  	"company": "MyParcel B.V.",
+  	"email": "janpeter@bedrijven.nl",
+  	"phone": "0203030315"
+  }
+</pre>
 
                 <p>Example i</p>
-    <pre>
-      {
-      	"cc": "JP",
-      	"city": "さいたま市",
-      	"street": "埼玉県さいたま市浦和区 常盤9－21－21",
-      	"person": "Tanaka san",
-      	"company": "さいたま国際キリスト教会",
-      	"email": "saitamakyokai@gmail.com",
-      	"phone": "0081-48-825-6637"
-      }
-    </pre>
+<pre>
+  {
+  	"cc": "JP",
+  	"city": "さいたま市",
+  	"street": "埼玉県さいたま市浦和区 常盤9－21－21",
+  	"person": "Tanaka san",
+  	"company": "さいたま国際キリスト教会",
+  	"email": "saitamakyokai@gmail.com",
+  	"phone": "0081-48-825-6637"
+  }
+</pre>
 
                 <p>Example CSV a</p>
-    <pre>
+<pre>
 {
     "cc",
     "city",
@@ -2321,7 +2322,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     "claus@stuter.nl",
     "0203030315",
 }
-    </pre>
+</pre>
 
                 <p>Example CSV b</p>
     <pre>
@@ -2433,75 +2434,77 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 </pre>
 
               <p>Example b</p>
-              <pre>
-                {
-                	"package_type": 1,
-                	"only_recipient": 0,
-                	"signature": 1,
-                	"return": 0,
-                	"insurance": {
-                		"amount": 50,
-                		"currency": "EUR"
-                	},
-                	"label_description": "My custom description"
-                }
-                </pre>
+<pre>
+  {
+  	"package_type": 1,
+  	"only_recipient": 0,
+  	"signature": 1,
+  	"return": 0,
+  	"insurance": {
+  		"amount": 50,
+  		"currency": "EUR"
+  	},
+  	"label_description": "My custom description"
+  }
+</pre>
 
                 <p>Example c</p>
-        <pre>
-          {
-          	"package_type": 1,
-          	"only_recipient": 1,
-          	"signature": 1,
-          	"return": 1,
-          	"insurance": {
-          		"amount": 50000,
-          		"currency": "EUR"
-          	},
-          	"large_format": 0
-          }
-          </pre>
+<pre>
+  {
+  	"package_type": 1,
+  	"only_recipient": 1,
+  	"signature": 1,
+  	"return": 1,
+  	"insurance": {
+  		"amount": 50000,
+  		"currency": "EUR"
+  	},
+  	"large_format": 0
+  }
+</pre>
 
           <p>Example d</p>
-          <pre>
-            {
-            	"package_type": 1,
-            	"only_recipient": 1,
-            	"signature": 1,
-            	"return": 1
-            }
-          </pre>
+<pre>
+  {
+  	"package_type": 1,
+  	"only_recipient": 1,
+  	"signature": 1,
+  	"return": 1
+  }
+</pre>
 
                 <p>Example return shipment options</p>
-        <pre>
-          {
-          	"package_type": 1,
-          	"only_recipient": 0,
-          	"signature": 1,
-          	"return": 0,
-          	"insurance": {
-          		"amount": 50,
-          		"currency": "EUR"
-          	}
-          }
-        </pre>
+<pre>
+  {
+  	"package_type": 1,
+  	"only_recipient": 0,
+  	"signature": 1,
+  	"return": 0,
+  	"insurance": {
+  		"amount": 50,
+  		"currency": "EUR"
+  	}
+  }
+</pre>
 
                 <p>Example international shipment</p>
-        <pre>
+<pre>
 {
-"package_type": 1
-}        </pre>
+  "package_type": 1
+}
+</pre>
 
                 <p>Example pickup</p>
-        <pre>
-          {
-          	"package_type": 1,
-          	"delivery_type": 4,
-          	"delivery_date": "2017-01-12 16:30:00",
-          	"only_recipient": 0,
-          	"signature": 1,
-          	"return": 0
-          }     </pre>
+<pre>
+  {
+  	"package_type": 1,
+  	"delivery_type": 4,
+  	"delivery_date": "2017-01-12 16:30:00",
+  	"only_recipient": 0,
+  	"signature": 1,
+  	"return": 0
+  }
+</pre>
 
                 <h2 id="7_D">7.D ShipmentGeneralSettings Object Definition</h2>
                 <h3 id="7_D_1">7.D.1 Overview</h3>
@@ -2587,34 +2590,34 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                   </pre>
 
                 <p>POST example a</p>
-        <pre>
-          {
-          	"contents": 3,
-          	"invoice": "4567789004",
-          	"weight": 30,
-          	"items": [{
-          		"description": "NIV Product Audio CD",
-          		"amount": 3,
-          		"weight": 10,
-          		"item_value": {
-          			"amount": 10000,
-          			"currency": "EUR"
-          		},
-          		"classification": "0181",
-          		"country": "US"
-          	}, {
-          		"description": "Sample JP Product",
-          		"amount": 10,
-          		"weight": 20,
-          		"item_value": {
-          			"amount": 800000,
-          			"currency": "YEN"
-          		},
-          		"classification": "0181",
-          		"country": "JP"
-          	}]
-          }
-        </pre>
+<pre>
+  {
+  	"contents": 3,
+  	"invoice": "4567789004",
+  	"weight": 30,
+  	"items": [{
+  		"description": "NIV Product Audio CD",
+  		"amount": 3,
+  		"weight": 10,
+  		"item_value": {
+  			"amount": 10000,
+  			"currency": "EUR"
+  		},
+  		"classification": "0181",
+  		"country": "US"
+  	}, {
+  		"description": "Sample JP Product",
+  		"amount": 10,
+  		"weight": 20,
+  		"item_value": {
+  			"amount": 800000,
+  			"currency": "YEN"
+  		},
+  		"classification": "0181",
+  		"country": "JP"
+  	}]
+  }
+</pre>
 
                 <h2 id="7_F">7.F CustomsItem Object Definition</h2>
                 <h3 id="7_F_1">7.F.1 Overview</h3>
@@ -2652,22 +2655,22 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 
                 <h3 id="7_F_2">7.F.2 Example</h3>
                 <p>POST example a</p>
-            <pre>
-              {
-              	"description": "Sample NIV Product",
-              	"amount": 10,
-              	"weight": 20,
-              	"item_value": {
-              		"amount": 7000,
-              		"currency": "EUR"
-              	},
-              	"classification": "0181",
-              	"country": "NL"
-              }
-            </pre>
+<pre>
+  {
+  	"description": "Sample NIV Product",
+  	"amount": 10,
+  	"weight": 20,
+  	"item_value": {
+  		"amount": 7000,
+  		"currency": "EUR"
+  	},
+  	"classification": "0181",
+  	"country": "NL"
+  }
+</pre>
 
                 <p>POST example b</p>
-            <pre>
+<pre>
 {
    "description":"Sample NBG Product",
    "amount":5,
@@ -2678,10 +2681,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
    },
    "classification":"0181",
    "country":"BE"
-}            </pre>
+}
+</pre>
 
                 <p>POST example c</p>
-            <pre>
+<pre>
 {
    "description":"NIV Product Audio CD",
    "amount":3,
@@ -2692,7 +2696,8 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
    },
    "classification":"0181",
    "country":"US"
-}            </pre>
+}
+</pre>
 
                 <p>POST example d</p>
             <pre>
@@ -3542,23 +3547,23 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 
                 <h3 id="10_A_2">10.A.2 Example</h3>
                 <p>Example a</p>
-                <pre>
-                {
-                   "hook":"shipment_status_change",
-                   "url":"https://seoshop.nl/myparcel/notifications"
-                }
-                </pre>
+<pre>
+{
+   "hook":"shipment_status_change",
+   "url":"https://seoshop.nl/myparcel/notifications"
+}
+</pre>
 
                 <p>Example b</p>
-                <pre>
-                  {
-                  	"id": 123,
-                  	"account_id": 1,
-                  	"shop_id": 2,
-                  	"hook": "shipment_status_change",
-                  	"url": "https://seoshop.nl/myparcel/notifications"
-                  }
-                  </pre>
+<pre>
+  {
+  	"id": 123,
+  	"account_id": 1,
+  	"shop_id": 2,
+  	"hook": "shipment_status_change",
+  	"url": "https://seoshop.nl/myparcel/notifications"
+  }
+</pre>
 
 
                 <h2 id="10_B">10.B ShipmentStatusChangeEvent Object Definition</h2>
@@ -3591,16 +3596,16 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 
                 <h3 id="10_B_2">10.B.2 Example</h3>
                 <p>Example a</p>
-                <pre>
-                  {
-                  	"shipment_id": 1,
-                  	"account_id": 1,
-                  	"shop_id": 2,
-                  	"barcode": "3SMYPA12302837",
-                  	"status": 3,
-                  	"date": "2017-01-31 12:00:00"
-                  }
-                </pre>
+<pre>
+  {
+  	"shipment_id": 1,
+  	"account_id": 1,
+  	"shop_id": 2,
+  	"barcode": "3SMYPA12302837",
+  	"status": 3,
+  	"date": "2017-01-31 12:00:00"
+  }
+</pre>
 
 
                 <h1 id="11">11. Document changes</h1>
