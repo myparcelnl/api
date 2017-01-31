@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head>
     <meta charset="UTF-8"/>
-    <title>API MyParcel installatie- gebruikershandleiding</title>
+    <title>MyParcel.nl API installatie- en gebruikershandleiding</title>
     <meta name="description" content="API MyParcel installatie- gebruikershandleiding">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <link rel="shortcut icon" href="https://backoffice.myparcel.nl/images/favicon/favicon.ico">
@@ -27,7 +27,7 @@
         <section class="page-header col-xs-8 col-xs-offset-4 col-lg-9 col-lg-offset-3">
             <img alt="" src="media/logo_myparcel.png"/>
             <h1 class="project-name">
-                MyParcel API Documentatie
+                MyParcel.nl API Documentation
             </h1>
             <h2 class="project-tagline">
                 <span id="current_version"></span>
@@ -38,19 +38,21 @@
 
             <h1>Introduction</h1>
             <p>
-                This is the interface documentation for the MyParcel Core API. Core API is build in
-                such a way to easily handle bulk operations. We try to follow the REST
-                architecture as much as possible but deviate from it when we need to achieve
-                high performance.
+                This is the interface documentation for the MyParcel.nl API (previously known as Core API).
+                our API is build in such a way to easily handle bulk operations. We try to follow the REST
+                architecture as much as possible but deviate from it when we need to achieve high performance or for other reasons.
             </p>
             <p>
-                Currently you’re looking at the Beta version of the My Parcel Core API as parts of
-                our system are still evolving. As this is a Beta version we would like to ask of you
-                to:
+                The Base URL for all requests is: <a target="_blank" href="https://api.myparcel.nl">https://api.myparcel.nl</a>
+
+                Note the S of Secure in httpS... We value your privacy. All communication between you and us is end-to-end encrypted.
+            </p>
+            <p>
+                Currently you’re looking at the most up-to-date version of the Documentation of the MyParcel.nl API as parts of our system are always evolving... it's hard to keep up
             </p>
             <ol>
                 <li>
-                    Provide us with feedback, and
+                    Provide us with feedback. We <strong>always</strong> try to improve our API.
                 </li>
                 <li>
                     Send us examples of your requests before releasing your version to the end
@@ -58,31 +60,28 @@
                     suggestions. Your examples may be sent to support@myparcel.nl.
                 </li>
             </ol>
-            <p>
-                If you want see the way we’ve implemented the API in our UI, you can always
-                open the code inspector to the see the AJAX-requests send to the server.
-            </p>
             <div>
                 <h1 id="1">1. Requests</h1>
-                <p>The Core API is RESTlike and uses JSON as it's primary data exchange format.
+                <h2>Base URL</h2>
+                <p>BaseURL: <strong>https://api.myparcel.nl</strong></p>
+                <p>The API is REST(ful) and uses JSON as it's primary data exchange format.
                     Communication with the API goes through HTTPS thereby insuring data
-                    confidentiality and integrity. Here is a list of all supported HTTP methods and their
-                    explanation.</p>
+                    confidentiality and integrity. Here is a list of all supported HTTP methods</p>
 
                 <h2 id="1_A">1.A GET</h2>
                 <p>
                     GET method is used for retrieving data and is idempotent. Data can be returned in
-                    JSON, PDF, CSV or XML.
+                    JSON, PDF, CSV, XML or other formats.
                 </p>
 
                 <h2 id="1_B">1.B POST</h2>
                 <p>
-                    POST is used to create new objects.
+                    POST is used to create new objects or send data to MyParcel.
                 </p>
 
                 <h2 id="1_3">1.C DELETE</h2>
                 <p>
-                    DELETE is used to delete an existing object. This method always returns HTTP/1.1
+                    DELETE is used to delete an existing object (piece of data). This method always returns HTTP/1.1
                     204 No Content unless otherwise specified.
                 </p>
 
@@ -92,14 +91,51 @@
                     are shipment label, invoice and CSV export. Shipment label and invoice are send
                     back in PDF format while CSV export is send back in CSV format.
                     Usually a response will have a response body. Exceptions are DELETE requests
-                    which will only contain a status code indicating success.
+                    which will only contain a status code (204) indicating success.
                     A failed request with a 4xx status code will always send back a response body with
                     the error description.
+                    A failed request with a 5xx status code will probably mean you've hit a snag in our API.
+                    We try to monitor these kind of errors, but if you keep having trouble... Don't hesitate to reach out! (we dont't bite ;-)
                 </p>
 
                 <h2 id="2_A">2.A HTTP statuses</h2>
-                <p> HTTP status code is used to indicate success or failure of a request. Here's a list of
+                <p> HTTP status codes are used to indicate success or failure of a request. Here's a list of
                     supported status codes.
+                    For a more comprehensive list of HTTP status codes <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">visit Wikipedia </a> or W3C.
+                </p>
+                <p>Example of a 200 Status code in our API (you can try this in your browser, then you know our API is online ):
+                <pre>
+                Request:
+
+                GET https://api.myparcel.nl/
+
+                Request Headers (example!):
+                GET / HTTP/1.1
+                Host: api.myparcel.nl
+                Connection: keep-alive
+                Pragma: no-cache
+                Cache-Control: no-cache
+                Upgrade-Insecure-Requests: 1
+                Accept-Encoding: gzip, deflate, sdch, br
+
+                Response:
+
+
+                {
+                  "title":"MyParcel API",
+                  "status":"OK"
+                }
+
+                Response Headers (example!)
+
+                HTTP/1.1 200 OK
+                Date: Tue, 31 Jan 2017 13:37:00 GMT
+                Content-Type: application/json;charset=utf-8
+                Transfer-Encoding: chunked
+                Connection: keep-alive
+
+                </pre>
+
                 </p>
 
                 <h2 id="2_A_I">2.A.I 2xx</h2>
@@ -144,7 +180,8 @@
 
                 <h3>2.A.III 401 - Unauthorized</h3>
                 <p>
-                    No credentials have been sent with the request.
+                    No credentials have been sent with the request. Or the wrong credentials are send.
+                    Tip: check if the API key is properly attached in the header (i.e. <code>Authorization: basic d2FudF90b193b3JrX2Zvcl91cz9fY29udGFjdF91c192aWFfd2Vic2l0ZQ==</code>).
                 </p>
 
                 <h3>2.A.III 402 - Payment Required</h3>
@@ -181,6 +218,7 @@
                 <h3>2.A.III 422 - Unprocessable Entity</h3>
                 <p>
                     When the client sends a request object with invalid data.
+                    The error message will specify what's wrong with the Request or the Data send to the API.
                 </p>
 
                 <h3>2.A.III 409 - Conflict</h3>
@@ -191,8 +229,7 @@
 
                 <h2 id="2_A_IV">2.A.IV 5xx</h2>
                 <p>
-                    Used for server-side errors. This happens when we are having problems
-                    processing your request.
+                    Used for server-side errors. This happens when we (i.e. MyParcel.nl / the API) are having problems.
                 </p>
 
 
@@ -200,12 +237,14 @@
                 <p>
                     All content must be encoded in UTF-8 and include the charset=utf-8 in the Content-Type: ...;
                     charset=utf-8 header.
+
+                    i.e. <code>Content-Type: application/json;charset=utf-8</code>
                 </p>
 
                 <h1 id="4">4. Data Types</h1>
 
                 <p>
-                    Core API defines it's own data types.
+                    Our API defines it's own data types.
                 </p>
 
                 <h2>4.1 Contents</h2>
@@ -681,13 +720,12 @@
         </pre>
                 </p>
 
-                <p>Core API uses API keys for access control. When a <b>Merchant</b> wants to connect an external system
+                <p>Our API uses API keys for access control. When a <b>Merchant</b> wants to connect an external system
                     to
-                    Core API he/she needs to create an <b>API Key.</b> This API Key will be assigned the <b>Broker</b> role.
+                    our API he/she needs to create an <b>API Key.</b> This API Key will be assigned the <b>Broker</b> role.
                     Currently the Merchant is not able to create or assign another Role to a API Key. When the Merchant
                     wants to invalidate an API Key he/she just disables the API Key. An Intermediate system, such as
-                    Core
-                    UI, has its own API Key but cannot access user resources. For this it needs to request
+                    the <a href="https://backoffice.myparcel.nl/">MyParcel.nl UI</a>, has its own API Key but cannot access user resources. For this it needs to request
                     a <b>Session</b>
                     Token so that it can perform actions on behalf of the user. The API Key and Session Token are send
                     in
@@ -695,7 +733,7 @@
                 </p>
 
                 <h2>5.1 Error codes</h2>
-                <p>Core API defines a list of error codes besides the HTTP status codes. Error codes are divided in
+                <p>Our API defines a list of error codes besides the HTTP status codes. Error codes are divided in
                     ranges
                     to make it easier for developers to quickly diagnose and solve problems. Errors are returned as an
                     Error object.</p>
@@ -1720,12 +1758,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
         Data type: <u>label_position</u><br>
         The position of the label on an A4 sheet. You can specify multiple positions by semi-colon separating them on the URI. Positioning is only applied on the first page with labels. All subsequent pages will use the default positioning 1,2,3,4.</p>
 
-        
+
         <h3 id="6_F_4">6.F.4 Example </h3>
         <p><strong>Get Shipment label</strong></p>
 
         <p><strong>Request</strong></p>
-        <pre>GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1 
+        <pre>GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1
         Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=</pre></p>
 
         <p><strong>Response</strong></p>
@@ -1738,9 +1776,9 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc= Accept: application/json;charset=utf-8</pre>
 
 	<p><strong>Response</strong></p>
-	<pre>HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8{  
-   "data":{  
-      "pdfs":{  
+	<pre>HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8{
+   "data":{
+      "pdfs":{
          "url":"https://api.myparcel.nl/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
       }
    }
@@ -1802,7 +1840,7 @@ application/pdf (...PDF content)</pre>
 
         <h3 id="6_G_4">6.G.4 Example </h3>
         <p><strong>Request</strong><br>
-        <pre>GET https://api.myparcel.nl/tracktraces/12 HTTP/1.1 
+        <pre>GET https://api.myparcel.nl/tracktraces/12 HTTP/1.1
 Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=</pre></p>
 
         <p><strong>Response</strong><br>
@@ -3213,7 +3251,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8{
                 <h1 id="9">9. Webhooks</h1>
                 <h2 id="9_A">9.A Add subscription</h2>
                 <h3 id="9_A_1">9.A.1 Overview</h3>
-                <p>Use this endpoint to subscribe to an event in Core API. Upon success a HTTP/1.1 200 OK with
+                <p>Use this endpoint to subscribe to an event in our API. Upon success a HTTP/1.1 200 OK with
                     subscription
                     ids is returned. You must use HTTPS for callback because it's secure and temper proof. Adding the
                     same
