@@ -846,20 +846,20 @@ Connection: keep-alive
 
                 <p><pre>
                   {
-                  	"data": {
-                  		"shipments": [{
-                  		  ...
-                  			"options": {
-                  				"package_type": 1,
-                  				"only_recipient": 0,
-                  				"signature": 1,
-                  				"delivery_type": 4
-                  			},
-                  			"pickup": {
-                  				...
-                  			}...
-                  		}]
-                  	}
+                    "data": {
+                      "shipments": [{
+                        ...
+                        "options": {
+                          "package_type": 1,
+                          "only_recipient": 0,
+                          "signature": 1,
+                          "delivery_type": 4
+                        },
+                        "pickup": {
+                          ...
+                        }...
+                      }]
+                    }
                   }</pre>
                 </p>
                 <p>Let's go through this example. This package will be picked up by the customer so it needs to
@@ -874,17 +874,17 @@ Connection: keep-alive
                     shipment looks like this.</p>
                 <p><pre>
                   {
-                  	"data": {
-                  		"shipments": [{
-                  			...
-                  			"options": {
-                  				"package_type": 1,
-                  				"delivery_type": 3,
-                  				"only_recipient": 1,
-                  				...
-                  			}
-                  		}]
-                  	}
+                    "data": {
+                      "shipments": [{
+                        ...
+                        "options": {
+                          "package_type": 1,
+                          "delivery_type": 3,
+                          "only_recipient": 1,
+                          ...
+                        }
+                      }]
+                    }
                   }</pre>
                 </p>
                 <p>Let's go through this example. This package will be delivered to the consumer in the evening so it
@@ -898,21 +898,21 @@ Connection: keep-alive
                     for obvious reasons. The shipment looks like this.</p>
 <pre>
   {
-  	"data": {
-  		"shipments": [{
-  			...
-  			"options": {
-  				"package_type": 1,
-  				"insurance": {
-  					"amount": 500000,
-  					"currency": "EUR"
-  				},
-  				"signature": 1,
-  				"only_recipient": 1
-  					...
-  			}
-  		}]
-  	}
+    "data": {
+      "shipments": [{
+        ...
+        "options": {
+          "package_type": 1,
+          "insurance": {
+            "amount": 500000,
+            "currency": "EUR"
+          },
+          "signature": 1,
+          "only_recipient": 1
+            ...
+        }
+      }]
+    }
   }
 </pre>
                 <p>Only package type 1 can be insured so package type is set to 1. Insurance amount needs to be
@@ -932,20 +932,20 @@ Connection: keep-alive
 
 <pre>
   {
-  	"data": {
-  		"shipments": [{
-  			...
-  			"options": {
-  				"package_type": 1,
-  				"insurance": {
-  					"amount": 50000,
-  					"currency": "EUR"
-  				},
-  				"large_format": 1
-  			}
-  			...
-  		}]
-  	}
+    "data": {
+      "shipments": [{
+        ...
+        "options": {
+          "package_type": 1,
+          "insurance": {
+            "amount": 50000,
+            "currency": "EUR"
+          },
+          "large_format": 1
+        }
+        ...
+      }]
+    }
   }
 </pre>
                 <p>This package is an EU package so the type must be set to 1. All EU and Global shipments <u>must</u> be
@@ -1062,50 +1062,50 @@ Connection: keep-alive
 POST https://api.myparcel.nl/shipments HTTP/1.1
 Content-Type:application/vnd.shipment+json;charset=utf-8 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=
 {
-	"data": {
-		"shipments": [{
-			"recipient": {
-				"cc": "NL",
-				"city": "Hoofddorp",
-				"street": "Hoofdweg",
-				"number": "679",
-				"postal_code": "2131BC",
-				"person": "Mr. Parcel",
-				"phone": "0213030315",
-				"email": "testing@myparcel.nl"
-			},
-			"options": {
-				"package_type": 1,
-				"only_recipient": 1,
-				"signature": 1,
-				"return": 1,
-				"insurance": {
-					"amount": 50000,
-					"currency": "EUR"
-				},
-				"large_format": 0
-			},
-			"carrier": 1
-		}, {
-			"recipient": {
-				"cc": "NL",
-				"city": "Amsterdam",
-				"street": "Dorpstraat",
-				"number": "123",
-				"postal_code": "1020BC",
-				"person": "Mrs. Parcel",
-				"phone": "02012343546",
-				"email": "info@myparcel.nl"
-			},
-			"options": {
-				"package_type": 1,
-				"only_recipient": 0,
-				"signature": 0,
-				"return": 0
-			},
-			"carrier": 1
-		}]
-	}
+  "data": {
+    "shipments": [{
+      "recipient": {
+        "cc": "NL",
+        "city": "Hoofddorp",
+        "street": "Hoofdweg",
+        "number": "679",
+        "postal_code": "2131BC",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 1,
+        "only_recipient": 1,
+        "signature": 1,
+        "return": 1,
+        "insurance": {
+          "amount": 50000,
+          "currency": "EUR"
+        },
+        "large_format": 0
+      },
+      "carrier": 1
+    }, {
+      "recipient": {
+        "cc": "NL",
+        "city": "Amsterdam",
+        "street": "Dorpstraat",
+        "number": "123",
+        "postal_code": "1020BC",
+        "person": "Mrs. Parcel",
+        "phone": "02012343546",
+        "email": "info@myparcel.nl"
+      },
+      "options": {
+        "package_type": 1,
+        "only_recipient": 0,
+        "signature": 0,
+        "return": 0
+      },
+      "carrier": 1
+    }]
+  }
 }</pre>
                 </p>
 
@@ -1113,13 +1113,13 @@ Content-Type:application/vnd.shipment+json;charset=utf-8 Authorization:basic SmV
         <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
-	"data": {
-		"ids": [{
-			"id": 12345
-		}, {
-			"id": 68794
-		}]
-	}
+  "data": {
+    "ids": [{
+      "id": 12345
+    }, {
+      "id": 68794
+    }]
+  }
 }
 </pre>
                 </p>
@@ -1130,63 +1130,63 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 POST https://api.myparcel.nl/shipments HTTP/1.1 Content-Type:application/vnd.shipment+json;
 charset=utf-8 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=
 {
-	"data": {
-		"shipments": [{
-			"recipient": {
-				"cc": "JP",
-				"city": "さいたま市",
-				"street": "埼玉県さいたま市浦和区 常盤9－21－21",
-				"person": "Tanaka san",
-				"company": "さいたま国際キリスト教会",
-				"email": "saitamakyokai@gmail.com",
-				"phone": "0081-48-825-6637"
-			},
-			"options": {
-				"package_type": 1
-			},
-			"customs_declaration": {
-				"contents": 1,
-				"invoice": "1231235345345",
-				"weight": 30,
-				"items": [{
-					"description": "Sample Product",
-					"amount": 10,
-					"weight": 20,
-					"item_value": {
-						"amount": 7000,
-						"currency": "EUR"
-					},
-					"classification": "0181",
-					"country": "NL"
-				}, {
-					"description": "Sample Product 2",
-					"amount": 5,
-					"weight": 10,
-					"item_value": {
-						"amount": 1000,
-						"currency": "EUR"
-					},
-					"classification": "0181",
-					"country": "BE"
-				}]
-			},
-			"physical_properties": {
-				"weight": 30
-			},
-			"carrier": 1
-		}]
-	}
+  "data": {
+    "shipments": [{
+      "recipient": {
+        "cc": "JP",
+        "city": "さいたま市",
+        "street": "埼玉県さいたま市浦和区 常盤9－21－21",
+        "person": "Tanaka san",
+        "company": "さいたま国際キリスト教会",
+        "email": "saitamakyokai@gmail.com",
+        "phone": "0081-48-825-6637"
+      },
+      "options": {
+        "package_type": 1
+      },
+      "customs_declaration": {
+        "contents": 1,
+        "invoice": "1231235345345",
+        "weight": 30,
+        "items": [{
+          "description": "Sample Product",
+          "amount": 10,
+          "weight": 20,
+          "item_value": {
+            "amount": 7000,
+            "currency": "EUR"
+          },
+          "classification": "0181",
+          "country": "NL"
+        }, {
+          "description": "Sample Product 2",
+          "amount": 5,
+          "weight": 10,
+          "item_value": {
+            "amount": 1000,
+            "currency": "EUR"
+          },
+          "classification": "0181",
+          "country": "BE"
+        }]
+      },
+      "physical_properties": {
+        "weight": 30
+      },
+      "carrier": 1
+    }]
+  }
 }
 </pre>
                 <p><strong>Response</strong>
             <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
-	"data": {
-		"ids": [{
-			"id": 3485394579
-		}]
-	}
+  "data": {
+    "ids": [{
+      "id": 3485394579
+    }]
+  }
 }
 </pre>
                 </p>
@@ -1196,36 +1196,36 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 POST https://api.myparcel.nl/shipments HTTP/1.1 Content-Type:application/vnd.shipment+json;
 charset=utf-8 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=
 {
-	"data": {
-		"shipments": [{
-			"recipient": {
-				"cc": "NL",
-				"city": "Hoofddorp",
-				"street": "Siriusdreef",
-				"number": "66-68",
-				"postal_code": "2132WT",
-				"person": "Mr. Parcel",
-				"phone": "0213030315",
-				"email": "testing@myparcel.nl"
-			},
-			"options": {
-				"package_type": 1,
-				"delivery_type": 4,
-				"delivery_date": "2015-07-12 00:00:00",
-				"only_recipient": 0,
-				"signature": 1,
-				"return": 0
-			},
-			"pickup": {
-				"postal_code": "2132BH",
-				"street": "Burgemeester van Stamplein",
-				"city": "Hoofddorp",
-				"number": "270",
-				"location_name": "Albert Heijn"
-			},
-			"carrier": 1
-		}]
-	}
+  "data": {
+    "shipments": [{
+      "recipient": {
+        "cc": "NL",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66-68",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 1,
+        "delivery_type": 4,
+        "delivery_date": "2015-07-12 00:00:00",
+        "only_recipient": 0,
+        "signature": 1,
+        "return": 0
+      },
+      "pickup": {
+        "postal_code": "2132BH",
+        "street": "Burgemeester van Stamplein",
+        "city": "Hoofddorp",
+        "number": "270",
+        "location_name": "Albert Heijn"
+      },
+      "carrier": 1
+    }]
+  }
 }
 </pre>
                 </p>
@@ -1234,11 +1234,11 @@ charset=utf-8 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=
         <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
-	"data": {
-		"ids": [{
-			"id": 12345
-		}]
-	}
+  "data": {
+    "ids": [{
+      "id": 12345
+    }]
+  }
 }
 </pre>
                 </p>
@@ -1249,24 +1249,24 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 POST https://api.myparcel.nl/shipments HTTP/1.1 Content-Type:application/vnd.return_shipment+
 json;charset=utf-8 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=
 {
-	"data": {
-		"return_shipments": [{
-			"parent": 5,
-			"carrier": 1,
-			"email": "testing@myparcel.nl",
-			"name": "Mr. Parcel",
-			"options": {
-				"package_type": 1,
-				"only_recipient": 0,
-				"signature": 1,
-				"return": 0,
-				"insurance": {
-					"amount": 50,
-					"currency": "EUR"
-				}
-			}
-		}]
-	}
+  "data": {
+    "return_shipments": [{
+      "parent": 5,
+      "carrier": 1,
+      "email": "testing@myparcel.nl",
+      "name": "Mr. Parcel",
+      "options": {
+        "package_type": 1,
+        "only_recipient": 0,
+        "signature": 1,
+        "return": 0,
+        "insurance": {
+          "amount": 50,
+          "currency": "EUR"
+        }
+      }
+    }]
+  }
 }
 </pre>
                 </p>
@@ -1274,11 +1274,11 @@ json;charset=utf-8 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=
         <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
-	"data": {
-		"ids": [{
-			"id": 12345
-		}]
-	}
+  "data": {
+    "ids": [{
+      "id": 12345
+    }]
+  }
 }</pre>
                 </p>
 
@@ -1289,25 +1289,25 @@ POST https://api.myparcel.nl/shipmentsHTTP/1.1 Content-Type:
 application/vnd.unrelated_return_shipment+json;charset=utf-8
 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=
 {
-	"data": {
-		"return_shipments": [{
-			"options": {
-				"package_type": 1,
-				"only_recipient": 0,
-				"signature": 0,
-				"return": 0,
-				"insurance": {
-					"amount": 0,
-					"currency": "EUR"
-				},
-				"large_format": 0,
-				"label_description": "test"
-			},
-			"carrier": 1,
-			"email": "testing@myparcel.nl",
-			"name": "Test"
-		}]
-	}
+  "data": {
+    "return_shipments": [{
+      "options": {
+        "package_type": 1,
+        "only_recipient": 0,
+        "signature": 0,
+        "return": 0,
+        "insurance": {
+          "amount": 0,
+          "currency": "EUR"
+        },
+        "large_format": 0,
+        "label_description": "test"
+      },
+      "carrier": 1,
+      "email": "testing@myparcel.nl",
+      "name": "Test"
+    }]
+  }
 }</pre>
                 </p>
 
@@ -1315,11 +1315,11 @@ Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=
     <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
-	"data": {
-		"ids": [{
-			"id": 12345
-		}]
-	}
+  "data": {
+    "ids": [{
+      "id": 12345
+    }]
+  }
 }</pre>
                 </p>
 
@@ -1622,55 +1622,55 @@ HTTP/1.1 Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=
         <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
-	"data": {
-		"search_results": {
-			"shipments": [{
-				"recipient": {
-					"cc": "NL",
-					"city": "Hoofddorp",
-					"street": "Siriusdreef",
-					"number": "66-68",
-					"postal_code": "2132WT",
-					"person": "Mr. Parcel",
-					"phone": "0213030315",
-					"email": "testing@myparcel.nl"
-				},
-				"options": {
-					"package_type": 1,
-					"only_recipient": 1,
-					"signature": 1,
-					"return": 1,
-					"insurance": {
-						"amount": 50000,
-						"currency": "EUR"
-					},
-					"large_format": 0
-				},
-				"sender": {
-					"cc": "NL",
-					"city": "Amsterdam",
-					"street": "Dorpstraat",
-					"number": "123",
-					"postal_code": "1020BC",
-					"person": "Mrs. Parcel",
-					"phone": "02012343546",
-					"email": "info@myparcel.nl"
-				},
-				"carrier": 1,
-				"status": 1,
-				"price": {
-					"amount": 535,
-					"currency": "EUR"
-				},
-				"barcode": "3SMYPA77773333",
-				"created": "2017-01-31 08:00:00",
-				"modified": "2017-01-31 09:00:00"
-			}],
-			"page": 1,
-			"size": 30,
-			"results": 50
-		}
-	}
+  "data": {
+    "search_results": {
+      "shipments": [{
+        "recipient": {
+          "cc": "NL",
+          "city": "Hoofddorp",
+          "street": "Siriusdreef",
+          "number": "66-68",
+          "postal_code": "2132WT",
+          "person": "Mr. Parcel",
+          "phone": "0213030315",
+          "email": "testing@myparcel.nl"
+        },
+        "options": {
+          "package_type": 1,
+          "only_recipient": 1,
+          "signature": 1,
+          "return": 1,
+          "insurance": {
+            "amount": 50000,
+            "currency": "EUR"
+          },
+          "large_format": 0
+        },
+        "sender": {
+          "cc": "NL",
+          "city": "Amsterdam",
+          "street": "Dorpstraat",
+          "number": "123",
+          "postal_code": "1020BC",
+          "person": "Mrs. Parcel",
+          "phone": "02012343546",
+          "email": "info@myparcel.nl"
+        },
+        "carrier": 1,
+        "status": 1,
+        "price": {
+          "amount": 535,
+          "currency": "EUR"
+        },
+        "barcode": "3SMYPA77773333",
+        "created": "2017-01-31 08:00:00",
+        "modified": "2017-01-31 09:00:00"
+      }],
+      "page": 1,
+      "size": 30,
+      "results": 50
+    }
+  }
 }</pre>
                 </p>
 
@@ -1721,7 +1721,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
         <p><strong>FORMAT</strong><br>
         Data type: <u>paper_size</u><br>
         The paper size of the PDF. Currently A4 and A6 are supported. When A4 is chosen you can specify the label position.<br>
-		When requesting the label for a shipment that contains a custom form, you can only request a A4 format.</p>
+    When requesting the label for a shipment that contains a custom form, you can only request a A4 format.</p>
 
         <p><strong>POSITIONS</strong><br>
         Data type: <u>label_position</u><br>
@@ -1739,31 +1739,31 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
         <pre>HTTP/1.1 200 OK Content-Disposition: attachment; filename="123123123.pdf" Content-Type: application/pdf
 (...PDF content)</pre>
 
-	<p><strong>Get shipment label download link</strong></p>
-	<p><strong>Request</strong></p>
-	<pre>GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1 Authorization: basic
+  <p><strong>Get shipment label download link</strong></p>
+  <p><strong>Request</strong></p>
+  <pre>GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1 Authorization: basic
 SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc= Accept: application/json;charset=utf-8</pre>
 
-	<p><strong>Response</strong></p>
-	<pre>HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+  <p><strong>Response</strong></p>
+  <pre>HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
     {
-    	"data": {
-    		"pdfs": {
-    			"url": "https://api.myparcel.nl/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
-    		}
-    	}
+      "data": {
+        "pdfs": {
+          "url": "https://api.myparcel.nl/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
+        }
+      }
     }</pre>
 
-	<p><strong>Get shipment label with different format and position</strong><br>
-	Get label for shipment with ID 2. The label will be printed on an A4 sheet and the
-	label position will be at the bottom-right.</p>
+  <p><strong>Get shipment label with different format and position</strong><br>
+  Get label for shipment with ID 2. The label will be printed on an A4 sheet and the
+  label position will be at the bottom-right.</p>
 
-	<p><strong>Request</strong></p>
-	<pre>GET https://api.myparcel.nl/shipment_labels/2?format=A4&positions=3;4 HTTP/1.1 Authorization: basic
+  <p><strong>Request</strong></p>
+  <pre>GET https://api.myparcel.nl/shipment_labels/2?format=A4&positions=3;4 HTTP/1.1 Authorization: basic
 SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=</pre>
 
-	<p><strong>Response</strong></p>
-	<pre>HTTP/1.1 200 OK Content-Disposition: attachment; filename="456456456456.pdf" Content-Type:
+  <p><strong>Response</strong></p>
+  <pre>HTTP/1.1 200 OK Content-Disposition: attachment; filename="456456456456.pdf" Content-Type:
 application/pdf (...PDF content)</pre>
 
 
@@ -1818,33 +1818,33 @@ Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc=</pre></p>
         <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
-	"data": {
-		"tracktraces": [{
-			"shipment_id": "1234",
-			"code": "D3",
-			"description": "The package is in distribution",
-			"time": "2015-01-02 05:00:00",
-			"history": [{
-				"code": "C3",
-				"description": "The package is at the sorting center",
-				"time": "2015-01-02 05:00:00"
-			}, {
-				"code": "B2",
-				"description": "The package is has been scanned",
-				"time": "2015-01-01 06:00:00"
-			}]
-		}, {
-			"shipment_id": "569034234",
-			"code": "B4",
-			"description": "The package is at the sorting center",
-			"time": "2015-01-02 05:00:00",
-			"history": [{
-				"code": "A2",
-				"description": "The package has been scanned",
-				"time": "2015-01-01 05:00:00"
-			}]
-		}]
-	}
+  "data": {
+    "tracktraces": [{
+      "shipment_id": "1234",
+      "code": "D3",
+      "description": "The package is in distribution",
+      "time": "2015-01-02 05:00:00",
+      "history": [{
+        "code": "C3",
+        "description": "The package is at the sorting center",
+        "time": "2015-01-02 05:00:00"
+      }, {
+        "code": "B2",
+        "description": "The package is has been scanned",
+        "time": "2015-01-01 06:00:00"
+      }]
+    }, {
+      "shipment_id": "569034234",
+      "code": "B4",
+      "description": "The package is at the sorting center",
+      "time": "2015-01-02 05:00:00",
+      "history": [{
+        "code": "A2",
+        "description": "The package has been scanned",
+        "time": "2015-01-01 05:00:00"
+      }]
+    }]
+  }
 }</pre>
                 </p>
 
@@ -1936,28 +1936,28 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <p>POST example national shipment</p>
         <pre>
           {
-          	"recipient": {
-          		"cc": "NL",
-          		"city": "Hoofddorp",
-          		"street": "Siriusdreef",
-          		"number": "66-68",
-          		"postal_code": "2132WT",
-          		"person": "Mr. Parcel",
-          		"phone": "0213030315",
-          		"email": "testing@myparcel.nl"
-          	},
-          	"options": {
-          		"package_type": 1,
-          		"only_recipient": 1,
-          		"signature": 1,
-          		"return": 1,
-          		"insurance": {
-          			"amount": 5000,
-          			"currency": "EUR"
-          		},
-          		"large_format": 0
-          	},
-          	"carrier": 1
+            "recipient": {
+              "cc": "NL",
+              "city": "Hoofddorp",
+              "street": "Siriusdreef",
+              "number": "66-68",
+              "postal_code": "2132WT",
+              "person": "Mr. Parcel",
+              "phone": "0213030315",
+              "email": "testing@myparcel.nl"
+            },
+            "options": {
+              "package_type": 1,
+              "only_recipient": 1,
+              "signature": 1,
+              "return": 1,
+              "insurance": {
+                "amount": 5000,
+                "currency": "EUR"
+              },
+              "large_format": 0
+            },
+            "carrier": 1
           }
         </pre>
                 <br>
@@ -1965,194 +1965,194 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <p>POST example national shipment b</p>
 <pre>
   {
-  	"recipient": {
-  		"cc": "NL",
-  		"city": "Amsterdam",
-  		"street": "Dorpstraat",
-  		"number": "123",
-  		"postal_code": "1020BC",
-  		"person": "Mrs. Parcel",
-  		"phone": "02012343546",
-  		"email": "info@myparcel.nl"
-  	},
-  	"options": {
-  		"package_type": 1,
-  		"only_recipient": 1,
-  		"signature": 1,
-  		"return": 1
-  	},
-  	"carrier": 1
+    "recipient": {
+      "cc": "NL",
+      "city": "Amsterdam",
+      "street": "Dorpstraat",
+      "number": "123",
+      "postal_code": "1020BC",
+      "person": "Mrs. Parcel",
+      "phone": "02012343546",
+      "email": "info@myparcel.nl"
+    },
+    "options": {
+      "package_type": 1,
+      "only_recipient": 1,
+      "signature": 1,
+      "return": 1
+    },
+    "carrier": 1
   }
 </pre>
                 <br>
                 <p>POST example international shipment</p>
 <pre>
   {
-  	"recipient": {
-  		"cc": "JP",
-  		"city": "さいたま市",
-  		"street": "埼玉県さいたま市浦和区 常盤9－21－21",
-  		"person": "Tanaka san",
-  		"company": "さいたま国際キリスト教会",
-  		"email": "saitamakyokai@gmail.com",
-  		"phone": "0081-48-825-6637"
-  	},
-  	"options": {
-  		"package_type": 1
-  	},
-  	"customs_declaration": {
-  		"contents": 1,
-  		"invoice": "1231235345345",
-  		"weight": 30,
-  		"items": [{
-  			"description": "Sample Product",
-  			"amount": 10,
-  			"weight": 20,
-  			"item_value": {
-  				"amount": 7000,
-  				"currency": "EUR"
-  			},
-  			"classification": "0181",
-  			"country": "NL"
-  		}, {
-  			"description": "Sample Product 2",
-  			"amount": 5,
-  			"weight": 10,
-  			"item_value": {
-  				"amount": 1000,
-  				"currency": "EUR"
-  			},
-  			"classification": "0181",
-  			"country": "BE"
-  		}]
-  	},
-  	"physical_properties": {
-  		"weight": 30
-  	},
-  	"carrier": 1
+    "recipient": {
+      "cc": "JP",
+      "city": "さいたま市",
+      "street": "埼玉県さいたま市浦和区 常盤9－21－21",
+      "person": "Tanaka san",
+      "company": "さいたま国際キリスト教会",
+      "email": "saitamakyokai@gmail.com",
+      "phone": "0081-48-825-6637"
+    },
+    "options": {
+      "package_type": 1
+    },
+    "customs_declaration": {
+      "contents": 1,
+      "invoice": "1231235345345",
+      "weight": 30,
+      "items": [{
+        "description": "Sample Product",
+        "amount": 10,
+        "weight": 20,
+        "item_value": {
+          "amount": 7000,
+          "currency": "EUR"
+        },
+        "classification": "0181",
+        "country": "NL"
+      }, {
+        "description": "Sample Product 2",
+        "amount": 5,
+        "weight": 10,
+        "item_value": {
+          "amount": 1000,
+          "currency": "EUR"
+        },
+        "classification": "0181",
+        "country": "BE"
+      }]
+    },
+    "physical_properties": {
+      "weight": 30
+    },
+    "carrier": 1
   }
 </pre>
                 <br>
                 <p>POST example pickup location</p>
 <pre>
   {
-  	"data": {
-  		"shipments": [{
-  			"recipient": {
-  				"cc": "NL",
-  				"city": "Hoofddorp",
-  				"street": "Siriusdreef",
-  				"number": "66-68",
-  				"postal_code": "2132WT",
-  				"person": "Mr. Parcel",
-  				"phone": "0213030315",
-  				"email": "testing@myparcel.nl"
-  			},
-  			"options": {
-  				"package_type": 1,
-  				"delivery_type": 4,
-  				"delivery_date": "2015-07-12 00:00:00",
-  				"only_recipient": 0,
-  				"signature": 1,
-  				"return": 0
-  			},
-  			"pickup": {
-  				"postal_code": "2132BH",
-  				"street": "Burgemeester van Stamplein",
-  				"city": "Hoofddorp",
-  				"number": "270",
-  				"location_name": "Albert Heijn"
-  			},
-  			"carrier": 1
-  		}]
-  	}
+    "data": {
+      "shipments": [{
+        "recipient": {
+          "cc": "NL",
+          "city": "Hoofddorp",
+          "street": "Siriusdreef",
+          "number": "66-68",
+          "postal_code": "2132WT",
+          "person": "Mr. Parcel",
+          "phone": "0213030315",
+          "email": "testing@myparcel.nl"
+        },
+        "options": {
+          "package_type": 1,
+          "delivery_type": 4,
+          "delivery_date": "2015-07-12 00:00:00",
+          "only_recipient": 0,
+          "signature": 1,
+          "return": 0
+        },
+        "pickup": {
+          "postal_code": "2132BH",
+          "street": "Burgemeester van Stamplein",
+          "city": "Hoofddorp",
+          "number": "270",
+          "location_name": "Albert Heijn"
+        },
+        "carrier": 1
+      }]
+    }
   }
 </pre>
                 <br>
                 <p>GET example national shipment</p>
 <pre>
   {
-  	"recipient": {
-  		"cc": "NL",
-  		"city": "Hoofddorp",
-  		"street": "Siriusdreef",
-  		"number": "66-68",
-  		"postal_code": "2132WT",
-  		"person": "Mr. Parcel",
-  		"phone": "0213030315",
-  		"email": "testing@myparcel.nl"
-  	},
-  	"options": {
-  		"package_type": 1,
-  		"only_recipient": 1,
-  		"signature": 1,
-  		"return": 1,
-  		"insurance": {
-  			"amount": 50000,
-  			"currency": "EUR"
-  		},
-  		"large_format": 0
-  	},
-  	"sender": {
-  		"cc": "NL",
-  		"city": "Amsterdam",
-  		"street": "Dorpstraat",
-  		"number": "123",
-  		"postal_code": "1020BC",
-  		"person": "Mrs. Parcel",
-  		"phone": "02012343546",
-  		"email": "info@myparcel.nl"
-  	},
-  	"carrier": 1,
-  	"status": 1,
-  	"price": {
-  		"amount": 535,
-  		"currency": "EUR"
-  	},
-  	"barcode": "3SMYPA77773333",
-  	"created": "2017-01-31 08:00:00",
-  	"modified": "2017-01-31 09:00:00"
+    "recipient": {
+      "cc": "NL",
+      "city": "Hoofddorp",
+      "street": "Siriusdreef",
+      "number": "66-68",
+      "postal_code": "2132WT",
+      "person": "Mr. Parcel",
+      "phone": "0213030315",
+      "email": "testing@myparcel.nl"
+    },
+    "options": {
+      "package_type": 1,
+      "only_recipient": 1,
+      "signature": 1,
+      "return": 1,
+      "insurance": {
+        "amount": 50000,
+        "currency": "EUR"
+      },
+      "large_format": 0
+    },
+    "sender": {
+      "cc": "NL",
+      "city": "Amsterdam",
+      "street": "Dorpstraat",
+      "number": "123",
+      "postal_code": "1020BC",
+      "person": "Mrs. Parcel",
+      "phone": "02012343546",
+      "email": "info@myparcel.nl"
+    },
+    "carrier": 1,
+    "status": 1,
+    "price": {
+      "amount": 535,
+      "currency": "EUR"
+    },
+    "barcode": "3SMYPA77773333",
+    "created": "2017-01-31 08:00:00",
+    "modified": "2017-01-31 09:00:00"
   }
 </pre>
                 <br>
                 <p>GET example national shipment b</p>
 <pre>
   {
-  	"recipient": {
-  		"cc": "NL",
-  		"city": "Amsterdam",
-  		"street": "Dorpstraat",
-  		"number": "123",
-  		"postal_code": "1020BC",
-  		"person": "Mrs. Parcel",
-  		"phone": "02012343546",
-  		"email": "info@myparcel.nl"
-  	},
-  	"options": {
-  		"package_type": 1,
-  		"only_recipient": 1,
-  		"signature": 1,
-  		"return": 1
-  	},
-  	"sender": {
-  		"cc": "NL",
-  		"city": "Hoofddorp",
-  		"street": "Siriusdreef",
-  		"number": "66-68",
-  		"postal_code": "2132WT",
-  		"person": "Mr. Parcel",
-  		"phone": "0213030315",
-  		"email": "testing@myparcel.nl"
-  	},
-  	"carrier": 2,
-  	"status": 2,
-  	"price": {
-  		"amount": 535,
-  		"currency": "EUR"
-  	},
-  	"barcode": "563716278632716817283",
-  	"created": "2017-01-31 08:00:00",
-  	"modified": "2017-01-31 09:00:00"
+    "recipient": {
+      "cc": "NL",
+      "city": "Amsterdam",
+      "street": "Dorpstraat",
+      "number": "123",
+      "postal_code": "1020BC",
+      "person": "Mrs. Parcel",
+      "phone": "02012343546",
+      "email": "info@myparcel.nl"
+    },
+    "options": {
+      "package_type": 1,
+      "only_recipient": 1,
+      "signature": 1,
+      "return": 1
+    },
+    "sender": {
+      "cc": "NL",
+      "city": "Hoofddorp",
+      "street": "Siriusdreef",
+      "number": "66-68",
+      "postal_code": "2132WT",
+      "person": "Mr. Parcel",
+      "phone": "0213030315",
+      "email": "testing@myparcel.nl"
+    },
+    "carrier": 2,
+    "status": 2,
+    "price": {
+      "amount": 535,
+      "currency": "EUR"
+    },
+    "barcode": "563716278632716817283",
+    "created": "2017-01-31 08:00:00",
+    "modified": "2017-01-31 09:00:00"
   }
 </pre>
                 </p>
@@ -2219,29 +2219,29 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <p>Example a</p>
 <pre>
 {
-	"cc": "NL",
-	"city": "Hoofddorp",
-	"street": "Siriusdreef",
-	"number": "66-68",
-	"postal_code": "2132WT",
-	"person": "Mr. Parcel",
-	"phone": "0213030315",
-	"email": "parcel@myparcel.nl"
+  "cc": "NL",
+  "city": "Hoofddorp",
+  "street": "Siriusdreef",
+  "number": "66-68",
+  "postal_code": "2132WT",
+  "person": "Mr. Parcel",
+  "phone": "0213030315",
+  "email": "parcel@myparcel.nl"
 }
 </pre>
 
                 <p>Example b</p>
 <pre>
   {
-  	"cc": "NL",
-  	"city": "Hoofddorp",
-  	"street": "Siriusdreef",
-  	"number": "66",
-  	"number_suffix": "-68",
-  	"postal_code": "2132WT",
-  	"person": "Mrs. Parcel",
-  	"phone": "0213030315",
-  	"email": "parcel@myparcel.nl"
+    "cc": "NL",
+    "city": "Hoofddorp",
+    "street": "Siriusdreef",
+    "number": "66",
+    "number_suffix": "-68",
+    "postal_code": "2132WT",
+    "person": "Mrs. Parcel",
+    "phone": "0213030315",
+    "email": "parcel@myparcel.nl"
   }
 </pre>
 
@@ -2249,54 +2249,54 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <p>Example c</p>
 <pre>
   {
-  	"cc": "FR",
-  	"city": "Paris",
-  	"street": "rue du Grenier-Saint-Lazare 22",
-  	"person": "Claus Stuter",
-  	"company": "Renault",
-  	"email": "claus@paris.nl",
-  	"postal_code": "75008",
-  	"phone": "0033142723122"
+    "cc": "FR",
+    "city": "Paris",
+    "street": "rue du Grenier-Saint-Lazare 22",
+    "person": "Claus Stuter",
+    "company": "Renault",
+    "email": "claus@paris.nl",
+    "postal_code": "75008",
+    "phone": "0033142723122"
   }
 </pre>
 
                 <p>Example d</p>
 <pre>
   {
-  	"cc": "NL",
-  	"city": "Zoetermeer",
-  	"street": "Louiarmstrongrode",
-  	"number": "18",
-  	"postal_code": "2717NH",
-  	"person": "Pato otap",
-  	"phone": "0790880808",
-  	"email": "pato@otap.nl"
+    "cc": "NL",
+    "city": "Zoetermeer",
+    "street": "Louiarmstrongrode",
+    "number": "18",
+    "postal_code": "2717NH",
+    "person": "Pato otap",
+    "phone": "0790880808",
+    "email": "pato@otap.nl"
   }
 </pre>
                 <p>Example e</p>
 <pre>
   {
-  	"cc": "NL",
-  	"city": "Hoofddorp",
-  	"street": "Siriusdreef",
-  	"number": "66",
-  	"person": "Jan Peter",
-  	"company": "MyParcel B.V.",
-  	"email": "janpeter@bedrijven.nl",
-  	"phone": "0203030315"
+    "cc": "NL",
+    "city": "Hoofddorp",
+    "street": "Siriusdreef",
+    "number": "66",
+    "person": "Jan Peter",
+    "company": "MyParcel B.V.",
+    "email": "janpeter@bedrijven.nl",
+    "phone": "0203030315"
   }
 </pre>
 
                 <p>Example i</p>
 <pre>
   {
-  	"cc": "JP",
-  	"city": "さいたま市",
-  	"street": "埼玉県さいたま市浦和区 常盤9－21－21",
-  	"person": "Tanaka san",
-  	"company": "さいたま国際キリスト教会",
-  	"email": "saitamakyokai@gmail.com",
-  	"phone": "0081-48-825-6637"
+    "cc": "JP",
+    "city": "さいたま市",
+    "street": "埼玉県さいたま市浦和区 常盤9－21－21",
+    "person": "Tanaka san",
+    "company": "さいたま国際キリスト教会",
+    "email": "saitamakyokai@gmail.com",
+    "phone": "0081-48-825-6637"
   }
 </pre>
 
@@ -2419,70 +2419,70 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <p>Example a</p>
 <pre>
 {
-	"package_type": 1,
-	"only_recipient": 1,
-	"signature": 1,
-	"return": 1,
-	"insurance": {
-		"amount": 5000,
-		"currency": "EUR"
-	},
-	"large_format": 0,
-	"label_description": "My custom description"
+  "package_type": 1,
+  "only_recipient": 1,
+  "signature": 1,
+  "return": 1,
+  "insurance": {
+    "amount": 5000,
+    "currency": "EUR"
+  },
+  "large_format": 0,
+  "label_description": "My custom description"
 }
 </pre>
 
               <p>Example b</p>
 <pre>
   {
-  	"package_type": 1,
-  	"only_recipient": 0,
-  	"signature": 1,
-  	"return": 0,
-  	"insurance": {
-  		"amount": 50,
-  		"currency": "EUR"
-  	},
-  	"label_description": "My custom description"
+    "package_type": 1,
+    "only_recipient": 0,
+    "signature": 1,
+    "return": 0,
+    "insurance": {
+      "amount": 50,
+      "currency": "EUR"
+    },
+    "label_description": "My custom description"
   }
 </pre>
 
                 <p>Example c</p>
 <pre>
   {
-  	"package_type": 1,
-  	"only_recipient": 1,
-  	"signature": 1,
-  	"return": 1,
-  	"insurance": {
-  		"amount": 50000,
-  		"currency": "EUR"
-  	},
-  	"large_format": 0
+    "package_type": 1,
+    "only_recipient": 1,
+    "signature": 1,
+    "return": 1,
+    "insurance": {
+      "amount": 50000,
+      "currency": "EUR"
+    },
+    "large_format": 0
   }
 </pre>
 
           <p>Example d</p>
 <pre>
   {
-  	"package_type": 1,
-  	"only_recipient": 1,
-  	"signature": 1,
-  	"return": 1
+    "package_type": 1,
+    "only_recipient": 1,
+    "signature": 1,
+    "return": 1
   }
 </pre>
 
                 <p>Example return shipment options</p>
 <pre>
   {
-  	"package_type": 1,
-  	"only_recipient": 0,
-  	"signature": 1,
-  	"return": 0,
-  	"insurance": {
-  		"amount": 50,
-  		"currency": "EUR"
-  	}
+    "package_type": 1,
+    "only_recipient": 0,
+    "signature": 1,
+    "return": 0,
+    "insurance": {
+      "amount": 50,
+      "currency": "EUR"
+    }
   }
 </pre>
 
@@ -2496,12 +2496,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <p>Example pickup</p>
 <pre>
   {
-  	"package_type": 1,
-  	"delivery_type": 4,
-  	"delivery_date": "2017-01-12 16:30:00",
-  	"only_recipient": 0,
-  	"signature": 1,
-  	"return": 0
+    "package_type": 1,
+    "delivery_type": 4,
+    "delivery_date": "2017-01-12 16:30:00",
+    "only_recipient": 0,
+    "signature": 1,
+    "return": 0
   }
 </pre>
 
@@ -2559,62 +2559,62 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 
                 <h3 id="7_E_2">7.E.2 Example</h3>
                 <p>POST example a</p>
-                <pre>
-                  {
-                  	"contents": 1,
-                  	"invoice": "1231235345345",
-                  	"weight": 30,
-                  	"items": [{
-                  		"description": "Sample Product",
-                  		"amount": 10,
-                  		"weight": 20,
-                  		"item_value": {
-                  			"amount": 7000,
-                  			"currency": "EUR"
-                  		},
-                  		"classification": "0181",
-                  		"country": "NL"
-                  	}, {
-                  		"description": "Sample NBG Product",
-                  		"amount": 5,
-                  		"weight": 10,
-                  		"item_value": {
-                  			"amount": 1000,
-                  			"currency": "EUR"
-                  		},
-                  		"classification": "0181",
-                  		"country": "BE"
-                  	}]
-                  }
-                  </pre>
+<pre>
+{
+  "contents": 1,
+  "invoice": "1231235345345",
+  "weight": 30,
+  "items": [{
+  "description": "Sample Product",
+    "amount": 10,
+    "weight": 20,
+    "item_value": {
+      "amount": 7000,
+      "currency": "EUR"
+    },
+    "classification": "0181",
+    "country": "NL"
+  }, {
+  "description": "Sample NBG Product",
+    "amount": 5,
+    "weight": 10,
+    "item_value": {
+      "amount": 1000,
+      "currency": "EUR"
+    },
+    "classification": "0181",
+    "country": "BE"
+  }]
+}
+  </pre>
 
                 <p>POST example a</p>
 <pre>
   {
-  	"contents": 3,
-  	"invoice": "4567789004",
-  	"weight": 30,
-  	"items": [{
-  		"description": "NIV Product Audio CD",
-  		"amount": 3,
-  		"weight": 10,
-  		"item_value": {
-  			"amount": 10000,
-  			"currency": "EUR"
-  		},
-  		"classification": "0181",
-  		"country": "US"
-  	}, {
-  		"description": "Sample JP Product",
-  		"amount": 10,
-  		"weight": 20,
-  		"item_value": {
-  			"amount": 800000,
-  			"currency": "YEN"
-  		},
-  		"classification": "0181",
-  		"country": "JP"
-  	}]
+    "contents": 3,
+    "invoice": "4567789004",
+    "weight": 30,
+    "items": [{
+      "description": "NIV Product Audio CD",
+      "amount": 3,
+      "weight": 10,
+      "item_value": {
+        "amount": 10000,
+        "currency": "EUR"
+      },
+      "classification": "0181",
+      "country": "US"
+    }, {
+      "description": "Sample JP Product",
+      "amount": 10,
+      "weight": 20,
+      "item_value": {
+        "amount": 800000,
+        "currency": "YEN"
+      },
+      "classification": "0181",
+      "country": "JP"
+    }]
   }
 </pre>
 
@@ -2656,15 +2656,15 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <p>POST example a</p>
 <pre>
   {
-  	"description": "Sample NIV Product",
-  	"amount": 10,
-  	"weight": 20,
-  	"item_value": {
-  		"amount": 7000,
-  		"currency": "EUR"
-  	},
-  	"classification": "0181",
-  	"country": "NL"
+    "description": "Sample NIV Product",
+    "amount": 10,
+    "weight": 20,
+    "item_value": {
+      "amount": 7000,
+      "currency": "EUR"
+    },
+    "classification": "0181",
+    "country": "NL"
   }
 </pre>
 
@@ -2769,22 +2769,22 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <h3 id="7_I_2">Example</h3>
                 <p>POST example</p>
                 <pre>
-                  {
-                  	"parent": 123456,
-                  	"carrier": 1,
-                  	"email": "testing@myparcel.nl",
-                  	"name": "Mr. Parcel",
-                  	"options": {
-                  		"package_type": 1,
-                  		"only_recipient": 0,
-                  		"signature": 1,
-                  		"return": 0,
-                  		"insurance": {
-                  			"amount": 5000,
-                  			"currency": "EUR"
-                  		}
-                  	}
-                  }
+{
+  "parent": 123456,
+  "carrier": 1,
+  "email": "testing@myparcel.nl",
+  "name": "Mr. Parcel",
+  "options": {
+    "package_type": 1,
+    "only_recipient": 0,
+    "signature": 1,
+    "return": 0,
+    "insurance": {
+      "amount": 5000,
+      "currency": "EUR"
+    }
+  }
+}
                 </pre>
 
                 <h2 id="7_J">7.J UnrelatedReturnShipment Object Definition</h2>
@@ -2819,23 +2819,23 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 
                 <h3 id="7_J_2">7.J.2 Example</h3>
                 <p>POST example</p>
-                <pre>
-                  {
-                  	"carrier": 1,
-                  	"email": "testing@myparcel.nl",
-                  	"name": "Mr. Parcel",
-                  	"options": {
-                  		"package_type": 1,
-                  		"only_recipient": 0,
-                  		"signature": 1,
-                  		"return": 0,
-                  		"insurance": {
-                  			"amount": 50,
-                  			"currency": "EUR"
-                  		}
-                  	}
-                  }
-                </pre>
+<pre>
+{
+  "carrier": 1,
+  "email": "testing@myparcel.nl",
+  "name": "Mr. Parcel",
+  "options": {
+    "package_type": 1,
+    "only_recipient": 0,
+    "signature": 1,
+    "return": 0,
+    "insurance": {
+      "amount": 50,
+      "currency": "EUR"
+    }
+  }
+}
+</pre>
 
                 <h1 id="8">8. Delivery options</h1>
                 <h2 id="8_A">8.A Get delivery options</h2>
@@ -3011,135 +3011,135 @@ cc=NL&postal_code=2132WT&number=66&carrier=postnl HTTP/1.1</pre>
         <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-	"data": {
-		"delivery": [{
-			"date": "2017-02-01",
-			"time": [{
-				"start": "08:00:00",
-				"end": "12:00:00",
-				"price": {
-					"currency": "EUR",
-					"amount": 1000
-				},
-				"price_comment": "morning",
-				"comment": "",
-				"type": 1
-			}, {
-				"start": "11:30:00",
-				"end": "13:30:00",
-				"price": {
-					"currency": "EUR",
-					"amount": 0
-				},
-				"price_comment": "standard",
-				"comment": "",
-				"type": 2
-			}]
-		}, {
-			"date": "2017-02-02",
-			"time": [{
-				"start": "08:00:00",
-				"end": "12:00:00",
-				"price": {
-					"currency": "EUR",
-					"amount": 1000
-				},
-				"price_comment": "morning",
-				"comment": "",
-				"type": 1
-			}, {
-				"start": "11:00:00",
-				"end": "13:00:00",
-				"price": {
-					"currency": "EUR",
-					"amount": 0
-				},
-				"price_comment": "standard",
-				"comment": "",
-				"type": 2
-			}]
-		}],
-		"pickup": [{
-			"date": "2017-02-01",
-			"time": [{
-				"start": "16:00:00",
-				"type": 4,
-				"price": {
-					"amount": 0,
-					"currency": "EUR"
-				}
-			}, {
-				"start": "08:30:00",
-				"type": 5,
-				"price": {
-					"amount": 125,
-					"currency": "EUR"
-				}
-			}],
-			"location": "Staples Office Centre",
-			"street": "Jacobus Spijkerdreef",
-			"number": "10",
-			"postal_code": "2132PZ",
-			"city": "Hoofddorp",
-			"start_time": "08:30:00",
-			"price": 125,
-			"price_comment": "retailexpress",
-			"comment": "Dit is een Business Point. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-			"phone_number": "023-5576310",
-			"opening_hours": {
-				"monday": ["08:00-18:30"],
-				"tuesday": ["08:00-18:30"],
-				"wednesday": ["08:00-18:30"],
-				"thursday": ["08:00-18:30"],
-				"friday": ["08:00-18:30"],
-				"saturday": ["08:00-17:00"],
-				"sunday": []
-			},
-			"distance": "1934",
-			"location_code": "173187"
-		}, {
-			"date": "2017-02-01",
-			"time": [{
-				"start": "16:00:00",
-				"type": 4,
-				"price": {
-					"amount": 0,
-					"currency": "EUR"
-				}
-			}],
-			"location": "Primera Sanders",
-			"street": "Polderplein",
-			"number": "3",
-			"postal_code": "2132BA",
-			"city": "Hoofddorp",
-			"start_time": "16:00:00",
-			"price": 0,
-			"price_comment": "retail",
-			"comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-			"phone_number": "023-5640556",
-			"opening_hours": {
-				"monday": ["11:00-18:00"],
-				"tuesday": ["09:00-18:00"],
-				"wednesday": ["09:00-18:00"],
-				"thursday": ["09:00-18:00"],
-				"friday": ["09:00-21:00"],
-				"saturday": ["09:00-17:00"],
-				"sunday": ["12:00-17:00"]
-			},
-			"distance": "1687",
-			"location_code": "176227"
-		}, {
-			"date": "2017-02-01",
-			"time": [{
-				"start": "16:00:00",
-				"type": 4,
-				"price": {
-					"amount": 0,
-					"currency": "EUR"
-				}
-			}]
-		}]
-	}
+  "data": {
+    "delivery": [{
+      "date": "2017-02-01",
+      "time": [{
+        "start": "08:00:00",
+        "end": "12:00:00",
+        "price": {
+          "currency": "EUR",
+          "amount": 1000
+        },
+        "price_comment": "morning",
+        "comment": "",
+        "type": 1
+      }, {
+        "start": "11:30:00",
+        "end": "13:30:00",
+        "price": {
+          "currency": "EUR",
+          "amount": 0
+        },
+        "price_comment": "standard",
+        "comment": "",
+        "type": 2
+      }]
+    }, {
+      "date": "2017-02-02",
+      "time": [{
+        "start": "08:00:00",
+        "end": "12:00:00",
+        "price": {
+          "currency": "EUR",
+          "amount": 1000
+        },
+        "price_comment": "morning",
+        "comment": "",
+        "type": 1
+      }, {
+        "start": "11:00:00",
+        "end": "13:00:00",
+        "price": {
+          "currency": "EUR",
+          "amount": 0
+        },
+        "price_comment": "standard",
+        "comment": "",
+        "type": 2
+      }]
+    }],
+    "pickup": [{
+      "date": "2017-02-01",
+      "time": [{
+        "start": "16:00:00",
+        "type": 4,
+        "price": {
+          "amount": 0,
+          "currency": "EUR"
+        }
+      }, {
+        "start": "08:30:00",
+        "type": 5,
+        "price": {
+          "amount": 125,
+          "currency": "EUR"
+        }
+      }],
+      "location": "Staples Office Centre",
+      "street": "Jacobus Spijkerdreef",
+      "number": "10",
+      "postal_code": "2132PZ",
+      "city": "Hoofddorp",
+      "start_time": "08:30:00",
+      "price": 125,
+      "price_comment": "retailexpress",
+      "comment": "Dit is een Business Point. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+      "phone_number": "023-5576310",
+      "opening_hours": {
+        "monday": ["08:00-18:30"],
+        "tuesday": ["08:00-18:30"],
+        "wednesday": ["08:00-18:30"],
+        "thursday": ["08:00-18:30"],
+        "friday": ["08:00-18:30"],
+        "saturday": ["08:00-17:00"],
+        "sunday": []
+      },
+      "distance": "1934",
+      "location_code": "173187"
+    }, {
+      "date": "2017-02-01",
+      "time": [{
+        "start": "16:00:00",
+        "type": 4,
+        "price": {
+          "amount": 0,
+          "currency": "EUR"
+        }
+      }],
+      "location": "Primera Sanders",
+      "street": "Polderplein",
+      "number": "3",
+      "postal_code": "2132BA",
+      "city": "Hoofddorp",
+      "start_time": "16:00:00",
+      "price": 0,
+      "price_comment": "retail",
+      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+      "phone_number": "023-5640556",
+      "opening_hours": {
+        "monday": ["11:00-18:00"],
+        "tuesday": ["09:00-18:00"],
+        "wednesday": ["09:00-18:00"],
+        "thursday": ["09:00-18:00"],
+        "friday": ["09:00-21:00"],
+        "saturday": ["09:00-17:00"],
+        "sunday": ["12:00-17:00"]
+      },
+      "distance": "1687",
+      "location_code": "176227"
+    }, {
+      "date": "2017-02-01",
+      "time": [{
+        "start": "16:00:00",
+        "type": 4,
+        "price": {
+          "amount": 0,
+          "currency": "EUR"
+        }
+      }]
+    }]
+  }
 }
 </pre>
 
@@ -3158,137 +3158,137 @@ exclude_delivery_type=1  HTTP/1.1</pre>
     <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-	"data": {
-		"delivery": [{
-			"date": "2017-02-01",
-			"time": [{
-				"start": "11:30:00",
-				"end": "13:30:00",
-				"price": {
-					"currency": "EUR",
-					"amount": 0
-				},
-				"price_comment": "standard",
-				"comment": "",
-				"type": 2
-			}]
-		}, {
-			"date": "2017-02-02",
-			"time": [{
-				"start": "11:00:00",
-				"end": "13:00:00",
-				"price": {
-					"currency": "EUR",
-					"amount": 0
-				},
-				"price_comment": "standard",
-				"comment": "",
-				"type": 2
-			}]
-		}],
-		"pickup": [{
-			"date": "2017-02-01",
-			"time": [{
-				"start": "16:00:00",
-				"type": 4,
-				"price": {
-					"amount": 0,
-					"currency": "EUR"
-				}
-			}, {
-				"start": "08:30:00",
-				"type": 5,
-				"price": {
-					"amount": 125,
-					"currency": "EUR"
-				}
-			}],
-			"location": "Bruna",
-			"street": "De Symfonie",
-			"number": "37",
-			"postal_code": "2151MD",
-			"city": "Nieuw-Vennep",
-			"start_time": "08:30:00",
-			"price": 125,
-			"price_comment": "retailexpress",
-			"comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-			"phone_number": "0252-624747",
-			"opening_hours": {
-				"monday": ["08:00-18:00"],
-				"tuesday": ["08:00-18:00"],
-				"wednesday": ["08:00-18:00"],
-				"thursday": ["08:00-18:00"],
-				"friday": ["08:00-21:00"],
-				"saturday": ["08:00-17:00"],
-				"sunday": []
-			},
-			"distance": "6057",
-			"location_code": "161943"
-		}, {
-			"date": "2017-02-01",
-			"time": [{
-				"start": "16:00:00",
-				"type": 4,
-				"price": {
-					"amount": 0,
-					"currency": "EUR"
-				}
-			}],
-			"location": "Gamma",
-			"street": "Lakenblekerstraat",
-			"number": "49",
-			"postal_code": "1431GE",
-			"city": "Aalsmeer",
-			"start_time": "16:00:00",
-			"price": 0,
-			"price_comment": "retail",
-			"comment": "Dit is een Pakketpunt. Pakketten die u op werkdagen v\u00f3\u00f3r lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-			"phone_number": "0297-326751",
-			"opening_hours": {
-				"monday": ["09:00-21:00"],
-				"tuesday": ["09:00-21:00"],
-				"wednesday": ["09:00-21:00"],
-				"thursday": ["09:00-21:00"],
-				"friday": ["09:00-21:00"],
-				"saturday": ["09:00-18:00"],
-				"sunday": []
-			},
-			"distance": "6022",
-			"location_code": "167146"
-		}, {
-			"date": "2017-02-01",
-			"time": [{
-				"start": "16:00:00",
-				"type": 4,
-				"price": {
-					"amount": 0,
-					"currency": "EUR"
-				}
-			}],
-			"location": "Primera",
-			"street": "Poldermeesterplein",
-			"number": "5",
-			"postal_code": "1432JZ",
-			"city": "Aalsmeer",
-			"start_time": "16:00:00",
-			"price": 0,
-			"price_comment": "retail",
-			"comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-			"phone_number": "0297-364259",
-			"opening_hours": {
-				"monday": ["12:00-18:00"],
-				"tuesday": ["08:30-18:00"],
-				"wednesday": ["08:30-18:00"],
-				"thursday": ["08:30-18:00"],
-				"friday": ["08:30-20:00"],
-				"saturday": ["08:30-17:00"],
-				"sunday": []
-			},
-			"distance": "6069",
-			"location_code": "176682"
-		}]
+  "data": {
+    "delivery": [{
+      "date": "2017-02-01",
+      "time": [{
+        "start": "11:30:00",
+        "end": "13:30:00",
+        "price": {
+          "currency": "EUR",
+          "amount": 0
+        },
+        "price_comment": "standard",
+        "comment": "",
+        "type": 2
+      }]
+    }, {
+      "date": "2017-02-02",
+      "time": [{
+        "start": "11:00:00",
+        "end": "13:00:00",
+        "price": {
+          "currency": "EUR",
+          "amount": 0
+        },
+        "price_comment": "standard",
+        "comment": "",
+        "type": 2
+      }]
+    }],
+    "pickup": [{
+      "date": "2017-02-01",
+      "time": [{
+        "start": "16:00:00",
+        "type": 4,
+        "price": {
+          "amount": 0,
+          "currency": "EUR"
+        }
+      }, {
+        "start": "08:30:00",
+        "type": 5,
+        "price": {
+          "amount": 125,
+          "currency": "EUR"
+        }
+      }],
+      "location": "Bruna",
+      "street": "De Symfonie",
+      "number": "37",
+      "postal_code": "2151MD",
+      "city": "Nieuw-Vennep",
+      "start_time": "08:30:00",
+      "price": 125,
+      "price_comment": "retailexpress",
+      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+      "phone_number": "0252-624747",
+      "opening_hours": {
+        "monday": ["08:00-18:00"],
+        "tuesday": ["08:00-18:00"],
+        "wednesday": ["08:00-18:00"],
+        "thursday": ["08:00-18:00"],
+        "friday": ["08:00-21:00"],
+        "saturday": ["08:00-17:00"],
+        "sunday": []
+      },
+      "distance": "6057",
+      "location_code": "161943"
+    }, {
+      "date": "2017-02-01",
+      "time": [{
+        "start": "16:00:00",
+        "type": 4,
+        "price": {
+          "amount": 0,
+          "currency": "EUR"
+        }
+      }],
+      "location": "Gamma",
+      "street": "Lakenblekerstraat",
+      "number": "49",
+      "postal_code": "1431GE",
+      "city": "Aalsmeer",
+      "start_time": "16:00:00",
+      "price": 0,
+      "price_comment": "retail",
+      "comment": "Dit is een Pakketpunt. Pakketten die u op werkdagen v\u00f3\u00f3r lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+      "phone_number": "0297-326751",
+      "opening_hours": {
+        "monday": ["09:00-21:00"],
+        "tuesday": ["09:00-21:00"],
+        "wednesday": ["09:00-21:00"],
+        "thursday": ["09:00-21:00"],
+        "friday": ["09:00-21:00"],
+        "saturday": ["09:00-18:00"],
+        "sunday": []
+      },
+      "distance": "6022",
+      "location_code": "167146"
+    }, {
+      "date": "2017-02-01",
+      "time": [{
+        "start": "16:00:00",
+        "type": 4,
+        "price": {
+          "amount": 0,
+          "currency": "EUR"
+        }
+      }],
+      "location": "Primera",
+      "street": "Poldermeesterplein",
+      "number": "5",
+      "postal_code": "1432JZ",
+      "city": "Aalsmeer",
+      "start_time": "16:00:00",
+      "price": 0,
+      "price_comment": "retail",
+      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+      "phone_number": "0297-364259",
+      "opening_hours": {
+        "monday": ["12:00-18:00"],
+        "tuesday": ["08:30-18:00"],
+        "wednesday": ["08:30-18:00"],
+        "thursday": ["08:30-18:00"],
+        "friday": ["08:30-20:00"],
+        "saturday": ["08:30-17:00"],
+        "sunday": []
+      },
+      "distance": "6069",
+      "location_code": "176682"
+    }]
 
-	}
+  }
 }
 </pre>
 
@@ -3356,12 +3356,12 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 Authorization:basic emVNYWdhbWV3QVg2OG
 Vzd3UydXM= Content-Type:application/json; charset=utf-8
 {
-	"data": {
-		"webhook_subscriptions": [{
-			"hook": "shipment_status_change",
-			"url": "https://seoshop.nl/myparcel/notifications"
-		}]
-	}
+  "data": {
+    "webhook_subscriptions": [{
+      "hook": "shipment_status_change",
+      "url": "https://seoshop.nl/myparcel/notifications"
+    }]
+  }
 }
 </pre>
 
@@ -3369,11 +3369,11 @@ Vzd3UydXM= Content-Type:application/json; charset=utf-8
     <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
-	"data": {
-		"ids": [{
-			"id": 3
-		}]
-	}
+  "data": {
+    "ids": [{
+      "id": 3
+    }]
+  }
 }
 </pre>
 
@@ -3500,15 +3500,15 @@ Authorization: basic emVNYWdhbWV3QVg2OGVzd3UydXM=</pre>
     <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-	"data": {
-		"webhook_subscriptions": [{
-			"id": 123,
-			"account_id": 1,
-			"shop_id": 2,
-			"hook": "shipment_status_change",
-			"url": "https://seoshop.nl/myparcel/notifications"
-		}]
-	}
+  "data": {
+    "webhook_subscriptions": [{
+      "id": 123,
+      "account_id": 1,
+      "shop_id": 2,
+      "hook": "shipment_status_change",
+      "url": "https://seoshop.nl/myparcel/notifications"
+    }]
+  }
 }
 </pre>
 
@@ -3556,11 +3556,11 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 <p>Example b</p>
 <pre>
   {
-  	"id": 123,
-  	"account_id": 1,
-  	"shop_id": 2,
-  	"hook": "shipment_status_change",
-  	"url": "https://seoshop.nl/myparcel/notifications"
+    "id": 123,
+    "account_id": 1,
+    "shop_id": 2,
+    "hook": "shipment_status_change",
+    "url": "https://seoshop.nl/myparcel/notifications"
   }
 </pre>
 
@@ -3597,12 +3597,12 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 <p>Example a</p>
 <pre>
   {
-  	"shipment_id": 1,
-  	"account_id": 1,
-  	"shop_id": 2,
-  	"barcode": "3SMYPA12302837",
-  	"status": 3,
-  	"date": "2017-01-31 12:00:00"
+    "shipment_id": 1,
+    "account_id": 1,
+    "shop_id": 2,
+    "barcode": "3SMYPA12302837",
+    "status": 3,
+    "date": "2017-01-31 12:00:00"
   }
 </pre>
 
