@@ -181,7 +181,7 @@ Connection: keep-alive
                     No credentials have been sent with the request. Or the wrong credentials are send.
                     Tip: check if the API key is properly attached in the header <br>
 
-                    <code>Authorization: basic d2FudF90b193b3JrX2Zvcl91cz9fY29udGFjdF91c192aWFfd2Vic2l0ZQ==</code>
+                    <pre>Authorization: basic d2FudF90b193b3JrX2Zvcl91cz9fY29udGFjdF91c192aWFfd2Vic2l0ZQ==</pre>
                 </p>
 
                 <h3>2.A.III 402 - Payment Required</h3>
@@ -235,10 +235,9 @@ Connection: keep-alive
 
                 <h1 id="3">3. Character encoding</h1>
                 <p>
-                    All content must be encoded in UTF-8 and include the charset=utf-8 in the Content-Type: ...;
-                    charset=utf-8 header.
-
-                    i.e. <code>Content-Type: application/json;charset=utf-8</code>
+                    All content must be encoded in UTF-8 and include the charset=utf-8.<br><br>
+                    example:
+                    <pre>Content-Type: application/json;charset=utf-8</pre>
                 </p>
 
                 <h1 id="4">4. Data Types</h1>
@@ -1468,15 +1467,15 @@ HTTP/1.1 Authorization: basic ZGFzZGFkYXNkYXNkYXNkYXNkYXNk </pre>
                 </p>
 
                 <p><strong>Response</strong>
-        <pre>HTTP/1.1 200 OK  Content-Type:application/json
-          {
-          	"data": {
-          		"download_url": {
-          			"link": "https://api.myparcel.nl/return_shipment_labels/902223ede2f50288ecfbbd21a8c8fd7e"
-          		}
-          	}
-          }
-        </pre>
+<pre>HTTP/1.1 200 OK  Content-Type:application/json
+{
+  "data": {
+    "download_url": {
+     "link": "https://api.myparcel.nl/return_shipment_labels/902223ede2f50288ecfbbd21a8c8fd7e"
+     }
+  }
+}
+</pre>
                 </p>
 
                 <h2 id="6_E">6.E Get Shipment</h2>
@@ -2418,20 +2417,20 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 
                 <h3 id="7_C_2">7.C.2 Example</h3>
                 <p>Example a</p>
-                <pre>
-                  {
-                  	"package_type": 1,
-                  	"only_recipient": 1,
-                  	"signature": 1,
-                  	"return": 1,
-                  	"insurance": {
-                  		"amount": 5000,
-                  		"currency": "EUR"
-                  	},
-                  	"large_format": 0,
-                  	"label_description": "My custom description"
-                  }
-                </pre>
+<pre>
+{
+	"package_type": 1,
+	"only_recipient": 1,
+	"signature": 1,
+	"return": 1,
+	"insurance": {
+		"amount": 5000,
+		"currency": "EUR"
+	},
+	"large_format": 0,
+	"label_description": "My custom description"
+}
+</pre>
 
               <p>Example b</p>
 <pre>
