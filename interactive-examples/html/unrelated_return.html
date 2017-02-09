@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>MyParcelAPI Copy &amp; Paste Example Unrelated Return Shipments</title>
+  <title>MyParcelAPI Copy&amp;Paste Example Unrelated Return Shipments</title>
 </head>
 <body>
 <div id="returnText"></div>
@@ -33,8 +33,8 @@
 
 function sendToMyParcelReturnPage() {
     var xmlhttp = new XMLHttpRequest();
-    /* Enter your MyParcelAPI key here like "YOUR-API-KEY-HERE" */
-    var myParcelApiKey = "YOUR-API-KEY-HERE";
+    /* Enter your MyParcelAPI key here like "MYPAk8xeGA6yU5APIe8abMF8fn6xFWYneuZ1Key0" */
+    var myParcelApiKey = "MYPAk8xeGA6yU5APIe8abMF8fn6xFWYneuZ1Key0";
     /* You can change the number of seconds that we will redirect your user to our page (1-5) seconds recommended, default: 5*/
     var seconds = 5;
     /* You can change this text, it will appear above the button before the 5 second redirect */
@@ -59,7 +59,7 @@ function sendToMyParcelReturnPage() {
            else if (xmlhttp.status == 400) {
               console.log('Sorry, there was an 400 error');
            }
-           else if (xmlhttp.status == 401) {
+           else if (xmlhttp.status == 400) {
               console.log('Sorry, there was an 401 error (did you use the correct API key?)');
            }
            else {

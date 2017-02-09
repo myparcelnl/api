@@ -1,7 +1,7 @@
 <?php
 
 $url = 'https://api.myparcel.nl/return_shipments';
-$yourAPIkey = "replace_with_your_api_key"; // no need to encode it, this script will do it for you!
+$yourAPIkey = "MYPAk8xeGA6yU5APIe8abMF8fn6xFWYneuZ1Key0"; // no need to encode it, this script will do it for you!
 
 $data = array(); // no data is needed for this request
 
@@ -23,7 +23,7 @@ The result
 {
   "data": {
     "download_url": {
-      "link": "https:\/\/api.myparcel.nl\/retour\/8005ebb27d55425c5eaf2dff2fa41147"
+      "link": "https:\/\/api.myparcel.nl\/retour\/8015ebb27d55425c5eaf2dff2fa41147"
     }
   }
 }
@@ -40,7 +40,7 @@ array(1) {
     ["download_url"]=>
     array(1) {
       ["link"]=>
-      string(64) "https://backoffice.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147"
+      string(64) "https://backoffice.myparcel.nl/retour/8015ebb27d55425c5eaf2dff2fa41147"
     }
   }
 }
@@ -49,4 +49,4 @@ array(1) {
 $sendYourCustomerToThisPage = $associativeArray['data']['download_url']['link'];
 
 
-echo $sendYourCustomerToThisPage; // https://backoffice.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147
+echo $sendYourCustomerToThisPage; // https://backoffice.myparcel.nl/retour/8005e5b27d55425c5eaf2dff2fa41147

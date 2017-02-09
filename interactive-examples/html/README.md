@@ -7,7 +7,7 @@ In this folder you can find a full HTML page with the example how to create a bu
 
 The full HTML is found in ```unrelated_return.html```  
 
-A snippet which you can Copy & Paste + Edit (fill in your API Key and settings) can be found in ``````unrelated_return.html.snippet```
+A snippet which you can Copy & Paste + Edit (fill in your API Key and settings) can be found in ```unrelated_return.html.snippet```
 
 ## How to use
 

@@ -29,9 +29,13 @@
 function sendToMyParcelReturnPage() {
     var xmlhttp = new XMLHttpRequest();
     /* Enter your MyParcelAPI key here like "MYPAk8xeGA6yU5APIe8abMF8fn6xFWYneuZ1Key0" */
-    var myParcelApiKey = "MYCHk8xeGA6yU5PhDe8abMF8fn6xFWYneuZ1Kovo";
+
+    var myParcelApiKey = "MYPAk8xeGA6yU5APIe8abMF8fn6xFWYneuZ1Key0";
+
     /* You can change the number of seconds that we will redirect your user to our page (1-5) seconds recommended, default: 5*/
+
     var seconds = 5;
+
     /* You can change this text, it will appear above the button before the 5 second redirect */
     var myParcelRedirectText = "U wordt doorverwezen in " + seconds + " seconden naar de volgende pagina: ";
 
@@ -54,7 +58,7 @@ function sendToMyParcelReturnPage() {
            else if (xmlhttp.status == 400) {
               console.log('Sorry, there was an 400 error');
            }
-           else if (xmlhttp.status == 401) {
+           else if (xmlhttp.status == 400) {
               console.log('Sorry, there was an 401 error (did you use the correct API key?)');
            }
            else {
