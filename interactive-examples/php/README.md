@@ -13,15 +13,15 @@ There are three examples:
 - a cURL-PHP example (With cURL extension)
 - Windows Users no Fear! [GitHub Desktop + GitHub SCM is here](https://git-for-windows.github.io/)
 
-#### Getting a DEMO API key
+#### Getting a  API key
 
-1. Visit (MyParcel Demo Registration)[https://myparcel.nl/demo]
+1. Visit (MyParcel)[https://myparcel.nl/login]
 
-2. Goto settings >  COG (Gear Wheel) Icon > Dutch: "Instellingen"
+2. Go to settings >  COG (Gear Wheel) Icon > Dutch: "Instellingen"
 
 3. Generate a API key -> Click "Genereer API-key" API
 
-example: 331591b4dd3aa71e895e37f1ce71ff5ee03f0342
+example: 331591b4dd3aa71e895e37f1ce71ff5ee03f0342 <br>
 Base64: MzMxNTkxYjRkZDNhYTcxZTg5NWUzN2YxY2U3MWZmNWVlMDNmMDM0Mg==
 
 You can test if this works by running this example request:
@@ -35,7 +35,7 @@ Live API base URL: https://api.myparcel.nl/
 api@demo.myparcel.nl:~$
 
 curl --request POST \
-  --url https://api-demo.myparcel.nl/return_shipments \
+  --url https://api.myparcel.nl/return_shipments \
   --header 'Content-Type: application/json;charset=utf-8' \
   --header 'Authorization: basic enter_your_base_64_encoded_api_key_here'
 ```
