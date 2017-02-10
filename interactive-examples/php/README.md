@@ -1,4 +1,4 @@
-# MyParcel.nl Interactive Examples
+# PHP Interactive Examples
 
 Author: MyParcel.nl <info@myparcel.nl>  
 Date: 2017-02-01
@@ -26,7 +26,7 @@ Base64: MzMxNTkxYjRkZDNhYTcxZTg5NWUzN2YxY2U3MWZmNWVlMDNmMDM0Mg==
 
 You can test if this works by running this example request:
 
-Demo API base url: https://api-demo.myparcel.nl/  
+Demo API base url: https://api.myparcel.nl/  
 Live API base URL: https://api.myparcel.nl/  
 
 
@@ -46,7 +46,7 @@ This request produces the following JSON output (The Response):
 {
   "data": {
     "download_url": {
-      "link": "https:\/\/demo.myparcel.nl\/retour\/8005ebb27d55425c5eaf2dff2fa41147"
+      "link": "https:\/\/backoffice.myparcel.nl\/retour\/8005ebb27d55425c5eaf2dff2fa41147"
     }
   }
 }
@@ -58,7 +58,7 @@ This request produces the following JSON output (The Response):
 
 ```
 <?php
-$associativeArray = json_decode('{"data":{"download_url":{"link":"https:\/\/demo.myparcel.nl\/retour\/8005ebb27d55425c5eaf2dff2fa41147"}}}', TRUE);
+$associativeArray = json_decode('{"data":{"download_url":{"link":"https:\/\/backoffice.myparcel.nl\/retour\/8005ebb27d55425c5eaf2dff2fa41147"}}}', TRUE);
 var_dump($associativeArray);
 /*
 array(1) {
@@ -67,7 +67,7 @@ array(1) {
     ["download_url"]=>
     array(1) {
       ["link"]=>
-      string(64) "https://demo.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147"
+      string(64) "https://backoffice.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147"
     }
   }
 }
@@ -78,7 +78,7 @@ echo $associativeArray['data']['download_url']['link'];
 // no need to run stripcslashes() in this example...
 // json_decode() is smart enough to know you just want that!
 
-/* result: https://demo.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147  */
+/* result: https://backoffice.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147  */
 
 ```
 
@@ -92,17 +92,17 @@ use the query-parmeter `cc` for displaying a different language.
 i.e.
 
 - Dutch / Nederlands (Standard: NL)
-  - https://demo.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=NL
+  - https://backoffice.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=NL
 - English / Engels (EN)
-  - https://demo.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=EN
+  - https://backoffce.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=EN
 - French / Frans (FR)
-  - https://demo.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=FR
+  - https://backoffice.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=FR
 - German / Duits (DE)
-  - https://demo.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=DE
+  - https://backoffie.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=DE
 - Italian / Italiaans (IT)
-  - https://demo.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=IT
+  - https://backoffice.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=IT
 - Spanish / Spaans (ES)
-  - https://demo.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=ES
+  - https://backoffice.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147?cc=ES
 
 
 ## run this example via your command-line
@@ -111,7 +111,7 @@ i.e.
 api@api-demo.myparcel.nl:~$
 
 curl --request POST \
-  --url https://api-demo.myparcel.nl/return_shipments \
+  --url https://api.myparcel.nl/return_shipments \
   --header 'Content-Type: application/json;charset=utf-8' \
   --header 'Authorization: basic enter_your_base_64_encoded_api_key_in' \
 ```
@@ -124,7 +124,7 @@ curl --request POST \
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api-demo.myparcel.nl/return_shipments",
+  CURLOPT_URL => "https://api.myparcel.nl/return_shipments",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 5,
@@ -156,7 +156,7 @@ if ($error) {
 ```
 <?php
 
-$url = 'https://api-demo.myparcel.nl/return_shipments';
+$url = 'https://api.myparcel.nl/return_shipments';
 $data = array(); // no data is needed for this request
 // use key 'http' even if you send the request to https://...
 $options = array(
@@ -185,8 +185,8 @@ echo "</pre>";
 api@demo.myparcel.nl:~$ php -a
 // starts a interactive php shell on your terminal
 
-php > echo stripcslashes("https:\/\/demo.myparcel.nl\/retour\/8005ebb27d55425c5eaf2dff2fa41147");
-https://demo.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147
+php > echo stripcslashes("https:\/\/backoffice.myparcel.nl\/retour\/8005ebb27d55425c5eaf2dff2fa41147");
+https://backoffice.myparcel.nl/retour/8005ebb27d55425c5eaf2dff2fa41147
 ```
 
 ## Extra: Base64encode your API key
@@ -201,7 +201,7 @@ echo $myParcel_Base_64_encoded
 
 ## Extra: base64encode via interactive PHP shell
 ```
-api@demo.myparcel.nl:~$ php -a
+api.myparcel.nl:~$ php -a
 // starts a interactive php shell on your terminal
 
 php > echo base64_encode("331591b4dd3aa71e895e37f1ce71ff5ee03f0342");
