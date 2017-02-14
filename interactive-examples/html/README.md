@@ -30,13 +30,14 @@ step 3. Copy & Paste the snippet to your webpage.
 
 step 4. (Optional!) Customize the text-color and background color.
 
-_Do you want a pink button with black text?_  **No problem!**
-
+The standard button background is Orange with a white text-color.
 
 ```
 background-color: orange;
 color: white;
 ```
+
+_Do you want a button with a pink background and black text?_  **No problem!**
 
 Change the ```background-color``` "orange" to pink (#ff00aa)  
 change the ```color``` "white" to black (#000000)  
