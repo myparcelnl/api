@@ -68,8 +68,8 @@ function sendToMyParcelReturnPage() {
         }
     };
 
-    xmlhttp.open("POST", "https://api.myparcel.nl/return_shipments", true);
-    xmlhttp.setRequestHeader("Authorization", "basic " + btoa(myParcelApiKey));
+    xmlhttp.open("POST", "https://api.myparcel.nl/return_shipments", true); // this will call our API @ api.myparcel.nl
+    xmlhttp.setRequestHeader("Authorization", "basic " + btoa(myParcelApiKey)); // this will tell us who you are
     xmlhttp.send();
 }
 </script>

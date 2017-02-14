@@ -1,17 +1,18 @@
 <?php
 
+$base64EncodedApiKey = "enter_your_myparcel_api_key_here"; // your API key
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api.myparcel.nl/return_shipments",
+  CURLOPT_URL => "https://api.myparcel.nl/return_shipments", // The URL to call
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 5,
+  CURLOPT_MAXREDIRS => 5, // Maximum number of redirects
   CURLOPT_TIMEOUT => 25,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, // Let's use HTTP version 1.1
   CURLOPT_CUSTOMREQUEST => "POST",
   CURLOPT_HTTPHEADER => array(
-    "Authorization: basic enter_your_base_64_encoded_api_key_in==",
+    "Authorization: basic " .base64_encode($base64EncodedApiKey), // we will base64encode it your API key  here
     "Content-Type: application/json;charset=utf-8"
   ),
 ));

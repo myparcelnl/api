@@ -21,18 +21,17 @@ There are three examples:
 
 3. Generate a API key -> Click "Genereer API-key" API
 
-example: 331591b4dd3aa71e895e37f1ce71ff5ee03f0342 <br>
-Base64: MzMxNTkxYjRkZDNhYTcxZTg5NWUzN2YxY2U3MWZmNWVlMDNmMDM0Mg==
+example: 331591b4dd3aa71e895e37f1ce71ff5ee03f0342  
+Base64: MzMxNTkxYjRkZDNhYTcxZTg5NWUzN2YxY2U3MWZmNWVlMDNmMDM0Mg==  
 
 You can test if this works by running this example request:
 
-Demo API base url: https://api.myparcel.nl/  
-Live API base URL: https://api.myparcel.nl/  
+API base URL: https://api.myparcel.nl/  
 
 
 #### CURL example (command-line) (The Request)
 ```
-api@demo.myparcel.nl:~$
+dev@api.myparcel.nl:~$
 
 curl --request POST \
   --url https://api.myparcel.nl/return_shipments \
@@ -201,7 +200,7 @@ echo $myParcel_Base_64_encoded
 
 ## Extra: base64encode via interactive PHP shell
 ```
-api.myparcel.nl:~$ php -a
+dev@api.myparcel.nl:~$ php -a
 // starts a interactive php shell on your terminal
 
 php > echo base64_encode("331591b4dd3aa71e895e37f1ce71ff5ee03f0342");
