@@ -1,6 +1,6 @@
 <?php
 
-$url = 'https://api.myparcel.nl/return_shipments';
+$url = 'https://api.myparcel.nl/return_shipments'; // this is the URL we are going to use
 $yourAPIkey = "MYPAk8xeGA6yU5APIe8abMF8fn6xFWYneuZ1Key0"; // no need to encode it, this script will do it for you!
 
 $data = array(); // no data is needed for this request
