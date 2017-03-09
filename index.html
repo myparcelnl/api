@@ -1002,7 +1002,7 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
                     <td>Array of UnrelatedReturnShipment objects. (For UnrelatedReturnShipments JSON request)</td>
                     </tr>
                     <tr>
-                        <th>Respnse</th>
+                        <th>Response</th>
                         <td>HTTP/1.1 200 OK
                             Content-Type: application/vnd.shipment_ids+json; charset=utf-8 (For standard and related
                             return
@@ -1474,9 +1474,9 @@ HTTP/1.1 Authorization: basic ZGFzZGFkYXNkYXNkYXNkYXNkYXNk== </pre>
 
 <p><strong>HTML/JavaScript Examples</strong> <a href="https://github.com/myparcelnl/api/tree/gh-pages/interactive-examples/html/README.md" target="_blank">README</a></p>
 
-<p>We make an example (snippet) to easily include the button in your favorite CMS (like Wordpress) For an example of a button in a HTML snippet: <a href="https://github.com/myparcelnl/api/tree/gh-pages/interactive-examples/html/unrelated_return.html.snippet" target="_blank">click here.</a></p>
+<p>We made an example (snippet) to easily include a return button in your favorite CMS (like Wordpress). For an example of a button in a HTML snippet: <a href="https://github.com/myparcelnl/api/tree/gh-pages/interactive-examples/html/unrelated_return.html.snippet" target="_blank">click here.</a></p>
 
-<p>With these examples you can easily place a Return Button on your website (full webpage). For an example of a button in a full HTML page: <a href="https://github.com/myparcelnl/api/tree/gh-pages/interactive-examples/html/unrelated_return.html" target="_blank">click here.</a></p>
+<p>With these examples you can easily place a return button on your website (full webpage). For an example of a button in a full HTML page: <a href="https://github.com/myparcelnl/api/tree/gh-pages/interactive-examples/html/unrelated_return.html" target="_blank">click here.</a></p>
 
 <p><strong>PHP Examples</strong> <a href="https://github.com/myparcelnl/api/tree/gh-pages/interactive-examples/php/README.md" target="_blank">README</a></p>
 
@@ -1912,7 +1912,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 
                 <p><strong>status</strong><br>
                     Type: <u>shipment_status</u><br>
-                    Required: yes<br>
+                    Required: no<br>
                     This is the internal shipment status. What we do is filter and translate the
                     shipment status provided by the carrier in order to reduce the number of statusses.</p>
 
@@ -2205,7 +2205,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     Additional information for the street that should not be included in the street field.</p>
 
                 <p><strong>number</strong><br>
-                    Type: integer<br>
+                    Type: string<br>
                     Required: Yes for NL.<br>
                     Street number.</p>
 
