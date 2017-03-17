@@ -1206,7 +1206,7 @@ charset=utf-8 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==
         "cc": "NL",
         "city": "Hoofddorp",
         "street": "Siriusdreef",
-        "number": "66-68",
+        "number": "66",
         "postal_code": "2132WT",
         "person": "Mr. Parcel",
         "phone": "0213030315",
@@ -1358,7 +1358,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <td>None.</td>
                     </tr>
                     <tr>
-                        <th>Respnse</th>
+                        <th>Response</th>
                         <td>HTTP/1.1 201 OK</td>
                     </tr>
                     <tr>
@@ -1395,7 +1395,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     <pre>DELETE https://api.myparcel.nl/shipments/1234 HTTP/1.1
 Authorization:basic YW55IGNhcm5hbCBwbGVhcw==</pre>
                 <p><strong>Response</strong></p>
-                <pre>HTTP/1.1 204 No Content </pre>
+                <pre>HTTP/1.1 201 OK</pre>
                 </p>
 
                 <h2 id="6_D">6.D Generate unrelated return shipment</h2>
@@ -1466,7 +1466,7 @@ HTTP/1.1 Authorization: basic ZGFzZGFkYXNkYXNkYXNkYXNkYXNk== </pre>
 {
   "data": {
     "download_url": {
-     "link": "https://api.myparcel.nl/return_shipment_labels/902223ede2f50288ecfbbd21a8c8fd7e"
+     "link": "https://backoffice.myparcel.nl/retour/c18b3fe1f32b80e9b781898d3f48adce"
      }
   }
 }
@@ -3103,7 +3103,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
       "start_time": "08:30:00",
       "price": 125,
       "price_comment": "retailexpress",
-      "comment": "Dit is een Business Point. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+      "comment": "Dit is een Business Point. Post en pakketten die u op werkdagen voor de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
       "phone_number": "023-5576310",
       "opening_hours": {
         "monday": ["08:00-18:30"],
@@ -3134,7 +3134,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
       "start_time": "16:00:00",
       "price": 0,
       "price_comment": "retail",
-      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen voor de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
       "phone_number": "023-5640556",
       "opening_hours": {
         "monday": ["11:00-18:00"],
@@ -3162,7 +3162,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 }
 </pre>
 
-                <p><strong>Get delivery options for 2132WT, 66-68 for PostNL cutoff time 16h00, dropoff days
+                <p><strong>Get delivery options for 2132WT, 66 for PostNL cutoff time 16h00, dropoff days
                     Mon - Fri, dropoff delay is zero, delivery window is 2 days and morning is excluded as delivery
                     type</strong><br>
                     <br>
@@ -3230,7 +3230,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
       "start_time": "08:30:00",
       "price": 125,
       "price_comment": "retailexpress",
-      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen voor de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
       "phone_number": "0252-624747",
       "opening_hours": {
         "monday": ["08:00-18:00"],
@@ -3261,7 +3261,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
       "start_time": "16:00:00",
       "price": 0,
       "price_comment": "retail",
-      "comment": "Dit is een Pakketpunt. Pakketten die u op werkdagen v\u00f3\u00f3r lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+      "comment": "Dit is een Pakketpunt. Pakketten die u op werkdagen voor lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
       "phone_number": "0297-326751",
       "opening_hours": {
         "monday": ["09:00-21:00"],
@@ -3292,7 +3292,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
       "start_time": "16:00:00",
       "price": 0,
       "price_comment": "retail",
-      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen v\u00f3\u00f3r de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen voor de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
       "phone_number": "0297-364259",
       "opening_hours": {
         "monday": ["12:00-18:00"],
