@@ -3454,9 +3454,10 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 }
 </pre>
             <h1 id="9">9. Delivery options Object Definitions</h1>
+            <p>If you use the endpoint delivery_options you get two objects. DeliveryOptions Object and PickupOptions Object. OpeningHours Object contains the opening hours of pickup locations.</p>
             <h2 id="9_A">9.A DeliveryOptions Object Definition</h2>
+            <p>DeliveryOptions Object contains possible delivery options. Besides these options would also be able to bring the customer has two other choices: only_recipient and signature. These two options could offer you as long as the address is in the Netherlands. Morning and Evening delivery types always used only_recipient.</p>
             <h3 id="9_A_1">9.A.1 Overview</h3>
-            <!--<p>This object...</p>-->
             <p>
                 <strong>date</strong><br>
                 Data Type: <u>date</u><br>
@@ -3496,10 +3497,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 }
 </pre>
             <h2 id="9_B">9.B PickupOptions Object Definition</h2>
+            <p>PickupOptions Object contains possible PostNL locations.</p>
             <h3 id="9_B_1">9.B.1 Overview</h3>
-            <!--<p>
-                This object...
-            </p>-->
             <p>
                 <strong>date</strong><br>
                 Data Type: <u>date</u><br>
