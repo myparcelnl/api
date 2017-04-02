@@ -622,10 +622,6 @@ Connection: keep-alive
                             <td>example</td>
                             <td>2015-01-01 08:00:00</td>
                         </tr>
-                        <tr>
-                            <td>example 2</td>
-                            <td>2 (processing)</td>
-                        </tr>
                     </table>
                     <h2>weekday_digit</h2>
                     <table>
@@ -3440,7 +3436,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     </p>
                     <p>
                         <strong>time</strong><br>
-                        Type: <u>time</u><br>
+                        Type: <u>DeliveryOptionTime</u><br>
                         Required: n/a.<br>
                     </p>
                     <h3 id="9_A_2">9.A.2 Example</h3>
@@ -3481,7 +3477,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     </p>
                     <p>
                         <strong>time</strong><br>
-                        Data Type: <u>time</u><br>
+                        Data Type: <u>PickupOptionTime</u><br>
                         Required: n/a.<br>
                     </p>
                     <p>
@@ -3628,7 +3624,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         Required: n/a.<br>
                     </p>
                     <h3 id="9_C_2">9.C.2 Example</h3>
-                    <p>Example a</p>
+                    <p>Example</p>
 <pre>
 {
   "monday": ["08:00-18:30"],
@@ -3638,6 +3634,88 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
   "friday": ["08:00-18:30"],
   "saturday": ["08:00-17:00"],
   "sunday": []
+}
+</pre>
+                    <h2 id="9_D">9.D DeliveryOptionTime Object Definition</h2>
+                    <h3 id="9_D_1">9.D.1 Overview</h3>
+                    <!--<p>
+        This object...
+    </p>-->
+                    <p>
+                        <strong>start</strong><br>
+                        Data Type: <u>time</u><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>end</strong><br>
+                        Data Type: <u>time</u><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>price</strong><br>
+                        Data Type: <u>price</u><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>price_comment</strong><br>
+                        Data Type: <u>string</u><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>comment</strong><br>
+                        Data Type: <u>string</u><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>type</strong><br>
+                        Data Type: <u>integer</u><br>
+                        Required: n/a.<br>
+                    </p>
+                    <h3 id="9_D_2">9.D.2 Example</h3>
+                    <p>Example</p>
+<pre>
+{
+  "start": "08:00:00",
+  "end": "12:00:00",
+  "price": {
+    "currency": "EUR",
+    "amount": 1000
+  },
+  "price_comment": "morning",
+  "comment": "",
+  "type": 1
+}
+</pre>
+                    <h2 id="9_E">9.E PickupOptionTime Object Definition</h2>
+                    <h3 id="9_E_1">9.E.1 Overview</h3>
+                    <!--<p>
+        This object...
+    </p>-->
+                    <p>
+                        <strong>start</strong><br>
+                        Data Type: <u>time</u><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>type</strong><br>
+                        Data Type: <u>integer</u><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>price</strong><br>
+                        Data Type: <u>price</u><br>
+                        Required: n/a.<br>
+                    </p>
+                    <h3 id="9_E_2">9.E.2 Example</h3>
+                    <p>Example</p>
+<pre>
+{
+  "start": "16:00:00",
+  "type": 4,
+  "price": {
+    "amount": 0,
+    "currency": "EUR"
+  }
 }
 </pre>
                     <h1 id="10">10. Webhooks</h1>
