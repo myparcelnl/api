@@ -2677,6 +2677,15 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Required: No.<br>
                         This email addresses that will receive a delivery notification.
                     </p>
+                    <h3 id="7_D_2">7.D.2 Example</h3>
+                    <p>Example</p>
+<pre>
+{
+  "save_recipient_address": 1,
+  "delivery_notification": 1,
+  "delivery_notification_email": "testing@myparcel.nl"
+}
+</pre>
                     <h2 id="7_E">7.E CustomsDeclaration Object Definition</h2>
                     <h3 id="7_E_1">7.E.1 Overview</h3>
                     <p>
@@ -2885,7 +2894,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <a href="#7_A">Shipment</a>.id
                     </p>
                     <h2 id="7_I">7.I ReturnShipment Object Definition</h2>
-                    <h3 id="7_I_1">Overview</h3>
+                    <h3 id="7_I_1">7.I.1 Overview</h3>
                     <p>You can create a return shipment with this object.</p>
                     <p>
                         <strong>shop_id</strong><br>
@@ -2924,7 +2933,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         The shipment options. If this is not provided then the default shop return shipment options are
                         used.
                     </p>
-                    <h3 id="7_I_2">Example</h3>
+                    <h3 id="7_I_2">7.I.2 Example</h3>
                     <p>POST example</p>
 <pre>
 {
@@ -4392,7 +4401,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         Data type: <a href="#integer">integer</a><br>
                         Required: n/a.<br>
                         <a href="#11_A">Subscription</a>.id
-                    </p>                    <h1 id="12">12. Document changes</h1>
+                    </p>
+                    <h1 id="12">12. Document changes</h1>
                     <p>
                         <a target="_blank" href="https://github.com/myparcelnl/api/releases">Click here</a> for the latest version of the API documentation. Last version update is done on <span id="current_version_date"></span>.
                     </p>
