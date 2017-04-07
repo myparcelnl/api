@@ -713,7 +713,7 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
                     <p>
                         There are three different packages types available and determine the type of shipment. The value is
                         send
-                        with the ShipmentOptions.package_type field.
+                        with the <a href="#7_C">ShipmentOptions</a>.package_type field.
                     </p>
                     <h4>1. Package</h4>
                     <p>
@@ -772,8 +772,8 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
                     <h3 id="6_A_3">6.A.3 Options</h3>
                     <p>
                         These are the different package options such as insurance, recipient only, signature on receipt, XL
-                        format etc. These options are specified in the <strong>ShipmentOptions</strong> object. These options are only
-                        available for package type 1.
+                        format etc. These options are specified in the <a href="#7_C">ShipmentOptions</a> object. These options are only
+                        available for <a href="#package_type">package type</a> 1 (package).
                     </p>
                     <h4>only_recipient</h4>
                     <p>
@@ -799,7 +799,7 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
                     </p>
                     <h4>insurance</h4>
                     <p>
-                        This option allows a shipment to be insured up to certain amount. Only package type 1 shipments can
+                        This option allows a shipment to be insured up to certain amount. Only <a href="#package_type">package type</a> 1 (package) shipments can
                         be
                         insured. NL shipments can be insured for 5000,- euros. EU shipments <strong>must</strong> be insured for 500,-
                         euros. Global shipments <strong>must</strong> be insured for 200,- euros. The following shipment options
@@ -833,10 +833,10 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
                     <p>
                         Let's go through this example. This package will be picked up by the customer so it needs to
                         package_type
-                        1(package) with delivery_type 4(pickup). All pickup packages need to have only_recipient and
+                        1(package) with <a href="#delivery_type">delivery type</a> 4 (Pickup). All pickup packages need to have only_recipient and
                         signature
                         set. A pickup location needs to be specified as well. Pickup express is almost identical to pickup.
-                        Instead of delivery type 4 you need to specify delivery type 5(Pickup express).
+                        Instead of <a href="#delivery_type">delivery type</a> 4 (Pickup), you need to specify <a href="#delivery_type">delivery type</a> 5 (Pickup express).
                     </p>
                     <h4>Evening</h4>
                     <p>
@@ -890,7 +890,7 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
 }
 </pre>
                     <p>
-                        Only package type 1 can be insured so package type is set to 1. Insurance amount needs to be
+                        Only <a href="#package_type">package type</a> 1 (package) can be insured so <a href="#package_type">package type</a> is set to 1. Insurance amount needs to be
                         specified
                         in cents and needs to be one of these amounts (5000, 25000, 50000, 500000, >= 500000). The package
                         needs
@@ -948,21 +948,21 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
                         </tr>
                         <tr>
-                            <td>Content-type: application/vnd.shipment+json; charset=utf-8 (For Shipments JSON request)</td>
+                            <td>Content-type: application/vnd.shipment+json; charset=utf-8 (For <a href="#7_A">Shipments</a> JSON request)</td>
                         </tr>
                         <tr>
                             <td>
-                                Content-type: application/vnd.shipment_recipients+json; charset=utf-8 (For Shipments with recipients column JSON request)
+                                Content-type: application/vnd.shipment_recipients+json; charset=utf-8 (For <a href="#7_A">Shipments</a> with recipients column JSON request)
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Content-type: application/vnd.return_shipment+json; charset=utf-8 (For ReturnShipments JSON request)
+                                Content-type: application/vnd.return_shipment+json; charset=utf-8 (For <a href="#7_I">ReturnShipments</a> JSON request)
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Content-type: application/vnd.unrelated_return_shipment+json; charset=utf-8 (For UnrelatedReturnShipments JSON request)
+                                Content-type: application/vnd.unrelated_return_shipment+json; charset=utf-8 (For <a href="#7_J">UnrelatedReturnShipments</a> JSON request)
                             </td>
                         </tr>
                         <tr>
@@ -992,7 +992,7 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
                         </tr>
                         <tr>
                             <th>Response body</th>
-                            <td><a href="#7_G"></a>ShipmentIds (For standard and related return shipment.)</td>
+                            <td><a href="#7_G">ShipmentIds</a></td>
                         </tr>
                         <tr>
                             <th>Error response</th>
@@ -1013,7 +1013,7 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
                         named 'column_mapping' in the multipart/form-data.
                     </p>
                     <p>
-                        For JSON requests a <a href="#7_G">ShipmentIds</a> object is returned.The ids in the <a href="#7_G">ShipmentIds</a> object
+                        For JSON requests a <a href="#7_G">ShipmentIds</a> object is returned. The ids in the <a href="#7_G">ShipmentIds</a> object
                         will
                         be in the same order they where sent.
                     </p>
@@ -1314,10 +1314,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         </tr>
                         <tr>
                             <th rowspan="2">Required request headers</th>
-                            <td>Content-type: application/json; charset=utf-8</td>
+                            <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
                         </tr>
                         <tr>
-                            <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                            <td>Content-type: application/json; charset=utf-8</td>
                         </tr>
                         <tr>
                             <th>URI parameters</th>
@@ -1341,11 +1341,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         </tr>
                         <tr>
                             <th>Error response</th>
-                            <td>None.</td>
+                            <td>HTTP/1.1 4xx < MESSAGE >.</td>
                         </tr>
                         <tr>
                             <th>Error response body</th>
-                            <td>None.</td>
+                            <td>Error</td>
                         </tr>
                     </table>
                     <h3 id="6_C_2">6.C.2 Overview</h3>
@@ -1359,14 +1359,16 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h3 id="6_C_3">6.C.3 Parameters</h3>
                     <p>
                         <strong>id</strong><br>
-                        Data type: <a href="#7_A">Shipment</a>.id<br>
+                        Data type: <a href="#integer">integer</a><br>
                         The id of the shipment to delete. You can specify multiple shipments by semi-colon separating them.
                     </p>
                     <h3 id="6_C_4">6.C.4 Example</h3>
-                    <p>Remove a shipment with id 1234 for account id 10 and shop id 1.</p>
+                    <p>Remove a shipment with id 1234.</p>
                     <p><strong>Request</strong></p>
-                    <pre>DELETE https://api.myparcel.nl/shipments/1234 HTTP/1.1
-Authorization:basic YW55IGNhcm5hbCBwbGVhcw==</pre>
+<pre>
+DELETE https://api.myparcel.nl/shipments/1234 HTTP/1.1
+Authorization:basic YW55IGNhcm5hbCBwbGVhcw==
+</pre>
                     <p><strong>Response</strong></p>
                     <pre>HTTP/1.1 201 No Content </pre>
                     </p>
@@ -2499,7 +2501,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <strong>package_type</strong><br>
                         Data type: <a href="#package_type">package_type</a><br>
                         Required: yes<br>
-                        The package type. For international shipment only package type 1 is allowed.
+                        The package type. For international shipment only package type 1 (package) is allowed.
                     </p>
                     <p>
                         <strong>delivery_type</strong><br>
@@ -4081,10 +4083,10 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         </tr>
                         <tr>
                             <th rowspan="2">Required request headers</th>
-                            <td>Content-type: application/json; charset=utf-8</td>
+                            <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
                         </tr>
                         <tr>
-                            <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                            <td>Content-type: application/json; charset=utf-8</td>
                         </tr>
                         <tr>
                             <th>URI parameters</th>
@@ -4161,10 +4163,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         </tr>
                         <tr>
                             <th rowspan="2">Required request headers</th>
-                            <td>Content-type: application/json; charset=utf-8</td>
+                            <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
                         </tr>
                         <tr>
-                            <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                            <td>Content-type: application/json; charset=utf-8</td>
                         </tr>
                         <tr>
                             <th>URI parameters</th>
