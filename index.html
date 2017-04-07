@@ -225,14 +225,14 @@ Connection: keep-alive
                         <li><a href="#currency">currency</a></li>
                         <li><a href="#date">date</a></li>
                         <li><a href="#delivery_type">delivery_type</a></li>
-                        <li><a href="#label_position">label_position</a></li>
                         <li><a href="#integer">integer</a></li>
                         <li><a href="#isic_code">isic_code</a></li>
+                        <li><a href="#label_position">label_position</a></li>
                         <li><a href="#month_digit">month_digit</a></li>
                         <li><a href="#package_contents">package_contents</a></li>
+                        <li><a href="#package_type">package_type</a></li>
                         <li><a href="#paper_size">paper_size</a></li>
                         <li><a href="#price">price</a></li>
-                        <li><a href="#package_type">package_type</a></li>
                         <li><a href="#shipment_status">shipment_status</a></li>
                         <li><a href="#sort_order">sort_order</a></li>
                         <li><a href="#string">string</a></li>
@@ -370,28 +370,6 @@ Connection: keep-alive
                             </td>
                         </tr>
                     </table>
-                    <h2 id="label_position">label_position</h2>
-                    <table>
-                        <tr>
-                            <th>description</th>
-                            <td>The position of the label on the paper.</td>
-                        </tr>
-                        <tr>
-                            <td>pattern</td>
-                            <td>[1 - 4]</td>
-                        </tr>
-                        <tr>
-                            <td>example</td>
-                            <td>
-                                <ol>
-                                    <li>(top-left)</li>
-                                    <li>(top-right)</li>
-                                    <li>(bottom-left)</li>
-                                    <li>(bottom-right)</li>
-                                </ol>
-                            </td>
-                        </tr>
-                    </table>
                     <h2 id="integer">integer</h2>
                     <table>
                         <tr>
@@ -420,6 +398,28 @@ Connection: keep-alive
                         <tr>
                             <td>example</td>
                             <td>0111 (Growing of cereals (except rice), leguminous crops and oil seeds)</td>
+                        </tr>
+                    </table>
+                    <h2 id="label_position">label_position</h2>
+                    <table>
+                        <tr>
+                            <th>description</th>
+                            <td>The position of the label on the paper.</td>
+                        </tr>
+                        <tr>
+                            <td>pattern</td>
+                            <td>[1 - 4]</td>
+                        </tr>
+                        <tr>
+                            <td>example</td>
+                            <td>
+                                <ol>
+                                    <li>(top-left)</li>
+                                    <li>(top-right)</li>
+                                    <li>(bottom-left)</li>
+                                    <li>(bottom-right)</li>
+                                </ol>
+                            </td>
                         </tr>
                     </table>
                     <h2 id="month_digit">month_digit</h2>
@@ -465,6 +465,27 @@ Connection: keep-alive
                             </td>
                         </tr>
                     </table>
+                    <h2 id="package_type">package_type</h2>
+                    <table>
+                        <tr>
+                            <th>description</th>
+                            <td>package_type</td>
+                        </tr>
+                        <tr>
+                            <td>pattern</td>
+                            <td>[1 – 3]</td>
+                        </tr>
+                        <tr>
+                            <td>example</td>
+                            <td>
+                                <ol>
+                                    <li>package</li>
+                                    <li>mailbox package</li>
+                                    <li>letter</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </table>
                     <h2 id="paper_size">paper_size</h2>
                     <table>
                         <tr>
@@ -496,27 +517,6 @@ Connection: keep-alive
                         <tr>
                             <td>example</td>
                             <td>{"amount": 5000, "currency": "EUR"}</td>
-                        </tr>
-                    </table>
-                    <h2 id="package_type">package_type</h2>
-                    <table>
-                        <tr>
-                            <th>description</th>
-                            <td>package_type</td>
-                        </tr>
-                        <tr>
-                            <td>pattern</td>
-                            <td>[1 – 3]</td>
-                        </tr>
-                        <tr>
-                            <td>example</td>
-                            <td>
-                                <ol>
-                                    <li>package</li>
-                                    <li>mailbox package</li>
-                                    <li>letter</li>
-                                </ol>
-                            </td>
                         </tr>
                     </table>
                     <h2 id="shipment_status">shipment_status</h2>
@@ -1602,7 +1602,7 @@ HTTP/1.1 Authorization: basic ZGFzZGFkYXNkYXNkYXNkYXNkYXNk== </pre>
                     </p>
                     <p>
                         <strong>Request</strong>
-                        <pre>GET https://api.myparcel.nl/shipments?q=Niels&status=1
+                        <pre>GET https://api.myparcel.nl/shipments?q=Niels&amp;status=1
 HTTP/1.1 Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==
         </pre>
                     </p>
@@ -1678,10 +1678,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
                         </tr>
                         <tr>
-                            <td>Accept: application/json; charset=utf8 (For shipment download link)</td>
+                            <td>Accept: application/pdf (For the PDF binary. This is the default.)</td>
                         </tr>
                         <tr>
-                            <td>Accept: application/pdf (For the PDF binary. This is the default.)</td>
+                            <td>Accept: application/json; charset=utf8 (For <a href="#7_R">ShipmentLabelDownloadLink</a>)</td>
                         </tr>
                         <tr>
                             <th>URI parameters</th>
@@ -1699,11 +1699,17 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td>None.</td>
                         </tr>
                         <tr>
-                            <th rowspan="2">Response</th>
+                            <th rowspan="3">Response</th>
                             <td>
                                 HTTP/1.1 200 OK
                                 Content-Disposition: attachment; filename="< PDF_FILE >"
                                 Content-Type: application/pdf
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                HTTP/1.1 200 OK
+                                Content-Type: application/json (When using "Accept: application/json; charset=utf8)
                             </td>
                         </tr>
                         <tr>
@@ -1713,8 +1719,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             </td>
                         </tr>
                         <tr>
-                            <th rowspan="2">Response body</th>
+                            <th rowspan="3">Response body</th>
                             <td>Shipment label PDF</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#7_R">ShipmentLabelDownloadLink</a> (When using "Accept: application/json; charset=utf8)"</td>
                         </tr>
                         <tr>
                             <td><a href="#7_P">PaymentInstructions</a> (When payment is required)</td>
@@ -1733,7 +1742,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Get shipment label. You can specify label format and starting position of labels on
                         the first page with the <strong>format</strong> and <strong>position</strong> query parameters. The <strong>position</strong>
                         query only works when you specify the A4 format and is only applied on the first
-                        page with labels.<br/>
+                        page with labels.<br />
                         Accounts with <strong>Postpayment</strong> payment methods can fetch multiple labels in one call.
                         For accounts with <strong>Prepayment</strong> payment method a HTTP/1.1 402 Payment
                         Required with a <a href="#7_P">PaymentInstructions</a> object is returned if the label has not been paid for
@@ -1797,7 +1806,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         label position will be at the bottom-right.
                     </p>
                     <p><strong>Request</strong></p>
-                    <pre>GET https://api.myparcel.nl/shipment_labels/2?format=A4&positions=3;4 HTTP/1.1 Authorization: basic
+                    <pre>GET https://api.myparcel.nl/shipment_labels/2?format=A4&amp;positions=3;4 HTTP/1.1 Authorization: basic
 SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==</pre>
                     <p><strong>Response</strong></p>
                     <pre>HTTP/1.1 200 OK Content-Disposition: attachment; filename="456456456456.pdf" Content-Type:
@@ -1936,6 +1945,41 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         shipment you have to use the <a href="#7_I">ReturnShipment</a> object.
                     </p>
                     <p>
+                        <strong>barcode</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        Required: n/a.<br>
+                        Shipment barcode.
+                    </p>
+                    <p>
+                        <strong>id</strong><br>
+                        Data type: <a href="#integer">integer</a><br>
+                        Required: n/a.<br>
+                        Shipment id.
+                    </p>
+                    <p>
+                        <strong>parent_id</strong><br>
+                        Data type: <a href="#integer">integer</a><br>
+                        Required: no<br>
+                        The parent shipment. This is used for related return shipment.
+                    </p>
+                    <p>
+                        <strong>account_id</strong><br>
+                        Data type: <a href="#integer">integer</a><br>
+                        Required: n/a.<br>
+                        The account id to which this shipment belongs.
+                    </p>
+                    <p>
+                        <strong>shop_id</strong><br>
+                        Data type: <a href="#integer">integer</a><br>
+                        Required: n/a.<br>
+                        The shop id to which this shipment belongs.
+                    </p>
+                    <p>
+                        <strong>shipment_type</strong><br>
+                        Data type: <a href="#integer">integer</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
                         <strong>recipient</strong><br>
                         Data type: <a href="#7_B">Address</a><br>
                         Required: Yes for application/vnd.shipment+json<br>
@@ -1948,35 +1992,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Use this field when you want to create multiple shipments for multiple addresses.
                     </p>
                     <p>
-                        <strong>pickup</strong><br>
-                        Data type: <a href="#7_O">PickupLocation</a><br>
-                        Required: Yes for options.delivery_type 4 and 5.<br>
-                        The pickup location for this shipment.
-                    </p>
-                    <p>
-                        <strong>options</strong><br>
-                        Data type: <a href="#7_C">ShipmentOptions</a><br>
-                        Required: Yes.<br>
-                        The shipment options.
-                    </p>
-                    <p>
-                        <strong>customs_declaration</strong><br>
-                        Data type: <a href="#7_E">CustomsDeclaration</a><br>
-                        Required: yes for non-EU shipments.<br>
-                        The customs declaration information.
-                    </p>
-                    <p>
-                        <strong>carrier</strong><br>
-                        Data type: <a href="#carrier">carrier</a><br>
-                        Required: yes.<br>
-                        The carrier that will deliver the package.
-                    </p>
-                    <p>
-                        <strong>physical_properties</strong><br>
-                        Data type: <a href="#7_N">PhysicalProperties</a><br>
-                        Required: yes for non-EU shipment types.<br>
-                        Shipment physical properties such as dimension, weight etc. This object may be
-                        updated when fetching shipment status update from the carrier.
+                        <strong>sender</strong><br>
+                        Data type: <a href="#7_B">Address</a><br>
+                        Required: n/a.<br>
+                        The sender of the package. This field is never set.
                     </p>
                     <p>
                         <strong>status</strong><br>
@@ -1986,10 +2005,35 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         shipment status provided by the carrier in order to reduce the number of statusses.
                     </p>
                     <p>
-                        <strong>parent</strong><br>
-                        Data type: <a href="#integer">integer</a><br>
-                        Required: no<br>
-                        The parent shipment. This is used for related return shipment.
+                        <strong>options</strong><br>
+                        Data type: <a href="#7_C">ShipmentOptions</a><br>
+                        Required: Yes.<br>
+                        The shipment options.
+                    </p>
+                    <p>
+                        <strong>pickup</strong><br>
+                        Data type: <a href="#7_O">PickupLocation</a><br>
+                        Required: Yes for options.delivery_type 4 and 5.<br>
+                        The pickup location for this shipment.
+                    </p>
+                    <p>
+                        <strong>customs_declaration</strong><br>
+                        Data type: <a href="#7_E">CustomsDeclaration</a><br>
+                        Required: yes for non-EU shipments.<br>
+                        The customs declaration information.
+                    </p>
+                    <p>
+                        <strong>physical_properties</strong><br>
+                        Data type: <a href="#7_N">PhysicalProperties</a><br>
+                        Required: yes for non-EU shipment types.<br>
+                        Shipment physical properties such as dimension, weight etc. This object may be
+                        updated when fetching shipment status update from the carrier.
+                    </p>
+                    <p>
+                        <strong>carrier</strong><br>
+                        Data type: <a href="#carrier">carrier</a><br>
+                        Required: yes.<br>
+                        The carrier that will deliver the package.
                     </p>
                     <p>
                         <strong>general_settings</strong><br>
@@ -2004,18 +2048,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         The shipment price.
                     </p>
                     <p>
-                        <strong>barcode</strong><br>
-                        Data type: <a href="#string">string</a><br>
-                        Required: n/a.<br>
-                        Shipment barcode.
-                    </p>
-                    <p>
-                        <strong>sender</strong><br>
-                        Data type: <a href="#7_B">Address</a><br>
-                        Required: n/a.<br>
-                        The sender of the package. This field is never set.
-                    </p>
-                    <p>
                         <strong>created</strong><br>
                         Data type: <a href="#timestamp">timestamp</a><br>
                         Required: n/a.<br>
@@ -2026,6 +2058,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Data type: <a href="#timestamp">timestamp</a><br>
                         Required: n/a.<br>
                         Date of modification.
+                    </p>
+                    <p>
+                        <strong>region</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        Required: n/a.<br>
                     </p>
                     <h3 id="7_A_2">7.A.2 Example</h3>
                     <p>POST example national shipment</p>
@@ -2513,6 +2550,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Large format package.
                     </p>
                     <p>
+                        <strong>cooled_delivery</strong><br>
+                        Data type: <a href="#boolean">boolean</a><br>
+                        Required: No.<br>
+                    </p>
+                    <p>
                         <strong>label_description</strong><br>
                         Data type: <a href="#string">string</a><br>
                         Required: No.<br>
@@ -2954,7 +2996,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 </pre>
                     <h2 id="7_K">7.K DownloadUrl Object Definition</h2>
                     <h3 id="7_K_1">7.K.1 Overview</h3>
-                    <p>This is the tracktrace object.</p>
+                    <p>This is the download url object.</p>
                     <p>
                         <strong>link</strong><br>
                         Data type: <a href="#string">string</a><br>
@@ -3210,7 +3252,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "type": 1,
   "notification_hash": "27eecee49d917d9ea2700ef5ccb59d28849a8bf3",
   "original_notification_hash": "27eecee49d917d9ea2700ef5ccb59d28849a8bf3",
-  "payment_url": "https://pay.multisafepay.com/pay/?transaction=25cOdyun01THR2ZpozaR5KfNPPrLCzBSFYq&lang=nl_NL",
+  "payment_url": "https://pay.multisafepay.com/pay/?transaction=25cOdyun01THR2ZpozaR5KfNPPrLCzBSFYq&amp;lang=nl_NL",
   "paid": 0,
   "price": {
     "amount": 911,
@@ -3245,6 +3287,21 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "status": 102
 }
  </pre>
+                    <h2 id="7_R">7.R ShipmentLabelDownloadLink Object Definition</h2>
+                    <h3 id="7_R_1">7.R.1 Overview</h3>
+                    <p>This is the shipment label download link object.</p>
+                    <p>
+                        <strong>url</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <h3 id="7_R_2">7.R.2 Example</h3>
+                    <p>Example</p>
+<pre>
+{
+  "url": "https://api.myparcel.nl/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
+}
+</pre>
                     <h1 id="8">8. Delivery options</h1>
                     <h2 id="8_A">8.A Get delivery options</h2>
                     <h3 id="8_A_1">8.A.1 Reference</h3>
@@ -3426,7 +3483,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <strong>Get delivery options for 2132WT, 66 for PostNL</strong><br>
                         <strong>Request</strong>
                     </p>
-                    <pre>GET https://api.myparcel.nl/delivery_options?cc=NL&postal_code=2132WT&number=66&carrier=postnl HTTP/1.1</pre>
+                    <pre>GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=postnl HTTP/1.1</pre>
                     <p><strong>Response</strong></p>
                     <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
@@ -3571,7 +3628,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         <br>
                         <strong>Request</strong>
                     </p>
-                    <pre>GET https://api.myparcel.nl/delivery_options?cc=NL&postal_code=2132WT&number=66&carrier=postnl&cuttoff_time=16:00:00&dropoff_days=1;2;3;4;5&dropoff_delay=0&deliverydays_window=2&exclude_delivery_type=1  HTTP/1.1</pre>
+                    <pre>GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=postnl&amp;cuttoff_time=16:00:00&amp;dropoff_days=1;2;3;4;5&amp;dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1</pre>
                     <p><strong>Response</strong></p>
 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
