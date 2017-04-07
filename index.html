@@ -952,21 +952,17 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
                         </tr>
                         <tr>
                             <td>
-                                Content-type: application/vnd.shipment_recipients+json; charset=utf-8 (For Shipments with
-                                recipients
-                                column JSON request)
+                                Content-type: application/vnd.shipment_recipients+json; charset=utf-8 (For Shipments with recipients column JSON request)
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Content-type: application/vnd.return_shipment+json; charset=utf-8 (For ReturnShipments JSON
-                                request)
+                                Content-type: application/vnd.return_shipment+json; charset=utf-8 (For ReturnShipments JSON request)
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Content-type: application/vnd.unrelated_return_shipment+json; charset=utf-8(For
-                                UnrelatedReturnShipments JSON request)
+                                Content-type: application/vnd.unrelated_return_shipment+json; charset=utf-8 (For UnrelatedReturnShipments JSON request)
                             </td>
                         </tr>
                         <tr>
@@ -979,26 +975,24 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
                         </tr>
                         <tr>
                             <th rowspan="3">Request body</th>
-                            <td>Array of Shipment objects. (For Shipments JSON request)</td>
+                            <td><a href="#array">array</a> of <a href="#7_A">Shipment</a> objects. (For Shipments JSON request)</td>
                         </tr>
                         <tr>
-                            <td>Array of ReturnShipment objects. (For ReturnShipments JSON request)</td>
+                            <td><a href="#array">array</a> of <a href="#7_I">ReturnShipment</a> objects. (For ReturnShipments JSON request)</td>
                         </tr>
                         <tr>
-                            <td>Array of UnrelatedReturnShipment objects. (For UnrelatedReturnShipments JSON request)</td>
+                            <td><a href="#array">array</a> of <a href="#7_J">UnrelatedReturnShipment</a> objects. (For UnrelatedReturnShipments JSON request)</td>
                         </tr>
                         <tr>
                             <th>Response</th>
                             <td>
                                 HTTP/1.1 200 OK
-                                Content-Type: application/vnd.shipment_ids+json; charset=utf-8 (For standard and related
-                                return
-                                shipment.)
+                                Content-Type: application/vnd.shipment_ids+json; charset=utf-8 (For standard and related return shipment.)
                             </td>
                         </tr>
                         <tr>
                             <th>Response body</th>
-                            <td>ShipmentIds(For standard and related return shipment.)</td>
+                            <td><a href="#7_G"></a>ShipmentIds (For standard and related return shipment.)</td>
                         </tr>
                         <tr>
                             <th>Error response</th>
@@ -1327,7 +1321,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         </tr>
                         <tr>
                             <th>URI parameters</th>
-                            <td>id = Shipment.id.</td>
+                            <td>id = <a href="#7_A">Shipment</a>.id.</td>
                         </tr>
                         <tr>
                             <th>Request parameters</th>
@@ -1516,7 +1510,7 @@ HTTP/1.1 Authorization: basic ZGFzZGFkYXNkYXNkYXNkYXNkYXNk== </pre>
                         </tr>
                         <tr>
                             <th>Response body</th>
-                            <td>Array of <a href="#7_A">Shipment</a> objects (For JSON)</td>
+                            <td><a href="#array">array</a> of <a href="#7_A">Shipment</a> objects (For JSON)</td>
                         </tr>
                         <tr>
                             <th>Error response</th>
@@ -1536,7 +1530,7 @@ HTTP/1.1 Authorization: basic ZGFzZGFkYXNkYXNkYXNkYXNkYXNk== </pre>
                         using
                         CSV you will only get the most recent status of shipment.<br>
                         <br>
-                        Upon success either a JSON array of Shipment objects or a CSV file is returned.
+                        Upon success either a JSON <a href="#array">array</a> of <a href="#7_A">Shipment</a> objects or a CSV file is returned.
                     </p>
                     <h3 id="6_E_3">6.E.3 Parameters</h3>
                     <p>
@@ -1723,7 +1717,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td>Shipment label PDF</td>
                         </tr>
                         <tr>
-                            <td><u>Transaction</u> (When payment is required)</td>
+                            <td><a href="#7_P">PaymentInstructions</a> (When payment is required)</td>
                         </tr>
                         <tr>
                             <th>Error response</th>
@@ -1737,12 +1731,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h3 id="6_F_2">6.F.2 Overview </h3>
                     <p>
                         Get shipment label. You can specify label format and starting position of labels on
-                        the first page with the FORMAT and POSITION query parameters. The POSITION
+                        the first page with the <strong>format</strong> and <strong>position</strong> query parameters. The <strong>position</strong>
                         query only works when you specify the A4 format and is only applied on the first
-                        page with labels. <br>See <a href="#6_F">Shipment label</a> for more information on position and format.
+                        page with labels.<br/>
                         Accounts with <strong>Postpayment</strong> payment methods can fetch multiple labels in one call.
-                        For accounts with <strong>Prepayment</strong> payment method an HTTP/1.1 402 Payment
-                        Required with an <u>Transaction</u> object is returned if the label has not been paid for
+                        For accounts with <strong>Prepayment</strong> payment method a HTTP/1.1 402 Payment
+                        Required with a <a href="#7_P">PaymentInstructions</a> object is returned if the label has not been paid for
                         yet.<br><br>
                         Upon error HTTP/1.1 4xx < MESSAGE >
                         with a response body containing an Error is
@@ -1865,7 +1859,7 @@ application/pdf (...PDF content)</pre>
                         </tr>
                     </table>
                     <h3 id="6_G_2">6.G.2 Overview </h3>
-                    <p>Get detailed track and trace information for a shipment. Upon success HTTP/1.1 200 OK is returned with an array of <a href="#7_L">TrackTrace</a> objects.</p>
+                    <p>Get detailed track and trace information for a shipment. Upon success HTTP/1.1 200 OK is returned with an <a href="#array">array</a> of <a href="#7_L">TrackTrace</a> objects.</p>
                     <h3 id="6_G_3">6.G.3 Parameters </h3>
                     <p>
                         <strong>id</strong><br>
@@ -3154,6 +3148,103 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "location_name": "Albert Heijn"
 }
 </pre>
+                    <h2 id="7_P">7.P PaymentInstructions Object Definition</h2>
+                    <h3 id="7_P_1">7.P.1 Overview</h3>
+                    <p>This is the payment instruction object.</p>
+                    <p>
+                        <strong>id</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>hash</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>invoices</strong><br>
+                        Data type: <a href="#">Invoice</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>type</strong><br>
+                        Data type: <a href="#integer">integer</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>notification_hash</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>original_notification_hash</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>payment_url</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>paid</strong><br>
+                        Data type: <a href="#boolean">boolean</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>price</strong><br>
+                        Data type: <a href="#price">price</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <h3 id="7_P_2">7.P.2 Example</h3>
+                    <p>Example</p>
+<pre>
+{
+  "id": "93c8533d3744eaf4a24a119f068019dcfbf97551",
+  "hash": "93c8533d3744eaf4a24a119f068019dcfbf97551",
+  "invoices": {
+    "id": 1334092,
+    "number": "111704089216",
+    "status": 102
+  },
+  "type": 1,
+  "notification_hash": "27eecee49d917d9ea2700ef5ccb59d28849a8bf3",
+  "original_notification_hash": "27eecee49d917d9ea2700ef5ccb59d28849a8bf3",
+  "payment_url": "https://pay.multisafepay.com/pay/?transaction=25cOdyun01THR2ZpozaR5KfNPPrLCzBSFYq&lang=nl_NL",
+  "paid": 0,
+  "price": {
+    "amount": 911,
+    "currency": "EUR"
+  }
+}
+ </pre>
+                    <h2 id="7_Q">7.Q Invoice Object Definition</h2>
+                    <h3 id="7_Q_1">7.Q.1 Overview</h3>
+                    <p>This is the invoice object.</p>
+                    <p>
+                        <strong>id</strong><br>
+                        Data type: <a href="#integer">integer</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>number</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>status</strong><br>
+                        Data type: <a href="#integer">integer</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <h3 id="7_Q_2">7.Q.2 Example</h3>
+                    <p>Example</p>
+<pre>
+{
+  "id": 1334092,
+  "number": "111704089216",
+  "status": 102
+}
+ </pre>
                     <h1 id="8">8. Delivery options</h1>
                     <h2 id="8_A">8.A Get delivery options</h2>
                     <h3 id="8_A_1">8.A.1 Reference</h3>
@@ -3221,7 +3312,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         </tr>
                         <tr>
                             <th>Response body</th>
-                            <td>Two array of <a href="#9_A">DeliveryOptions</a> and <a href="#9_B">PickupOptions</a> objects</td>
+                            <td><a href="#array">array</a> of <a href="#9_A">DeliveryOptions</a> and <a href="#array">array</a> of <a href="#9_B">PickupOptions</a> objects</td>
                         </tr>
                         <tr>
                             <th>Error response</th>
@@ -3240,7 +3331,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         (15h30) and Monday <strong>before</strong> the default cutoff_time (15h30) then Tuesday will be
                         shown as the next possible delivery date.<br>
                         <br>
-                        Upon success two arrays are returned one for <a href="#9_A">DeliveryOptions</a> and one
+                        Upon success two <a href="#array">arrays</a> are returned one for <a href="#9_A">DeliveryOptions</a> and one
                         for <a href="#9_B">PickupOptions</a> objects is returned. This object contains delivery date, time and
                         pricing. Upon error an Error object is returned.
                     </p>
@@ -3936,7 +4027,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                             <td>Content-type: application/json; charset=utf-8</td>
                         </tr>
                         <tr>
-                            <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)/td>
+                            <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
                         </tr>
                         <tr>
                             <th>URI parameters</th>
@@ -3956,7 +4047,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         </tr>
                         <tr>
                             <th>Response body</th>
-                            <td><a href="#array">array</a> of <a href="#7_A">SubscriptionId</a> objects</td>
+                            <td><a href="#11_A">SubscriptionIds</a></td>
                         </tr>
                         <tr>
                             <th>Error response</th>
@@ -4016,7 +4107,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td>Content-type: application/json; charset=utf-8</td>
                         </tr>
                         <tr>
-                            <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)/td>
+                            <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
                         </tr>
                         <tr>
                             <th>URI parameters</th>
@@ -4064,8 +4155,7 @@ Authorization:basic emVNYWdhbWV3QVg2OGVzd3UydXM==
                     <h2 id="10_C">10.C Get subscription</h2>
                     <h3 id="10_C_1">10.C.1 Overview</h3>
                     <p>
-                        Use this endpoint to fetch webhook subscriptions. Upon success a HTTP/1.1 200 with an array of
-                        Subscription objects is returned.
+                        Use this endpoint to fetch webhook subscriptions. Upon success a HTTP/1.1 200 with an <a href="#array">array</a> of <a href="#11_A">Subscription</a> objects is returned.
                     </p>
                     <h3 id="10_C_2">10.C.2 Reference</h3>
                     <table>
@@ -4083,7 +4173,7 @@ Authorization:basic emVNYWdhbWV3QVg2OGVzd3UydXM==
                         </tr>
                         <tr>
                             <th>URI parameters</th>
-                            <td>id = Subscription.id</td>
+                            <td>id = <a href="#11_A">Subscription</a>.id</td>
                         </tr>
                         <tr>
                             <th>Request parameters</th>
@@ -4099,7 +4189,7 @@ Authorization:basic emVNYWdhbWV3QVg2OGVzd3UydXM==
                         </tr>
                         <tr>
                             <th>Response body</th>
-                            <td>Array of Subscription objects</td>
+                            <td><a href="#array">array</a> of <a href="#11_A">Subscription</a> objects</td>
                         </tr>
                         <tr>
                             <th>Error response</th>
@@ -4226,7 +4316,24 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
   "barcode": "3SMYPA12302837"
 }
 </pre>
-                    <h1 id="12">12. Document changes</h1>
+                    <h2 id="11_C">11.C SubscriptionIds Object Definition</h2>
+                    <h3>Overview</h3>
+                    <p>
+                        This object contains an <a href="#array">array</a> of <a href="#11_D">SubscriptionId</a> objects.<br>
+                        <br>
+                        <strong>ids</strong><br>
+                        Data type: <a href="#array">array</a> of <a href="#11_D">SubscriptionId</a> objects.<br>
+                        Required: n/a.<br>
+                        <a href="#array">array</a> of <a href="#11_D">SubscriptionId</a> objects.
+                    </p>
+                    <h2 id="11_D">11.D SubscriptionId Object Definition</h2>
+                    <h3>Overview</h3>
+                    <p>
+                        <strong>id</strong><br>
+                        Data type: <a href="#integer">integer</a><br>
+                        Required: n/a.<br>
+                        <a href="#11_A">Subscription</a>.id
+                    </p>                    <h1 id="12">12. Document changes</h1>
                     <p>
                         <a target="_blank" href="https://github.com/myparcelnl/api/releases">Click here</a> for the latest version of the API documentation. Last version update is done on <span id="current_version_date"></span>.
                     </p>
