@@ -165,7 +165,7 @@ Connection: keep-alive
                     <p>
                         No credentials have been sent with the request. Or the wrong credentials are send.
                         Tip: check if the API key is properly attached in the header <br>
-                        <pre>Authorization: basic d2FudF90b193b3JrX2Zvcl91cz9fY29udGFjdF91c192aWFfd2Vic2l0ZQ==</pre>
+                        <pre>Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==</pre>
                     </p>
                     <h3>2.A.III 402 - Payment Required</h3>
                     <p>
@@ -675,7 +675,7 @@ Connection: keep-alive
                     </p>
 <pre>
 GET /somelink HTTP/1.1
-Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGRrYWpzbGk==
+Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p>
                         Our API uses API keys for access control. When a <strong>Merchant</strong> wants to connect an external system
@@ -1042,7 +1042,7 @@ Authorization: basic YXNsa2pkYWxrc2pkO2xha3NqZGw7a2Fqc2w7a2RqYWxzO2tqZGxha3NqbGR
 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
 Content-Type:application/vnd.shipment+json;charset=utf-8
-Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
     "shipments": [{
@@ -1107,7 +1107,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <p><strong>Request</strong></p>
 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1 Content-Type:application/vnd.shipment+json;
-charset=utf-8 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==
+charset=utf-8 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
     "shipments": [{
@@ -1172,7 +1172,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p><strong>Request</strong></p>
                     <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1 Content-Type:application/vnd.shipment+json;
-charset=utf-8 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==
+charset=utf-8 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
     "shipments": [{
@@ -1221,7 +1221,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p><strong>Request</strong></p>
 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1 Content-Type:application/vnd.return_shipment+
-json;charset=utf-8 Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==
+json;charset=utf-8 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
     "return_shipments": [{
@@ -1258,7 +1258,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 POST https://api.myparcel.nl/shipmentsHTTP/1.1 Content-Type:
 application/vnd.unrelated_return_shipment+json;charset=utf-8
-Authorization:basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
     "return_shipments": [{
@@ -1367,7 +1367,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p><strong>Request</strong></p>
 <pre>
 DELETE https://api.myparcel.nl/shipments/1234 HTTP/1.1
-Authorization:basic YW55IGNhcm5hbCBwbGVhcw==
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
                     <pre>HTTP/1.1 201 No Content </pre>
@@ -1605,7 +1605,7 @@ HTTP/1.1 Authorization: basic ZGFzZGFkYXNkYXNkYXNkYXNkYXNk== </pre>
                     <p>
                         <strong>Request</strong>
                         <pre>GET https://api.myparcel.nl/shipments?q=Niels&amp;status=1
-HTTP/1.1 Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==
+HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         </pre>
                     </p>
                     <p>
@@ -1776,7 +1776,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p><strong>Request</strong></p>
 <pre>
   GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1
-  Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==
+  Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
 <pre>
@@ -1788,7 +1788,7 @@ filename="123123123.pdf" Content-Type: application/pdf
                     <p><strong>Request</strong></p>
 <pre>
 GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1
-Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==
+Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 Accept: application/json;charset=utf-8
 </pre>
                     <p><strong>Response</strong></p>
@@ -1809,7 +1809,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     </p>
                     <p><strong>Request</strong></p>
                     <pre>GET https://api.myparcel.nl/shipment_labels/2?format=A4&amp;positions=3;4 HTTP/1.1 Authorization: basic
-SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==</pre>
+eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==</pre>
                     <p><strong>Response</strong></p>
                     <pre>HTTP/1.1 200 OK Content-Disposition: attachment; filename="456456456456.pdf" Content-Type:
 application/pdf (...PDF content)</pre>
@@ -1902,7 +1902,7 @@ application/pdf (...PDF content)</pre>
                     <p><strong>Request</strong></p>
                     <pre>
 GET https://api.myparcel.nl/tracktraces/12 HTTP/1.1
-Authorization: basic SmVzdXNDaHJpc3Rpc0xvcmQ3Nzc==
+Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
                     <pre>
@@ -4168,7 +4168,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <p><strong>Request</strong></p>
 <pre>
 POST https://api.myparcel.nl/webhook_subscriptions HTTP/1.1
-Authorization:basic emVNYWdhbWV3QVg2OGVzd3UydXM==
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 Content-Type:application/json; charset=utf-8
 {
   "data": {
@@ -4254,7 +4254,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p><strong>Request</strong></p>
 <pre>
 DELETE https://api.myparcel.nl/webhook_subscriptions/1 HTTP/1.1
-Authorization:basic emVNYWdhbWV3QVg2OGVzd3UydXM==
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
                     <pre>HTTP/1.1 204 No Content</pre>
@@ -4317,7 +4317,7 @@ Authorization:basic emVNYWdhbWV3QVg2OGVzd3UydXM==
                     <p><strong>Request</strong></p>
 <pre>
 GET https://api.myparcel.nl/webhook_subscriptions/12 HTTP/1.1
-Authorization: basic emVNYWdhbWV3QVg2OGVzd3UydXM==
+Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
 <pre>
