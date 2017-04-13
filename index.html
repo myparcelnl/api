@@ -3395,12 +3395,15 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td><a href="#array">array</a> of <a href="#9_A">DeliveryOptions</a> and <a href="#array">array</a> of <a href="#9_B">PickupOptions</a> objects</td>
                         </tr>
                         <tr>
-                            <th>Error response</th>
+                            <th rowspan="2">Error response</th>
                             <td>HTTP/1.1 4xx < MESSAGE ></td>
                         </tr>
                         <tr>
+                            <td>HTTP/1.1 5xx < MESSAGE ></td>
+                        </tr>
+                        <tr>
                             <th>Error response body</th>
-                            <td>Error</td>
+                            <td>None.</td>
                         </tr>
                         <tr>
                             <th>Error response body Example 422</th>
@@ -3814,6 +3817,47 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
   }
 }
 </pre>
+                    <p>
+                        <strong>Get delivery options for 2132WT, aaa for PostNL</strong><br>
+                        <strong>Request</strong>
+                    </p>
+                    <pre>GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=aaa&amp;carrier=postnl HTTP/1.1</pre>
+                    <p><strong>Response</strong></p>
+                    <pre>
+HTTP/1.1 422 Unprocessable Entity Content-Type:application/json;charset=utf-8
+{
+	"data": {
+		"delivery": [],
+		"pickup": [],
+		"message": "No results"
+	},
+	"errors": [{
+		"code": 3212,
+		"message": "number is required to be a number: `aaa` is not a number",
+		"human": "number is required to be a number: `aaa` is not a number"
+	}]
+}
+                    </pre>
+                    <p>
+                        <strong>Request</strong>
+                    </p>
+                    <pre>GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=postnl HTTP/1.1</pre>
+                    <p><strong>Response</strong></p>
+                    <pre>
+HTTP/1.1 503 Service Unavailable Content-Type:application/json;charset=utf-8
+{
+	"data": {
+		"delivery": [],
+		"pickup": [],
+		"message": "No results"
+	},
+	"errors": [{
+		"code": 9,
+		"message": "Number of requests exceed the maximum of 0.25 requests\/second",
+		"human": "Number of requests exceed the maximum of 0.25 requests\/second"
+	}]
+}
+                    </pre>
                     <h1 id="9">9. Delivery options Object Definitions</h1>
                     <p>If you use the endpoint delivery_options you get two objects. DeliveryOptions Object and PickupOptions Object. OpeningHours Object contains the opening hours of pickup locations.</p>
                     <h2 id="9_A">9.A DeliveryOptions Object Definition</h2>
