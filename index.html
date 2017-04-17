@@ -3403,45 +3403,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         </tr>
                         <tr>
                             <th>Error response body</th>
-                            <td>None.</td>
-                        </tr>
-                        <tr>
-                            <th>Error response body Example 422</th>
-                            <td><pre>{
-	"data": {
-		"delivery": [],
-		"pickup": [],
-		"message": "No results"
-	},
-	"errors": [{
-		"code": 3212,
-		"message": "number is required to be a number: `aaa` is not a number",
-		"human": "number is required to be a number: `aaa` is not a number"
-	}]
-}</pre></td>
-                        </tr>
-                        <tr>
-                            <th>Error response</th>
-                            <td>HTTP/1.1 503 < MESSAGE ></td>
-                        </tr>
-                        <tr>
-                            <th>Error response body 503</th>
-                            <td>Error</td>
-                        </tr>
-                        <tr>
-                            <th>Error response body Example</th>
-                            <td><pre>{
-	"data": {
-		"delivery": [],
-		"pickup": [],
-		"message": "No results"
-	},
-	"errors": [{
-		"code": 9,
-		"message": "Number of requests exceed the maximum of 0.25 requests\/second",
-		"human": "Number of requests exceed the maximum of 0.25 requests\/second"
-	}]
-}</pre></td>
+                            <td>Error.</td>
                         </tr>
                     </table>
                     <h3 id="8_A_3">8.A.3 Parameters</h3>
