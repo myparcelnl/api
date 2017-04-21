@@ -3438,8 +3438,8 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 	},
 	"errors": [{
 		"code": 9,
-		"message": "Number of requests exceed the maximum of 0.25 requests\/second",
-		"human": "Number of requests exceed the maximum of 0.25 requests\/second"
+		"message": "Example",
+		"human": "Example"
 	}]
 }</pre></td>
                         </tr>
@@ -3816,29 +3816,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
     }]
   }
 }
-</pre>
-                    <p>
-                        <strong>Get delivery options for 2132WT, aaa for PostNL</strong><br>
-                        <strong>Request</strong>
-                    </p>
-                    <pre>GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=aaa&amp;carrier=postnl HTTP/1.1</pre>
-                    <p><strong>Response</strong></p>
-                    <pre>
-HTTP/1.1 422 Unprocessable Entity Content-Type:application/json;charset=utf-8
-{
-	"data": {
-		"delivery": [],
-		"pickup": [],
-		"message": "No results"
-	},
-	"errors": [{
-		"code": 3212,
-		"message": "number is required to be a number: `aaa` is not a number",
-		"human": "number is required to be a number: `aaa` is not a number"
-	}]
-}
-                    </pre>
-                    <h1 id="9">9. Delivery options Object Definitions</h1>
+</pre>                    <h1 id="9">9. Delivery options Object Definitions</h1>
                     <p>If you use the endpoint delivery_options you get two objects. DeliveryOptions Object and PickupOptions Object. OpeningHours Object contains the opening hours of pickup locations.</p>
                     <h2 id="9_A">9.A DeliveryOptions Object Definition</h2>
                     <p>DeliveryOptions Object contains possible delivery options. Besides these options would also be able to bring the customer has two other choices: only_recipient and signature. These two options could offer you as long as the address is in the Netherlands. Morning and Evening delivery types always used only_recipient.</p>
