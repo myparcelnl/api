@@ -3317,15 +3317,16 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2 id="8_A">8.A Get delivery options</h2>
                     <h3 id="8_A_1">8.A.1 Overview</h3>
                     <p>
+                        <strong>Defaults</strong><br>
                         Get the delivery options for a given location and carrier. If none of the optional
                         parameters are specified then the following default will be used: If a request is
                         made for the delivery options between Friday <strong>after</strong> the default cutoff_time
-                        (15h30) and Monday <strong>before</strong> the default cutoff_time (15h30) then Tuesday will be
-                        shown as the next possible delivery date.<br>
-                        <br>
+                        (15h30) and Monday <strong>before</strong> the default cutoff_time (15h30) then Tuesday will be shown as the next possible delivery date.
+                    </p>
+                    <p>
+                        <strong>Objects</strong><br>
                         Upon success two <a href="#array">arrays</a> are returned one for <a href="#9_A">DeliveryOptions</a> and one
-                        for <a href="#9_B">PickupOptions</a> objects is returned. This object contains delivery date, time and
-                        pricing. Upon error an Error object is returned.
+                        for <a href="#9_B">PickupOptions</a> objects is returned. This object contains delivery date, time and pricing. Upon error an Error object is returned.
                     </p>
                     <h3 id="8_A_2">8.A.2 Reference</h3>
                     <table>
@@ -3346,7 +3347,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td>None.</td>
                         </tr>
                         <tr>
-                            <th rowspan="11">Query parameters</th>
+                            <th rowspan="12">Query parameters</th>
                             <td>cc = <a href="#country_code">country_code</a></td>
                         </tr>
                         <tr>
@@ -3369,6 +3370,9 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         </tr>
                         <tr>
                             <td>dropoff_days = <a href="#weekday_digit">weekday_digit</a></td>
+                        </tr>
+                        <tr>
+                            <td>monday_delivery = <a href="#boolean">boolean</a></td>
                         </tr>
                         <tr>
                             <td>dropoff_delay = <a href="#integer">integer</a></td>
@@ -3502,6 +3506,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Required: no<br>
                         This options allows the <strong>Merchant</strong> to set the days she normally goes to PostNL to
                         hand in her parcels. By default Saturday and Sunday are excluded.
+                    </p>
+                    <p>
+                        <strong>monday_delivery</strong><br>
+                        Data type: <a href="#weekday_digit">boolean</a><br>
+                        Required: no<br>
+                        Monday delivery is only possible when the package is delivered before 15.00 on Saturday at the designated PostNL locations. Click <a href="https://blog.myparcel.nl/maandagbezorging" target="_blank">here</a> for more information concerning Monday delivery and the locations. To activate Monday delivery, value 6 must be given with dropoff_days, value 1 must be given by monday_delivery. And on Saturday the cutoff_time must be before 15:00 (14:30 recommended) so that Monday will be shown.
                     </p>
                     <p>
                         <strong>dropoff_delay</strong><br>
@@ -3674,147 +3684,159 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <p>
                         <strong>
                             Get delivery options for 2132WT, 66 for PostNL cutoff time 16h00, dropoff days
-                            Mon - Fri, dropoff delay is zero, delivery window is 2 days and morning is excluded as delivery
+                            Mon - Sat, dropoff delay is zero, delivery window is 2 days and morning is excluded as delivery
                             type
                         </strong><br>
                         <br>
                         <strong>Request</strong>
                     </p>
-                    <pre>GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=postnl&amp;cuttoff_time=16:00:00&amp;dropoff_days=1;2;3;4;5&amp;dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1</pre>
+                    <pre>GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=postnl&amp;cuttoff_time=16:00:00&amp;dropoff_days=1;2;3;4;5;6&amp;monday_delivery=1&amp;dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1</pre>
                     <p><strong>Response</strong></p>
 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-  "data": {
-    "delivery": [{
-      "date": "2017-02-01",
-      "time": [{
-        "start": "11:30:00",
-        "end": "13:30:00",
-        "price": {
-          "currency": "EUR",
-          "amount": 0
-        },
-        "price_comment": "standard",
-        "comment": "",
-        "type": 2
-      }]
-    }, {
-      "date": "2017-02-02",
-      "time": [{
-        "start": "11:00:00",
-        "end": "13:00:00",
-        "price": {
-          "currency": "EUR",
-          "amount": 0
-        },
-        "price_comment": "standard",
-        "comment": "",
-        "type": 2
-      }]
-    }],
-    "pickup": [{
-      "date": "2017-02-01",
-      "time": [{
-        "start": "16:00:00",
-        "type": 4,
-        "price": {
-          "amount": 0,
-          "currency": "EUR"
-        }
-      }, {
-        "start": "08:30:00",
-        "type": 5,
-        "price": {
-          "amount": 125,
-          "currency": "EUR"
-        }
-      }],
-      "location": "Bruna",
-      "street": "De Symfonie",
-      "number": "37",
-      "postal_code": "2151MD",
-      "city": "Nieuw-Vennep",
-      "start_time": "08:30:00",
-      "price": 125,
-      "price_comment": "retailexpress",
-      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen voor de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-      "phone_number": "0252-624747",
-      "opening_hours": {
-        "monday": ["08:00-18:00"],
-        "tuesday": ["08:00-18:00"],
-        "wednesday": ["08:00-18:00"],
-        "thursday": ["08:00-18:00"],
-        "friday": ["08:00-21:00"],
-        "saturday": ["08:00-17:00"],
-        "sunday": []
-      },
-      "distance": "6057",
-      "location_code": "161943"
-    }, {
-      "date": "2017-02-01",
-      "time": [{
-        "start": "16:00:00",
-        "type": 4,
-        "price": {
-          "amount": 0,
-          "currency": "EUR"
-        }
-      }],
-      "location": "Gamma",
-      "street": "Lakenblekerstraat",
-      "number": "49",
-      "postal_code": "1431GE",
-      "city": "Aalsmeer",
-      "start_time": "16:00:00",
-      "price": 0,
-      "price_comment": "retail",
-      "comment": "Dit is een Pakketpunt. Pakketten die u op werkdagen voor lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-      "phone_number": "0297-326751",
-      "opening_hours": {
-        "monday": ["09:00-21:00"],
-        "tuesday": ["09:00-21:00"],
-        "wednesday": ["09:00-21:00"],
-        "thursday": ["09:00-21:00"],
-        "friday": ["09:00-21:00"],
-        "saturday": ["09:00-18:00"],
-        "sunday": []
-      },
-      "distance": "6022",
-      "location_code": "167146"
-    }, {
-      "date": "2017-02-01",
-      "time": [{
-        "start": "16:00:00",
-        "type": 4,
-        "price": {
-          "amount": 0,
-          "currency": "EUR"
-        }
-      }],
-      "location": "Primera",
-      "street": "Poldermeesterplein",
-      "number": "5",
-      "postal_code": "1432JZ",
-      "city": "Aalsmeer",
-      "start_time": "16:00:00",
-      "price": 0,
-      "price_comment": "retail",
-      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen voor de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-      "phone_number": "0297-364259",
-      "opening_hours": {
-        "monday": ["12:00-18:00"],
-        "tuesday": ["08:30-18:00"],
-        "wednesday": ["08:30-18:00"],
-        "thursday": ["08:30-18:00"],
-        "friday": ["08:30-20:00"],
-        "saturday": ["08:30-17:00"],
-        "sunday": []
-      },
-      "distance": "6069",
-      "location_code": "176682"
-    }]
-  }
+   "data":{
+      "delivery":[
+         {
+            "date":"2017-05-06",
+            "time":[
+               {
+                  "start":"08:30:00",
+                  "end":"21:30:00",
+                  "price":{
+                     "currency":"EUR",
+                     "amount":0
+                  },
+                  "price_comment":"standard",
+                  "comment":"",
+                  "type":2
+               }
+            ]
+         },
+         {
+            "date":"2017-05-08",
+            "time":[
+               {
+                  "start":"10:30:00",
+                  "end":"13:00:00",
+                  "price":{
+                     "currency":"EUR",
+                     "amount":0
+                  },
+                  "price_comment":"standard",
+                  "comment":"",
+                  "type":2
+               }
+            ]
+         }
+      ],
+      "pickup":[
+         {
+            "date":"2017-05-06",
+            "time":[
+               {
+                  "start":"16:00:00",
+                  "type":4,
+                  "price":{
+                     "amount":0,
+                     "currency":"EUR"
+                  }
+               },
+               {
+                  "start":"08:30:00",
+                  "type":5,
+                  "price":{
+                     "amount":125,
+                     "currency":"EUR"
+                  }
+               }
+            ],
+            "location":"Staples Office Centre",
+            "street":"Jacobus Spijkerdreef",
+            "number":"10",
+            "postal_code":"2132PZ",
+            "city":"Hoofddorp",
+            "start_time":"08:30:00",
+            "price":125,
+            "price_comment":"retailexpress",
+            "comment":"Dit is een Business Point. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+            "phone_number":"023-5576310",
+            "opening_hours":{
+               "monday":[
+                  "08:00-18:30"
+               ],
+               "tuesday":[
+                  "08:00-18:30"
+               ],
+               "wednesday":[
+                  "08:00-18:30"
+               ],
+               "thursday":[
+                  "08:00-18:30"
+               ],
+               "friday":[
+                  "08:00-18:30"
+               ],
+               "saturday":[
+                  "08:00-17:00"
+               ],
+               "sunday":[
+
+               ]
+            },
+            "distance":"1798",
+            "location_code":"173187"
+         },
+         {
+            "date":"2017-05-06",
+            "time":[
+               {
+                  "start":"16:00:00",
+                  "type":4,
+                  "price":{
+                     "amount":0,
+                     "currency":"EUR"
+                  }
+               }
+            ],
+            "location":"Primera Sanders",
+            "street":"Polderplein",
+            "number":"3",
+            "postal_code":"2132BA",
+            "city":"Hoofddorp",
+            "start_time":"16:00:00",
+            "price":0,
+            "price_comment":"retail",
+            "comment":"Dit is een Postkantoor. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+            "phone_number":"023-5640556",
+            "opening_hours":{
+               "monday":[
+                  "11:00-18:00"
+               ],
+               "tuesday":[
+                  "09:00-18:00"
+               ],
+               "wednesday":[
+                  "09:00-18:00"
+               ],
+               "thursday":[
+                  "09:00-18:00"
+               ],
+               "friday":[
+                  "09:00-21:00"
+               ],
+               "saturday":[
+                  "09:00-17:00"
+               ],
+               "sunday":[
+                  "12:00-17:00"
+               ]
+            },
+            "distance":"1696",
+            "location_code":"176227"
+         }
+      ]
+   }
 }
 </pre>                    <h1 id="9">9. Delivery options Object Definitions</h1>
                     <p>If you use the endpoint delivery_options you get two objects. DeliveryOptions Object and PickupOptions Object. OpeningHours Object contains the opening hours of pickup locations.</p>
