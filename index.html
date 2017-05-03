@@ -3489,7 +3489,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Required: no<br>
                         The date on which the package has to be delivered.
                     </p>
-                    <p>
+                    <p id="cutoff_time">
                         <strong>cutoff_time</strong><br>
                         Data type: <a href="#time">time</a><br>
                         Required: no<br>
@@ -3500,19 +3500,19 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         delay; all orders placed Monday before 15h30 will be dropped of at PostNL on
                         that same Monday in time for the Monday collection.
                     </p>
-                    <p>
+                    <p id="dropoff_days">
                         <strong>dropoff_days</strong><br>
                         Data type: <a href="#weekday_digit">weekday_digit</a><br>
                         Required: no<br>
                         This options allows the <strong>Merchant</strong> to set the days she normally goes to PostNL to
                         hand in her parcels. By default Saturday and Sunday are excluded.
                     </p>
-                    <p>
+                    <p id="monday_delivery">
                         <strong>monday_delivery</strong><br>
                         Data type: <a href="#weekday_digit">boolean</a><br>
                         Required: no<br>
                         Monday delivery is only possible when the package is delivered before 15.00 on Saturday at the designated PostNL locations. Click <a href="https://blog.myparcel.nl/maandagbezorging" target="_blank">here</a> for more information concerning Monday delivery and the locations.<br>
-                        <strong>Note: To activate Monday delivery, value 6 must be given with dropoff_days, value 1 must be given by monday_delivery. And on Saturday the cutoff_time must be before 15:00 (14:30 recommended) so that Monday will be shown.</strong>
+                        <strong>Note: To activate Monday delivery, value 6 must be given with <a href="#dropoff_days">dropoff_days</a>, value 1 must be given by <a href="#monday_delivery">monday_delivery</a>. And on Saturday the <a href="#cutoff_time">cutoff_time</a> must be before 15:00 (14:30 recommended) so that Monday will be shown.</strong>
                     </p>
                     <p>
                         <strong>dropoff_delay</strong><br>
