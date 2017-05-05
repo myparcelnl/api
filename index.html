@@ -3399,30 +3399,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td><a href="#array">array</a> of <a href="#9_A">DeliveryOptions</a> and <a href="#array">array</a> of <a href="#9_B">PickupOptions</a> objects</td>
                         </tr>
                         <tr>
-                            <th rowspan="2">Error response</th>
-                            <td>HTTP/1.1 4xx < MESSAGE ></td>
-                        </tr>
-                        <tr>
+                            <th>Error response</th>
                             <td>HTTP/1.1 5xx < MESSAGE ></td>
                         </tr>
                         <tr>
                             <th>Error response body</th>
                             <td>None.</td>
-                        </tr>
-                        <tr>
-                            <th>Error response body Example 422</th>
-                            <td><pre>{
-	"data": {
-		"delivery": [],
-		"pickup": [],
-		"message": "No results"
-	},
-	"errors": [{
-		"code": 3212,
-		"message": "number is required to be a number: `aaa` is not a number",
-		"human": "number is required to be a number: `aaa` is not a number"
-	}]
-}</pre></td>
                         </tr>
                         <tr>
                             <th>Error response</th>
