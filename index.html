@@ -20,8 +20,7 @@
         <div class="row">
             <div class="menu col-xs-4 col-lg-3">
                 <nav class="navbar nav nav-pills nav-stacked">
-                    <div class="menu-items">
-			    
+                    <div class="menu-items">   
                     </div>
                 </nav>
             </div>
@@ -701,7 +700,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <p>
                         We’ll start the shipment section with the different shipment option combinations available in
                         MyParcel
-                        (6.a). It is highly recommende that you read this first as this section helps you understand what
+                        (6.a). It is highly recommended that you read this first as this section helps you understand what
                         all
                         the shipment options are and which combinations are possible. We will not list every possible
                         combination since there are too many to list. We will look at the different package types and then
@@ -1972,6 +1971,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         The account id to which this shipment belongs.
                     </p>
                     <p>
+                        <strong>reference_identifier</strong><br>
+                        Data type: <a href="#integer">string</a><br>
+                        Required: No.<br>
+                        Arbitrary reference indentifier to identify this shipment.
+                    </p>
+                    <p>
                         <strong>shop_id</strong><br>
                         Data type: <a href="#integer">integer</a><br>
                         Required: n/a.<br>
@@ -2071,6 +2076,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>POST example national shipment</p>
 <pre>
 {
+  "reference_identifier": "FOO-333-BAR-42",
   "recipient": {
     "cc": "NL",
     "city": "Hoofddorp",
@@ -2099,6 +2105,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>POST example national shipment b</p>
 <pre>
 {
+  "reference_identifier": "FOO-333-BAR-42",
   "recipient": {
     "cc": "NL",
     "city": "Amsterdam",
@@ -2122,6 +2129,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>POST example international shipment</p>
 <pre>
 {
+  "reference_identifier" : "さいた-ᚱᚾᛟ/42",
   "recipient": {
     "cc": "JP",
     "city": "さいたま市",
