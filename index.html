@@ -1046,6 +1046,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
     "shipments": [{
+      "shipment_identifier" : "FOO-222-BAR-42",
       "recipient": {
         "cc": "NL",
         "city": "Hoofddorp",
@@ -1616,6 +1617,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "data": {
     "search_results": {
       "shipments": [{
+        "shipment_identifier" : "FOO-222-BAR-42",
         "recipient": {
           "cc": "NL",
           "city": "Hoofddorp",
@@ -2129,7 +2131,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>POST example international shipment</p>
 <pre>
 {
-  "reference_identifier" : "さいた-ᚱ	ᚾᛟ/42"
+  "reference_identifier" : "さいた-ᚱ	ᚾᛟ/42",
   "recipient": {
     "cc": "JP",
     "city": "さいたま市",
