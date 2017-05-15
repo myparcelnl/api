@@ -1476,8 +1476,11 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
                         </tr>
                         <tr>
-                            <th>URI parameters</th>
+                            <th rowspan="2">URI parameters</th>
                             <td>id= <a href="#7_A">Shipment</a>.id</td>
+                        </tr>
+                        <tr>
+                            <td>reference_identifier= <a href="#reference_identifier">reference_identifier</a></td>
                         </tr>
                         <tr>
                             <th rowspan="9">Query parameters</th>
@@ -1542,8 +1545,8 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                         This is the shipment id. You can specify multiple shipment ids by semi-colon separating them on the
                         URI.
                     </p>
-                    <p>
-                        <strong>reference_identifier</strong>
+                    <p id="reference_identifier">
+                        <strong>reference_identifier</strong><br>
                         Data type: <a href="#string">string</a><br>
                         This is an optional arbitrary identifier to identify the shipment.
                     </p>
