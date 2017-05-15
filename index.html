@@ -91,7 +91,7 @@
                         A failed request with a 4xx status code will always send back a response body with
                         the error description.
                         A failed request with a 5xx status code will probably mean you've hit a snag in our API.
-                        We try to monitor these kind of errors, but if you keep having trouble... Don't hesitate to reach out!
+                        We try to monitor these kind of errors, but if you keep having trouble... Don't hesitate to <a href="https://www.myparcel.nl/contact">reach out!</a>
                     </p>
                     <h2 id="2_A">2.A HTTP statuses</h2>
                     <p>
@@ -900,7 +900,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     </p>
                     <h4>EU and Global insured</h4>
                     <p>
-                        We want to send an expensive Japanese vase to a Belgian friend of ours in Brussel. This package is
+                        We want to send an expensive Japanese vase to a Belgian friend of ours in Brussels. This package is
                         large
                         format because it's dimensions are within 100 x 70 x 50 and 175 x 78 x 58 cm range. Since this is an
                         EU
@@ -1309,7 +1309,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         on
                         the URL. Only shipments with <strong>status 'pending - concept'</strong> can be deleted. This method returns
                         HTTP/1.1 201 if successful. If the shipment doesn’t exist a 422 "cannot delete shipment" is
-                        returend.
+                        returned.
                     </p>
                     <h3 id="6_C_2">6.C.2 Reference</h3>
                     <table>
@@ -1543,6 +1543,11 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                         URI.
                     </p>
                     <p>
+                        <strong>reference_identifier</strong>
+                        Data type: <a href="#string">string</a><br>
+                        This is an optional arbitrary identifier to identify the shipment.
+                    </p>
+                    <p>
                         <strong>dropoff_today</strong><br />
                         Data type: <a href="#boolean">boolean</a><br>
                         Use this parameter to filter for shipments that need to dropped at a PostNL location today.
@@ -1550,7 +1555,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                     <p>
                         <strong>q</strong><br />
                         Data type: <a href="#string">string</a><br>
-                        Use this parameter to search true all the fields of a shipment object including the embedded objects
+                        Use this parameter to search trough all the fields of a shipment object including the embedded objects
                     </p>
                     <p>
                         <strong>status</strong><br />
@@ -1771,7 +1776,8 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>
                         <strong>positions</strong><br>
                         Data type: <a href="#label_position">label_position</a><br>
-                        The position of the label on an A4 sheet. You can specify multiple positions by semi-colon separating them on the URI. Positioning is only applied on the first page with labels. All subsequent pages will use the default positioning 1,2,3,4.
+                        The position of the label on an A4 sheet. You can specify multiple positions by semi-colon separating them on the URI.
+                        Positioning is only applied on the first page with labels. All subsequent pages will use the default positioning 1,2,3,4.
                     </p>
                     <h3 id="6_F_4">6.F.4 Example </h3>
                     <p><strong>Get Shipment label</strong></p>
