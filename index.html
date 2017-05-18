@@ -1049,6 +1049,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
       "shipment_identifier" : "FOO-222-BAR-42",
       "recipient": {
         "cc": "NL",
+        "region": "Zuid-Holland",
         "city": "Hoofddorp",
         "street": "Siriusdreef",
         "number": "66",
@@ -1072,6 +1073,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
     }, {
       "recipient": {
         "cc": "NL",
+        "region": "Zuid-Holland",
         "city": "Amsterdam",
         "street": "Dorpstraat",
         "number": "123",
@@ -1114,6 +1116,7 @@ charset=utf-8 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUG
     "shipments": [{
       "recipient": {
         "cc": "JP",
+        "region": "埼玉県",
         "city": "さいたま市",
         "street": "埼玉県さいたま市浦和区 常盤9－21－21",
         "person": "Tanaka san",
@@ -1179,6 +1182,7 @@ charset=utf-8 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUG
     "shipments": [{
       "recipient": {
         "cc": "NL",
+        "region": "Zuid-Holland",
         "city": "Hoofddorp",
         "street": "Siriusdreef",
         "number": "66",
@@ -1629,6 +1633,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
         "recipient": {
           "cc": "NL",
           "city": "Hoofddorp",
+          "region": "Zuid-Holland",
           "street": "Siriusdreef",
           "number": "66",
           "postal_code": "2132WT",
@@ -1649,6 +1654,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
         },
         "sender": {
           "cc": "NL",
+          "region": "Zuid-Holland",
           "city": "Amsterdam",
           "street": "Dorpstraat",
           "number": "123",
@@ -2078,11 +2084,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Required: n/a.<br>
                         Date of modification.
                     </p>
-                    <p>
-                        <strong>region</strong><br>
-                        Data type: <a href="#string">string</a><br>
-                        Required: n/a.<br>
-                    </p>
                     <h3 id="7_A_2">7.A.2 Example</h3>
                     <p>POST example national shipment</p>
 <pre>
@@ -2090,6 +2091,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "reference_identifier": "FOO-333-BAR-42",
   "recipient": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Hoofddorp",
     "street": "Siriusdreef",
     "number": "66",
@@ -2119,6 +2121,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "reference_identifier" : "FOO-333-BAR-42",
   "recipient": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Amsterdam",
     "street": "Dorpstraat",
     "number": "123",
@@ -2143,6 +2146,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "reference_identifier" : "さいた-ᚱ	ᚾᛟ/42",
   "recipient": {
     "cc": "JP",
+    "region": "埼玉県",
     "city": "さいたま市",
     "street": "埼玉県さいたま市浦和区 常盤9－21－21",
     "person": "Tanaka san",
@@ -2193,6 +2197,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     "shipments": [{
       "recipient": {
         "cc": "NL",
+        "region": "Zuid-Holland",
         "city": "Hoofddorp",
         "street": "Siriusdreef",
         "number": "66",
@@ -2229,6 +2234,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "reference_identifier" : "FOO-222-BAR-42",
   "recipient": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Hoofddorp",
     "street": "Siriusdreef",
     "number": "66",
@@ -2250,6 +2256,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   },
   "sender": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Amsterdam",
     "street": "Dorpstraat",
     "number": "123",
@@ -2275,6 +2282,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "recipient": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Amsterdam",
     "street": "Dorpstraat",
     "number": "123",
@@ -2291,6 +2299,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   },
   "sender": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Hoofddorp",
     "street": "Siriusdreef",
     "number": "66",
@@ -2318,6 +2327,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Data type: <a href="#country_code">country_code</a><br>
                         Required: yes.<br>
                         The address country code.
+                    </p>
+                    <p>
+                        <strong>region</strong><br>
+                        Data type: <a href="#region">region</a><br>
+                        Required: no.<br>
+                        The region, department, state or province of the address.
                     </p>
                     <p>
                         <strong>postal_code</strong><br>
@@ -2384,6 +2399,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "NL",
+  "region": "Zuid-Holland",
   "city": "Hoofddorp",
   "street": "Siriusdreef",
   "number": "66",
@@ -2397,6 +2413,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "NL",
+  "region": "Zuid-Holland",
   "city": "Hoofddorp",
   "street": "Siriusdreef",
   "number": "66",
@@ -2411,6 +2428,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "FR",
+  "region": "Seine",
   "city": "Paris",
   "street": "rue du Grenier-Saint-Lazare 22",
   "person": "Claus Stuter",
@@ -2424,6 +2442,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "NL",
+  "region": "Zuid-Holland",
   "city": "Zoetermeer",
   "street": "Louiarmstrongrode",
   "number": "18",
@@ -2437,6 +2456,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "NL",
+  "region": "Zuid-Holland",
   "city": "Hoofddorp",
   "street": "Siriusdreef",
   "number": "66",
@@ -2450,6 +2470,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "JP",
+  "region": "埼玉県",
   "city": "さいたま市",
   "street": "埼玉県さいたま市浦和区 常盤9－21－21",
   "person": "Tanaka san",
@@ -2462,6 +2483,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc",
+  "region",
   "city",
   "street",
   "number",
@@ -2484,6 +2506,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <pre>
 {
   "cc",
+  "region",
   "postalcode",
   "city",
   "street",
