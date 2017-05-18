@@ -1046,7 +1046,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
     "shipments": [{
-      "shipment_identifier" : "FOO-222-BAR-42",
+      "reference_identifier" : "FOO-222-BAR-42",
       "recipient": {
         "cc": "NL",
         "region": "Zuid-Holland",
@@ -1629,9 +1629,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "data": {
     "search_results": {
       "shipments": [{
-        "shipment_identifier" : "FOO-222-BAR-42",
+        "reference_identifier" : "FOO-222-BAR-42",
         "recipient": {
           "cc": "NL",
+          "region": "Zuid-Holland",
           "city": "Hoofddorp",
           "region": "Zuid-Holland",
           "street": "Siriusdreef",
