@@ -91,7 +91,7 @@
                         A failed request with a 4xx status code will always send back a response body with
                         the error description.
                         A failed request with a 5xx status code will probably mean you've hit a snag in our API.
-                        We try to monitor these kind of errors, but if you keep having trouble... Don't hesitate to reach out!
+                        We try to monitor these kind of errors, but if you keep having trouble... Don't hesitate to <a href="https://www.myparcel.nl/contact">reach out!</a>
                     </p>
                     <h2 id="2_A">2.A HTTP statuses</h2>
                     <p>
@@ -700,7 +700,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <p>
                         We’ll start the shipment section with the different shipment option combinations available in
                         MyParcel
-                        (6.a). It is highly recommende that you read this first as this section helps you understand what
+                        (6.a). It is highly recommended that you read this first as this section helps you understand what
                         all
                         the shipment options are and which combinations are possible. We will not list every possible
                         combination since there are too many to list. We will look at the different package types and then
@@ -900,7 +900,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     </p>
                     <h4>EU and Global insured</h4>
                     <p>
-                        We want to send an expensive Japanese vase to a Belgian friend of ours in Brussel. This package is
+                        We want to send an expensive Japanese vase to a Belgian friend of ours in Brussels. This package is
                         large
                         format because it's dimensions are within 100 x 70 x 50 and 175 x 78 x 58 cm range. Since this is an
                         EU
@@ -1046,8 +1046,10 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
     "shipments": [{
+      "reference_identifier" : "FOO-222-BAR-42",
       "recipient": {
         "cc": "NL",
+        "region": "Zuid-Holland",
         "city": "Hoofddorp",
         "street": "Siriusdreef",
         "number": "66",
@@ -1071,6 +1073,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
     }, {
       "recipient": {
         "cc": "NL",
+        "region": "Zuid-Holland",
         "city": "Amsterdam",
         "street": "Dorpstraat",
         "number": "123",
@@ -1113,6 +1116,7 @@ charset=utf-8 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUG
     "shipments": [{
       "recipient": {
         "cc": "JP",
+        "region": "埼玉県",
         "city": "さいたま市",
         "street": "埼玉県さいたま市浦和区 常盤9－21－21",
         "person": "Tanaka san",
@@ -1178,6 +1182,7 @@ charset=utf-8 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUG
     "shipments": [{
       "recipient": {
         "cc": "NL",
+        "region": "Zuid-Holland",
         "city": "Hoofddorp",
         "street": "Siriusdreef",
         "number": "66",
@@ -1308,7 +1313,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         on
                         the URL. Only shipments with <strong>status 'pending - concept'</strong> can be deleted. This method returns
                         HTTP/1.1 201 if successful. If the shipment doesn’t exist a 422 "cannot delete shipment" is
-                        returend.
+                        returned.
                     </p>
                     <h3 id="6_C_2">6.C.2 Reference</h3>
                     <table>
@@ -1479,8 +1484,11 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                             <td>id= <a href="#7_A">Shipment</a>.id</td>
                         </tr>
                         <tr>
-                            <th rowspan="9">Query parameters</th>
+                            <th rowspan="10">Query parameters</th>
                             <td>q= <a href="#string">string</a></td>
+                        </tr>
+                        <tr>
+                            <td>reference_identifier= <a href="#reference_identifier">reference_identifier</a></td>
                         </tr>
                         <tr>
                             <td>dropoff_today= <a href="#boolean">boolean</a></td>
@@ -1541,6 +1549,11 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                         This is the shipment id. You can specify multiple shipment ids by semi-colon separating them on the
                         URI.
                     </p>
+                    <p id="reference_identifier">
+                        <strong>reference_identifier</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        This is an optional arbitrary identifier to identify the shipment.
+                    </p>
                     <p>
                         <strong>dropoff_today</strong><br />
                         Data type: <a href="#boolean">boolean</a><br>
@@ -1549,7 +1562,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                     <p>
                         <strong>q</strong><br />
                         Data type: <a href="#string">string</a><br>
-                        Use this parameter to search true all the fields of a shipment object including the embedded objects
+                        Use this parameter to search trough all the fields of a shipment object including the embedded objects
                     </p>
                     <p>
                         <strong>status</strong><br />
@@ -1616,8 +1629,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "data": {
     "search_results": {
       "shipments": [{
+        "reference_identifier" : "FOO-222-BAR-42",
         "recipient": {
           "cc": "NL",
+          "region": "Zuid-Holland",
           "city": "Hoofddorp",
           "street": "Siriusdreef",
           "number": "66",
@@ -1639,6 +1654,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
         },
         "sender": {
           "cc": "NL",
+          "region": "Zuid-Holland",
           "city": "Amsterdam",
           "street": "Dorpstraat",
           "number": "123",
@@ -1769,7 +1785,8 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>
                         <strong>positions</strong><br>
                         Data type: <a href="#label_position">label_position</a><br>
-                        The position of the label on an A4 sheet. You can specify multiple positions by semi-colon separating them on the URI. Positioning is only applied on the first page with labels. All subsequent pages will use the default positioning 1,2,3,4.
+                        The position of the label on an A4 sheet. You can specify multiple positions by semi-colon separating them on the URI.
+                        Positioning is only applied on the first page with labels. All subsequent pages will use the default positioning 1,2,3,4.
                     </p>
                     <h3 id="6_F_4">6.F.4 Example </h3>
                     <p><strong>Get Shipment label</strong></p>
@@ -1977,6 +1994,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         The shop id to which this shipment belongs.
                     </p>
                     <p>
+                        <strong>reference_identifier</strong><br>
+                        Data type: <a href="#integer">string</a><br>
+                        Required: No.<br>
+                        Arbitrary reference indentifier to identify this shipment.
+                    </p>
+                    <p>
                         <strong>shipment_type</strong><br>
                         Data type: <a href="#integer">integer</a><br>
                         Required: n/a.<br>
@@ -2061,17 +2084,14 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Required: n/a.<br>
                         Date of modification.
                     </p>
-                    <p>
-                        <strong>region</strong><br>
-                        Data type: <a href="#string">string</a><br>
-                        Required: n/a.<br>
-                    </p>
                     <h3 id="7_A_2">7.A.2 Example</h3>
                     <p>POST example national shipment</p>
 <pre>
 {
+  "reference_identifier": "FOO-333-BAR-42",
   "recipient": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Hoofddorp",
     "street": "Siriusdreef",
     "number": "66",
@@ -2098,8 +2118,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>POST example national shipment b</p>
 <pre>
 {
+  "reference_identifier" : "FOO-333-BAR-42",
   "recipient": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Amsterdam",
     "street": "Dorpstraat",
     "number": "123",
@@ -2121,8 +2143,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>POST example international shipment</p>
 <pre>
 {
+  "reference_identifier" : "さいた-ᚱ	ᚾᛟ/42",
   "recipient": {
     "cc": "JP",
+    "region": "埼玉県",
     "city": "さいたま市",
     "street": "埼玉県さいたま市浦和区 常盤9－21－21",
     "person": "Tanaka san",
@@ -2173,6 +2197,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     "shipments": [{
       "recipient": {
         "cc": "NL",
+        "region": "Zuid-Holland",
         "city": "Hoofddorp",
         "street": "Siriusdreef",
         "number": "66",
@@ -2205,8 +2230,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>GET example national shipment</p>
 <pre>
 {
+
+  "reference_identifier" : "FOO-222-BAR-42",
   "recipient": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Hoofddorp",
     "street": "Siriusdreef",
     "number": "66",
@@ -2228,6 +2256,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   },
   "sender": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Amsterdam",
     "street": "Dorpstraat",
     "number": "123",
@@ -2253,6 +2282,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "recipient": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Amsterdam",
     "street": "Dorpstraat",
     "number": "123",
@@ -2269,6 +2299,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   },
   "sender": {
     "cc": "NL",
+    "region": "Zuid-Holland",
     "city": "Hoofddorp",
     "street": "Siriusdreef",
     "number": "66",
@@ -2296,6 +2327,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Data type: <a href="#country_code">country_code</a><br>
                         Required: yes.<br>
                         The address country code.
+                    </p>
+                    <p>
+                        <strong>region</strong><br>
+                        Data type: <a href="#string">region</a><br>
+                        Required: no.<br>
+                        The region, department, state or province of the address.
                     </p>
                     <p>
                         <strong>postal_code</strong><br>
@@ -2362,6 +2399,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "NL",
+  "region": "Zuid-Holland",
   "city": "Hoofddorp",
   "street": "Siriusdreef",
   "number": "66",
@@ -2375,6 +2413,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "NL",
+  "region": "Zuid-Holland",
   "city": "Hoofddorp",
   "street": "Siriusdreef",
   "number": "66",
@@ -2389,6 +2428,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "FR",
+  "region": "Seine",
   "city": "Paris",
   "street": "rue du Grenier-Saint-Lazare 22",
   "person": "Claus Stuter",
@@ -2402,6 +2442,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "NL",
+  "region": "Zuid-Holland",
   "city": "Zoetermeer",
   "street": "Louiarmstrongrode",
   "number": "18",
@@ -2415,6 +2456,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "NL",
+  "region": "Zuid-Holland",
   "city": "Hoofddorp",
   "street": "Siriusdreef",
   "number": "66",
@@ -2428,6 +2470,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "cc": "JP",
+  "region": "埼玉県",
   "city": "さいたま市",
   "street": "埼玉県さいたま市浦和区 常盤9－21－21",
   "person": "Tanaka san",
