@@ -4239,7 +4239,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2 id="10_B">10.B Delete subscription</h2>
                     <h3 id="10_B_1">10.B.1 Overview</h3>
                     <p>
-                        Use this endpoint to delete webhook subscriptions. You specify multiple subscription ids by
+                        Use this endpoint to delete webhook subscriptions. You can specify multiple subscription ids by
                         semi-colon
                         separating them on the URI. Upon delete an
                         HTTP/1.1 204 No Content is returned.
@@ -4307,7 +4307,9 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <h2 id="10_C">10.C Get subscription</h2>
                     <h3 id="10_C_1">10.C.1 Overview</h3>
                     <p>
-                        Use this endpoint to fetch webhook subscriptions. Upon success a HTTP/1.1 200 with an <a href="#array">array</a> of <a href="#11_A">Subscription</a> objects is returned.
+                        Use this endpoint to fetch webhook subscriptions. You can specify multiple subscription ids by
+                        semi-colon
+                        separating them on the URI. Upon success a HTTP/1.1 200 with an <a href="#array">array</a> of <a href="#11_A">Subscription</a> objects is returned.
                     </p>
                     <h3 id="10_C_2">10.C.2 Reference</h3>
                     <table>
@@ -4354,7 +4356,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     </table>
                     <h3 id="10_C_3">10.C.3 Parameters</h3>
                     <p>
-                        <strong>id</strong><br />>
+                        <strong>id</strong><br>
                         Data type: <a href="#integer">integer</a><br>
                         This is the subscription id. You can specify multiple subscription ids by semi-colon separating them on the
                         URI.
