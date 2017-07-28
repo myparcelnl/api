@@ -525,31 +525,29 @@ Connection: keep-alive
                             <td>example</td>
                             <td>
                                 <ul>
-                                    <li>1 pending - concept
-                                    <li>2 pending - registered
-                                    <li>3 enroute - handed to carrier
-                                    <li>4 enroute - sorting
-                                    <li>5 enroute - distribution
-                                    <li>6 enroute - customs
-                                    <li>7 delivered - at recipient
-                                    <li>8 delivered - ready for pickup
-                                    <li>9 delivered - package picked up
-                                    <li>10 delivered - return shipment ready for pickup
-                                    <li>11 delivered - return shipment package picked up
-                                    <li>12 printed - letter
-                                    <li>13 credit
-                                    <li>30 inactive - concept
-                                    <li>31 inactive - registered
-                                    <li>32 inactive - enroute - handed to carrier
-                                    <li>33 inactive - enroute - sorting
-                                    <li>34 inactive - enroute - distribution
-                                    <li>35 inactive - enroute - customs
-                                    <li>36 inactive - delivered - at recipient
-                                    <li>37 inactive - delivered - ready for pickup
-                                    <li>38 inactive - delivered - package picked up
-                                    <li>99 inactive - unknown
-                                    <li>100 credit rejected
-                                    <li>101 credit approved</li>
+                                    <li>1 pending - concept</li>
+                                    <li>2 pending - registered</li>
+                                    <li>3 enroute - handed to carrier</li>
+                                    <li>4 enroute - sorting</li>
+                                    <li>5 enroute - distribution</li>
+                                    <li>6 enroute - customs</li>
+                                    <li>7 delivered - at recipient</li>
+                                    <li>8 delivered - ready for pickup</li>
+                                    <li>9 delivered - package picked up</li>
+                                    <li>10 delivered - return shipment ready for pickup</li>
+                                    <li>11 delivered - return shipment package picked up</li>
+                                    <li>12 printed - letter</li>
+                                    <li>13 credit</li>
+                                    <li>30 inactive - concept</li>
+                                    <li>31 inactive - registered</li>
+                                    <li>32 inactive - enroute - handed to carrier</li>
+                                    <li>33 inactive - enroute - sorting</li>
+                                    <li>34 inactive - enroute - distribution</li>
+                                    <li>35 inactive - enroute - customs</li>
+                                    <li>36 inactive - delivered - at recipient</li>
+                                    <li>37 inactive - delivered - ready for pickup</li>
+                                    <li>38 inactive - delivered - package picked up</li>
+                                    <li>99 inactive - unknown</li>
                                 </ul>
                             </td>
                         </tr>
@@ -3474,7 +3472,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <strong>cc</strong><br>
                         Data type: <a href="#country_code">country_code</a><br>
                         Required: yes<br>
-                        The country code for which to fetch the delivery options.
+                        The country code for which to fetch the delivery options. This endpoint can only be used in the Netherlands or Belgium ( cc=NL or cc=BE ).
                     </p>
                     <p>
                         <strong>postal_code</strong><br>
@@ -3859,6 +3857,176 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
          }
       ]
    }
+}
+</pre>
+                    <p>
+                        <strong>
+                            Get delivery options and pickup locations for Belgium
+                        </strong>
+                        <br>
+                        <br>
+                        <strong>Request</strong>
+                    </p>
+                    <pre>GET https://api.myparcel.nl/delivery_options?cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1</pre>
+                    <p><strong>Response</strong></p>
+<pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+  "data": {
+    "delivery": [
+      {
+        "date": "2017-07-29",
+        "time": [
+          {
+            "start": "08:00:00",
+            "end": "21:30:00",
+            "price": {
+              "currency": "EUR",
+              "amount": 0
+            },
+            "price_comment": "standard",
+            "comment": "",
+            "type": 2
+          }
+        ]
+      }
+    ],
+    "pickup": [
+      {
+        "date": "2017-07-29",
+        "time": [
+          {
+            "start": "16:00:00",
+            "type": 4,
+            "price": {
+              "amount": 0,
+              "currency": "EUR"
+            }
+          }
+        ],
+        "location": "BELLES NOUVELLES",
+        "street": "AVENUE MONTJOIE",
+        "number": "20",
+        "postal_code": "1180",
+        "city": "UCCLE",
+        "cc": "BE",
+        "start_time": "16:00:00",
+        "price": 0,
+        "price_comment": "retail",
+        "comment": "",
+        "phone_number": "",
+        "opening_hours": {
+          "monday": [
+            [
+              "07:30-12:00",
+              "12:00-19:00"
+            ]
+          ],
+          "tuesday": [
+            [
+              "07:30-12:00",
+              "12:00-19:00"
+            ]
+          ],
+          "wednesday": [
+            [
+              "07:30-12:00",
+              "12:00-19:00"
+            ]
+          ],
+          "thursday": [
+            [
+              "07:30-12:00",
+              "12:00-19:00"
+            ]
+          ],
+          "friday": [
+            [
+              "07:30-12:00",
+              "12:00-19:00"
+            ]
+          ],
+          "saturday": [
+            [
+              "07:30-12:00",
+              "12:00-19:00"
+            ]
+          ],
+          "sunday": {
+
+          }
+        },
+        "distance": "616",
+        "location_code": "BE0S01",
+        "retail_network_id": "LD-01"
+      },
+      {
+        "date": "2017-07-29",
+        "time": [
+          {
+            "start": "16:00:00",
+            "type": 4,
+            "price": {
+              "amount": 0,
+              "currency": "EUR"
+            }
+          }
+        ],
+        "location": "KARIBOO C'EST LE BOUQUET",
+        "street": "RUE EMILE CLAUS",
+        "number": "58",
+        "postal_code": "1180",
+        "city": "UCCLE",
+        "cc": "BE",
+        "start_time": "16:00:00",
+        "price": 0,
+        "price_comment": "retail",
+        "comment": "",
+        "phone_number": "",
+        "opening_hours": {
+          "monday": [
+            "13:00-18:00"
+          ],
+          "tuesday": [
+            [
+              "09:00-12:00",
+              "12:00-19:00"
+            ]
+          ],
+          "wednesday": [
+            [
+              "09:00-12:00",
+              "12:00-19:00"
+            ]
+          ],
+          "thursday": [
+            [
+              "09:00-12:00",
+              "12:00-19:00"
+            ]
+          ],
+          "friday": [
+            [
+              "09:00-12:00",
+              "12:00-20:00"
+            ]
+          ],
+          "saturday": [
+            [
+              "09:00-12:00",
+              "12:00-20:00"
+            ]
+          ],
+          "sunday": [
+            "10:00-16:00"
+          ]
+        },
+        "distance": "983",
+        "location_code": "BE0T57",
+        "retail_network_id": "LD-01"
+      }
+    ]
+  }
 }
 </pre>                    <h1 id="9">9. Delivery options Object Definitions</h1>
                     <p>If you use the endpoint delivery_options you get two objects. DeliveryOptions Object and PickupOptions Object. OpeningHours Object contains the opening hours of pickup locations.</p>
