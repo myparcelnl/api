@@ -3226,8 +3226,18 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Data type: <a href="#string">string</a><br>
                         Required: n/a.<br>
                     </p>
+                    <p>
+                        <strong>location_code</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>retail_network_id</strong><br>
+                        Data type: <a href="#string">string</a><br>
+                        Required: n/a.<br>
+                    </p>
                     <h3 id="7_O_2">7.O.2 Example</h3>
-                    <p>POST example</p>
+                    <p>POST example for NL pickup location</p>
                     <pre>
                     {
                       "postal_code": "2132BH",
@@ -3235,6 +3245,18 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                       "city": "Hoofddorp",
                       "number": "270",
                       "location_name": "Albert Heijn"
+                    }
+                    </pre>
+                    <p>POST example for BE pickup location</p>
+                    <pre>
+                    {
+                        "city":"ANTWERPEN",
+                        "street":"HOOGSTRAAT",
+                        "postal_code":"2000",
+                        "number":"75",
+                        "location_code":"BE0Q07",
+                        "retail_network_id":"LD-01",
+                        "location_name":"K&J TRADING"
                     }
                     </pre>
                     <h2 id="7_P">7.P PaymentInstructions Object Definition</h2>
