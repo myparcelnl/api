@@ -4707,11 +4707,24 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <p>Example a</p>
 <pre>
 {
-  "shipment_id": 1,
-  "account_id": 1,
-  "shop_id": 2,
-  "status": 3,
-  "barcode": "3SMYPA12302837"
+  "data": {
+    "hooks": [
+      {
+        "shipment_id":"25482412",
+        "account_id":7003,
+        "shop_id":1897,
+	"status":2,
+	"barcode":"3SMYPA749883621"
+      },
+      {
+        "shipment_id":25482412,
+	"account_id":7003,
+	"shop_id":1897,
+	"status":2,
+	"barcode":"3SMYPA749883620"
+      }
+    ]
+  }
 }
 </pre>
                     <h2 id="11_C">11.C SubscriptionIds Object Definition</h2>
