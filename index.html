@@ -52,23 +52,31 @@
                 </ul>
                 <div>
                     <h1 id="1">1. Requests</h1>
-                    <h2>Base URL</h2>
+                    <h2 id="1_A">1.A Base URL</h2>
                     <p>BaseURL: <strong>https://api.myparcel.nl</strong></p>
+                    <h2 id="1_B">1.B User-Agent</h2>
+                    <p>
+                      To give us insight that you use the API documentation, you should always send an User-Agent in your header. If you do not use a known CMS system, use the following header:<br>
+                      <code>User-Agent: CustomApiCall/2</code><br>
+                      <br>
+                      If you are using a known CMS system then you must use the name of the CMS system followed by a version number (User-Agent: &lt;product> / &lt;product-version>). Here's an example if your CMS system is Wordpress: <code>User-Agent: Wordpress/4.8.1</code>.
+                    </p>
+                    <h2 id="1_C">1.C HTTP methods</h2>
                     <p>
                         The API is REST(ful) and uses JSON as it's primary data exchange format.
                         Communication with the API goes through HTTPS thereby insuring data
                         confidentiality and integrity. Here is a list of all supported HTTP methods
                     </p>
-                    <h2 id="1_A">1.A GET</h2>
+                    <h3 id="1_C_1">1.C.1 GET</h3>
                     <p>
                         GET method is used for retrieving data and is idempotent. Data can be returned in
                         JSON, PDF, CSV, XML or other formats.
                     </p>
-                    <h2 id="1_B">1.B POST</h2>
+                    <h3 id="1_C_2">1.C.2 POST</h3>
                     <p>
                         POST is used to create new objects or send data to MyParcel.
                     </p>
-                    <h2 id="1_3">1.C DELETE</h2>
+                    <h3 id="1_C_3">1.C.3 DELETE</h3>
                     <p>
                         DELETE is used to delete an existing object (piece of data). This method always returns HTTP/1.1
                         204 No Content unless otherwise specified.
@@ -949,8 +957,11 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                             <td>POST</td>
                         </tr>
                         <tr>
-                            <th rowspan="5">Required request headers</th>
+                            <th rowspan="6">Required request headers</th>
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
                         </tr>
                         <tr>
                             <td>Content-type: application/vnd.shipment+json; charset=utf-8 (For <a href="#7_A">Shipments</a> JSON request)</td>
@@ -1030,6 +1041,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
 Content-Type:application/vnd.shipment+json;charset=utf-8
+User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
@@ -1099,8 +1111,10 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <h2>Create International shipment</h2>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.myparcel.nl/shipments HTTP/1.1 Content-Type:application/vnd.shipment+json;
-charset=utf-8 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+POST https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json; charset=utf-8
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
     "shipments": [{
@@ -1165,8 +1179,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2>Create shipment with NL pickup location</h2>
                     <p><strong>Request</strong></p>
                     <pre>
-POST https://api.myparcel.nl/shipments HTTP/1.1 Content-Type:application/vnd.shipment+json;
-charset=utf-8 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+POST https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json; charset=utf-8
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
     "shipments": [{
@@ -1215,8 +1231,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2>Create shipment with BE pickup location</h2>
                     <p><strong>Request</strong></p>
                     <pre>
-POST https://api.myparcel.nl/shipments HTTP/1.1 Content-Type:application/vnd.shipment+json;
-charset=utf-8 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+POST https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json; charset=utf-8
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
     "data":{
         "shipments":[
@@ -1273,8 +1291,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2>Create related return shipment</h2>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.myparcel.nl/shipments HTTP/1.1 Content-Type:application/vnd.return_shipment+
-json;charset=utf-8 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+POST https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.return_shipment+json;charset=utf-8
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
     "return_shipments": [{
@@ -1309,8 +1329,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2>Create unrelated return shipment</h2>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.myparcel.nl/shipmentsHTTP/1.1 Content-Type:
-application/vnd.unrelated_return_shipment+json;charset=utf-8
+POST https://api.myparcel.nl/shipments
+HTTP/1.1
+Content-Type: application/vnd.unrelated_return_shipment+json;charset=utf-8
+User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
@@ -1374,8 +1396,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td>DELETE</td>
                         </tr>
                         <tr>
-                            <th rowspan="2">Required request headers</th>
+                            <th rowspan="3">Required request headers</th>
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
                         </tr>
                         <tr>
                             <td>Content-type: application/json; charset=utf-8</td>
@@ -1420,6 +1445,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p><strong>Request</strong></p>
 <pre>
 DELETE https://api.myparcel.nl/shipments/1234 HTTP/1.1
+User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
@@ -1447,8 +1473,11 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                             <td>POST</td>
                         </tr>
                         <tr>
-                            <th>Required request headers</th>
+                            <th rowspan="2">Required request headers</th>
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
                         </tr>
                         <tr>
                             <th>URI parameters</th>
@@ -1486,7 +1515,9 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <p>
                         <strong>Proceed with actual request</strong><br>
                         <strong>Request</strong>
-                        <pre>POST https://api.myparcel.nl/return_shipments
+<pre>
+POST https://api.myparcel.nl/return_shipments
+User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw== </pre>
                     </p>
                     <p><strong>Response</strong></p>
@@ -1524,8 +1555,11 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                             <td>GET</td>
                         </tr>
                         <tr>
-                            <th>Required request headers</th>
+                            <th rowspan="2">Required request headers</th>
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
                         </tr>
                         <tr>
                             <th>URI parameters</th>
@@ -1665,9 +1699,11 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                     </p>
                     <p>
                         <strong>Request</strong>
-                        <pre>GET https://api.myparcel.nl/shipments?q=Niels&amp;status=1
+<pre>
+GET https://api.myparcel.nl/shipments?q=Niels&amp;status=1
+User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
-        </pre>
+</pre>
                     </p>
                     <p>
                         <strong>Response</strong>
@@ -1754,8 +1790,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td>GET</td>
                         </tr>
                         <tr>
-                            <th rowspan="3">Required request headers</th>
+                            <th rowspan="4">Required request headers</th>
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
                         </tr>
                         <tr>
                             <td>Accept: application/pdf (For the PDF binary. This is the default.)</td>
@@ -1840,8 +1879,9 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p><strong>Get Shipment label</strong></p>
                     <p><strong>Request</strong></p>
 <pre>
-  GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1
-  Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1
+User-Agent: CustomApiCall/2
+Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
 <pre>
@@ -1853,6 +1893,7 @@ filename="123123123.pdf" Content-Type: application/pdf
                     <p><strong>Request</strong></p>
 <pre>
 GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1
+User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 Accept: application/json;charset=utf-8
 </pre>
@@ -1873,8 +1914,11 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         label position will be at the bottom-right.
                     </p>
                     <p><strong>Request</strong></p>
-                    <pre>GET https://api.myparcel.nl/shipment_labels/2?format=A4&amp;positions=3;4 HTTP/1.1 Authorization: basic
-eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==</pre>
+<pre>
+GET https://api.myparcel.nl/shipment_labels/2?format=A4&amp;positions=3;4 HTTP/1.1
+User-Agent: CustomApiCall/2
+Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+</pre>
                     <p><strong>Response</strong></p>
                     <pre>HTTP/1.1 200 OK Content-Disposition: attachment; filename="456456456456.pdf" Content-Type:
 application/pdf (...PDF content)</pre>
@@ -1892,8 +1936,11 @@ application/pdf (...PDF content)</pre>
                             <td>GET</td>
                         </tr>
                         <tr>
-                            <th>Required request headers</th>
+                            <th rowspan="2">Required request headers</th>
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
                         </tr>
                         <tr>
                             <th>URI parameters</th>
@@ -1967,6 +2014,7 @@ application/pdf (...PDF content)</pre>
                     <p><strong>Request</strong></p>
                     <pre>
 GET https://api.myparcel.nl/tracktraces/12 HTTP/1.1
+User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
@@ -3453,7 +3501,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         </tr>
                         <tr>
                             <th>Required request headers</th>
-                            <td>None.</td>
+                            <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
                         </tr>
                         <tr>
                             <th>URI parameters</th>
@@ -3529,7 +3577,9 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         </tr>
                         <tr>
                             <th>Error response body Example</th>
-                            <td><pre>{
+                            <td>
+<pre>
+{
 	"data": {
 		"delivery": [],
 		"pickup": [],
@@ -3641,7 +3691,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <strong>Get delivery options for 2132WT, 66 for PostNL</strong><br>
                         <strong>Request</strong>
                     </p>
-                    <pre>GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=postnl HTTP/1.1</pre>
+                    <pre>
+GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=postnl HTTP/1.1
+User-Agent: CustomApiCall/2
+</pre>
                     <p><strong>Response</strong></p>
                     <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
@@ -3786,7 +3839,10 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         <br>
                         <strong>Request</strong>
                     </p>
-                    <pre>GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=postnl&amp;cutoff_time=16:00:00&amp;dropoff_days=1;2;3;4;5;6&amp;monday_delivery=1&amp;dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1</pre>
+                    <pre>
+GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=postnl&amp;cutoff_time=16:00:00&amp;dropoff_days=1;2;3;4;5;6&amp;monday_delivery=1&amp;dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1
+User-Agent: CustomApiCall/2
+</pre>
                     <p><strong>Response</strong></p>
 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
@@ -3943,7 +3999,10 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         <br>
                         <strong>Request</strong>
                     </p>
-                    <pre>GET https://api.myparcel.nl/delivery_options?cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1</pre>
+                    <pre>
+GET https://api.myparcel.nl/delivery_options?cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1
+User-Agent: CustomApiCall/2
+</pre>
                     <p><strong>Response</strong></p>
 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
@@ -4419,8 +4478,11 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                             <td>POST</td>
                         </tr>
                         <tr>
-                            <th rowspan="2">Required request headers</th>
+                            <th rowspan="3">Required request headers</th>
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
                         </tr>
                         <tr>
                             <td>Content-type: application/json; charset=utf-8</td>
@@ -4458,6 +4520,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <p><strong>Request</strong></p>
 <pre>
 POST https://api.myparcel.nl/webhook_subscriptions HTTP/1.1
+User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 Content-Type:application/json; charset=utf-8
 {
@@ -4499,8 +4562,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td>DELETE</td>
                         </tr>
                         <tr>
-                            <th rowspan="2">Required request headers</th>
+                            <th rowspan="3">Required request headers</th>
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
                         </tr>
                         <tr>
                             <td>Content-type: application/json; charset=utf-8</td>
@@ -4544,6 +4610,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p><strong>Request</strong></p>
 <pre>
 DELETE https://api.myparcel.nl/webhook_subscriptions/1 HTTP/1.1
+User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
@@ -4566,8 +4633,11 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                             <td>GET</td>
                         </tr>
                         <tr>
-                            <th>Required request headers</th>
+                            <th rowspan="2">Required request headers</th>
                             <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
                         </tr>
                         <tr>
                             <th>URI parameters</th>
@@ -4609,6 +4679,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <p><strong>Request</strong></p>
 <pre>
 GET https://api.myparcel.nl/webhook_subscriptions/12 HTTP/1.1
+User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
