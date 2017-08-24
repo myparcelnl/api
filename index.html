@@ -52,23 +52,31 @@
                 </ul>
                 <div>
                     <h1 id="1">1. Requests</h1>
-                    <h2>Base URL</h2>
+                    <h2 id="1_A">1.A Base URL</h2>
                     <p>BaseURL: <strong>https://api.myparcel.nl</strong></p>
+                    <h2 id="1_B">1.B User-Agent</h2>
+                    <p>
+                      To give us insight that you use the API documentation, you should always send an User-Agent in your header. If you do not use a known CMS system, use the following header:<br>
+                      <code>User-Agent: CustomApiCall/2</code><br>
+                      <br>
+                      If you are using a known CMS system then you must use the name of the CMS system followed by a version number (User-Agent: &lt;product> / &lt;product-version>). Here's an example if your CMS system is Wordpress: <code>User-Agent: Wordpress/4.8.1</code>.
+                    </p>
+                    <h2 id="1_C">1.C HTTP methods</h2>
                     <p>
                         The API is REST(ful) and uses JSON as it's primary data exchange format.
                         Communication with the API goes through HTTPS thereby insuring data
                         confidentiality and integrity. Here is a list of all supported HTTP methods
                     </p>
-                    <h2 id="1_A">1.A GET</h2>
+                    <h3 id="1_C_1">1.C.1 GET</h3>
                     <p>
                         GET method is used for retrieving data and is idempotent. Data can be returned in
                         JSON, PDF, CSV, XML or other formats.
                     </p>
-                    <h2 id="1_B">1.B POST</h2>
+                    <h3 id="1_C_2">1.C.2 POST</h3>
                     <p>
                         POST is used to create new objects or send data to MyParcel.
                     </p>
-                    <h2 id="1_3">1.C DELETE</h2>
+                    <h3 id="1_C_3">1.C.3 DELETE</h3>
                     <p>
                         DELETE is used to delete an existing object (piece of data). This method always returns HTTP/1.1
                         204 No Content unless otherwise specified.
