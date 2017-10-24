@@ -226,6 +226,7 @@ Connection: keep-alive
                         <li><a href="#date">date</a></li>
                         <li><a href="#delivery_type">delivery_type</a></li>
                         <li><a href="#integer">integer</a></li>
+                        <li><a href="#coordinates">coordinates</a></li>
                         <li><a href="#isic_code">isic_code</a></li>
                         <li><a href="#label_position">label_position</a></li>
                         <li><a href="#month_digit">month_digit</a></li>
@@ -383,6 +384,21 @@ Connection: keep-alive
                         <tr>
                             <td>example</td>
                             <td>10. 20. NOT 2,3</td>
+                        </tr>
+                    </table>
+                    <h2 id="coordinates">coordinates</h2>
+                    <table>
+                        <tr>
+                            <th>description</th>
+                            <td>The position of the postNL locations</td>
+                        </tr>
+                        <tr>
+                            <td>pattern</td>
+                            <td>[-+]?[\d]{1,2}\.\d+</td>
+                        </tr>
+                        <tr>
+                            <td>example</td>
+                            <td>52.192150633052</td>
                         </tr>
                     </table>
                     <h2 id="isic_code">isic_code</h2>
@@ -3508,7 +3524,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td>None.</td>
                         </tr>
                         <tr>
-                            <th rowspan="12">Query parameters</th>
+                            <th rowspan="14">Query parameters</th>
                             <td>cc = <a href="#country_code">country_code</a></td>
                         </tr>
                         <tr>
@@ -3543,6 +3559,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         </tr>
                         <tr>
                             <td>exclude_delivery_type = <a href="#delivery_type">delivery_type</a></td>
+                        </tr>
+                        <tr>
+                            <td>latitude = <a href="#coordinates">coordinates</a></td>
+                        </tr>
+                        <tr>
+                            <td>longitude = <a href="#coordinates">coordinates</a></td>
                         </tr>
                         <tr>
                             <th>Request body</th>
@@ -3686,6 +3708,18 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         delivery options. You can specify multiple delivery types by semi-colon separating
                         them. The standard delivery type cannot be excluded.
                     </p>
+                    <p>
+                        <strong>latitude</strong><br>
+                        Data type: <a href="#coordinates">coordinates</a><br>
+                        Required: no<br>
+                        This provides the ability to display the postNL locations through the coordinates. If only latitude or longitude is passed as a parameter, it will be ignored and will simply use zip code for searching locations.
+                    </p>
+                    <p>
+                        <strong>longitude</strong><br>
+                        Data type: <a href="#coordinates">coordinates</a><br>
+                        Required: no<br>
+                        This provides the ability to display the postNL locations through the coordinates. If only latitude or longitude is passed as a parameter, it will be ignored and will simply use zip code for searching locations.
+                    </p>
                     <h3 id="8_A_4">8.A.4 Example</h3>
                     <p>
                         <strong>Get delivery options for 2132WT, 66 for PostNL</strong><br>
@@ -3784,6 +3818,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
         "sunday": []
       },
       "distance": "1934",
+      "latitude": "52.286582",
+      "longitude": "4.682377",
       "location_code": "173187"
     }, {
       "date": "2017-02-01",
@@ -3815,6 +3851,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
         "sunday": ["12:00-17:00"]
       },
       "distance": "1687",
+      "latitude": "52.192150633052",
+      "longitude": "4.44249030539514",
       "location_code": "176227"
     }, {
       "date": "2017-02-01",
@@ -3937,6 +3975,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                ]
             },
             "distance":"1798",
+            "latitude": "52.286582",
+            "longitude": "4.682377",
             "location_code":"173187"
          },
          {
@@ -3985,6 +4025,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                ]
             },
             "distance":"1696",
+            "latitude": "52.192150633052",
+            "longitude": "4.44249030539514",
             "location_code":"176227"
          }
       ]
@@ -4092,6 +4134,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
           }
         },
         "distance": "616",
+        "latitude": "50.810441",
+        "longitude": "4.368223",
         "location_code": "BE0S01",
         "retail_network_id": "LD-01"
       },
@@ -4157,6 +4201,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
           ]
         },
         "distance": "983",
+        "latitude": "50.815598",
+        "longitude": "4.367427",
         "location_code": "BE0T57",
         "retail_network_id": "LD-01"
       }
@@ -4275,6 +4321,16 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         Required: n/a.<br>
                     </p>
                     <p>
+                        <strong>longitude</strong><br>
+                        Data type: <a href="#coordinates">coordinates</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
+                        <strong>longitude</strong><br>
+                        Data type: <a href="#coordinates">coordinates</a><br>
+                        Required: n/a.<br>
+                    </p>
+                    <p>
                         <strong>location_code</strong><br>
                         Data type: <a href="#string">string</a><br>
                         Required: n/a.<br>
@@ -4319,6 +4375,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
     "sunday": []
   },
   "distance": "1934",
+  "latitude": "52.286582",
+  "longitude": "4.682377",
   "location_code": "173187"
 }
 </pre>
