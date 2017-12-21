@@ -446,7 +446,7 @@ Connection: keep-alive
                         </tr>
                         <tr>
                             <td>pattern</td>
-                            <td>[0-1][1-9]+</td>
+                            <td>[0-1]{1}[1-9]{1}</td>
                         </tr>
                         <tr>
                             <td>example</td>
@@ -598,11 +598,11 @@ Connection: keep-alive
                         </tr>
                         <tr>
                             <td>pattern</td>
-                            <td>*{0,255}</td>
+                            <td>.{0,255}</td>
                         </tr>
                         <tr>
                             <td>example</td>
-                            <td>e.g 1; 2; 3; 4</td>
+                            <td>3SMYPA123456789; Siriusdreef 66; Nederland; </td>
                         </tr>
                     </table>
                     <h2 id="text">text</h2>
@@ -613,7 +613,7 @@ Connection: keep-alive
                         </tr>
                         <tr>
                             <td>pattern</td>
-                            <td>(.*){,2048}</td>
+                            <td>.{0,2048}</td>
                         </tr>
                         <tr>
                             <td>example</td>
@@ -658,7 +658,7 @@ Connection: keep-alive
                         </tr>
                         <tr>
                             <td>pattern</td>
-                            <td>[0-6]{1,1}</td>
+                            <td>[0-6]{1}</td>
                         </tr>
                         <tr>
                             <td>example</td>
