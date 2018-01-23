@@ -220,7 +220,6 @@ Connection: keep-alive
                         <li><a href="#array">array</a></li>
                         <li><a href="#boolean">boolean</a></li>
                         <li><a href="#carrier">carrier</a></li>
-                        <li><a href="#carrier_string">carrier_string</a></li>
                         <li><a href="#country_code">country_code</a></li>
                         <li><a href="#currency">currency</a></li>
                         <li><a href="#date">date</a></li>
@@ -286,21 +285,6 @@ Connection: keep-alive
                         <tr>
                             <td>example</td>
                             <td> 1. postnl</td>
-                        </tr>
-                    </table>
-                    <h2 id="carrier_string">carrier_string</h2>
-                    <table>
-                        <tr>
-                            <th>description</th>
-                            <td>Carrier in human readable form</td>
-                        </tr>
-                        <tr>
-                            <td>pattern</td>
-                            <td>POSTNL</td>
-                        </tr>
-                        <tr>
-                            <td>example</td>
-                            <td>POSTNL</td>
                         </tr>
                     </table>
                     <h2 id="country_code">country_code</h2>
@@ -3532,7 +3516,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td>number = <a href="#string">string</a></td>
                         </tr>
                         <tr>
-                            <td>carrier = <a href="#carrier_string">carrier_string</a></td>
+                            <td>carrier = <a href="#carrier">carrier</a></td>
                         </tr>
                         <tr>
                             <td>delivery_time = <a href="#time">time</a></td>
@@ -3631,12 +3615,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Data type: <a href="#string">string</a><br>
                         Required: yes<br>
                         The street number for which to fetch the delivery options.
-                    </p>
-                    <p>
-                        <strong>carrier</strong><br>
-                        Data type: <a href="#carrier_string">carrier_string</a><br>
-                        Required: yes.<br>
-                        The carrier for which to fetch the delivery options.
                     </p>
                     <p>
                         <strong>delivery_time</strong><br>
