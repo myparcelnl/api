@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head>
     <meta charset="UTF-8" />
-    <title>API MyParcel installatie- gebruikershandleiding</title>
+    <title>API MyParcel BE installatie- gebruikershandleiding</title>
     <meta name="description" content="API MyParcel installatie- gebruikershandleiding">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <link rel="shortcut icon" href="https://backoffice.myparcel.nl/images/favicon/favicon.ico">
@@ -27,17 +27,17 @@
             <section class="page-header col-xs-8 col-xs-offset-4 col-lg-9 col-lg-offset-3">
                 <img alt="" src="media/logo_myparcel.png" />
                 <h1 class="project-name">
-                    MyParcel.nl API Documentation
+                    sendmyparcel.be API Documentation
                 </h1>
                 <h2 class="project-tagline">
                     <span id="current_version"></span>
                 </h2>
-                <a target="_blank" class="btn" href="https://github.com/myparcelnl/api/releases">Laatste updates</a>
+                <a target="_blank" class="btn" href="https://github.com/myparcelbe/api/releases">Laatste updates</a>
             </section>
             <section class="main-content col-xs-8 col-xs-offset-4 col-lg-7 col-lg-offset-4">
                 <h1>Introduction</h1>
                 <p>
-                    This is the documentation for the MyParcel.nl Core API.
+                    This is the documentation for the sendmyparcel.be Core API.
                     Our API is build in such a way to easily handle bulk operations.
                     We try to follow the REST
                     architecture as much as possible but deviate from it when we need to achieve high performance.
@@ -91,7 +91,7 @@
                         A failed request with a 4xx status code will always send back a response body with
                         the error description.
                         A failed request with a 5xx status code will probably mean you've hit a snag in our API.
-                        We try to monitor these kind of errors, but if you keep having trouble... Don't hesitate to <a href="https://www.myparcel.nl/contact">reach out!</a>
+                        We try to monitor these kind of errors, but if you keep having trouble... Don't hesitate to <a href="https://sendmyparcel.be/nl-be/contact">reach out!</a>
                     </p>
                     <h2 id="2_A">2.A HTTP statuses</h2>
                     <p>
@@ -284,7 +284,7 @@ Connection: keep-alive
                         </tr>
                         <tr>
                             <td>example</td>
-                            <td> 1. postnl</td>
+                            <td> 2. bpost</td>
                         </tr>
                     </table>
                     <h2 id="country_code">country_code</h2>
@@ -374,7 +374,7 @@ Connection: keep-alive
                     <table>
                         <tr>
                             <th>description</th>
-                            <td>The position of the postNL locations</td>
+                            <td>The position of the pickup point locations</td>
                         </tr>
                         <tr>
                             <td>pattern</td>
@@ -469,7 +469,7 @@ Connection: keep-alive
                     <table>
                         <tr>
                             <th>description</th>
-                            <td>package_type</td>
+                            <td>For MyParcel BE only package type 1 (package) is allowed.</td>
                         </tr>
                         <tr>
                             <td>pattern</td>
@@ -480,8 +480,6 @@ Connection: keep-alive
                             <td>
                                 <ol>
                                     <li>package</li>
-                                    <li>mailbox package</li>
-                                    <li>letter</li>
                                 </ol>
                             </td>
                         </tr>
@@ -680,7 +678,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                         our API he/she needs to create an <strong>API Key.</strong> This API Key will be assigned the <strong>Broker</strong> role.
                         Currently the Merchant is not able to create or assign another Role to a API Key. When the Merchant
                         wants to invalidate an API Key he/she just disables the API Key. An Intermediate system, such as
-                        the <a href="https://backoffice.myparcel.nl/">MyParcel.nl UI</a>, has its own API Key but cannot access user resources. For this it needs to request
+                        the <a href="https://backoffice.sendmyparcel.nl/">MyParcel UI</a>, has its own API Key but cannot access user resources. For this it needs to request
                         a <strong>Session</strong>
                         Token so that it can perform actions on behalf of the user. The API Key and Session Token are send
                         in
@@ -708,29 +706,13 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <h3>Contents</h3>
                     <h3 id="6_A_1">6.A.1 Package types</h3>
                     <p>
-                        There are three different packages types available and determine the type of shipment. The value is
-                        send
-                        with the <a href="#7_C">ShipmentOptions</a>.package_type field.
+                        The package type. For MyParcel BE only package type 1 (package) is available. The value is send with the <a href="#7_C">ShipmentOptions</a>.package_type field.
                     </p>
                     <h4>1. Package</h4>
                     <p>
-                        This is the standard package type used for NL, EU and Global shipments. It supports a variety of
-                        additional options such as insurance, xl format etc. We will look at these options in more detail
+                        This is the standard package type used for BE, EU and Global shipments. It supports a variety of
+                        additional options such as insurance, signature etc. We will look at these options in more detail
                         later.
-                        This package is most commonly used when creating shipments.
-                    </p>
-                    <h4>2. Mailbox package</h4>
-                    <p>
-                        This package type is only available for NL shipment that fit into a mailbox. It does not support
-                        additional options.<br>
-                        <strong>Note: If you still make the request with additional options, bear in mind that you need to pay more than is necessary!</strong>
-                    </p>
-                    <h4>3. Letter</h4>
-                    <p>
-                        This package type is available for NL, EU and Global shipments. The label for this shipment is unpaid
-                        meaning that you will need to pay the postal office/courier to sent this letter/package. Therefore,
-                        it
-                        does not support additional options.
                     </p>
                     <h3 id="6_A_2">6.A.2 Delivery types</h3>
                     <p>
@@ -765,9 +747,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     </p>
                     <h3 id="6_A_3">6.A.3 Options</h3>
                     <p>
-                        These are the different package options such as insurance, recipient only, signature on receipt, XL
-                        format etc. These options are specified in the <a href="#7_C">ShipmentOptions</a> object. These options are only
-                        available for <a href="#package_type">package type</a> 1 (package).
+                        These are the different package options such as insurance, recipient only, signature on receipt etc. These options are specified in the <a href="#7_C">ShipmentOptions</a> object.
                     </p>
                     <h4>only_recipient</h4>
                     <p>
@@ -793,18 +773,14 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     </p>
                     <h4>insurance</h4>
                     <p>
-                        This option allows a shipment to be insured up to certain amount. Only <a href="#package_type">package type</a> 1 (package) shipments can
-                        be
-                        insured. NL shipments can be insured for 5000,- euros. EU shipments <strong>must</strong> be insured for 500,-
-                        euros. Global shipments <strong>must</strong> be insured for 200,- euros. The following shipment options
-                        are <strong>mandatory</strong> when
-                        insuring an NL shipment: only_recipient and signature.
+                        This option allows a shipment to be insured up to certain amount. BE, EU and Global shipments can be insured for 500,- euros. The shipment option signature
+                        are <strong>mandatory</strong> when insuring a shipment.
                     </p>
                     <h3 id="6_A_4">6.A.4 Examples</h3>
                     <h4>Pickup</h4>
                     <p>
-                        We want to send a package to a consumer in Utrecht. He will pick the package up at the nearest pickup
-                        location. The shipment looks like this.
+                        We want to send a package to a consumer in Antwerpen. He will pick the package up at the nearest pickup
+                        location. The shipment looks like this:
                     </p>
 <pre>
 {
@@ -826,9 +802,8 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p>
                         Let's go through this example. This package will be picked up by the customer so it needs to
-                        package_type
-                        1(package) with <a href="#delivery_type">delivery type</a> 4 (Pickup). All pickup packages need to have signature set. A pickup location needs to be specified as well. Pickup express is almost identical to pickup.
-                        Instead of <a href="#delivery_type">delivery type</a> 4 (Pickup), you need to specify <a href="#delivery_type">delivery type</a> 5 (Pickup express).
+                        package_type 1(package) with <a href="#delivery_type">delivery type</a> 4 (Pickup). All pickup
+                        packages need to have signature set. A pickup location needs to be specified as well.
                     </p>
                     <h4>Evening</h4>
                     <p>
@@ -1068,7 +1043,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         "large_format": 0,
         "label_description": "My custom description"
       },
-      "carrier": 1
+      "carrier": 2
     }, {
       "reference_identifier" : "FOO-223-BAR-43",
       "recipient": {
@@ -1088,7 +1063,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         "signature": 0,
         "return": 0
       },
-      "carrier": 1
+      "carrier": 2
     }]
   }
 }
@@ -1158,7 +1133,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
       "physical_properties": {
         "weight": 30
       },
-      "carrier": 1
+      "carrier": 2
     }]
   }
 }
@@ -1210,7 +1185,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         "number": "270",
         "location_name": "Albert Heijn"
       },
-      "carrier": 1
+      "carrier": 2
     }]
   }
 }
@@ -1297,7 +1272,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
   "data": {
     "return_shipments": [{
       "parent": 5,
-      "carrier": 1,
+      "carrier": 2,
       "email": "testing@myparcel.nl",
       "name": "Mr. Parcel",
       "options": {
@@ -1347,7 +1322,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         "large_format": 0,
         "label_description": "My custom description"
       },
-      "carrier": 1,
+      "carrier": 2,
       "email": "testing@myparcel.nl",
       "name": "Test"
     }]
@@ -1745,7 +1720,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
           "phone": "02012343546",
           "email": "info@myparcel.nl"
         },
-        "carrier": 1,
+        "carrier": 2,
         "status": 1,
         "price": {
           "amount": 535,
@@ -2205,7 +2180,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     },
     "large_format": 0
   },
-  "carrier": 1
+  "carrier": 2
 }
 </pre>
                     <br>
@@ -2230,7 +2205,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     "signature": 1,
     "return": 1
   },
-  "carrier": 1
+  "carrier": 2
 }
 </pre>
                     <br>
@@ -2280,7 +2255,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "physical_properties": {
     "weight": 30
   },
-  "carrier": 1
+  "carrier": 2
 }
 </pre>
                     <br>
@@ -2315,7 +2290,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
         "number": "270",
         "location_name": "Albert Heijn"
       },
-      "carrier": 1
+      "carrier": 2
     }]
   }
 }
@@ -2359,7 +2334,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     "phone": "02012343546",
     "email": "info@myparcel.nl"
   },
-  "carrier": 1,
+  "carrier": 2,
   "status": 1,
   "price": {
     "amount": 535,
@@ -2638,7 +2613,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <strong>package_type</strong><br>
                         Data type: <a href="#package_type">package_type</a><br>
                         Required: yes<br>
-                        The package type. For international shipment only package type 1 (package) is allowed.
+                        The package type. For MyParcel BE only package type 1 (package) is allowed.
                     </p>
                     <p>
                         <strong>delivery_type</strong><br>
@@ -3075,7 +3050,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "parent": 123456,
-  "carrier": 1,
+  "carrier": 2,
   "email": "testing@myparcel.nl",
   "name": "Mr. Parcel",
   "options": {
@@ -3127,7 +3102,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>POST example</p>
 <pre>
 {
-  "carrier": 1,
+  "carrier": 2,
   "email": "testing@myparcel.nl",
   "name": "Mr. Parcel",
   "options": {
@@ -3640,21 +3615,21 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         consumer order will still be picked, packed and dispatched on the same/first set
                         dropoff day, taking into account the dropoff-delay. Default time is 15h30. For
                         example, if cutoff time is 15h30, Monday is a delivery day and there's no delivery
-                        delay; all orders placed Monday before 15h30 will be dropped of at PostNL on
+                        delay; all orders placed Monday before 15h30 will be dropped of at bpost on
                         that same Monday in time for the Monday collection.
                     </p>
                     <p id="dropoff_days">
                         <strong>dropoff_days</strong><br>
                         Data type: <a href="#weekday_digit">weekday_digit</a><br>
                         Required: no<br>
-                        This options allows the <strong>Merchant</strong> to set the days she normally goes to PostNL to
+                        This options allows the <strong>Merchant</strong> to set the days she normally goes to bpost to
                         hand in her parcels. By default Saturday and Sunday are excluded.
                     </p>
                     <p id="monday_delivery">
                         <strong>monday_delivery</strong><br>
                         Data type: <a href="#boolean">boolean</a><br>
                         Required: no<br>
-                        Monday delivery is only possible when the package is delivered before 15.00 on Saturday at the designated PostNL locations. Click <a href="https://blog.myparcel.nl/maandagbezorging" target="_blank">here</a> for more information concerning Monday delivery and the locations.<br>
+                        Monday delivery is only possible when the package is delivered before 15.00 on Saturday at the designated bpost locations. Click <a href="https://blog.myparcel.nl/maandagbezorging" target="_blank">here</a> for more information concerning Monday delivery and the locations.<br>
                         <strong>Note: To activate Monday delivery, value 6 must be given with <a href="#dropoff_days">dropoff_days</a>, value 1 must be given by <a href="#monday_delivery">monday_delivery</a>. And on Saturday the <a href="#cutoff_time">cutoff_time</a> must be before 15:00 (14:30 recommended) so that Monday will be shown.</strong>
                     </p>
                     <p>
@@ -3662,7 +3637,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Data type: <a href="#integer">integer</a><br>
                         Required: no<br>
                         This options allows the <strong>Merchant</strong> to set the number of days it takes her to pick,
-                        pack and hand in her parcels at PostNL when ordered before the cutoff time. By
+                        pack and hand in her parcels at bpost when ordered before the cutoff time. By
                         default this is 0 and max is 14.
                     </p>
                     <p>
@@ -3673,7 +3648,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         which she wants to show her consumers delivery options. For example, if set to 3
                         in her check-out, a consumer ordering on Monday will see possible delivery
                         options for Tuesday, Wednesday and Thursday (provided there is no drop-off
-                        delay, it's before the cut-off time and she goes to PostNL on Mondays). Min is 1.
+                        delay, it's before the cut-off time and she goes to bpost on Mondays). Min is 1.
                         and max. is 14.
                     </p>
                     <p>
@@ -3698,11 +3673,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     </p>
                     <h3 id="8_A_4">8.A.4 Example</h3>
                     <p>
-                        <strong>Get delivery options for 2132WT, 66 for PostNL</strong><br>
+                        <strong>Get delivery options for 2132WT, 66 for bpost</strong><br>
                         <strong>Request</strong>
                     </p>
                     <pre>
-GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=postnl HTTP/1.1
+GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=2 HTTP/1.1
 User-Agent: CustomApiCall/2
 </pre>
                     <p><strong>Response</strong></p>
@@ -3846,7 +3821,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 </pre>
                     <p>
                         <strong>
-                            Get delivery options for 2132WT, 66 for PostNL cutoff time 16h00, dropoff days
+                            Get delivery options for 2132WT, 66 for bpost cutoff time 16h00, dropoff days
                             Mon - Sat, dropoff delay is zero, delivery window is 2 days and morning is excluded as delivery
                             type
                         </strong><br>
@@ -3854,7 +3829,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         <strong>Request</strong>
                     </p>
                     <pre>
-GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=postnl&amp;cutoff_time=16:00:00&amp;dropoff_days=1;2;3;4;5;6&amp;monday_delivery=1&amp;dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1
+GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=2&amp;cutoff_time=16:00:00&amp;dropoff_days=1;2;3;4;5;6&amp;monday_delivery=1&amp;dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1
 User-Agent: CustomApiCall/2
 </pre>
                     <p><strong>Response</strong></p>
@@ -4229,7 +4204,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 }
 </pre>
                     <h2 id="9_B">9.B PickupOptions Object Definition</h2>
-                    <p>PickupOptions Object contains possible PostNL locations.</p>
+                    <p>PickupOptions Object contains possible bpost locations.</p>
                     <h3 id="9_B_1">9.B.1 Overview</h3>
                     <p>
                         <strong>date</strong><br>
@@ -4852,10 +4827,10 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     </p>
                     <h1 id="12">12. Document changes</h1>
                     <p>
-                        <a target="_blank" href="https://github.com/myparcelnl/api/releases">Click here</a> for the latest version of the API documentation. Last version update is done on <span id="current_version_date"></span>.
+                        <a target="_blank" href="https://github.com/myparcelbe/api/releases">Click here</a> for the latest version of the API documentation. Last version update is done on <span id="current_version_date"></span>.
                     </p>
                     <script>
-                        $.get('https://api.github.com/repos/myparcelnl/api/releases/latest', function (data) {
+                        $.get('https://api.github.com/repos/myparcelbe/api/releases/latest', function (data) {
                             var day = data.published_at.split('T')[0];
                             var parts = day.split('-');
                             $('#current_version_date').html(parts[2] + '-' + parts[1] + '-' + parts[0]);
@@ -4868,16 +4843,12 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         </p>
                         <p>
                             <span class="site-footer-credits">
-                                <strong>Adres </strong>Siriusdreef 66-68, 2132 WT Hoofddorp<br />
-                                <strong>Telefoon </strong>023 30 30 315&nbsp;
-                                <strong>E-mail</strong> &nbsp;info@myparcel.nl<br />
-                                <strong>Website </strong><a href="https://www.myparcel.nl">www.myparcel.nl</a>&nbsp;
-                                <strong>IBAN </strong>NL48ABNA0447850539&nbsp;
-                                <strong>KvK </strong>Amsterdam 34 09 97 58 <br />
-                                <strong>BTW-nr. </strong>NL8045.33.258.B01
+                                <strong>Adres </strong>Adriaan Brouwerstraat 16, 2000 Antwerpen<br />
+                                <strong>Telefoon </strong>03 808 18 20
+                                <strong>E-mail </strong>info@sendmyparcel.be<br />
+                                <strong>Website </strong><a href="https://sendmyparcel.be">www.sendmyparcel.be</a>
                             </span>
                             <br />
-                            &nbsp;
                         </p>
                     </footer>
                 </div>
