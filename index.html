@@ -46,7 +46,7 @@
                     Do you want to connect with MyParcel using PHP, C# or Ruby? Then you can use the following github projects instead of the API. Create an issue on github to contact the programmer.
                 </p>
                 <ul>
-                    <li><a href="https://github.com/myparcelnl/sdk" target="_blank">PHP</a></li>
+                    <li><a href="https://github.com/myparcelbe/sdk" target="_blank">PHP</a></li>
                     <li><a href="https://github.com/janssenr/MyParcelApi.Net" target="_blank">C#/.net</a></li>
                     <li><a href="https://github.com/paypronl/myparcel" target="_blank">Ruby</a></li>
                 </ul>
@@ -100,7 +100,6 @@
                         For a more comprehensive list of HTTP status codes <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">visit Wikipedia </a> or W3C.
                     </p>
                     <p>Example of a 200 Status code in our API (you can try this in your browser, then you know our API is online)</p>
-                    <p>
                         <strong>Request:</strong>
 <pre>
 GET https://api.myparcel.nl/
@@ -126,7 +125,6 @@ Content-Type: application/json;charset=utf-8
 Transfer-Encoding: chunked
 Connection: keep-alive
 </pre>
-                    </p>
                     <h2 id="2_A_I">2.A.I 2xx</h2>
                     <p>
                         Used for successful requests. Successful requests may contain a response body e.g.
@@ -164,9 +162,9 @@ Connection: keep-alive
                     <h3>2.A.III 401 - Unauthorized</h3>
                     <p>
                         No credentials have been sent with the request. Or the wrong credentials are send.
-                        Tip: check if the API key is properly attached in the header <br>
-                        <pre>Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==</pre>
+                        Tip: check if the API key is properly attached in the header
                     </p>
+                    <pre>Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==</pre>
                     <h3>2.A.III 402 - Payment Required</h3>
                     <p>
                         When payment is required. An Invoice object is always sent with this response.
@@ -209,8 +207,8 @@ Connection: keep-alive
                     <p>
                         All content must be encoded in UTF-8 and include the charset=utf-8.<br><br>
                         example:
-                        <pre>Content-Type: application/json;charset=utf-8</pre>
                     </p>
+                    <pre>Content-Type: application/json;charset=utf-8</pre>
                     <h1 id="4">4. Data Types</h1>
                     <p>
                         Our API defines it's own data types.
@@ -284,7 +282,7 @@ Connection: keep-alive
                         </tr>
                         <tr>
                             <td>example</td>
-                            <td> 2. bpost</td>
+                            <td>2</td>
                         </tr>
                     </table>
                     <h2 id="country_code">country_code</h2>
@@ -299,7 +297,7 @@ Connection: keep-alive
                         </tr>
                         <tr>
                             <td>example</td>
-                            <td>NL, BE, CW</td>
+                            <td>BE, NL, CW</td>
                         </tr>
                     </table>
                     <h2 id="currency">currency</h2>
@@ -336,22 +334,19 @@ Connection: keep-alive
                     <table>
                         <tr>
                             <th>description</th>
-                            <td>The delivery type.</td>
+                            <td>The delivery type. 2 for standard</td>
                         </tr>
                         <tr>
                             <td>pattern</td>
-                            <td>[1 – 5]</td>
+                            <td>[2,4]</td>
                         </tr>
                         <tr>
                             <td>example</td>
                             <td>
-                                <ol>
-                                    <li>morning</li>
-                                    <li>standard</li>
-                                    <li>night</li>
-                                    <li>pickup</li>
-                                    <li>pickup express</li>
-                                </ol>
+                                <ul>
+                                    <li>2 (standard)</li>
+                                    <li>4 (pickup)</li>
+                                </ul>
                             </td>
                         </tr>
                     </table>
@@ -404,7 +399,7 @@ Connection: keep-alive
                     <table>
                         <tr>
                             <th>description</th>
-                            <td>The position of the label on the paper.</td>
+                            <td>The position of the label on the paper</td>
                         </tr>
                         <tr>
                             <td>pattern</td>
@@ -440,8 +435,7 @@ Connection: keep-alive
                     <h2 id="package_contents">package_contents</h2>
                     <p>
                         The package contents are only needed in case of shipping outside EU, this is mandatory info for
-                        customs
-                        form.
+                        customs form
                     </p>
                     <table>
                         <tr>
@@ -469,11 +463,11 @@ Connection: keep-alive
                     <table>
                         <tr>
                             <th>description</th>
-                            <td>For MyParcel BE only package type 1 (package) is allowed.</td>
+                            <td>For SendMyParcel only package type 1 (package) is allowed</td>
                         </tr>
                         <tr>
                             <td>pattern</td>
-                            <td>[1 – 3]</td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td>example</td>
@@ -488,7 +482,7 @@ Connection: keep-alive
                     <table>
                         <tr>
                             <th>description</th>
-                            <td>The size of a paper as specified in ISO216.</td>
+                            <td>The size of a paper as specified in ISO216</td>
                         </tr>
                         <tr>
                             <td>pattern</td>
@@ -505,7 +499,7 @@ Connection: keep-alive
                             <th>description</th>
                             <td>
                                 composite type containing integer and currency. The amount is without decimal separators (in
-                                cents).
+                                cents)
                             </td>
                         </tr>
                         <tr>
@@ -584,7 +578,7 @@ Connection: keep-alive
                         </tr>
                         <tr>
                             <td>example</td>
-                            <td>3SMYPA123456789; Siriusdreef 66; Nederland; </td>
+                            <td>123456 789 012 345; Siriusdreef 66;</td>
                         </tr>
                     </table>
                     <h2 id="text">text</h2>
@@ -674,15 +668,13 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p>
                         Our API uses API keys for access control. When a <strong>Merchant</strong> wants to connect an external system
-                        to
-                        our API he/she needs to create an <strong>API Key.</strong> This API Key will be assigned the <strong>Broker</strong> role.
+                        to our API he/she needs to create an <strong>API Key.</strong> This API Key will be assigned the <strong>Broker</strong> role.
                         Currently the Merchant is not able to create or assign another Role to a API Key. When the Merchant
                         wants to invalidate an API Key he/she just disables the API Key. An Intermediate system, such as
                         the <a href="https://backoffice.sendmyparcel.nl/">MyParcel UI</a>, has its own API Key but cannot access user resources. For this it needs to request
                         a <strong>Session</strong>
                         Token so that it can perform actions on behalf of the user. The API Key and Session Token are send
-                        in
-                        the Authorization header.
+                        in the Authorization header.
                     </p>
                     <h2>5.1 Error codes</h2>
                     <p>
@@ -708,7 +700,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <p>
                         The package type. For MyParcel BE only package type 1 (package) is available. The value is send with the <a href="#7_C">ShipmentOptions</a>.package_type field.
                     </p>
-                    <h4>1. Package</h4>
+                    <h4>Package</h4>
                     <p>
                         This is the standard package type used for BE, EU and Global shipments. It supports a variety of
                         additional options such as insurance, signature etc. We will look at these options in more detail
@@ -716,60 +708,24 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     </p>
                     <h3 id="6_A_2">6.A.2 Delivery types</h3>
                     <p>
-                        There are five different delivery types and these specify how the package is delivered. The value is send
-                        with the ShipmentOptions.delivery_type field. Currently delivery types are only available for NL and BE
-                        shipments with package type 1. Delivery types 1-5 for NL and 1,4 for BE. The address of the package determines the delivery types available.
-                        You need to use the DeliveryOptions interface to fetch the delivery types for a specific address. It is
-                        also possible to specify a date on which the package has to be delivered with
-                        the ShipmentOptions.delivery_date field. With delivery types 2-5 ShipmentOptions.delivery_date is required.
+                        There are two different delivery types and these specify how the package is delivered. The value is send
+                        with the ShipmentOptions.delivery_type field.
                     </p>
-                    <h4>1. Morning</h4>
+                    <h4>Standard</h4>
                     <p>
-                        This options is only available for certain NL addresses. It allows a Customer/Consumer to have their
-                        package delivered early in the morning on the delivery date specified except on Saturday and
-                        Sunday.
+                        This is the standard delivery type.
                     </p>
-                    <h4>2. Standard</h4>
-                    <p>This is the standard delivery type.</p>
-                    <h4>3. Evening</h4>
+                    <h4>Pickup</h4>
                     <p>
-                        The package is delivered in the evening on the delivery date specified. Currently this is only
-                        available
-                        for Tuesday and Thursday, but it is expected to be broadened to other days of the week as well.
-                    </p>
-                    <h4>4. Pickup</h4>
-                    <p>The package is delivered at the chosen drop off point specified by the Consumer/Customer.</p>
-                    <h4>5. Pickup express</h4>
-                    <p>
-                        The same as pickup but the package is available for pickup before 8:30AM on the delivery date
-                        specified
-                        at the drop off location.
+                        The package is delivered at the chosen drop off point specified by the Consumer/Customer.
                     </p>
                     <h3 id="6_A_3">6.A.3 Options</h3>
                     <p>
-                        These are the different package options such as insurance, recipient only, signature on receipt etc. These options are specified in the <a href="#7_C">ShipmentOptions</a> object.
-                    </p>
-                    <h4>only_recipient</h4>
-                    <p>
-                        Deliver the package only at address of the intended recipient. This option is required for Morning
-                        and
-                        Evening delivery types.
+                        These are the different package options. These options are specified in the <a href="#7_C">ShipmentOptions</a> object.
                     </p>
                     <h4>signature</h4>
                     <p>
-                        Recipient must sign for the package. This option is required for Pickup and Pickup express delivery
-                        types.
-                    </p>
-                    <h4>return</h4>
-                    <p>Return the package to the sender when the recipient is not home.</p>
-                    <h4>large_format</h4>
-                    <p>
-                        This option must be specified if the dimensions of the package are between 100 x 70 x 50 and 175 x 78
-                        x
-                        58 cm. If the scanned dimensions from the carrier indicate that this package is large format and it
-                        has
-                        not been specified then it will be added to the shipment in the billing process. This option is also
-                        available for EU shipments.
+                        Recipient must sign for the package. This option is required for Pickup delivery.
                     </p>
                     <h4>insurance</h4>
                     <p>
@@ -789,7 +745,6 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
       ...
       "options": {
         "package_type": 1,
-        "only_recipient": 0,
         "signature": 1,
         "delivery_type": 4
       },
@@ -805,37 +760,10 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                         package_type 1(package) with <a href="#delivery_type">delivery type</a> 4 (Pickup). All pickup
                         packages need to have signature set. A pickup location needs to be specified as well.
                     </p>
-                    <h4>Evening</h4>
-                    <p>
-                        We want to send a package to a consumer in Utrecht that has to be delivered on Tuesday evening. The
-                        shipment looks like this.
-                    </p>
-<pre>
-{
-  "data": {
-    "shipments": [{
-      ...
-      "options": {
-        "package_type": 1,
-        "delivery_type": 3,
-        "only_recipient": 1,
-        ...
-      }
-    }]
-  }
-}
-</pre>
-                    <p>
-                        Let's go through this example. This package will be delivered to the consumer in the evening so it
-                        needs
-                        package_type 1(package) with delivery_type 3(evening). All evening and morning packages need to have
-                        only_recipient set.
-                    </p>
                     <h4>NL insured</h4>
                     <p>
-                        We want to send a Rolex to a customer in Maastricht. This shipment needs to be insured up to 5000
-                        euros
-                        for obvious reasons. The shipment looks like this.
+                        We want to send a Rolex to a customer in Maastricht. This shipment needs to be insured up to 50000
+                        euros. The shipment looks like this.
                     </p>
 <pre>
 {
@@ -845,11 +773,10 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
       "options": {
         "package_type": 1,
         "insurance": {
-          "amount": 500000,
+          "amount": 50000,
           "currency": "EUR"
         },
         "signature": 1,
-        "only_recipient": 1
           ...
       }
     }]
@@ -857,21 +784,13 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 }
 </pre>
                     <p>
-                        Only <a href="#package_type">package type</a> 1 (package) can be insured so <a href="#package_type">package type</a> is set to 1. Insurance amount needs to be
-                        specified
-                        in cents and needs to be one of these amounts (5000, 25000, 50000, 500000, >= 500000). The package
-                        needs
-                        to be insured up to 5000 euros so we set insurance.amount to 500000 cents. All NL insured packages
-                        need
-                        to have signature and only_recipient set so we set them as well.
+                        Insurance amount needs to be specified in cents and needs to be 50000. The package
+                        needs to be insured up to 500 euros so we set insurance.amount to 50000 cents.
                     </p>
                     <h4>EU and Global insured</h4>
                     <p>
-                        We want to send an expensive Japanese vase to a Belgian friend of ours in Brussels. This package is
-                        large
-                        format because it's dimensions are within 100 x 70 x 50 and 175 x 78 x 58 cm range. Since this is an
-                        EU
-                        shipment is must be insured up to 500 euros.
+                        We want to send an expensive Japanese vase to a Dutch friend of ours in Amsterdam. Since this is an
+                        EU shipment is must be insured up to 500 euros.
                     </p>
 <pre>
   {
@@ -883,8 +802,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
           "insurance": {
             "amount": 50000,
             "currency": "EUR"
-          },
-          "large_format": 1
+          }
         }
         ...
       }]
@@ -893,31 +811,14 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p>
                         This package is an EU package so the type must be set to 1. All EU and Global shipments <strong>must</strong> be
-                        insured up to 500 (EU) / 200 (Global) euros so we set the insured amount to 50000 <strong>cents.</strong> EU
-                        and
-                        Global shipments do not have the only_recipient, signature and return options so these cannot be set
-                        for
-                        this shipment.
+                        insured up to 500 (EU) euros so we set the insured amount to 50000 <strong>cents.</strong> EU
+                        and Global shipments do not have the signature and return options so these cannot be set
+                        for this shipment.
                     </p>
                     <h2 id="6_B">6.B Add Shipment</h2>
                     <h3 id="6_B_1">6.B.1 Overview</h3>
                     <p>
-                        Add shipments allows you to create standard and related return shipments.
-                        The data format can be JSON or CSV. Only standard national and EU shipments can be created with CSV.
-                        There are two ways of sending CSV: raw CSV or CSV file as part of multipart/form-data. You can
-                        specify
-                        the column mapping for CSV by including it as the first line in the CSV file or as a separate field
-                        named 'column_mapping' in the multipart/form-data.
-                    </p>
-                    <p>
-                        For JSON requests a <a href="#7_G">ShipmentIds</a> object is returned. The ids in the <a href="#7_G">ShipmentIds</a> object
-                        will
-                        be in the same order they where sent.
-                    </p>
-                    <p>
-                        For CSV requests HTTP/1.1 204 No Content with empty response body is returned. If a request fails
-                        then an
-                        HTTP/1.1 4xx < MESSAGE > is returned.
+                        For JSON requests a <a href="#7_G">ShipmentIds</a> object is returned.
                     </p>
                     <h3 id="6_B_2">6.B.2 Reference</h3>
                     <table>
@@ -1000,7 +901,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                         <strong>Content-Type: application/vnd.return_shipment+json</strong><br>
                         Specify this content-type when you want to create related return shipments.<br>
                         Parent shipment cannot be a concept (<a href="#shipment_status">shipment_status</a> 1).<br>
-                         When a label is generated, the status of the shipment is converted to registerd (<a href="#shipment_status">shipment_status</a> 2).<br>
+                        When a label is generated, the status of the shipment is converted to registered (<a href="#shipment_status">shipment_status</a> 2).<br>
                         <br>
                         <strong>Content-Type: application/vnd.unrelated_return_shipment+json</strong><br>
                         Specify this content-type when you want to create unrelated return shipments.
@@ -1021,52 +922,33 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
     "shipments": [{
       "reference_identifier" : "FOO-222-BAR-42",
       "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
+        "cc": "BE",
+        "city": "Brussel",
         "street": "Siriusdreef",
         "number": "66",
-        "postal_code": "2132WT",
+        "number_suffix": "a",
+        "box_number": "100",
+        "postal_code": "2100",
         "person": "Mr. Parcel",
         "phone": "0213030315",
         "email": "testing@myparcel.nl"
       },
       "options": {
         "package_type": 1,
-        "only_recipient": 1,
         "signature": 1,
-        "return": 1,
         "insurance": {
           "amount": 50000,
           "currency": "EUR"
         },
-        "large_format": 0,
-        "label_description": "My custom description"
       },
-      "carrier": 2
-    }, {
-      "reference_identifier" : "FOO-223-BAR-43",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Amsterdam",
-        "street": "Dorpstraat",
-        "number": "123",
-        "postal_code": "1020BC",
-        "person": "Mrs. Parcel",
-        "phone": "02012343546",
-        "email": "info@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "only_recipient": 0,
-        "signature": 0,
-        "return": 0
+      "physical_properties": {
+        "weight": 100
       },
       "carrier": 2
     }]
   }
 }
+
 </pre>
                     <p><strong>Response</strong></p>
 <pre>
@@ -1107,7 +989,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
       "customs_declaration": {
         "contents": 1,
         "invoice": "1231235345345",
-        "weight": 30,
+        "weight": 3000,
         "items": [{
           "description": "Sample Product",
           "amount": 10,
@@ -1121,7 +1003,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         }, {
           "description": "Sample Product 2",
           "amount": 5,
-          "weight": 10,
+          "weight": 1000,
           "item_value": {
             "amount": 1000,
             "currency": "EUR"
@@ -1131,7 +1013,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         }]
       },
       "physical_properties": {
-        "weight": 30
+        "weight": 4000
       },
       "carrier": 2
     }]
@@ -1149,7 +1031,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   }
 }
 </pre>
-                    <h2>Create shipment with NL pickup location</h2>
+                    <h2>Create shipment with BE pickup location</h2>
                     <p><strong>Request</strong></p>
                     <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1174,14 +1056,14 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         "package_type": 1,
         "delivery_type": 4,
         "delivery_date": "2015-07-12 00:00:00",
-        "only_recipient": 0,
         "signature": 1,
         "return": 0
       },
       "pickup": {
-        "postal_code": "2132BH",
+        "location_code": "207500",
+        "postal_code": "1100",
         "street": "Burgemeester van Stamplein",
-        "city": "Hoofddorp",
+        "city": "Brussel",
         "number": "270",
         "location_name": "Albert Heijn"
       },
@@ -1234,15 +1116,12 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 "package_type":1,
                 "delivery_type":4,
                 "delivery_date":"2017-08-09 16:00:00",
-                "only_recipient":0,
                 "signature":1,
                 "return":0,
                 "insurance":{
                     "amount":50000,
                     "currency":"EUR"
-                },
-                "large_format":0,
-                "cooled_delivery":0
+                }
             },
             "carrier":1
             }
@@ -1277,7 +1156,6 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
       "name": "Mr. Parcel",
       "options": {
         "package_type": 1,
-        "only_recipient": 0,
         "signature": 1,
         "return": 0,
         "insurance": {
@@ -1312,14 +1190,11 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
     "return_shipments": [{
       "options": {
         "package_type": 1,
-        "only_recipient": 0,
         "signature": 0,
         "return": 0,
         "insurance": {
           "amount": 0,
-          "currency": "EUR"
-        },
-        "large_format": 0,
+
         "label_description": "My custom description"
       },
       "carrier": 2,
@@ -1423,8 +1298,6 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
                     <pre>HTTP/1.1 201 No Content </pre>
-                    </p>
-
                     <h2 id="6_D">6.D Generate unrelated return shipment</h2>
                     <h3 id="6_D_1">6.D.1 Overview</h3>
                     <p>
@@ -1492,7 +1365,6 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 POST https://api.myparcel.nl/return_shipments
 User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw== </pre>
-                    </p>
                     <p><strong>Response</strong></p>
 <pre>HTTP/1.1 200 OK  Content-Type:application/json
 {
@@ -1677,7 +1549,6 @@ GET https://api.myparcel.nl/shipments?q=Niels&amp;status=1
 User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
-                    </p>
                     <p>
                         <strong>Response</strong>
                         <pre>
@@ -1700,14 +1571,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
         },
         "options": {
           "package_type": 1,
-          "only_recipient": 1,
           "signature": 1,
-          "return": 1,
+          "return": 0,
           "insurance": {
             "amount": 50000,
-            "currency": "EUR"
-          },
-          "large_format": 0
+
         },
         "sender": {
           "cc": "NL",
@@ -1721,12 +1589,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
           "email": "info@myparcel.nl"
         },
         "carrier": 2,
-        "status": 1,
+        "status": 2,
         "price": {
           "amount": 535,
           "currency": "EUR"
         },
-        "barcode": "3SMYPA77773333",
+        "barcode": "123456 789 012 345",
         "created": "2017-01-31 08:00:00",
         "modified": "2017-01-31 09:00:00"
       }],
@@ -1736,7 +1604,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     }
   }
 }</pre>
-                    </p>
                     <h2 id="6_F">6.F Get Shipment label</h2>
                     <h3 id="6_F_1">6.F.1 Overview </h3>
                     <p>
@@ -2119,7 +1986,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>
                         <strong>physical_properties</strong><br>
                         Data type: <a href="#7_N">PhysicalProperties</a><br>
-                        Required: yes for non-EU shipment types.<br>
+                        Required: Yes.<br>
                         Shipment physical properties such as dimension, weight etc. This object may be
                         updated when fetching shipment status update from the carrier.
                     </p>
@@ -2171,14 +2038,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   },
   "options": {
     "package_type": 1,
-    "only_recipient": 1,
     "signature": 1,
     "return": 1,
     "insurance": {
       "amount": 5000,
-      "currency": "EUR"
-    },
-    "large_format": 0
+
   },
   "carrier": 2
 }
@@ -2201,7 +2065,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   },
   "options": {
     "package_type": 1,
-    "only_recipient": 1,
     "signature": 1,
     "return": 1
   },
@@ -2229,7 +2092,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "customs_declaration": {
     "contents": 1,
     "invoice": "1231235345345",
-    "weight": 30,
+    "weight": 3000,
     "items": [{
       "description": "Sample Product",
       "amount": 10,
@@ -2243,7 +2106,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     }, {
       "description": "Sample Product 2",
       "amount": 5,
-      "weight": 10,
+      "weight": 1000,
       "item_value": {
         "amount": 1000,
         "currency": "EUR"
@@ -2253,7 +2116,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     }]
   },
   "physical_properties": {
-    "weight": 30
+    "weight": 4000
   },
   "carrier": 2
 }
@@ -2279,16 +2142,19 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
         "package_type": 1,
         "delivery_type": 4,
         "delivery_date": "2015-07-12 00:00:00",
-        "only_recipient": 0,
         "signature": 1,
         "return": 0
       },
       "pickup": {
-        "postal_code": "2132BH",
+        "location_code": "207500",
+        "postal_code": "1100",
         "street": "Burgemeester van Stamplein",
-        "city": "Hoofddorp",
+        "city": "Brussel",
         "number": "270",
         "location_name": "Albert Heijn"
+      },
+      "physical_properties": {
+        "weight": 3000
       },
       "carrier": 2
     }]
@@ -2296,7 +2162,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 }
 </pre>
                     <br>
-                    <p>GET example national shipment</p>
+                    <p>GET example national shipment a</p>
 <pre>
 {
 
@@ -2314,14 +2180,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   },
   "options": {
     "package_type": 1,
-    "only_recipient": 1,
     "signature": 1,
     "return": 1,
     "insurance": {
       "amount": 50000,
       "currency": "EUR"
-    },
-    "large_format": 0
+    }
   },
   "sender": {
     "cc": "NL",
@@ -2362,7 +2226,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   },
   "options": {
     "package_type": 1,
-    "only_recipient": 1,
     "signature": 1,
     "return": 1
   },
@@ -2634,12 +2497,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         The delivery remark.
                     </p>
                     <p>
-                        <strong>only_recipient</strong><br>
-                        Data type: <a href="#boolean">boolean</a><br>
-                        Required: No.<br>
-                        Deliver the package to the recipient only.
-                    </p>
-                    <p>
                         <strong>signature</strong><br>
                         Data type: <a href="#boolean">boolean</a><br>
                         Required: No.<br>
@@ -2658,23 +2515,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Insurance price for the package.
                     </p>
                     <p>
-                        <strong>large_format</strong><br>
-                        Data type: <a href="#boolean">boolean</a><br>
-                        Required: No.<br>
-                        Large format package.
-                    </p>
-                    <p>
-                        <strong>cooled_delivery</strong><br>
-                        Data type: <a href="#boolean">boolean</a><br>
-                        Required: No.<br>
-                    </p>
-                    <p>
                         <strong>label_description</strong><br>
                         Data type: <a href="#string">string</a><br>
                         Required: No.<br>
                         This description will appear on the shipment label.<strong>
                             Note: This will be overridden
-                            for return shipment by the following: Retour – 3SMYPAMYPAXXXXXX
+                            for return shipment by the following: Retour – 3SMYPAXXXXXX
                         </strong>
                     </p>
                     <h3 id="7_C_2">7.C.2 Example</h3>
@@ -2682,14 +2528,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "package_type": 1,
-  "only_recipient": 1,
   "signature": 1,
   "return": 1,
   "insurance": {
     "amount": 5000,
     "currency": "EUR"
   },
-  "large_format": 0,
   "label_description": "My custom description"
 }
 </pre>
@@ -2697,7 +2541,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
   {
     "package_type": 1,
-    "only_recipient": 0,
     "signature": 1,
     "return": 0,
     "insurance": {
@@ -2711,21 +2554,18 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "package_type": 1,
-  "only_recipient": 1,
   "signature": 1,
   "return": 1,
   "insurance": {
     "amount": 50000,
     "currency": "EUR"
-  },
-  "large_format": 0
+  }
 }
 </pre>
                     <p>Example d</p>
 <pre>
 {
   "package_type": 1,
-  "only_recipient": 1,
   "signature": 1,
   "return": 1
 }
@@ -2734,7 +2574,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "package_type": 1,
-  "only_recipient": 0,
   "signature": 1,
   "return": 0,
   "insurance": {
@@ -2755,7 +2594,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "package_type": 1,
   "delivery_type": 4,
   "delivery_date": "2017-01-12 16:30:00",
-  "only_recipient": 0,
   "signature": 1,
   "return": 0
 }
@@ -2838,11 +2676,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "contents": 1,
   "invoice": "1231235345345",
-  "weight": 30,
+  "weight": 4000,
   "items": [{
   "description": "Sample Product",
     "amount": 10,
-    "weight": 20,
+    "weight": 3000,
     "item_value": {
       "amount": 7000,
       "currency": "EUR"
@@ -2852,7 +2690,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   }, {
   "description": "Sample NBG Product",
     "amount": 5,
-    "weight": 10,
+    "weight": 1000,
     "item_value": {
       "amount": 1000,
       "currency": "EUR"
@@ -2867,11 +2705,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "contents": 3,
   "invoice": "4567789004",
-  "weight": 30,
+  "weight": 3000,
   "items": [{
     "description": "NIV Product Audio CD",
     "amount": 3,
-    "weight": 10,
+    "weight": 1000,
     "item_value": {
       "amount": 10000,
       "currency": "EUR"
@@ -2881,7 +2719,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   }, {
     "description": "Sample JP Product",
     "amount": 10,
-    "weight": 20,
+    "weight": 2000,
     "item_value": {
       "amount": 800000,
       "currency": "YEN"
@@ -2936,7 +2774,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "description": "Sample NIV Product",
   "amount": 10,
-  "weight": 20,
+  "weight": 2000,
   "item_value": {
     "amount": 7000,
     "currency": "EUR"
@@ -2950,7 +2788,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
  "description":"Sample NBG Product",
  "amount":5,
- "weight":10,
+ "weight":1000,
  "item_value":{
     "amount":1000,
     "currency":"EUR"
@@ -2964,7 +2802,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
  "description":"NIV Product Audio CD",
  "amount":3,
- "weight":10,
+ "weight":1000,
  "item_value":{
     "amount":10000,
     "currency":"EUR"
@@ -2978,7 +2816,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
  "description":"Sample JP Product",
  "amount":10,
- "weight":20,
+ "weight":2000,
  "item_value":{
     "amount":800000,
     "currency":"YEN"
@@ -3055,7 +2893,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "name": "Mr. Parcel",
   "options": {
     "package_type": 1,
-    "only_recipient": 0,
     "signature": 1,
     "return": 0,
     "insurance": {
@@ -3107,7 +2944,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "name": "Mr. Parcel",
   "options": {
     "package_type": 1,
-    "only_recipient": 0,
     "signature": 1,
     "return": 0,
     "insurance": {
@@ -3271,7 +3107,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>POST example</p>
 <pre>
 {
-  "weight": 30
+  "weight": 3000
 }
 </pre>
                     <h2 id="7_O">7.O PickupLocation Object Definition</h2>
@@ -3313,26 +3149,15 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Required: n/a.<br>
                     </p>
                     <h3 id="7_O_2">7.O.2 Example</h3>
-                    <p>POST example for NL pickup location</p>
-<pre>
-{
-  "postal_code": "2132BH",
-  "street": "Burgemeester van Stamplein",
-  "city": "Hoofddorp",
-  "number": "270",
-  "location_name": "Albert Heijn"
-}
-</pre>
                     <p>POST example for BE pickup location</p>
 <pre>
 {
-    "city":"ANTWERPEN",
-    "street":"HOOGSTRAAT",
-    "postal_code":"2000",
-    "number":"75",
-    "location_code":"BE0Q07",
-    "retail_network_id":"LD-01",
-    "location_name":"K&J TRADING"
+    "location_code": "207500",
+    "postal_code": "1100",
+    "street": "Burgemeester van Stamplein",
+    "city": "Brussel",
+    "number": "270",
+    "location_name": "Albert Heijn"
 }
 </pre>
                     <h2 id="7_P">7.P PaymentInstructions Object Definition</h2>
@@ -3685,80 +3510,16 @@ User-Agent: CustomApiCall/2
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
   "data": {
-    "delivery": [{
-      "date": "2017-02-01",
-      "time": [{
-        "start": "08:00:00",
-        "end": "12:00:00",
-        "price": {
-          "currency": "EUR",
-          "amount": 1000
-        },
-        "price_comment": "morning",
-        "comment": "",
-        "type": 1
-      }, {
-        "start": "11:30:00",
-        "end": "13:30:00",
-        "price": {
-          "currency": "EUR",
-          "amount": 0
-        },
-        "price_comment": "standard",
-        "comment": "",
-        "type": 2
-      }]
-    }, {
-      "date": "2017-02-02",
-      "time": [{
-        "start": "08:00:00",
-        "end": "12:00:00",
-        "price": {
-          "currency": "EUR",
-          "amount": 1000
-        },
-        "price_comment": "morning",
-        "comment": "",
-        "type": 1
-      }, {
-        "start": "11:00:00",
-        "end": "13:00:00",
-        "price": {
-          "currency": "EUR",
-          "amount": 0
-        },
-        "price_comment": "standard",
-        "comment": "",
-        "type": 2
-      }]
-    }],
+    "delivery": [],
     "pickup": [{
       "date": "2017-02-01",
-      "time": [{
-        "start": "16:00:00",
-        "type": 4,
-        "price": {
-          "amount": 0,
-          "currency": "EUR"
-        }
-      }, {
-        "start": "08:30:00",
-        "type": 5,
-        "price": {
-          "amount": 125,
-          "currency": "EUR"
-        }
-      }],
+      "time": [],
       "location": "Staples Office Centre",
       "street": "Jacobus Spijkerdreef",
       "number": "10",
-      "postal_code": "2132PZ",
-      "city": "Hoofddorp",
-      "start_time": "08:30:00",
-      "price": 125,
-      "price_comment": "retailexpress",
-      "comment": "Dit is een Business Point. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-      "phone_number": "023-5576310",
+      "postal_code": "1000",
+      "city": "Brussel",
+      "comment": "Dit is een Business Point.",
       "opening_hours": {
         "monday": ["08:00-18:30"],
         "tuesday": ["08:00-18:30"],
@@ -3768,55 +3529,11 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
         "saturday": ["08:00-17:00"],
         "sunday": []
       },
-      "distance": "1934",
       "latitude": "52.286582",
       "longitude": "4.682377",
       "location_code": "173187"
-    }, {
-      "date": "2017-02-01",
-      "time": [{
-        "start": "16:00:00",
-        "type": 4,
-        "price": {
-          "amount": 0,
-          "currency": "EUR"
-        }
-      }],
-      "location": "Primera Sanders",
-      "street": "Polderplein",
-      "number": "3",
-      "postal_code": "2132BA",
-      "city": "Hoofddorp",
-      "start_time": "16:00:00",
-      "price": 0,
-      "price_comment": "retail",
-      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-      "phone_number": "023-5640556",
-      "opening_hours": {
-        "monday": ["11:00-18:00"],
-        "tuesday": ["09:00-18:00"],
-        "wednesday": ["09:00-18:00"],
-        "thursday": ["09:00-18:00"],
-        "friday": ["09:00-21:00"],
-        "saturday": ["09:00-17:00"],
-        "sunday": ["12:00-17:00"]
-      },
-      "distance": "1687",
-      "latitude": "52.192150633052",
-      "longitude": "4.44249030539514",
-      "location_code": "176227"
-    }, {
-      "date": "2017-02-01",
-      "time": [{
-        "start": "16:00:00",
-        "type": 4,
-        "price": {
-          "amount": 0,
-          "currency": "EUR"
-        }
-      }]
-    }]
-  }
+    }
+}]
 }
 </pre>
                     <p>
@@ -3836,334 +3553,38 @@ User-Agent: CustomApiCall/2
 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-   "data":{
-      "delivery":[
-         {
-            "date":"2017-05-06",
-            "time":[
-               {
-                  "start":"08:30:00",
-                  "end":"21:30:00",
-                  "price":{
-                     "currency":"EUR",
-                     "amount":0
-                  },
-                  "price_comment":"standard",
-                  "comment":"",
-                  "type":2
-               }
-            ]
-         },
-         {
-            "date":"2017-05-08",
-            "time":[
-               {
-                  "start":"10:30:00",
-                  "end":"13:00:00",
-                  "price":{
-                     "currency":"EUR",
-                     "amount":0
-                  },
-                  "price_comment":"standard",
-                  "comment":"",
-                  "type":2
-               }
-            ]
-         }
-      ],
-      "pickup":[
-         {
-            "date":"2017-05-06",
-            "time":[
-               {
-                  "start":"16:00:00",
-                  "type":4,
-                  "price":{
-                     "amount":0,
-                     "currency":"EUR"
-                  }
-               },
-               {
-                  "start":"08:30:00",
-                  "type":5,
-                  "price":{
-                     "amount":125,
-                     "currency":"EUR"
-                  }
-               }
-            ],
-            "location":"Staples Office Centre",
-            "street":"Jacobus Spijkerdreef",
-            "number":"10",
-            "postal_code":"2132PZ",
-            "city":"Hoofddorp",
-            "start_time":"08:30:00",
-            "price":125,
-            "price_comment":"retailexpress",
-            "comment":"Dit is een Business Point. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-            "phone_number":"023-5576310",
-            "opening_hours":{
-               "monday":[
-                  "08:00-18:30"
-               ],
-               "tuesday":[
-                  "08:00-18:30"
-               ],
-               "wednesday":[
-                  "08:00-18:30"
-               ],
-               "thursday":[
-                  "08:00-18:30"
-               ],
-               "friday":[
-                  "08:00-18:30"
-               ],
-               "saturday":[
-                  "08:00-17:00"
-               ],
-               "sunday":[
-
-               ]
-            },
-            "distance":"1798",
-            "latitude": "52.286582",
-            "longitude": "4.682377",
-            "location_code":"173187"
-         },
-         {
-            "date":"2017-05-06",
-            "time":[
-               {
-                  "start":"16:00:00",
-                  "type":4,
-                  "price":{
-                     "amount":0,
-                     "currency":"EUR"
-                  }
-               }
-            ],
-            "location":"Primera Sanders",
-            "street":"Polderplein",
-            "number":"3",
-            "postal_code":"2132BA",
-            "city":"Hoofddorp",
-            "start_time":"16:00:00",
-            "price":0,
-            "price_comment":"retail",
-            "comment":"Dit is een Postkantoor. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-            "phone_number":"023-5640556",
-            "opening_hours":{
-               "monday":[
-                  "11:00-18:00"
-               ],
-               "tuesday":[
-                  "09:00-18:00"
-               ],
-               "wednesday":[
-                  "09:00-18:00"
-               ],
-               "thursday":[
-                  "09:00-18:00"
-               ],
-               "friday":[
-                  "09:00-21:00"
-               ],
-               "saturday":[
-                  "09:00-17:00"
-               ],
-               "sunday":[
-                  "12:00-17:00"
-               ]
-            },
-            "distance":"1696",
-            "latitude": "52.192150633052",
-            "longitude": "4.44249030539514",
-            "location_code":"176227"
-         }
-      ]
-   }
-}
-</pre>
-                    <p>
-                        <strong>
-                            Get delivery options and pickup locations for Belgium
-                        </strong>
-                        <br>
-                        <br>
-                        <strong>Request</strong>
-                    </p>
-                    <pre>
-GET https://api.myparcel.nl/delivery_options?cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1
-User-Agent: CustomApiCall/2
-</pre>
-                    <p><strong>Response</strong></p>
-<pre>
-HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
-{
   "data": {
-    "delivery": [
-      {
-        "date": "2017-07-29",
-        "time": [
-          {
-            "start": "08:00:00",
-            "end": "21:30:00",
-            "price": {
-              "currency": "EUR",
-              "amount": 0
-            },
-            "price_comment": "standard",
-            "comment": "",
-            "type": 2
-          }
-        ]
-      }
-    ],
-    "pickup": [
-      {
-        "date": "2017-07-29",
-        "time": [
-          {
-            "start": "16:00:00",
-            "type": 4,
-            "price": {
-              "amount": 0,
-              "currency": "EUR"
-            }
-          }
-        ],
-        "location": "BELLES NOUVELLES",
-        "street": "AVENUE MONTJOIE",
-        "number": "20",
-        "postal_code": "1180",
-        "city": "UCCLE",
-        "cc": "BE",
-        "start_time": "16:00:00",
-        "price": 0,
-        "price_comment": "retail",
-        "comment": "",
-        "phone_number": "",
-        "opening_hours": {
-          "monday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "tuesday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "wednesday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "thursday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "friday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "saturday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "sunday": {
-
-          }
-        },
-        "distance": "616",
-        "latitude": "50.810441",
-        "longitude": "4.368223",
-        "location_code": "BE0S01",
-        "retail_network_id": "LD-01"
+    "delivery": [],
+    "pickup": [{
+      "date": "2017-02-01",
+      "time": [],
+      "location": "Staples Office Centre",
+      "street": "Jacobus Spijkerdreef",
+      "number": "10",
+      "postal_code": "1000",
+      "city": "Brussel",
+      "comment": "Dit is een Business Point.",
+      "opening_hours": {
+        "monday": ["08:00-18:30"],
+        "tuesday": ["08:00-18:30"],
+        "wednesday": ["08:00-18:30"],
+        "thursday": ["08:00-18:30"],
+        "friday": ["08:00-18:30"],
+        "saturday": ["08:00-17:00"],
+        "sunday": []
       },
-      {
-        "date": "2017-07-29",
-        "time": [
-          {
-            "start": "16:00:00",
-            "type": 4,
-            "price": {
-              "amount": 0,
-              "currency": "EUR"
-            }
-          }
-        ],
-        "location": "KARIBOO C'EST LE BOUQUET",
-        "street": "RUE EMILE CLAUS",
-        "number": "58",
-        "postal_code": "1180",
-        "city": "UCCLE",
-        "cc": "BE",
-        "start_time": "16:00:00",
-        "price": 0,
-        "price_comment": "retail",
-        "comment": "",
-        "phone_number": "",
-        "opening_hours": {
-          "monday": [
-            "13:00-18:00"
-          ],
-          "tuesday": [
-            [
-              "09:00-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "wednesday": [
-            [
-              "09:00-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "thursday": [
-            [
-              "09:00-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "friday": [
-            [
-              "09:00-12:00",
-              "12:00-20:00"
-            ]
-          ],
-          "saturday": [
-            [
-              "09:00-12:00",
-              "12:00-20:00"
-            ]
-          ],
-          "sunday": [
-            "10:00-16:00"
-          ]
-        },
-        "distance": "983",
-        "latitude": "50.815598",
-        "longitude": "4.367427",
-        "location_code": "BE0T57",
-        "retail_network_id": "LD-01"
-      }
-    ]
-  }
+      "latitude": "52.286582",
+      "longitude": "4.682377",
+      "location_code": "173187"
+    }
+}]
 }
-</pre>                    <h1 id="9">9. Delivery options Object Definitions</h1>
+
+</pre>
+                    <h1 id="9">9. Delivery options Object Definitions</h1>
                     <p>If you use the endpoint delivery_options you get two objects. DeliveryOptions Object and PickupOptions Object. OpeningHours Object contains the opening hours of pickup locations.</p>
                     <h2 id="9_A">9.A DeliveryOptions Object Definition</h2>
-                    <p>DeliveryOptions Object contains possible delivery options. Besides these options would also be able to bring the customer has two other choices: only_recipient and signature. These two options could offer you as long as the address is in the Netherlands. Morning and Evening delivery types always used only_recipient.</p>
+                    <p>DeliveryOptions Object contains possible delivery options.</p>
                     <h3 id="9_A_1">9.A.1 Overview</h3>
                     <p>
                         <strong>date</strong><br>
@@ -4291,31 +3712,13 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 <pre>
 {
   "date": "2017-02-01",
-  "time": [{
-    "start": "16:00:00",
-    "type": 4,
-    "price": {
-      "amount": 0,
-      "currency": "EUR"
-    }
-  }, {
-    "start": "08:30:00",
-    "type": 5,
-    "price": {
-        "amount": 125,
-        "currency": "EUR"
-    }
-  }],
+  "time": [],
   "location": "Staples Office Centre",
   "street": "Jacobus Spijkerdreef",
   "number": "10",
-  "postal_code": "2132PZ",
-  "city": "Hoofddorp",
-  "start_time": "08:30:00",
-  "price": 125,
-  "price_comment": "retailexpress",
-  "phone_number": "023-5576310",
-  "comment": "Dit is een Business Point. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+  "postal_code": "1000",
+  "city": "Brussel",
+  "comment": "Dit is een Business Point.",
   "opening_hours": {
     "monday": ["08:00-18:30"],
     "tuesday": ["08:00-18:30"],
@@ -4325,11 +3728,11 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
     "saturday": ["08:00-17:00"],
     "sunday": []
   },
-  "distance": "1934",
   "latitude": "52.286582",
   "longitude": "4.682377",
   "location_code": "173187"
 }
+
 </pre>
                     <h2 id="9_C">9.C OpeningHours Object Definition</h2>
                     <h3 id="9_C_1">9.C.1 Overview</h3>
