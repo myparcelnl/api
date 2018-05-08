@@ -102,10 +102,10 @@
                     <p>Example of a 200 Status code in our API (you can try this in your browser, then you know our API is online)</p>
                         <strong>Request:</strong>
 <pre>
-GET https://api.myparcel.nl/
+GET https://api.sendmyparcel.be/
 Request Headers (example!):
 GET / HTTP/1.1
-Host: api.myparcel.nl
+Host: api.sendmyparcel.be
 Connection: keep-alive
 Pragma: no-cache
 Cache-Control: no-cache
@@ -671,7 +671,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                         to our API he/she needs to create an <strong>API Key.</strong> This API Key will be assigned the <strong>Broker</strong> role.
                         Currently the Merchant is not able to create or assign another Role to a API Key. When the Merchant
                         wants to invalidate an API Key he/she just disables the API Key. An Intermediate system, such as
-                        the <a href="https://backoffice.sendmyparcel.nl/">MyParcel UI</a>, has its own API Key but cannot access user resources. For this it needs to request
+                        the <a href="https://backoffice.sendmyparcel.be/">MyParcel UI</a>, has its own API Key but cannot access user resources. For this it needs to request
                         a <strong>Session</strong>
                         Token so that it can perform actions on behalf of the user. The API Key and Session Token are send
                         in the Authorization header.
@@ -698,7 +698,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <h3>Contents</h3>
                     <h3 id="6_A_1">6.A.1 Package types</h3>
                     <p>
-                        The package type. For MyParcel BE only package type 1 (package) is available. The value is send with the <a href="#7_C">ShipmentOptions</a>.package_type field.
+                        The package type. For MyParcel BE only package type 1 (package) is available. The value is send with the <a href="#7_C">ShipmentOptions.package_type</a> field.
                     </p>
                     <h4>Package</h4>
                     <p>
@@ -824,7 +824,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.myparcel.nl/shipments</td>
+                            <td>https://api.sendmyparcel.be/shipments</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -913,38 +913,34 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                         <h2>Create national shipments</h2>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.myparcel.nl/shipments HTTP/1.1
+POST https://api.sendmyparcel.be/shipments HTTP/1.1
 Content-Type:application/vnd.shipment+json;charset=utf-8
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
-      "reference_identifier" : "FOO-222-BAR-42",
-      "recipient": {
-        "cc": "BE",
-        "city": "Brussel",
-        "street": "Siriusdreef",
-        "number": "66",
-        "number_suffix": "a",
-        "box_number": "100",
-        "postal_code": "2100",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "signature": 1,
-        "insurance": {
-          "amount": 50000,
-          "currency": "EUR"
+    "shipments": [
+      {
+        "recipient": {
+          "cc": "BE",
+          "postal_code": "2000",
+          "city": "Purmerend",
+          "street": "Wormerplein",
+          "number": "16",
+          "box_number": "",
+          "person": "test"
         },
-      },
-      "physical_properties": {
-        "weight": 100
-      },
-      "carrier": 2
+        "options": {
+          "package_type": 1,
+          "signature": 0,
+          "insurance": {
+            "amount": 0,
+            "currency": "EUR"
+          },
+          "large_format": 0,
+          "cooled_delivery": 0
+        },
+        "carrier": 2
     }]
   }
 }
@@ -966,7 +962,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <h2>Create International shipment</h2>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.myparcel.nl/shipments HTTP/1.1
+POST https://api.sendmyparcel.be/shipments HTTP/1.1
 Content-Type:application/vnd.shipment+json; charset=utf-8
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
@@ -999,7 +995,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
             "currency": "EUR"
           },
           "classification": "0181",
-          "country": "NL"
+          "country": "BE"
         }, {
           "description": "Sample Product 2",
           "amount": 5,
@@ -1031,58 +1027,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   }
 }
 </pre>
-                    <h2>Create shipment with BE pickup location</h2>
-                    <p><strong>Request</strong></p>
-                    <pre>
-POST https://api.myparcel.nl/shipments HTTP/1.1
-Content-Type:application/vnd.shipment+json; charset=utf-8
-User-Agent: CustomApiCall/2
-Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
-{
-  "data": {
-    "shipments": [{
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "delivery_type": 4,
-        "delivery_date": "2015-07-12 00:00:00",
-        "signature": 1,
-        "return": 0
-      },
-      "pickup": {
-        "location_code": "207500",
-        "postal_code": "1100",
-        "street": "Burgemeester van Stamplein",
-        "city": "Brussel",
-        "number": "270",
-        "location_name": "Albert Heijn"
-      },
-      "carrier": 2
-    }]
-  }
-}
-</pre>
-                    <p><strong>Response</strong></p>
-<pre>
-HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
-{
-  "data": {
-    "ids": [{
-      "id": 12345
-    }]
-  }
-}
-</pre>
+
                     <h2>Create shipment with BE pickup location</h2>
                     <p><strong>Request</strong></p>
                     <pre>
@@ -1152,7 +1097,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
     "return_shipments": [{
       "parent": 5,
       "carrier": 2,
-      "email": "testing@myparcel.nl",
+      "email": "testing@sendmyparcel.be",
       "name": "Mr. Parcel",
       "options": {
         "package_type": 1,
@@ -1180,7 +1125,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2>Create unrelated return shipment</h2>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.myparcel.nl/shipments
+POST https://api.sendmyparcel.be/shipments
 HTTP/1.1
 Content-Type: application/vnd.unrelated_return_shipment+json;charset=utf-8
 User-Agent: CustomApiCall/2
@@ -1198,7 +1143,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         "label_description": "My custom description"
       },
       "carrier": 2,
-      "email": "testing@myparcel.nl",
+      "email": "testing@sendmyparcel.be",
       "name": "Test"
     }]
   }
@@ -1237,7 +1182,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.myparcel.nl/shipments/id[;id]</td>
+                            <td>https://api.sendmyparcel.be/shipments/id[;id]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -1292,7 +1237,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>Remove a shipment with id 1234.</p>
                     <p><strong>Request</strong></p>
 <pre>
-DELETE https://api.myparcel.nl/shipments/1234 HTTP/1.1
+DELETE https://api.sendmyparcel.be/shipments/1234 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -1312,7 +1257,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.myparcel.nl/return_shipments</td>
+                            <td>https://api.sendmyparcel.be/return_shipments</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -1362,7 +1307,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                         <strong>Proceed with actual request</strong><br>
                         <strong>Request</strong>
 <pre>
-POST https://api.myparcel.nl/return_shipments
+POST https://api.sendmyparcel.be/return_shipments
 User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw== </pre>
                     <p><strong>Response</strong></p>
@@ -1370,12 +1315,12 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
 {
   "data": {
     "download_url": {
-     "link": "https://api.myparcel.nl/return_shipment_labels/902223ede2f50288ecfbbd21a8c8fd7e"
+     "link": "https://api.sendmyparcel.be/return_shipment_labels/902223ede2f50288ecfbbd21a8c8fd7e"
      }
   }
 }
 </pre>
-                    <p><strong>PHP Examples</strong> <a href="https://github.com/myparcelnl/api/tree/gh-pages/interactive-examples/php/README.md" target="_blank">README</a></p>
+                    <p><strong>PHP Examples</strong> <a href="https://github.com/myparcelbe/api/tree/gh-pages/interactive-examples/php/README.md" target="_blank">README</a></p>
                     <p>If you are a PHP Developer we've included a few examples on how to call our API from your (custom) back-end. For cURL / Non-cURL PHP examples: <a href="https://github.com/myparcelnl/api/tree/gh-pages/interactive-examples/php" target="_blank">click here</a>.</p>
                     <h2 id="6_E">6.E Get Shipment</h2>
                     <h3 id="6_E_1">6.E.1 Overview</h3>
@@ -1545,7 +1490,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                     <p>
                         <strong>Request</strong>
 <pre>
-GET https://api.myparcel.nl/shipments?q=Niels&amp;status=1
+GET https://api.sendmyparcel.be/shipments?q=Niels&;status=1
 User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -1557,52 +1502,82 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "data": {
     "search_results": {
       "shipments": [{
-        "reference_identifier" : "FOO-222-BAR-42",
-        "recipient": {
-          "cc": "NL",
-          "region": "Zuid-Holland",
-          "city": "Hoofddorp",
-          "street": "Siriusdreef",
-          "number": "66",
-          "postal_code": "2132WT",
-          "person": "Mr. Parcel",
-          "phone": "0213030315",
-          "email": "testing@myparcel.nl"
-        },
-        "options": {
-          "package_type": 1,
-          "signature": 1,
-          "return": 0,
-          "insurance": {
-            "amount": 50000,
-
-        },
-        "sender": {
-          "cc": "NL",
-          "region": "Zuid-Holland",
-          "city": "Amsterdam",
-          "street": "Dorpstraat",
-          "number": "123",
-          "postal_code": "1020BC",
-          "person": "Mrs. Parcel",
-          "phone": "02012343546",
-          "email": "info@myparcel.nl"
-        },
-        "carrier": 2,
-        "status": 2,
-        "price": {
-          "amount": 535,
-          "currency": "EUR"
-        },
-        "barcode": "123456 789 012 345",
-        "created": "2017-01-31 08:00:00",
-        "modified": "2017-01-31 09:00:00"
-      }],
-      "page": 1,
-      "size": 30,
-      "results": 50
+                "id": 32879749,
+                "parent_id": null,
+                "account_id": 108164,
+                "shop_id": 18432,
+                "shipment_type": 1,
+                "recipient": {
+                    "cc": "BE",
+                    "postal_code": "2000",
+                    "city": "Purmerend",
+                    "street": "Wormerplein",
+                    "number": "16",
+                    "box_number": "",
+                    "person": "test"
+                },
+                "sender": {
+                    "cc": "BE",
+                    "postal_code": "2000",
+                    "city": "Hoofddorp",
+                    "street": "Siriusdreef",
+                    "number": "16",
+                    "number_suffix": "",
+                    "person": "MyParcel",
+                    "company": "MyParcelNL",
+                    "email": "richard@myparcel.nl",
+                    "phone": "0233030315"
+                },
+                "status": 2,
+                "options": {
+                    "package_type": 1,
+                    "signature": 0,
+                    "insurance": {
+                        "amount": 0,
+                        "currency": "EUR"
+                    },
+                    "large_format": 0,
+                    "cooled_delivery": 0,
+                    "delivery_type": 2
+                },
+                "general_settings": {
+                    "save_recipient_address": 0,
+                    "tracktrace": {
+                        "send_track_trace_emails": 1,
+                        "email_on_handed_to_courier": 1,
+                        "bcc": 1,
+                        "bcc_email": "richard@myparcel.nl",
+                        "from_address_email": "richard@myparcel.nl",
+                        "from_address_company": "MyParcel test123",
+                        "delivery_notification": 1,
+                        "carrier_email_basic_notification": 1
+                    },
+                    "delivery_notification": 1,
+                    "delivery_notification_email": [
+                        "richard@myparcel.nl"
+                    ]
+                },
+                "pickup": null,
+                "customs_declaration": null,
+                "physical_properties": null,
+                "created": "2018-05-07T00:00:00+02:00",
+                "modified": "2018-05-07T16:25:01+02:00",
+                "reference_identifier": null,
+                "created_by": 16441,
+                "modified_by": 16441,
+                "transaction_status": "unpaid",
+                "price": {
+                    "amount": 0,
+                    "currency": "EUR"
+                },
+                "barcode": "323211623959926381769040",
+                "region": "NL",
+                "payment_status": "unpaid"
+            }
+        ],
+        "results": 1
     }
-  }
+}
 }</pre>
                     <h2 id="6_F">6.F Get Shipment label</h2>
                     <h3 id="6_F_1">6.F.1 Overview </h3>
@@ -1623,7 +1598,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.myparcel.nl/shipment_labels/id[;id]</td>
+                            <td>https://api.sendmyparcel.be/shipment_labels/id[;id]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -1719,7 +1694,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p><strong>Get Shipment label</strong></p>
                     <p><strong>Request</strong></p>
 <pre>
-GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1
+GET https://api.sendmyparcel.be/shipment_labels/12 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -1732,7 +1707,7 @@ filename="123123123.pdf" Content-Type: application/pdf
                     <p><strong>Get shipment label download link</strong></p>
                     <p><strong>Request</strong></p>
 <pre>
-GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1
+GET https://api.sendmyparcel.be/shipment_labels/12 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 Accept: application/json;charset=utf-8
@@ -1743,7 +1718,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
   "data": {
     "pdfs": {
-      "url": "https://api.myparcel.nl/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
+      "url": "https://api.sendmyparcel.be/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
     }
   }
 }
@@ -1755,7 +1730,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     </p>
                     <p><strong>Request</strong></p>
 <pre>
-GET https://api.myparcel.nl/shipment_labels/2?format=A4&amp;positions=3;4 HTTP/1.1
+GET https://api.sendmyparcel.be/shipment_labels/2?format=A4&amp;positions=3;4 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -1769,7 +1744,7 @@ application/pdf (...PDF content)</pre>
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.myparcel.nl/tracktraces/id[;id]</td>
+                            <td>https://api.sendmyparcel.be/tracktraces/id[;id]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -1853,7 +1828,7 @@ application/pdf (...PDF content)</pre>
                     <h3 id="6_G_4">6.G.4 Example </h3>
                     <p><strong>Request</strong></p>
                     <pre>
-GET https://api.myparcel.nl/tracktraces/12 HTTP/1.1
+GET https://api.sendmyparcel.be/tracktraces/12 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -2024,101 +1999,98 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>POST example national shipment</p>
 <pre>
 {
-  "reference_identifier": "FOO-333-BAR-42",
-  "recipient": {
-    "cc": "NL",
-    "region": "Zuid-Holland",
-    "city": "Hoofddorp",
-    "street": "Siriusdreef",
-    "number": "66",
-    "postal_code": "2132WT",
-    "person": "Mr. Parcel",
-    "phone": "0213030315",
-    "email": "testing@myparcel.nl"
-  },
-  "options": {
-    "package_type": 1,
-    "signature": 1,
-    "return": 1,
-    "insurance": {
-      "amount": 5000,
-
-  },
-  "carrier": 2
-}
+  "data": {
+    "shipments": [
+      {
+        "recipient": {
+          "cc": "BE",
+          "postal_code": "2000",
+          "city": "Antwerpen",
+          "street": "Wormerplein",
+          "number": "16",
+          "box_number": "",
+          "person": "test"
+        },
+        "options": {
+          "package_type": 1,
+          "signature": 0,
+          "insurance": {
+            "amount": 5000,
+            "currency": "EUR"
+        },
+        "carrier": 2
+      }
 </pre>
                     <br>
                     <p>POST example national shipment b</p>
 <pre>
 {
-  "reference_identifier" : "FOO-333-BAR-42",
-  "recipient": {
-    "cc": "NL",
-    "region": "Zuid-Holland",
-    "city": "Amsterdam",
-    "street": "Dorpstraat",
-    "number": "123",
-    "postal_code": "1020BC",
-    "person": "Mrs. Parcel",
-    "phone": "02012343546",
-    "email": "info@myparcel.nl"
-  },
-  "options": {
-    "package_type": 1,
-    "signature": 1,
-    "return": 1
-  },
-  "carrier": 2
-}
+  "data": {
+    "shipments": [
+      {
+        "recipient": {
+          "cc": "BE",
+          "postal_code": "2000",
+          "city": "Antwerpen",
+          "street": "Wormerplein",
+          "number": "16",
+          "box_number": "",
+          "person": "test"
+        },
+        "options": {
+          "package_type": 1,
+          "signature": 0,
+          "insurance": {
+            "amount": 0,
+            "currency": "EUR"
+        },
+        "carrier": 2
+      }
 </pre>
                     <br>
                     <p>POST example international shipment</p>
 <pre>
 {
-  "reference_identifier" : "さいた-ᚱ	ᚾᛟ/42",
-  "recipient": {
-    "cc": "JP",
-    "region": "埼玉県",
-    "city": "さいたま市",
-    "street": "埼玉県さいたま市浦和区 常盤9－21－21",
-    "person": "Tanaka san",
-    "company": "さいたま国際キリスト教会",
-    "email": "saitamakyokai@gmail.com",
-    "phone": "0081-48-825-6637"
-  },
-  "options": {
-    "package_type": 1
-  },
-  "customs_declaration": {
-    "contents": 1,
-    "invoice": "1231235345345",
-    "weight": 3000,
-    "items": [{
-      "description": "Sample Product",
-      "amount": 10,
-      "weight": 20,
-      "item_value": {
-        "amount": 7000,
-        "currency": "EUR"
-      },
-      "classification": "0181",
-      "country": "NL"
-    }, {
-      "description": "Sample Product 2",
-      "amount": 5,
-      "weight": 1000,
-      "item_value": {
-        "amount": 1000,
-        "currency": "EUR"
-      },
-      "classification": "0181",
-      "country": "BE"
-    }]
-  },
-  "physical_properties": {
-    "weight": 4000
-  },
-  "carrier": 2
+  "data": {
+    "shipments": [
+      {
+		"reference_identifier" : "Order 1",
+        "recipient": {
+          "cc": "JP",
+          "region": "埼玉県",
+          "city": "さいたま市",
+          "street": "埼玉県さいたま市浦和区 常盤9-21-21",
+          "company": "さいたま国際キリスト教会",
+          "email": "saitamakyokai@gmail.com",
+          "phone": "0081488256637",
+          "person": "test"
+        },
+        "options": {
+          "package_type": 1
+        },
+        "customs_declaration": {
+	        "contents": 1,
+	        "weight": 3000,
+	        "items":[{
+		      "description": "Sample Product",
+		      "amount": 10,
+		      "weight": 20,
+	    		"item_value": {
+	        	"amount": 7000,
+	        	"currency": "EUR"
+	    		},
+			      "classification": "0181",
+			      "country": "NL"
+	    	  }
+    		]
+        },
+		  "physical_properties": {
+		    "weight": 4000
+		},
+        "carrier": 2
+      }
+    ]
+  }
 }
 </pre>
                     <br>
@@ -2128,33 +2100,19 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "data": {
     "shipments": [{
       "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
+        "cc": "BE",
+        "region": "Antwerpen",
+        "city": "Antwerpen",
+        "street": "Adriaan Brouwerstraat",
+        "number": "16",
+        "postal_code": "2000",
         "person": "Mr. Parcel",
         "phone": "0213030315",
-        "email": "testing@myparcel.nl"
+        "email": "testing@sendmyparcel.be"
       },
       "options": {
         "package_type": 1,
-        "delivery_type": 4,
-        "delivery_date": "2015-07-12 00:00:00",
-        "signature": 1,
-        "return": 0
-      },
-      "pickup": {
-        "location_code": "207500",
-        "postal_code": "1100",
-        "street": "Burgemeester van Stamplein",
-        "city": "Brussel",
-        "number": "270",
-        "location_name": "Albert Heijn"
-      },
-      "physical_properties": {
-        "weight": 3000
+        "delivery_type": 4
       },
       "carrier": 2
     }]
@@ -2162,95 +2120,85 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 }
 </pre>
                     <br>
-                    <p>GET example national shipment a</p>
+                    <p>GET example national shipment</p>
 <pre>
 {
-
-  "reference_identifier" : "FOO-222-BAR-42",
-  "recipient": {
-    "cc": "NL",
-    "region": "Zuid-Holland",
-    "city": "Hoofddorp",
-    "street": "Siriusdreef",
-    "number": "66",
-    "postal_code": "2132WT",
-    "person": "Mr. Parcel",
-    "phone": "0213030315",
-    "email": "testing@myparcel.nl"
-  },
-  "options": {
-    "package_type": 1,
-    "signature": 1,
-    "return": 1,
-    "insurance": {
-      "amount": 50000,
-      "currency": "EUR"
+    "data": {
+        "shipments": [
+            {
+                "id": 32904375,
+                "parent_id": null,
+                "account_id": 108164,
+                "shop_id": 18432,
+                "shipment_type": 1,
+                "recipient": {
+                    "cc": "BE",
+                    "region": "Antwerpen",
+                    "city": "Antwerpen",
+                    "street": "Adriaan Brouwerstraat",
+                    "number": "16",
+                    "box_number": "12",
+                    "postal_code": "2000",
+                    "person": "Mr. Parcel",
+                    "phone": "0213030315",
+                    "email": "testing@sendmyparcel.be"
+                },
+                "sender": {
+                    "cc": "BE",
+                    "postal_code": "2000",
+                    "city": "Hoofddorp",
+                    "street": "Siriusdreef",
+                    "number": "16",
+                    "number_suffix": "",
+                    "person": "MyParcel",
+                    "company": "MyParcelNL",
+                    "email": "richard@myparcel.nl",
+                    "phone": "0233030315"
+                },
+                "status": 1,
+                "options": {
+                    "package_type": 1,
+                    "delivery_type": 4
+                },
+                "general_settings": {
+                    "save_recipient_address": 0,
+                    "tracktrace": {
+                        "send_track_trace_emails": 1,
+                        "email_on_handed_to_courier": 1,
+                        "bcc": 1,
+                        "bcc_email": "richard@myparcel.nl",
+                        "from_address_email": "richard@myparcel.nl",
+                        "from_address_company": "MyParcel test123",
+                        "delivery_notification": 1,
+                        "carrier_email_basic_notification": 1
+                    },
+                    "delivery_notification": 1,
+                    "delivery_notification_email": [
+                        "richard@myparcel.nl"
+                    ]
+                },
+                "pickup": null,
+                "customs_declaration": null,
+                "physical_properties": null,
+                "created": "2018-05-08T00:00:00+02:00",
+                "modified": "2018-05-08T12:51:03+02:00",
+                "reference_identifier": null,
+                "created_by": 16441,
+                "modified_by": 16441,
+                "transaction_status": "unpaid",
+                "barcode": "",
+                "price": {
+                    "amount": 0,
+                    "currency": "EUR"
+                },
+                "region": "NL",
+                "payment_status": "unpaid"
+            }
+        ],
+        "results": 1817
     }
-  },
-  "sender": {
-    "cc": "NL",
-    "region": "Zuid-Holland",
-    "city": "Amsterdam",
-    "street": "Dorpstraat",
-    "number": "123",
-    "postal_code": "1020BC",
-    "person": "Mrs. Parcel",
-    "phone": "02012343546",
-    "email": "info@myparcel.nl"
-  },
-  "carrier": 2,
-  "status": 1,
-  "price": {
-    "amount": 535,
-    "currency": "EUR"
-  },
-  "barcode": "3SMYPA77773333",
-  "created": "2017-01-31 08:00:00",
-  "modified": "2017-01-31 09:00:00"
-}
-</pre>
-                    <br>
-                    <p>GET example national shipment b</p>
-<pre>
-{
-  "recipient": {
-    "cc": "NL",
-    "region": "Zuid-Holland",
-    "city": "Amsterdam",
-    "street": "Dorpstraat",
-    "number": "123",
-    "postal_code": "1020BC",
-    "person": "Mrs. Parcel",
-    "phone": "02012343546",
-    "email": "info@myparcel.nl"
-  },
-  "options": {
-    "package_type": 1,
-    "signature": 1,
-    "return": 1
-  },
-  "sender": {
-    "cc": "NL",
-    "region": "Zuid-Holland",
-    "city": "Hoofddorp",
-    "street": "Siriusdreef",
-    "number": "66",
-    "postal_code": "2132WT",
-    "person": "Mr. Parcel",
-    "phone": "0213030315",
-    "email": "testing@myparcel.nl"
-  },
-  "carrier": 2,
-  "status": 2,
-  "price": {
-    "amount": 535,
-    "currency": "EUR"
-  },
-  "barcode": "563716278632716817283",
-  "created": "2017-01-31 08:00:00",
-  "modified": "2017-01-31 09:00:00"
-}
-</pre>
+}</pre>
+
                     <h2 id="7_B">7.B Address Object Definition</h2>
                     <h3 id="7_B_1">7.B.1 Overview</h3>
                     <p>This is the adress object</p>
@@ -2269,7 +2217,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>
                         <strong>postal_code</strong><br>
                         Data type: <a href="#string">string</a><br>
-                        Required: Yes for NL and EU destinations except for IE.<br>
+                        Required: Yes for BE and EU destinations except for IE.<br>
                         The address postal code.
                     </p>
                     <p>
@@ -2293,14 +2241,14 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>
                         <strong>number</strong><br>
                         Data type: <a href="#string">string</a><br>
-                        Required: Yes for NL.<br>
-                        Street number.
+                        Required: Yes for BE.<br>
+                        House number.
                     </p>
                     <p>
-                        <strong>number_suffix</strong><br>
+                        <strong>box_number</strong><br>
                         Data type: <a href="#string">string</a><br>
                         Required: no<br>
-                        Street number suffix.
+                        Additional house number.
                     </p>
                     <p>
                         <strong>person</strong><br>
@@ -2330,30 +2278,31 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>Example a</p>
 <pre>
 {
-  "cc": "NL",
-  "region": "Zuid-Holland",
-  "city": "Hoofddorp",
-  "street": "Siriusdreef",
-  "number": "66",
-  "postal_code": "2132WT",
-  "person": "Mr. Parcel",
-  "phone": "0213030315",
-  "email": "parcel@myparcel.nl"
+    "cc": "BE",
+    "region": "Antwerpen",
+    "city": "Antwerpen",
+    "street": "Adriaan Brouwerstraat",
+    "number": "16",
+    "postal_code": "2000",
+    "person": "Mr. Parcel",
+    "phone": "0213030315",
+    "email": "testing@sendmyparcel.be"
 }
 </pre>
                     <p>Example b</p>
 <pre>
 {
-  "cc": "NL",
-  "region": "Zuid-Holland",
-  "city": "Hoofddorp",
-  "street": "Siriusdreef",
-  "number": "66",
-  "number_suffix": "68",
-  "postal_code": "2132WT",
-  "person": "Mrs. Parcel",
-  "phone": "0213030315",
-  "email": "parcel@myparcel.nl"
+    "cc": "BE",
+    "region": "Antwerpen",
+    "city": "Antwerpen",
+    "street": "Adriaan Brouwerstraat",
+    "number": "16",
+    "box_number": "12",
+    "box_number": "12",
+    "postal_code": "2000",
+    "person": "Mr. Parcel",
+    "phone": "0213030315",
+    "email": "testing@sendmyparcel.be"
 }
 </pre>
                     <p>Example c</p>
@@ -2373,29 +2322,29 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>Example d</p>
 <pre>
 {
-  "cc": "NL",
-  "region": "Zuid-Holland",
-  "city": "Zoetermeer",
-  "street": "Louiarmstrongrode",
-  "number": "18",
-  "postal_code": "2717NH",
-  "person": "Pato otap",
-  "phone": "0790880808",
-  "email": "pato@otap.nl"
+    "cc": "BE",
+    "region": "Antwerpen",
+    "city": "Antwerpen",
+    "street": "Adriaan Brouwerstraat",
+    "number": "16",
+    "postal_code": "2000",
+    "person": "Mr. Parcel",
+    "phone": "0213030315",
+    "email": "testing@sendmyparcel.be"
 }
 </pre>
                     <p>Example e</p>
 <pre>
 {
-  "cc": "NL",
-  "region": "Zuid-Holland",
-  "city": "Hoofddorp",
-  "street": "Siriusdreef",
-  "number": "66",
-  "person": "Jan Peter",
-  "company": "MyParcel B.V.",
-  "email": "janpeter@bedrijven.nl",
-  "phone": "0203030315"
+    "cc": "BE",
+    "region": "Antwerpen",
+    "city": "Antwerpen",
+    "street": "Adriaan Brouwerstraat",
+    "number": "16",
+    "person": "Mr. Parcel",
+    "company" "Renault B.V."
+    "phone": "0213030315",
+    "email": "testing@sendmyparcel.be"
 }
 </pre>
                     <p>Example i</p>
@@ -2423,10 +2372,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "email",
   "phone",
   "groups""124",
-  "nl",
-  "Hoofddorp",
-  "Siriusdreef",
-  "66",
+  "be",
+  "Antwerpen",
+  "Adriaan Brouwerstraat",
+  "16",
   "Claus Stuter",
   "MyParcel B.V.",
   "claus@stuter.nl",
@@ -2444,162 +2393,32 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "person",
   "company",
   "email",
-  "phone""nl",
-  "2132WT",
-  "Hoofddorp",
-  "Siriusdreef",
-  "66",
+  "phone""be",
+  "2000",
+  "Antwerpen",
+  "Adriaan Brouwerstraat",
+  "16",
   "Mrs. Parcel",
   "MyParcel",
-  "parcel@myparcel.nl",
+  "parcel@sendmyparcel.be",
   "0213030315"
 }</pre>
                     <p>Example CSV c</p>
                     <pre>
 {
-  "nl",
-  "2132WT",
-  "Hoofddorp",
-  "Siriusdreef",
-  "66",
+  "be",
+  "2000",
+  "Antwerpen",
+  "Adriaan Brouwerstraat",
+  "16",
   "Arie Test",
   "MyParcel",
-  "arie@myparcel.nl",
+  "arie@sendmyparcel.be",
   "0213030319"
 }</pre>
-                    <h2 id="7_C">7.C ShipmentOptions Object Definition</h2>
+
+                    <h2 id="7_C">7.C ShipmentGeneralSettings Object Definition</h2>
                     <h3 id="7_C_1">7.C.1 Overview</h3>
-                    <p>
-                        This object contains the shipment options and is embedded in <a href="#7_A">Shipment</a>.options and <a href="#7_I">ReturnShipment</a>.options.
-                    </p>
-                    <p>
-                        <strong>package_type</strong><br>
-                        Data type: <a href="#package_type">package_type</a><br>
-                        Required: yes<br>
-                        The package type. For MyParcel BE only package type 1 (package) is allowed.
-                    </p>
-                    <p>
-                        <strong>delivery_type</strong><br>
-                        Data type: <a href="#delivery_type">delivery_type</a><br>
-                        Required: Yes if delivery_date has been specified.<br>
-                        The delivery type for the package.
-                    </p>
-                    <p>
-                        <strong>delivery_date</strong><br>
-                        Data type: <a href="#timestamp">timestamp</a><br>
-                        Required: Yes if delivery type has been specified.<br>
-                        The delivery date time for this shipment.
-                    </p>
-                    <p>
-                        <strong>delivery_remark</strong><br>
-                        Data type: <a href="#string">string</a><br>
-                        Required: No.<br>
-                        The delivery remark.
-                    </p>
-                    <p>
-                        <strong>signature</strong><br>
-                        Data type: <a href="#boolean">boolean</a><br>
-                        Required: No.<br>
-                        Package must be signed for.
-                    </p>
-                    <p>
-                        <strong>return</strong><br>
-                        Data type: <a href="#boolean">boolean</a><br>
-                        Required: No.<br>
-                        Return the package if the recipient is not home.
-                    </p>
-                    <p>
-                        <strong>insurance</strong><br>
-                        Data type: <a href="#price">price</a><br>
-                        Required: No.<br>
-                        Insurance price for the package.
-                    </p>
-                    <p>
-                        <strong>label_description</strong><br>
-                        Data type: <a href="#string">string</a><br>
-                        Required: No.<br>
-                        This description will appear on the shipment label.<strong>
-                            Note: This will be overridden
-                            for return shipment by the following: Retour – 3SMYPAXXXXXX
-                        </strong>
-                    </p>
-                    <h3 id="7_C_2">7.C.2 Example</h3>
-                    <p>Example a</p>
-<pre>
-{
-  "package_type": 1,
-  "signature": 1,
-  "return": 1,
-  "insurance": {
-    "amount": 5000,
-    "currency": "EUR"
-  },
-  "label_description": "My custom description"
-}
-</pre>
-                    <p>Example b</p>
-<pre>
-  {
-    "package_type": 1,
-    "signature": 1,
-    "return": 0,
-    "insurance": {
-      "amount": 50,
-      "currency": "EUR"
-    },
-    "label_description": "My custom description"
-  }
-</pre>
-                    <p>Example c</p>
-<pre>
-{
-  "package_type": 1,
-  "signature": 1,
-  "return": 1,
-  "insurance": {
-    "amount": 50000,
-    "currency": "EUR"
-  }
-}
-</pre>
-                    <p>Example d</p>
-<pre>
-{
-  "package_type": 1,
-  "signature": 1,
-  "return": 1
-}
-</pre>
-                    <p>Example return shipment options</p>
-<pre>
-{
-  "package_type": 1,
-  "signature": 1,
-  "return": 0,
-  "insurance": {
-    "amount": 50,
-    "currency": "EUR"
-  }
-}
-</pre>
-                    <p>Example international shipment</p>
-<pre>
-{
-  "package_type": 1
-}
-</pre>
-                    <p>Example pickup</p>
-<pre>
-{
-  "package_type": 1,
-  "delivery_type": 4,
-  "delivery_date": "2017-01-12 16:30:00",
-  "signature": 1,
-  "return": 0
-}
-</pre>
-                    <h2 id="7_D">7.D ShipmentGeneralSettings Object Definition</h2>
-                    <h3 id="7_D_1">7.D.1 Overview</h3>
                     <p>
                         You can specify shipment general settings with this object. It is embedded in the <a href="#7_A">Shipment</a>.general_settings
                         column.
@@ -2627,17 +2446,17 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Required: No.<br>
                         This email addresses that will receive a delivery notification.
                     </p>
-                    <h3 id="7_D_2">7.D.2 Example</h3>
+                    <h3 id="7_C_2">7.C.2 Example</h3>
                     <p>Example</p>
 <pre>
 {
   "save_recipient_address": 1,
   "delivery_notification": 1,
-  "delivery_notification_email": "testing@myparcel.nl"
+  "delivery_notification_email": "testing@sendmyparcel.be"
 }
 </pre>
-                    <h2 id="7_E">7.E CustomsDeclaration Object Definition</h2>
-                    <h3 id="7_E_1">7.E.1 Overview</h3>
+                    <h2 id="7_D">7.D CustomsDeclaration Object Definition</h2>
+                    <h3 id="7_D_1">7.D.1 Overview</h3>
                     <p>
                         This object is embedded in the <a href="#7_A">Shipment</a> object for global shipments and is mandatory for
                         non-EU
@@ -2670,7 +2489,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Required: Yes.<br>
                         An <a href="#array">array</a> containing <a href="#7_F">CustomsItem</a> objects with description for each item in the package.
                     </p>
-                    <h3 id="7_E_2">7.E.2 Example</h3>
+                    <h3 id="7_D_2">7.D.2 Example</h3>
                     <p>POST example a</p>
 <pre>
 {
@@ -2889,7 +2708,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "parent": 123456,
   "carrier": 2,
-  "email": "testing@myparcel.nl",
+  "email": "testing@sendmyparcel.be",
   "name": "Mr. Parcel",
   "options": {
     "package_type": 1,
@@ -2940,7 +2759,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 <pre>
 {
   "carrier": 2,
-  "email": "testing@myparcel.nl",
+  "email": "testing@sendmyparcel.be",
   "name": "Mr. Parcel",
   "options": {
     "package_type": 1,
@@ -3291,7 +3110,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.myparcel.nl/delivery_options</td>
+                            <td>https://api.myparcel.be/delivery_options</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -3331,7 +3150,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                             <td>dropoff_days = <a href="#weekday_digit">weekday_digit</a></td>
                         </tr>
                         <tr>
-                            <td>monday_delivery = <a href="#boolean">boolean</a></td>
+                            <td>saturday_delivery = <a href="#boolean">boolean</a></td>
                         </tr>
                         <tr>
                             <td>dropoff_delay = <a href="#integer">integer</a></td>
@@ -3402,7 +3221,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <strong>cc</strong><br>
                         Data type: <a href="#country_code">country_code</a><br>
                         Required: yes<br>
-                        The country code for which to fetch the delivery options. This endpoint can only be used in the Netherlands or Belgium ( cc=NL or cc=BE ).
+                        The country code for which to fetch the delivery options. This endpoint can only be used in Belgium ( cc=BE ).
                     </p>
                     <p>
                         <strong>postal_code</strong><br>
@@ -3450,12 +3269,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         This options allows the <strong>Merchant</strong> to set the days she normally goes to bpost to
                         hand in her parcels. By default Saturday and Sunday are excluded.
                     </p>
-                    <p id="monday_delivery">
-                        <strong>monday_delivery</strong><br>
+                    <p id="saturday_delivery">
+                        <strong>saturday_delivery</strong><br>
                         Data type: <a href="#boolean">boolean</a><br>
                         Required: no<br>
-                        Monday delivery is only possible when the package is delivered before 15.00 on Saturday at the designated bpost locations. Click <a href="https://blog.myparcel.nl/maandagbezorging" target="_blank">here</a> for more information concerning Monday delivery and the locations.<br>
-                        <strong>Note: To activate Monday delivery, value 6 must be given with <a href="#dropoff_days">dropoff_days</a>, value 1 must be given by <a href="#monday_delivery">monday_delivery</a>. And on Saturday the <a href="#cutoff_time">cutoff_time</a> must be before 15:00 (14:30 recommended) so that Monday will be shown.</strong>
+                        Saturday delivery is only possible when the package is delivered before 15.00 on Friday at the designated bpost locations.<br>
+                        <strong>Note: To activate Saturday delivery, value 6 must be given with <a href="#dropoff_days">dropoff_days</a>, value 1 must be given by <a href="#saturday_delivery">saturday_delivery</a>. And on Friday the <a href="#cutoff_time">cutoff_time</a> must be before 15:00 (14:30 recommended) so that Saturday will be shown.</strong>
                     </p>
                     <p>
                         <strong>dropoff_delay</strong><br>
@@ -3498,11 +3317,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     </p>
                     <h3 id="8_A_4">8.A.4 Example</h3>
                     <p>
-                        <strong>Get delivery options for 2132WT, 66 for bpost</strong><br>
+                        <strong>Get delivery options for 2000, 16 for bpost</strong><br>
                         <strong>Request</strong>
                     </p>
                     <pre>
-GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=2 HTTP/1.1
+GET https://api.myparcel.be/delivery_options?cc=BEpostal_code=2000&amp;number=16&carrier=2 HTTP/1.1
 User-Agent: CustomApiCall/2
 </pre>
                     <p><strong>Response</strong></p>
@@ -3510,74 +3329,163 @@ User-Agent: CustomApiCall/2
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
   "data": {
-    "delivery": [],
-    "pickup": [{
-      "date": "2017-02-01",
-      "time": [],
-      "location": "Staples Office Centre",
-      "street": "Jacobus Spijkerdreef",
-      "number": "10",
-      "postal_code": "1000",
-      "city": "Brussel",
-      "comment": "Dit is een Business Point.",
-      "opening_hours": {
-        "monday": ["08:00-18:30"],
-        "tuesday": ["08:00-18:30"],
-        "wednesday": ["08:00-18:30"],
-        "thursday": ["08:00-18:30"],
-        "friday": ["08:00-18:30"],
-        "saturday": ["08:00-17:00"],
-        "sunday": []
-      },
-      "latitude": "52.286582",
-      "longitude": "4.682377",
-      "location_code": "173187"
-    }
-}]
+    "delivery": [
+            {
+                "date": "2018-05-17",
+                "time": [
+                    {
+                        "start": "08:00",
+                        "end": "17:00",
+                        "price": {
+                            "currency": "EUR",
+                            "amount": 0
+                        },
+                        "price_comment": "standard",
+                        "comment": "",
+                        "type": 2
+                    }
+                ]
+            },
+            {
+                "date": "2018-05-18",
+                "time": [
+                    {
+                        "start": "08:00",
+                        "end": "17:00",
+                        "price": {
+                            "currency": "EUR",
+                            "amount": 0
+                        },
+                        "price_comment": "standard",
+                        "comment": "",
+                        "type": 2
+                    }
+                ]
+            }
+    ],
+    "pickup": [
+        {
+            "date": "2018-05-08",
+            "time": [
+                {
+                    "start": "16:00",
+                    "type": 2,
+                    "price": {
+                        "amount": 0,
+                        "currency": "EUR"
+                    }
+                }
+            ],
+            "location": "PRESS SH ANSELMO ANTWERPEN",
+            "street": "ANSELMOSTRAAT",
+            "number": "42",
+            "postal_code": "2018",
+            "city": "ANTWERPEN",
+            "cc": "BE",
+            "start_time": "11:00",
+            "price": 0,
+            "price_comment": "",
+            "comment": "",
+            "phone_number": "",
+            "opening_hours": {
+                "monday": [
+                    "7:00 - 18:30"
+                ],
+                "tuesday": [
+                    "7:00 - 18:30"
+                ],
+                "wednesday": [
+                    "7:00 - 18:30"
+                ],
+                "thursday": [
+                    "7:00 - 18:30"
+                ],
+                "friday": [
+                    "7:00 - 18:30"
+                ],
+                "saturday": [
+                    "7:30 - 16:00"
+                ],
+                "sunday": []
+            },
+            "distance": "894",
+            "latitude": "51.2071",
+            "longitude": "4.40363",
+            "location_code": "822030",
+            "retail_network_id": "",
+            "holiday": []
+        }
+    ]
 }
 </pre>
                     <p>
                         <strong>
-                            Get delivery options for 2132WT, 66 for bpost cutoff time 16h00, dropoff days
-                            Mon - Sat, dropoff delay is zero, delivery window is 2 days and morning is excluded as delivery
+                            Get delivery options for 2000, 16 for bpost cutoff time 16h00, dropoff days
+                            Mon - Fri, dropoff delay is zero, delivery window is 2 days and morning is excluded as delivery
                             type
                         </strong><br>
                         <br>
                         <strong>Request</strong>
                     </p>
                     <pre>
-GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=2&amp;cutoff_time=16:00:00&amp;dropoff_days=1;2;3;4;5;6&amp;monday_delivery=1&amp;dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1
+GET https://api.sendmyparcel.be/delivery_options?cc=BE&postal_code=2000&amp;number=16&amp;carrier=2&amp;cutoff_time=16:00:00&dropoff_days=1;2;3;4;5;6&amp;saturday_delivery=1&dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1
 User-Agent: CustomApiCall/2
 </pre>
                     <p><strong>Response</strong></p>
 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
-{
-  "data": {
-    "delivery": [],
-    "pickup": [{
-      "date": "2017-02-01",
-      "time": [],
-      "location": "Staples Office Centre",
-      "street": "Jacobus Spijkerdreef",
-      "number": "10",
-      "postal_code": "1000",
-      "city": "Brussel",
-      "comment": "Dit is een Business Point.",
-      "opening_hours": {
-        "monday": ["08:00-18:30"],
-        "tuesday": ["08:00-18:30"],
-        "wednesday": ["08:00-18:30"],
-        "thursday": ["08:00-18:30"],
-        "friday": ["08:00-18:30"],
-        "saturday": ["08:00-17:00"],
-        "sunday": []
-      },
-      "latitude": "52.286582",
-      "longitude": "4.682377",
-      "location_code": "173187"
-    }
-}]
+[
+            {
+                "date": "2018-05-08",
+                "time": [
+                    {
+                        "start": "16:00",
+                        "type": 2,
+                        "price": {
+                            "amount": 0,
+                            "currency": "EUR"
+                        }
+                    }
+                ],
+                "location": "PRESS SH ANSELMO ANTWERPEN",
+                "street": "ANSELMOSTRAAT",
+                "number": "42",
+                "postal_code": "2018",
+                "city": "ANTWERPEN",
+                "cc": "BE",
+                "start_time": "11:00",
+                "price": 0,
+                "price_comment": "",
+                "comment": "",
+                "phone_number": "",
+                "opening_hours": {
+                    "monday": [
+                        "7:00 - 18:30"
+                    ],
+                    "tuesday": [
+                        "7:00 - 18:30"
+                    ],
+                    "wednesday": [
+                        "7:00 - 18:30"
+                    ],
+                    "thursday": [
+                        "7:00 - 18:30"
+                    ],
+                    "friday": [
+                        "7:00 - 18:30"
+                    ],
+                    "saturday": [
+                        "7:30 - 16:00"
+                    ],
+                    "sunday": []
+                },
+                "distance": "894",
+                "latitude": "51.2071",
+                "longitude": "4.40363",
+                "location_code": "822030",
+                "retail_network_id": "",
+                "holiday": []
+            }]
 }
 
 </pre>
@@ -3883,7 +3791,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.myparcel.nl/webhook_subscriptions</td>
+                            <td>https://api.sendmyparcel.be/webhook_subscriptions</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -3931,7 +3839,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <h3 id="10_A_3">10.A.3 Example</h3>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.myparcel.nl/webhook_subscriptions HTTP/1.1
+POST https://api.sendmyparcel.be/webhook_subscriptions HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 Content-Type:application/json; charset=utf-8
@@ -3967,7 +3875,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.myparcel.nl/webhook_subscriptions/id[;id]</td>
+                            <td>https://api.sendmyparcel.be/webhook_subscriptions/id[;id]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -4021,7 +3929,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h3 id="10_B_4">10.B.4 Example</h3>
                     <p><strong>Request</strong></p>
 <pre>
-DELETE https://api.myparcel.nl/webhook_subscriptions/1 HTTP/1.1
+DELETE https://api.sendmyparcel.be/webhook_subscriptions/1 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -4038,7 +3946,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.myparcel.nl/webhook_subscriptions/id[;id]</td>
+                            <td>https://api.sendmyparcel.be/webhook_subscriptions/id[;id]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -4090,7 +3998,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <h3 id="10_C_4">10.C.4 Example</h3>
                     <p><strong>Request</strong></p>
 <pre>
-GET https://api.myparcel.nl/webhook_subscriptions/12 HTTP/1.1
+GET https://api.sendmyparcel.be/webhook_subscriptions/12 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
