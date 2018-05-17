@@ -1045,7 +1045,6 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 "city":"Antwerpen",
                 "region":"België",
                 "street":"Adriaan Brouwerstraat 12",
-                "street_additional_info":"",
                 "person":"Mr. Parcel"
             },
             "pickup":{
@@ -2230,13 +2229,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <strong>street</strong><br>
                         Data type: <a href="#string">string</a><br>
                         Required: yes.<br>
-                        The address street name.
-                    </p>
-                    <p>
-                        <strong>street_additional_info</strong><br>
-                        Data type: <a href="#string">string</a><br>
-                        Required: no.<br>
-                        Additional information for the street that should not be included in the street field.
+                        The address street name max 40 characters.
                     </p>
                     <p>
                         <strong>number</strong><br>
