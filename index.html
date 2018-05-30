@@ -1031,7 +1031,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2>Create shipment with BE pickup location</h2>
                     <p><strong>Request</strong></p>
                     <pre>
-POST https://api.myparcel.nl/shipments HTTP/1.1
+POST https://api.sendmyparcel.be/shipments HTTP/1.1
 Content-Type:application/vnd.shipment+json; charset=utf-8
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
@@ -1087,7 +1087,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2>Create related return shipment</h2>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.myparcel.nl/shipments HTTP/1.1
+POST https://api.sendmyparcel.be/shipments HTTP/1.1
 Content-Type:application/vnd.return_shipment+json;charset=utf-8
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
@@ -1337,7 +1337,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.myparcel.nl/shipments/[id[;id]]</td>
+                            <td>https://api.sendmyparcel.be/shipments/[id[;id]]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -3081,7 +3081,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>Example</p>
 <pre>
 {
-  "url": "https://api.myparcel.nl/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
+  "url": "https://api.sendmyparcel.be/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
 }
 </pre>
                     <h1 id="8">8. Delivery options</h1>
@@ -3103,7 +3103,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.myparcel.be/delivery_options</td>
+                            <td>https://api.sendmyparcel.be/delivery_options</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -3314,7 +3314,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <strong>Request</strong>
                     </p>
                     <pre>
-GET https://api.myparcel.be/delivery_options?cc=BEpostal_code=2000&amp;number=16&carrier=2 HTTP/1.1
+GET https://api.sendmyparcel.be/delivery_options?cc=BEpostal_code=2000&amp;number=16&carrier=2 HTTP/1.1
 User-Agent: CustomApiCall/2
 </pre>
                     <p><strong>Response</strong></p>
