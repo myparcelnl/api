@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-us">
 <head>
     <meta charset="UTF-8" />
@@ -53,7 +53,7 @@
                 <div>
                     <h1 id="1">1. Requests</h1>
                     <h2 id="1_A">1.A Base URL</h2>
-                    <p>BaseURL: <strong>https://api.sendmyparcel.be</strong></p>
+                    <p>BaseURL: <strong>https://api.myparcel.nl</strong></p>
                     <h2 id="1_B">1.B User-Agent</h2>
                     <p>
                       To give us insight that you use the API documentation, you should always send an User-Agent in your header. If you do not use a known CMS system, use the following header:<br>
@@ -102,10 +102,10 @@
                     <p>Example of a 200 Status code in our API (you can try this in your browser, then you know our API is online)</p>
                         <strong>Request:</strong>
 <pre>
-GET https://api.sendmyparcel.be/
+GET https://api.myparcel.nl/
 Request Headers (example!):
 GET / HTTP/1.1
-Host: api.sendmyparcel.be
+Host: api.myparcel.nl
 Connection: keep-alive
 Pragma: no-cache
 Cache-Control: no-cache
@@ -824,7 +824,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.sendmyparcel.be/shipments</td>
+                            <td>https://api.myparcel.nl/shipments</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -913,7 +913,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                         <h2>Create national shipments</h2>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.sendmyparcel.be/shipments HTTP/1.1
+POST https://api.myparcel.nl/shipments HTTP/1.1
 Content-Type:application/vnd.shipment+json;charset=utf-8
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
@@ -962,7 +962,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <h2>Create International shipment</h2>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.sendmyparcel.be/shipments HTTP/1.1
+POST https://api.myparcel.nl/shipments HTTP/1.1
 Content-Type:application/vnd.shipment+json; charset=utf-8
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
@@ -1031,7 +1031,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2>Create shipment with BE pickup location</h2>
                     <p><strong>Request</strong></p>
                     <pre>
-POST https://api.sendmyparcel.be/shipments HTTP/1.1
+POST https://api.myparcel.nl/shipments HTTP/1.1
 Content-Type:application/vnd.shipment+json; charset=utf-8
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
@@ -1087,7 +1087,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2>Create related return shipment</h2>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.sendmyparcel.be/shipments HTTP/1.1
+POST https://api.myparcel.nl/shipments HTTP/1.1
 Content-Type:application/vnd.return_shipment+json;charset=utf-8
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
@@ -1124,7 +1124,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h2>Create unrelated return shipment</h2>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.sendmyparcel.be/shipments
+POST https://api.myparcel.nl/shipments
 HTTP/1.1
 Content-Type: application/vnd.unrelated_return_shipment+json;charset=utf-8
 User-Agent: CustomApiCall/2
@@ -1181,7 +1181,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.sendmyparcel.be/shipments/id[;id]</td>
+                            <td>https://api.myparcel.nl/shipments/id[;id]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -1236,7 +1236,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>Remove a shipment with id 1234.</p>
                     <p><strong>Request</strong></p>
 <pre>
-DELETE https://api.sendmyparcel.be/shipments/1234 HTTP/1.1
+DELETE https://api.myparcel.nl/shipments/1234 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -1256,7 +1256,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.sendmyparcel.be/return_shipments</td>
+                            <td>https://api.myparcel.nl/return_shipments</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -1306,7 +1306,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                         <strong>Proceed with actual request</strong><br>
                         <strong>Request</strong>
 <pre>
-POST https://api.sendmyparcel.be/return_shipments
+POST https://api.myparcel.nl/return_shipments
 User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw== </pre>
                     <p><strong>Response</strong></p>
@@ -1314,7 +1314,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
 {
   "data": {
     "download_url": {
-     "link": "https://api.sendmyparcel.be/return_shipment_labels/902223ede2f50288ecfbbd21a8c8fd7e"
+     "link": "https://api.myparcel.nl/return_shipment_labels/902223ede2f50288ecfbbd21a8c8fd7e"
      }
   }
 }
@@ -1337,7 +1337,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.sendmyparcel.be/shipments/[id[;id]]</td>
+                            <td>https://api.myparcel.nl/shipments/[id[;id]]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -1489,7 +1489,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                     <p>
                         <strong>Request</strong>
 <pre>
-GET https://api.sendmyparcel.be/shipments?q=Niels&;status=1
+GET https://api.myparcel.nl/shipments?q=Niels&;status=1
 User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -1597,7 +1597,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.sendmyparcel.be/shipment_labels/id[;id]</td>
+                            <td>https://api.myparcel.nl/shipment_labels/id[;id]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -1693,7 +1693,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p><strong>Get Shipment label</strong></p>
                     <p><strong>Request</strong></p>
 <pre>
-GET https://api.sendmyparcel.be/shipment_labels/12 HTTP/1.1
+GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -1706,7 +1706,7 @@ filename="123123123.pdf" Content-Type: application/pdf
                     <p><strong>Get shipment label download link</strong></p>
                     <p><strong>Request</strong></p>
 <pre>
-GET https://api.sendmyparcel.be/shipment_labels/12 HTTP/1.1
+GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 Accept: application/json;charset=utf-8
@@ -1717,7 +1717,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
   "data": {
     "pdfs": {
-      "url": "https://api.sendmyparcel.be/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
+      "url": "https://api.myparcel.nl/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
     }
   }
 }
@@ -1729,7 +1729,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     </p>
                     <p><strong>Request</strong></p>
 <pre>
-GET https://api.sendmyparcel.be/shipment_labels/2?format=A4&amp;positions=3;4 HTTP/1.1
+GET https://api.myparcel.nl/shipment_labels/2?format=A4&amp;positions=3;4 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -1743,7 +1743,7 @@ application/pdf (...PDF content)</pre>
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.sendmyparcel.be/tracktraces/id[;id]</td>
+                            <td>https://api.myparcel.nl/tracktraces/id[;id]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -1827,7 +1827,7 @@ application/pdf (...PDF content)</pre>
                     <h3 id="6_G_4">6.G.4 Example </h3>
                     <p><strong>Request</strong></p>
                     <pre>
-GET https://api.sendmyparcel.be/tracktraces/12 HTTP/1.1
+GET https://api.myparcel.nl/tracktraces/12 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -3081,7 +3081,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <p>Example</p>
 <pre>
 {
-  "url": "https://api.sendmyparcel.be/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
+  "url": "https://api.myparcel.nl/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
 }
 </pre>
                     <h1 id="8">8. Delivery options</h1>
@@ -3103,7 +3103,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.sendmyparcel.be/delivery_options</td>
+                            <td>https://api.myparcel.nl/delivery_options</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -3314,7 +3314,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <strong>Request</strong>
                     </p>
                     <pre>
-GET https://api.sendmyparcel.be/delivery_options?cc=BEpostal_code=2000&amp;number=16&carrier=2 HTTP/1.1
+GET https://api.myparcel.nl/delivery_options?cc=BEpostal_code=2000&amp;number=16&carrier=2 HTTP/1.1
 User-Agent: CustomApiCall/2
 </pre>
                     <p><strong>Response</strong></p>
@@ -3421,7 +3421,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         <strong>Request</strong>
                     </p>
                     <pre>
-GET https://api.sendmyparcel.be/delivery_options?cc=BE&postal_code=2000&amp;number=16&amp;carrier=2&amp;cutoff_time=16:00:00&dropoff_days=1;2;3;4;5;6&amp;saturday_delivery=1&dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1
+GET https://api.myparcel.nl/delivery_options?cc=BE&postal_code=2000&amp;number=16&amp;carrier=2&amp;cutoff_time=16:00:00&dropoff_days=1;2;3;4;5;6&amp;saturday_delivery=1&dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1
 User-Agent: CustomApiCall/2
 </pre>
                     <p><strong>Response</strong></p>
@@ -3784,7 +3784,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.sendmyparcel.be/webhook_subscriptions</td>
+                            <td>https://api.myparcel.nl/webhook_subscriptions</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -3832,7 +3832,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <h3 id="10_A_3">10.A.3 Example</h3>
                     <p><strong>Request</strong></p>
 <pre>
-POST https://api.sendmyparcel.be/webhook_subscriptions HTTP/1.1
+POST https://api.myparcel.nl/webhook_subscriptions HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 Content-Type:application/json; charset=utf-8
@@ -3868,7 +3868,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.sendmyparcel.be/webhook_subscriptions/id[;id]</td>
+                            <td>https://api.myparcel.nl/webhook_subscriptions/id[;id]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -3922,7 +3922,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <h3 id="10_B_4">10.B.4 Example</h3>
                     <p><strong>Request</strong></p>
 <pre>
-DELETE https://api.sendmyparcel.be/webhook_subscriptions/1 HTTP/1.1
+DELETE https://api.myparcel.nl/webhook_subscriptions/1 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
@@ -3939,7 +3939,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <table>
                         <tr>
                             <th>URI</th>
-                            <td>https://api.sendmyparcel.be/webhook_subscriptions/id[;id]</td>
+                            <td>https://api.myparcel.nl/webhook_subscriptions/id[;id]</td>
                         </tr>
                         <tr>
                             <th>Methods</th>
@@ -3991,7 +3991,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <h3 id="10_C_4">10.C.4 Example</h3>
                     <p><strong>Request</strong></p>
 <pre>
-GET https://api.sendmyparcel.be/webhook_subscriptions/12 HTTP/1.1
+GET https://api.myparcel.nl/webhook_subscriptions/12 HTTP/1.1
 User-Agent: CustomApiCall/2
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
