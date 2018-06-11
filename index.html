@@ -1029,41 +1029,34 @@ Content-Type:application/vnd.shipment+json; charset=utf-8
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
-    "data":{
-        "shipments":[
-            {
-            "recipient":{
-                "cc":"BE",
-                "postal_code":"2000",
-                "city":"Antwerpen",
-                "region":"België",
-                "street":"Adriaan Brouwerstraat 12",
-                "person":"Mr. Parcel"
-            },
-            "pickup":{
-                "city":"ANTWERPEN",
-                "street":"HOOGSTRAAT",
-                "postal_code":"2000",
-                "number":"75",
-                "location_code":"BE0Q07",
-                "retail_network_id":"LD-01",
-                "location_name":"K&J TRADING"
-            },
-            "options":{
-                "package_type":1,
-                "delivery_type":4,
-                "delivery_date":"2017-08-09 16:00",
-                "signature":1,
-                "return":0,
-                "insurance":{
-                    "amount":50000,
-                    "currency":"EUR"
-                }
-            },
-            "carrier":2
-            }
-        ]
-    }
+  "data": {
+    "shipments": [
+      {
+        "carrier": 2,
+        "recipient": {
+          "cc": "BE",
+          "city": "Antwerpen",
+          "street": "Adriaan Brouwerstraat",
+          "number": "16",
+          "person": "Test",
+          "postal_code": "2000"
+        },
+        "options": {
+          "package_type": 1,
+          "delivery_type":4
+        },
+        "pickup": {
+          "city": "ANTWERPEN",
+          "location_code": "618925",
+          "location_name": "KLAPKRANT",
+          "number": "15",
+          "postal_code": "2000",
+          "street": "KLAPDORP"
+        },
+        "reference_identifier": ""
+      }
+    ]
+  }
 }
 </pre>
                     <p><strong>Response</strong></p>
