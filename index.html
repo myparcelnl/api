@@ -4857,14 +4857,14 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     </p>
                     <h1 id="12">12. Document changes</h1>
                     <p>
-                        <a target="_blank" href="https://github.com/myparcelnl/api/releases">Click here</a> for the latest version of the API documentation. Last version update is done on <span id="current_version_date"></span>.
+                        <a target="_blank" href="https://github.com/myparcelnl/api/commits">Click here</a> for the latest version of the API documentation. Last version update is done on <span id="current_version_date"></span>.
                     </p>
                     <script>
-                        $.get('https://api.github.com/repos/myparcelnl/api/releases/latest', function (data) {
-                            var day = data.published_at.split('T')[0];
+                       	$.get('https://api.github.com/repos/myparcelnl/api/commits', function (data) {
+                            var day = data[0].commit.author.date.split('T')[0];
                             var parts = day.split('-');
                             $('#current_version_date').html(parts[2] + '-' + parts[1] + '-' + parts[0]);
-                            $('#current_version').html(data.name);
+                            $('#current_version').html(data[0].commit.message);
                         });
                     </script>
                     <footer class="site-footer">
