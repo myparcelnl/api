@@ -1385,7 +1385,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         Use this link to remove shipments. You can specify multiple shipment ids by semicolon separating them
                         on
                         the URL. Only shipments with <strong>status 'pending - concept'</strong> can be deleted. This method returns
-                        HTTP/1.1 201 if successful. If the shipment doesn’t exist a 422 "cannot delete shipment" is
+                        HTTP/1.1 204 if successful. If the shipment doesn’t exist a 422 "cannot delete shipment" is
                         returned.
                     </p>
                     <h3 id="6_C_2">6.C.2 Reference</h3>
@@ -1422,7 +1422,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         </tr>
                         <tr>
                             <th>Response</th>
-                            <td>HTTP/1.1 201 OK</td>
+                            <td>HTTP/1.1 204 NO CONTENT</td>
                         </tr>
                         <tr>
                             <th>Response body</th>
@@ -1452,7 +1452,7 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                     <p><strong>Response</strong></p>
-                    <pre>HTTP/1.1 201 No Content </pre>
+                    <pre>HTTP/1.1 204 No Content </pre>
                     </p>
 
                     <h2 id="6_D">6.D Generate unrelated return shipment</h2>
