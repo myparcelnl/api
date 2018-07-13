@@ -385,3 +385,7 @@ h1 {
     height: 38px;
     padding-top: 7.9px;
 }
+
+.page-header {
+    padding: 30px;
+}
