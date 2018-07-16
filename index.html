@@ -699,8 +699,8 @@ Connection: keep-alive
                     <h1 id="5">5. Authentication</h1>
                     <p>
                         HTTP basic access authentication on top of SSL is used for authentication. Every request must include
-                        an
-                        Authorization header with base64 encoded API Key.
+                        an Authorization header with base64 encoded API Key. Go to
+                        <a target="_blank" href="https://www.base64encode.org/">base64encode.org</a> to convert your key base64.
                     </p>
 <pre>
 GET /somelink HTTP/1.1
@@ -1348,7 +1348,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         "signature": 1,
         "return": 0,
         "insurance": {
-          "amount": 50,
+          "amount": 5000,
           "currency": "EUR"
         }
       }
@@ -1492,7 +1492,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     <pre>HTTP/1.1 204 No Content </pre>
                     </p>
 
-                    <h2 id="6_D">6.D Generate unrelated return shipment</h2>
+                    <h2 id="6_D">6.D Generate unrelated return shipment url</h2>
                     <h3 id="6_D_1">6.D.1 Overview</h3>
                     <p>
                         This endpoint is often used by external parties to facilitate return shipments on a dedicated part of
@@ -4552,10 +4552,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <h3 id="10_A_1">10.A.1 Overview</h3>
                     <p>
                         Use this endpoint to subscribe to an event in our API. Upon success a HTTP/1.1 200 OK with
-                        subscription
-                        ids is returned. You must use HTTPS for callback because it's secure and temper proof. Adding the
-                        same
-                        webhook overwrites the existing one.
+                        subscription ids is returned. You must use HTTPS for callback because it's secure and temper proof.
+                        Adding the same webhook overwrites the existing one. <b>Tip:</b> You can test webhooks with <a href="https://webhook.site/">Webhook Tester</a>
                     </p>
                     <div class="postman-run-button"
                          data-postman-action="collection/import"
