@@ -56,6 +56,38 @@ h1 {
     border-color: rgba(255, 255, 255, 0.3);
 }
 
+.page-header > .postman-run-button:after {
+    content: "Run in postman";
+    margin: 10px;
+}
+
+.page-header > .postman-run-button {
+    background: none;
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+    width: 140px;
+    height: 38px;
+    padding-top: 7.9px;
+}
+
+.page-header {
+    padding: 30px;
+}
+
+.box {
+    background-color: rgba(0, 179, 196, 0.04);
+    -moz-box-shadow: inset 0 0 10px #caeef2;
+    -webkit-box-shadow: inset 0 0 10px #caeef2;
+    box-shadow: inset 0 0 10px #caeef2;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
 @media screen and (min-width: 64em) {
     .btn {
         padding: 0.75rem 1rem;
@@ -365,27 +397,4 @@ h1 {
 @media screen and (max-width: 42em) {
     .site-footer {
     }
-}
-
-.page-header > .postman-run-button:after {
-    content: "Run in postman";
-    margin: 10px;
-}
-
-.page-header > .postman-run-button {
-    background: none;
-    display: inline-block;
-    margin-bottom: 1rem;
-    color: white;
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0.3rem;
-    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
-    width: 140px;
-    height: 38px;
-    padding-top: 7.9px;
-}
-
-.page-header {
-    padding: 30px;
 }
