@@ -32,19 +32,7 @@
                 Last adjustments: <span id="current_version"></span>
             </p>
             <a target="_blank" class="btn" href="https://github.com/myparcelnl/api/commits/">Show the latest adjustments</a>
-            <div class="postman-run-button"
-                 data-postman-action="collection/import"
-                 data-postman-var-1="23326831fdc77bc0615b"
-                 data-postman-param="env%5BMyParcel%20public%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0="></div>
-            <script type="text/javascript">
-                (function (p,o,s,t,m,a,n) {
-                    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
-                    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
-                        (n = o.createElement("script")),
-                            (n.id = s+t), (n.async = 1), (n.src = m), n
-                    ));
-                }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
-            </script>
+            <div class="postman-run-button"></div>
         </section>
         <section class="main-content col-xs-8 col-xs-offset-4 col-lg-7 col-lg-offset-4">
             <h1>Introduction</h1>
@@ -53,20 +41,8 @@
                 Our API is build in such a way to easily handle bulk operations.
                 We try to follow the REST
                 architecture as much as possible but deviate from it when we need to achieve high performance.
-            <div class="postman-run-button"
-                 data-postman-action="collection/import"
-                 data-postman-var-1="23326831fdc77bc0615b"
-                 data-postman-param="env%5BMyParcel%20public%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0="></div>
-            <script type="text/javascript">
-                (function (p,o,s,t,m,a,n) {
-                    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
-                    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
-                        (n = o.createElement("script")),
-                            (n.id = s+t), (n.async = 1), (n.src = m), n
-                    ));
-                }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
-            </script>
             </p>
+            <div class="postman-run-button"></div>
             <div class="box">
                 <p>
                     Do you want to connect with MyParcel using PHP, C# or Ruby? Then you can use the following github projects instead of the API. Create an issue on github to contact the programmer.
@@ -77,11 +53,11 @@
                     <li><a href="https://github.com/paypronl/myparcel" target="_blank">Ruby</a></li>
                 </ul>
             </div>
-	    	<div>
-				<p>
-					To show delivery options to customers, you can use our javascript <a href="http://github.com/myparcelnl/checkout" target="_blank">code</a>. Use our <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">sandbox</a> for an example and easier integration.
-				</p>
-	    	</div>
+            <div>
+                <p>
+                    To show delivery options to customers, you can use our javascript <a href="http://github.com/myparcelnl/checkout" target="_blank">code</a>. Use our <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">sandbox</a> for an example and easier integration.
+                </p>
+            </div>
             <div>
                 <h1 id="1">1. Requests</h1>
                 <h2 id="1_A">1.A Base URL</h2>
@@ -739,19 +715,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     combination since there are too many to list. We will look at the different package types and then
                     look at the different options available to them. Then we bring all of it together with some examples.
                 </p>
-                <div class="postman-run-button"
-                     data-postman-action="collection/import"
-                     data-postman-var-1="23326831fdc77bc0615b"
-                     data-postman-param="env%5BMyParcel%20public%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0="></div>
-                <script type="text/javascript">
-                    (function (p,o,s,t,m,a,n) {
-                        !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
-                        !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
-                            (n = o.createElement("script")),
-                                (n.id = s+t), (n.async = 1), (n.src = m), n
-                        ));
-                    }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
-                </script>
+                <div class="postman-run-button"></div>
                 <h2 id="6_A">6.A Shipment option combinations</h2>
                 <h3>Contents</h3>
                 <h3 id="6_A_1">6.A.1 Package types</h3>
@@ -790,8 +754,8 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     with the ShipmentOptions.delivery_type field. Currently delivery types are only available for NL and BE
                     shipments with package type 1. Delivery types 1-5 for NL and 1,4 for BE. The address of the package determines the delivery types available.
                     You need to use the DeliveryOptions interface to fetch the delivery types for a specific address. It is also
-		    possible to specify a date on which the package has to be delivered with the ShipmentOptions.delivery_date field.
-		    With delivery types 1 & 3 ShipmentOptions.delivery_date is required.
+            possible to specify a date on which the package has to be delivered with the ShipmentOptions.delivery_date field.
+            With delivery types 1 & 3 ShipmentOptions.delivery_date is required.
                 </p>
                 <h4>1. Morning</h4>
                 <p>
@@ -1416,6 +1380,53 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   }
 }
 </pre>
+<h2>Create digital stamp shipments</h2>
+                <p><strong>Request</strong></p>
+                <pre>
+POST https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json;charset=utf-8
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [{
+      "reference_identifier" : "FOO-DPZ-BAR-46",
+      "recipient": {
+        "cc": "NL",
+        "region": "Zuid-Holland",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 4,
+        "label_description": "This is a digital stamp shipment!"
+      },
+      "physical_properties": {
+        "weight": 30
+      },
+      "carrier": 1
+    }
+  ]}
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK
+Content-Type:application/json;charset=utf-8
+{
+  "data": {
+    "ids": [{
+      "id": 39234953
+    }]
+  }
+}
+</pre>
+
                 <h2 id="6_C">6.C Delete Shipment</h2>
                 <p>
                     <strong>
@@ -2744,7 +2755,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <strong>cooled_delivery</strong><br>
                     Data type: <a href="#boolean">boolean</a><br>
                     Required: No.<br>
-		    Cooled_delivery is only valid for cc=NL and with shipment_type 1 or 3. <br>
+            Cooled_delivery is only valid for cc=NL and with shipment_type 1 or 3. <br>
                 </p>
                 <p>
                     <strong>label_description</strong><br>
@@ -3540,22 +3551,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     Upon success two <a href="#array">arrays</a> are returned; one for <a href="#9_A">DeliveryOptions</a> and one
                     for <a href="#9_B">PickupOptions</a> objects is returned. This object contains delivery date, time and pricing. Upon error an Error object is returned.
                     <br/>
-					<div class="postman-run-button"
-						 data-postman-action="collection/import"
-						 data-postman-var-1="23326831fdc77bc0615b"
-						 data-postman-param="env%5BMyParcel%20public%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0="></div>
-					<script type="text/javascript">
-						(function (p,o,s,t,m,a,n) {
-							!p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
-							!o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
-								(n = o.createElement("script")),
-									(n.id = s+t), (n.async = 1), (n.src = m), n
-							));
-						}(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
-					</script>
+                    <div class="postman-run-button"></div>
                     <br/>
                     <br/>
-					    To show delivery options to customers, you can use our javascript <a href="http://github.com/myparcelnl/checkout" target="_blank">code</a>. Use our <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">sandbox</a> for an example and easier integration.
+                        To show delivery options to customers, you can use our javascript <a href="http://github.com/myparcelnl/checkout" target="_blank">code</a>. Use our <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">sandbox</a> for an example and easier integration.
                     <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">
                         <div class="box" style="width: 370px;">
                             <img src="https://monosnap.com/image/mOGXF5KFCjVALnbjg67IgPB99bjLuV.png">
@@ -3659,17 +3658,18 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <td>
 <pre>
 {
-	"data": {
-		"delivery": [],
-		"pickup": [],
-		"message": "No results"
-	},
-	"errors": [{
-		"code": 9,
-		"message": "Example",
-		"human": "Example"
-	}]
-}</pre></td>
+  "data": {
+    "delivery": [],
+    "pickup": [],
+    "message": "No results"
+  },
+  "errors": [{
+    "code": 9,
+    "message": "Example",
+    "human": "Example"
+  }]
+}
+</pre></td>
                     </tr>
                 </table>
                 <h3 id="8_A_3">8.A.3 Parameters</h3>
@@ -4558,12 +4558,12 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 <p>Example</p>
                 <pre>
 {
-    "start": "16:00:00",
-    "type": 4,
-    "price": {
-        "amount": 0,
-        "currency": "EUR"
-    }
+  "start": "16:00:00",
+  "type": 4,
+  "price": {
+    "amount": 0,
+    "currency": "EUR"
+  }
 }
 </pre>
                 <h1 id="10">10. Webhooks</h1>
@@ -4576,18 +4576,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 
                     We currently only have one available hook: shipment_status_change. Whenever the <a href="#shipment_status">status</a> of a shipment changes this webhook will send you an update with the new value.
                 </p>
-                <div class="postman-run-button"
-                     data-postman-action="collection/import"
-                     data-postman-var-1="fd83fce88e59906512aa"></div>
-                <script type="text/javascript">
-                    (function (p,o,s,t,m,a,n) {
-                        !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
-                        !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
-                            (n = o.createElement("script")),
-                                (n.id = s+t), (n.async = 1), (n.src = m), n
-                        ));
-                    }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
-                </script>
+                <div class="postman-run-button"></div>
                 <h3 id="10_A_2">10.A.2 Reference</h3>
                 <table>
                     <tr>
@@ -4664,7 +4653,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   }
 }
 </pre>
-                <h2 id="10_B">10.B Get subscription</h2>
+                <h2 id="10_B">10.B Get subscriptions</h2>
                 <h3 id="10_B_1">10.B.1 Overview</h3>
                 <p>
                     Use this endpoint to fetch your active webhook subscriptions. Upon success a HTTP/1.1 200 with an <a href="#array">array</a> of <a href="#11_A">Subscription</a> objects is returned.
@@ -4721,15 +4710,13 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-    "data": {
-        "webhook_subscriptions": [
-            {
-                "id": 123,
-                "hook": "shipment_status_change",
-                "url": "https://seoshop.nl/myparcel/notifications"
-            }
-        ]
-    }
+  "data": {
+    "webhook_subscriptions": [{
+      "id": 123,
+      "hook": "shipment_status_change",
+      "url": "https://seoshop.nl/myparcel/notifications"
+    }]
+  }
 }
 </pre>
 
@@ -4844,24 +4831,22 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>POST Example</p>
                 <pre>
 {
-    "hook": "shipment_status_change",
-    "url": "https://seoshop.nl/myparcel/notifications"
+  "hook": "shipment_status_change",
+  "url": "https://seoshop.nl/myparcel/notifications"
 }
 </pre>
                 <p>GET Example</p>
                 <pre>
 {
-    "data": {
-        "webhook_subscriptions": [
-            {
-                "id": 79798,
-                "account_id": 126594,
-                "shop_id": 39399,
-                "hook": "shipment_status_change",
-                "url": "https://seoshop.nl/myparcel/notifications"
-            }
-        ]
-    }
+  "data": {
+    "webhook_subscriptions": [{
+      "id": 79798,
+      "account_id": 126594,
+      "shop_id": 39399,
+      "hook": "shipment_status_change",
+      "url": "https://seoshop.nl/myparcel/notifications"
+    }]
+  }
 }
 </pre>
                 <h2 id="11_B">11.B ShipmentStatusChangeEvent Object Definition</h2>
@@ -4900,13 +4885,13 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <h3 id="11_B_2">11.B.2 Example</h3>
                 <pre>
 [
-    {
-        "shipment_id": "25482412",
-        "account_id": 7003,
-        "shop_id": 1897,
-        "status": 2,
-        "barcode": "3SMYPA749883621"
-    }
+  {
+    "shipment_id": "25482412",
+    "account_id": 7003,
+    "shop_id": 1897,
+    "status": 2,
+    "barcode": "3SMYPA749883621"
+  }
 ]
 </pre>
                 <h2 id="11_C">11.C SubscriptionIds Object Definition</h2>
@@ -4961,5 +4946,24 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         </section>
     </div>
 </div>
+<script>
+    // Set postman button attributes in one place
+    postman_buttons = document.getElementsByClassName('postman-run-button');
+
+    for ( i = 0; i < postman_buttons.length; i++) {
+        postman_buttons[i].setAttribute('data-postman-action', 'collection/import');
+        postman_buttons[i].setAttribute('data-postman-var-1',  'fd83fce88e59906512aa');
+        postman_buttons[i].setAttribute('data-postman-param',  'env%5BMyParcel%20public%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0=');
+    }
+
+    (function (p,o,s,t,m,a,n) {
+        !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+        !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
+            (n = o.createElement("script")),
+                (n.id = s+t), (n.async = 1), (n.src = m), n
+        ));
+    }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+</script>
+
 </body>
 </html>
