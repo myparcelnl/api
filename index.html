@@ -972,7 +972,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     </tr>
                     <tr>
                         <th rowspan="6">Required request headers</th>
-                        <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        <td>Authorization: basic BASE64(API_KEY)</td>
                     </tr>
                     <tr>
                         <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
@@ -1115,9 +1115,11 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
   "data": {
     "ids": [{
-      "id": 12345
+      "id": 12345,
+      "reference_identifier":"FOO-222-BAR-42"
     }, {
-      "id": 68794
+      "id": 68794,
+      "reference_identifier":"FOO-223-BAR-43"
     }]
   }
 }
@@ -1185,7 +1187,55 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
     "ids": [{
-      "id": 3485394579
+      "id": 3485394579,
+      "reference_identifier":null
+    }]
+  }
+}
+</pre>
+                <h2>Create digital stamp shipments</h2>
+                <p><strong>Request</strong></p>
+                <pre>
+POST https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json;charset=utf-8
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [{
+      "reference_identifier" : "FOO-DPZ-BAR-46",
+      "recipient": {
+        "cc": "NL",
+        "region": "Zuid-Holland",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 4,
+        "label_description": "This is a digital stamp shipment!"
+      },
+      "physical_properties": {
+        "weight": 30
+      },
+      "carrier": 1
+    }
+  ]}
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK
+Content-Type:application/json;charset=utf-8
+{
+  "data": {
+    "ids": [{
+      "id": 39234953,
+      "reference_identifier":null
     }]
   }
 }
@@ -1237,7 +1287,8 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
     "ids": [{
-      "id": 12345
+      "id": 12345,
+      "reference_identifier":null
     }]
   }
 }
@@ -1297,7 +1348,8 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
     "ids": [{
-      "id": 12345
+      "id": 12345,
+      "reference_identifier":null
     }]
   }
 }
@@ -1336,7 +1388,8 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
     "ids": [{
-      "id": 12345
+      "id": 12345,
+      "reference_identifier":null
     }]
   }
 }</pre>
@@ -1375,53 +1428,8 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
     "ids": [{
-      "id": 12345
-    }]
-  }
-}
-</pre>
-<h2>Create digital stamp shipments</h2>
-                <p><strong>Request</strong></p>
-                <pre>
-POST https://api.myparcel.nl/shipments HTTP/1.1
-Content-Type:application/vnd.shipment+json;charset=utf-8
-User-Agent: CustomApiCall/2
-Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
-{
-  "data": {
-    "shipments": [{
-      "reference_identifier" : "FOO-DPZ-BAR-46",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 4,
-        "label_description": "This is a digital stamp shipment!"
-      },
-      "physical_properties": {
-        "weight": 30
-      },
-      "carrier": 1
-    }
-  ]}
-}
-</pre>
-                <p><strong>Response</strong></p>
-                <pre>
-HTTP/1.1 200 OK
-Content-Type:application/json;charset=utf-8
-{
-  "data": {
-    "ids": [{
-      "id": 39234953
+      "id": 12345,
+      "reference_identifier":null
     }]
   }
 }
