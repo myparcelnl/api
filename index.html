@@ -1466,7 +1466,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     </tr>
                     <tr>
                         <th rowspan="3">Required request headers</th>
-                        <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        <td>Authorization: basic BASE64(API_KEY)</td>
                     </tr>
                     <tr>
                         <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
@@ -1543,7 +1543,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     </tr>
                     <tr>
                         <th rowspan="2">Required request headers</th>
-                        <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        <td>Authorization: basic BASE64(API_KEY)</td>
                     </tr>
                     <tr>
                         <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
@@ -1625,7 +1625,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                     </tr>
                     <tr>
                         <th rowspan="2">Required request headers</th>
-                        <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        <td>Authorization: basic BASE64(API_KEY)</td>
                     </tr>
                     <tr>
                         <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
@@ -1860,7 +1860,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     </tr>
                     <tr>
                         <th rowspan="4">Required request headers</th>
-                        <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        <td>Authorization: basic BASE64(API_KEY)</td>
                     </tr>
                     <tr>
                         <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
@@ -2006,7 +2006,7 @@ application/pdf (...PDF content)</pre>
                     </tr>
                     <tr>
                         <th rowspan="2">Required request headers</th>
-                        <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        <td>Authorization: basic BASE64(API_KEY)</td>
                     </tr>
                     <tr>
                         <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
@@ -2722,12 +2722,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     Data type: <a href="#timestamp">timestamp</a><br>
                     Required: Yes if delivery type has been specified.<br>
                     The delivery date time for this shipment.
-                </p>
-                <p>
-                    <strong>delivery_remark</strong><br>
-                    Data type: <a href="#string">string</a><br>
-                    Required: No.<br>
-                    The delivery remark.
                 </p>
                 <p>
                     <strong>only_recipient</strong><br>
@@ -4597,7 +4591,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     </tr>
                     <tr>
                         <th rowspan="3">Required request headers</th>
-                        <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        <td>Authorization: basic BASE64(API_KEY)</td>
                     </tr>
                     <tr>
                         <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
@@ -4678,7 +4672,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     </tr>
                     <tr>
                         <th rowspan="2">Required request headers</th>
-                        <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        <td>Authorization: basic BASE64(API_KEY)</td>
                     </tr>
                     <tr>
                         <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
@@ -4748,7 +4742,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     </tr>
                     <tr>
                         <th rowspan="3">Required request headers</th>
-                        <td>Authorization: basic BASE64(API_KEY OR SESSION_TOKEN)</td>
+                        <td>Authorization: basic BASE64(API_KEY)</td>
                     </tr>
                     <tr>
                         <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
@@ -4882,7 +4876,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 </p>
                 <p>
                     <strong>status</strong><br>
-                    Data type: <a href="#integer">integer</a><br>
+                    Data type: <a href="#shipment_status">shipment_status</a><br>
                     The shipment status.
                 </p>
                 <p>
@@ -4890,7 +4884,29 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     Data type: <a href="#string">string</a><br>
                     This is the shipment barcode.
                 </p>
-                <h3 id="11_B_2">11.B.2 Example</h3>
+                <h3 id="11_B_2">11.B.2 Reference</h3>
+                <p>
+                    We send the following headers to your environment:
+                </p>
+                <table>
+                    <tr>
+                        <th rowspan="5">Headers</th>
+                        <td>User-Agent: MyParcel/Webhook-Notifier</td>
+                    </tr>
+                    <tr>
+                        <td>Content-Type: application/json; charset=utf-8</td>
+                    </tr>
+                    <tr>
+                        <td>X-MyParcel-Hook: shipment_status_change</td>
+                    </tr>
+                    <tr>
+                        <td>X-MyParcel-HookId: d91e16cbfbcfec0b17cfafb3a9bf3c1b206a9dd0</td>
+                    </tr>
+                    <tr>
+                        <td>X-MyParcel-Authorization: basic BASE64(API_KEY)</td>
+                    </tr>
+                </table>
+                <h3 id="11_B_3">11.B.3 Example</h3>
                 <pre>
 [
   {
@@ -4958,10 +4974,10 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
     // Set postman button attributes in one place
     postman_buttons = document.getElementsByClassName('postman-run-button');
 
-    for ( i = 0; i < postman_buttons.length; i++) {
+    for (i = 0; i < postman_buttons.length; i++) {
         postman_buttons[i].setAttribute('data-postman-action', 'collection/import');
-        postman_buttons[i].setAttribute('data-postman-var-1',  'fd83fce88e59906512aa');
-        postman_buttons[i].setAttribute('data-postman-param',  'env%5BMyParcel%20public%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0=');
+        postman_buttons[i].setAttribute('data-postman-var-1', '065786285c2e5ed75509');
+        postman_buttons[i].setAttribute('data-postman-param', 'env%5BMyParcel%20public%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIn0seyJrZXkiOiJVc2VyLUFnZW50IiwidmFsdWUiOiJ7e1VzZXItQWdlbnR9fSIsImRlc2NyaXB0aW9uIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJhdXRoX3Rva2VuIiwidmFsdWUiOiIiLCJkZXNjcmlwdGlvbiI6IiIsImVuYWJsZWQiOnRydWV9XQ==');
     }
 
     (function (p,o,s,t,m,a,n) {
