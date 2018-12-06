@@ -771,9 +771,8 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>This is the standard delivery type.</p>
                 <h4>3. Evening</h4>
                 <p>
-                    The package is delivered in the evening on the delivery date specified. Currently this is only
-                    available
-                    for Tuesday and Thursday, but it is expected to be broadened to other days of the week as well.
+                    This options is only available for certain NL addresses. It allows a Customer/Consumer to have their
+                    package delivered in the evening on the specified delivery date.
                 </p>
                 <h4>4. Pickup</h4>
                 <p>The package is delivered at the chosen drop off point specified by the Consumer/Customer.</p>
@@ -819,6 +818,10 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     euros. Global shipments <strong>must</strong> be insured for 200,- euros. The following shipment options
                     are <strong>mandatory</strong> when
                     insuring an NL shipment: only_recipient and signature.
+                </p>
+                <h4>age_check</h4>
+                <p>
+                    The Customer/Consumer must sign for the package and only receive it when he is at least 18 years.
                 </p>
                 <h3 id="6_A_4">6.A.4 Examples</h3>
                 <h4>Pickup</h4>
@@ -1086,7 +1089,8 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
           "currency": "EUR"
         },
         "large_format": 0,
-        "label_description": "My custom description"
+        "label_description": "My custom description",
+        "age_check":1
       },
       "carrier": 1
     }, {
@@ -2772,6 +2776,13 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     for return shipment by the following: Retour – 3SMYPAMYPAXXXXXX
                 </strong>
                 </p>
+                <p>
+                    <strong>age_check</strong><br>
+                    Data type: <a href="#boolean">boolean</a><br>
+                    Required: No.<br>
+                    The recipient must sign for the package and must be at least 18 years old.
+                </strong>
+                </p>
                 <h3 id="7_C_2">7.C.2 Example</h3>
                 <p>Example a</p>
                 <pre>
@@ -2853,6 +2864,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "only_recipient": 0,
   "signature": 1,
   "return": 0
+}
+</pre>
+                <p>Example age check</p>
+                <pre>
+{
+  "age_check":1
 }
 </pre>
                 <h2 id="7_D">7.D ShipmentGeneralSettings Object Definition</h2>
