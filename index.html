@@ -534,7 +534,7 @@ Connection: keep-alive
                     </tr>
                     <tr>
                         <td>example</td>
-                        <td>{"amount": 5000, "currency": "EUR"}</td>
+                        <td>{"amount": 10000, "currency": "EUR"}</td>
                     </tr>
                 </table>
                 <h2 id="shipment_status">shipment_status</h2>
@@ -814,7 +814,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>
                     This option allows a shipment to be insured up to certain amount. Only <a href="#package_type">package type</a> 1 (package) shipments can
                     be
-                    insured. NL shipments can be insured for 5000,- euros. EU shipments <strong>must</strong> be insured for 500,-
+                    insured. NL shipments can be insured for 10000,- euros. EU shipments <strong>must</strong> be insured for 500,-
                     euros. Global shipments <strong>must</strong> be insured for 200,- euros. The following shipment options
                     are <strong>mandatory</strong> when
                     insuring an NL shipment: only_recipient and signature.
@@ -907,7 +907,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>
                     Only <a href="#package_type">package type</a> 1 (package) can be insured so <a href="#package_type">package type</a> is set to 1. Insurance amount needs to be
                     specified
-                    in cents and needs to be one of these amounts (5000, 25000, 50000, 500000, <= 500000). The package
+                    in cents and needs to be one of these amounts (10000, 25000, 50000, 500000, <= 500000). The package
                     needs
                     to be insured up to 5000 euros so we set insurance.amount to 500000 cents. All NL insured packages
                     need
@@ -1382,7 +1382,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         "signature": 1,
         "return": 0,
         "insurance": {
-          "amount": 5000,
+          "amount": 10000,
           "currency": "EUR"
         }
       }
@@ -2279,7 +2279,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     "signature": 1,
     "return": 1,
     "insurance": {
-      "amount": 5000,
+      "amount": 10000,
       "currency": "EUR"
     },
     "large_format": 0
@@ -2792,7 +2792,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "signature": 1,
   "return": 1,
   "insurance": {
-    "amount": 5000,
+    "amount": 10000,
     "currency": "EUR"
   },
   "large_format": 0,
@@ -3166,7 +3166,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     "signature": 1,
     "return": 0,
     "insurance": {
-      "amount": 5000,
+      "amount": 10000,
       "currency": "EUR"
     }
   }
