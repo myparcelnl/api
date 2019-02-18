@@ -246,6 +246,7 @@ Connection: keep-alive
                     <li><a href="#paper_size">paper_size</a></li>
                     <li><a href="#price">price</a></li>
                     <li><a href="#shipment_status">shipment_status</a></li>
+                    <li><a href="#main_status">main_status</a></li>
                     <li><a href="#sort_order">sort_order</a></li>
                     <li><a href="#string">string</a></li>
                     <li><a href="#text">text</a></li>
@@ -577,6 +578,30 @@ Connection: keep-alive
                         </td>
                     </tr>
                 </table>
+                <h2 id="main_status">main_status</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>The status of the shipment divided into 5 statuses. If there are 2 times the same statuses,
+                          only the last one gets the main status.</td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>[a-z]</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>
+                            <ul>
+                                <li>registered</li>
+                                <li>handed_to_carrier</li>
+                                <li>sorting</li>
+                                <li>distribution</li>
+                                <li>delivered</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
                 <h2 id="sort_order">sort_order</h2>
                 <table>
                     <tr>
@@ -596,7 +621,7 @@ Connection: keep-alive
                 <table>
                     <tr>
                         <th>description</th>
-                        <td>any alphanumeric value up to 255 characters.</td>
+                        <td>Any alphanumeric value up to 255 characters.</td>
                     </tr>
                     <tr>
                         <td>pattern</td>
@@ -605,6 +630,21 @@ Connection: keep-alive
                     <tr>
                         <td>example</td>
                         <td>3SMYPA123456789; Siriusdreef 66; Nederland; </td>
+                    </tr>
+                </table>
+                <h2 id="description">description</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>You can translate the endpoint by sending the correct header (Accept-Language: en_GB).</td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>.{0,255}</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>Zending bezorgd</td>
                     </tr>
                 </table>
                 <h2 id="text">text</h2>
@@ -645,11 +685,12 @@ Connection: keep-alive
                     </tr>
                     <tr>
                         <td>pattern</td>
-                        <td>YYYY-MM-DD HH:MM:SS</td>
+                        <td>YYYY-MM-DD HH:MM:SS(.[0-9]{6})?</td>
                     </tr>
                     <tr>
                         <td>example</td>
                         <td>2015-01-01 08:00:00</td>
+                        <td>2015-01-01 08:00:00.000000</td>
                     </tr>
                 </table>
                 <h2 id="weekday_digit">weekday_digit</h2>
@@ -2017,10 +2058,10 @@ application/pdf (...PDF content)</pre>
                     </tr>
                     <tr>
                         <th>URI parameters</th>
-                        <td>id= <a href="#7_A">Shipment</a>.id.</td>
+                        <td>id= <a href="#7_A">Shipment</a>.id</td>
                     </tr>
                     <tr>
-                        <th rowspan="4">Query parameters</th>
+                        <th rowspan="5">Query parameters</th>
                         <td>page= <a href="#integer">integer</a></td>
                     </tr>
                     <tr>
@@ -2031,6 +2072,9 @@ application/pdf (...PDF content)</pre>
                     </tr>
                     <tr>
                         <td>order= <a href="#sort_order">sort_order</a></td>
+                    </tr>
+                    <tr>
+                        <td>extra_info= <a href="#extra_info">extra_info</a></td>
                     </tr>
                     <tr>
                         <th>Request body</th>
@@ -2083,11 +2127,18 @@ application/pdf (...PDF content)</pre>
                     Data type: <a href="#sort_order">sort_order</a><br>
                     Sort order for sort filter. Defaults to ASC.
                 </p>
+                <p>
+                    <strong>extra_info</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    Only the delivery_moment option is available. Delivery moment is not included by default for performance reasons. Example:
+                </p>
+                <div class="nice">extra_info=delivery_moment</div>
                 <h3 id="6_G_4">6.G.4 Example </h3>
                 <p><strong>Request</strong></p>
                 <pre>
-GET https://api.myparcel.nl/tracktraces/12 HTTP/1.1
+GET https://api.myparcel.nl/tracktraces/1212321?extra_info=delivery_moment HTTP/1.1
 User-Agent: CustomApiCall/2
+Accept-Language: en_GB
 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                 <p><strong>Response</strong></p>
@@ -2095,32 +2146,98 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
-    "tracktraces": [{
-      "shipment_id": "1234",
-      "code": "D3",
-      "final": false,
-      "description": "The package is in distribution",
-      "time": "2015-01-02 05:00:00",
-      "history": [{
-        "code": "C3",
-        "description": "The package is at the sorting center",
-        "time": "2015-01-02 05:00:00"
-      }, {
-        "code": "B2",
-        "description": "The package is has been scanned",
-        "time": "2015-01-01 06:00:00"
-      }]
-    }, {
-      "shipment_id": "569034234",
-      "code": "B4",
-      "description": "The package is at the sorting center",
-      "time": "2015-01-02 05:00:00",
-      "history": [{
-        "code": "A2",
-        "description": "The package has been scanned",
-        "time": "2015-01-01 05:00:00"
-      }]
-    }]
+    "tracktraces": [
+      {
+        "shipment_id": 43393092,
+        "code": "I01",
+        "description": "Zending bezorgd",
+        "time": "2019-02-16 15:09:53",
+        "link_consumer_portal": "https://postnl.nl/tracktrace/?B=3SMYPA126329191&P=2182KD&D=NL&T=C&L=NL",
+        "link_tracktrace": "https://postnl.nl/tracktrace/?B=3SMYPA126329191&P=2182KD&D=NL&T=C&L=NL",
+        "recipient": {
+          "cc": "NL",
+          "postal_code": "2231je",
+          "city": "Potloden dorp",
+          "street": "Gumlaan",
+          "number": "101",
+          "number_suffix": "",
+          "person": "Hard Kauwer"
+        },
+        "sender": {
+          "cc": "NL",
+          "postal_code": "4337WA",
+          "city": "Middelburg",
+          "street": "Jacobus Spijkerdreef",
+          "number": "10",
+          "person": "Tamara Faker",
+          "company": "Potlodenshop",
+          "email": "tamluca@potlodenshop.nl",
+          "phone": "0673826485"
+        },
+        "options": {
+          "package_type": 1,
+          "only_recipient": 0,
+          "signature": 0,
+          "return": 0,
+          "insurance": {
+            "amount": 0,
+            "currency": "EUR"
+          },
+          "large_format": 0,
+          "cooled_delivery": 0,
+          "age_check": 0
+        },
+        "pickup": null,
+        "status": {
+          "current": 7,
+          "main": "delivered",
+          "final": true
+        },
+        "history": [
+          {
+            "code": "A01",
+            "status": 2,
+            "main": "registered",
+            "description": "De zending is aangemeld bij PostNL en wordt volgbaar",
+            "time": "2019-02-15 00:00:00"
+          },
+          {
+            "code": "B01",
+            "status": 3,
+            "main": "handed_to_carrier",
+            "description": "Zending is ontvangen door PostNL",
+            "time": "2019-02-15 17:09:55"
+          },
+          {
+            "code": "J01",
+            "status": 4,
+            "main": "sorting",
+            "description": "Zending gesorteerd in sorteercentrum",
+            "time": "2019-02-16 08:13:29"
+          },
+          {
+            "code": "J05",
+            "status": 5,
+            "main": "distribution",
+            "description": "Bezorger is onderweg",
+            "time": "2019-02-16 08:35:51"
+          }
+        ],
+        "delivery_moment_type": "estimated",
+        "delivery_moment": {
+          "start": {
+            "date": "2019-02-19 17:15:00.000000",
+            "timezone_type": 3,
+            "timezone": "Europe/Amsterdam"
+          },
+          "end": {
+            "date": "2019-02-19 19:45:00.000000",
+            "timezone_type": 3,
+            "timezone": "Europe/Amsterdam"
+          }
+        }
+      }
+    ]
   }
 }
 </pre>
@@ -3234,52 +3351,141 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <p>
                     <strong>shipment_id</strong><br>
                     Data type: <a href="#integer">integer</a><br>
-                    Required: n/a.<br>
-                    Shipment id.
                 </p>
                 <p>
                     <strong>code</strong><br>
                     Data type: <a href="#string">string</a><br>
-                    Required: n/a.<br>
+                  </p>
+                <p>
+                  <strong>description</strong><br>
+                  Data type: <a href="#description">description</a><br>
                 </p>
                 <p>
-                    <strong>final</strong><br>
+                  <strong>time</strong><br>
+                  Data type: <a href="#time">time</a><br>
+                </p>
+                <p>
+                  <strong>link_consumer_portal</strong><br>
+                  Data type: <a href="#string">string</a><br>
+                  Url for custom track and trace page. If the consumer protal is turned off, the carrier tracking page
+                  is used. You can also send a language: <span class="nice">?lang=en_GB</span>
+                </p>
+                <p>
+                  <strong>link_tracktrace</strong><br>
+                  Data type: <a href="#string">string</a><br>
+                  Carrier tracking page
+                </p>
+                <p>
+                  <strong>recipient</strong><br>
+                  Data type: <a href="#string">string</a><br>
+                  Carrier tracking page
+                </p>
+                <p>
+                  <strong>recipient</strong><br>
+                  Data type: <a href="#7_B">Address</a><br>
+                </p>
+                <p>
+                  <strong>sender</strong><br>
+                  Data type: <a href="#7_B">Address</a><br>
+                </p>
+                <p>
+                  <strong>options</strong><br>
+                  Data type: <a href="#7_C">ShipmentOptions</a><br>
+                </p>
+                <p>
+                  <strong>pickup</strong><br>
+                  Data type: <a href="#7_O">PickupLocation</a><br>
+                </p>
+                <p>
+                    <strong>status.current</strong><br>
+                    Data type: <a href="#shipment_status">shipment_status</a><br>
+                </p>
+                <p>
+                    <strong>status.main</strong><br>
+                    Data type: <a href="#main_status">main_status</a><br>
+                </p>
+                <p>
+                    <strong>status.final</strong><br>
                     Data type: <a href="#boolean">boolean</a><br>
-                    Required: n/a.<br>
-                </p>
-                <p>
-                    <strong>description</strong><br>
-                    Data type: <a href="#string">string</a><br>
-                    Required: n/a.<br>
-                </p>
-                <p>
-                    <strong>time</strong><br>
-                    Data type: <a href="#time">time</a><br>
-                    Required: n/a.<br>
+                    With 'true' no new statuses are expected<br>
                 </p>
                 <p>
                     <strong>history</strong><br>
                     Data type: <a href="#7_M">TrackTraceHistory</a><br>
-                    Required: n/a.<br>
+                </p>
+                <p>
+                    <strong>delivery_moment</strong><br>
+                    Data type: <a href="#7_S">DateTimeStartEnd</a><br>
                 </p>
                 <h3 id="7_L_2">7.L.2 Example</h3>
-                <p>POST example</p>
+                <p>GET example</p>
                 <pre>
 {
-  "shipment_id": "1234",
-  "code": "D3",
-  "final": false,
-  "description": "The package is in distribution",
-  "time": "2015-01-02 05:00:00",
-  "history": [{
-    "code": "C3",
-    "description": "The package is at the sorting center",
-    "time": "2015-01-02 05:00:00"
-    }, {
-    "code": "B2",
-    "description": "The package is has been scanned",
-    "time": "2015-01-01 06:00:00"
-  }]
+  "data": {
+    "tracktraces": [
+      {
+        "shipment_id": 43393092,
+        "code": "I01",
+        "description": "Zending bezorgd",
+        "time": "2019-02-16 15:09:53",
+        "link_consumer_portal": "https://potlodenshop.myparcel.me/track-trace/3SMYPA126329191/2182KD/NL",
+        "link_tracktrace": "https://postnl.nl/tracktrace/?B=3SMYPA126329190&P=2182KD&D=NL&T=C&L=NL",
+        "recipient": {
+          "cc": "NL",
+          "postal_code": "2182KD",
+          "city": "Hillegom",
+          "street": "Brouwerlaan",
+          "number": "47",
+          "number_suffix": "",
+          "person": "Elma Mense"
+        },
+        "sender": {
+          "cc": "NL",
+          "postal_code": "4337WV",
+          "city": "Middelburg",
+          "street": "Podium",
+          "number": "3",
+          "person": "Tamara Bosman",
+          "company": "Skin Jewelry",
+          "email": "tamluca@zeelandnet.nl",
+          "phone": "0118418888"
+        },
+        "options": {
+          "package_type": 1,
+          "only_recipient": 0,
+          "signature": 0,
+          "return": 0,
+          "insurance": {
+            "amount": 0,
+            "currency": "EUR"
+          },
+          "large_format": 0,
+          "cooled_delivery": 0,
+          "age_check": 0
+        },
+        "pickup": null,
+        "status": {
+          "current": 7,
+          "main": "delivered",
+          "final": true
+        },
+        "history": [],
+        "delivery_moment_type": "estimated",
+        "delivery_moment": {
+          "start": {
+            "date": "2019-02-19 17:15:00.000000",
+            "timezone_type": 3,
+            "timezone": "Europe/Amsterdam"
+          },
+          "end": {
+            "date": "2019-02-19 19:45:00.000000",
+            "timezone_type": 3,
+            "timezone": "Europe/Amsterdam"
+          }
+        }
+      }
+    ]
+  }
 }
 </pre>
                 <h2 id="7_M">7.M TrackTraceHistory Object Definition</h2>
@@ -3540,6 +3746,49 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <pre>
 {
   "url": "https://api.myparcel.nl/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
+}
+</pre>
+                <h2 id="7_S">7.S DateTimeStartEnd Object Definition</h2>
+                <h3 id="7_S_1">7.S.1 Overview</h3>
+                <p>An object with a start and end DateTime.</p>
+                <p>
+                    <strong>delivery_moment.start.date</strong><br>
+                    Data type: <a href="#timestamp">timestamp</a><br>
+                </p>
+                <p>
+                    <strong>delivery_moment.start.timezone_type</strong><br>
+                    Data type: <a href="#integer">integer</a><br>
+                </p>
+                <p>
+                    <strong>delivery_moment.start.timezone</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                </p>
+                <p>
+                    <strong>delivery_moment.end.date</strong><br>
+                    Data type: <a href="#timestamp">timestamp</a><br>
+                </p>
+                <p>
+                    <strong>delivery_moment.end.timezone_type</strong><br>
+                    Data type: <a href="#integer">integer</a><br>
+                </p>
+                <p>
+                    <strong>delivery_moment.end.timezone</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                </p>
+                <h3 id="7_S_2">7.S.2 Example</h3>
+                <p>Example</p>
+                <pre>
+"delivery_moment": {
+  "start": {
+    "date": "2019-02-19 17:15:00.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+  },
+  "end": {
+    "date": "2019-02-19 19:45:00.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+  }
 }
 </pre>
                 <h1 id="8">8. Delivery options</h1>
