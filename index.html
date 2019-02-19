@@ -246,7 +246,7 @@ Connection: keep-alive
                     <li><a href="#paper_size">paper_size</a></li>
                     <li><a href="#price">price</a></li>
                     <li><a href="#shipment_status">shipment_status</a></li>
-                    <li><a href="#main_status">main_status</a></li>
+                    <li><a href="#main">main</a></li>
                     <li><a href="#sort_order">sort_order</a></li>
                     <li><a href="#string">string</a></li>
                     <li><a href="#text">text</a></li>
@@ -578,12 +578,13 @@ Connection: keep-alive
                         </td>
                     </tr>
                 </table>
-                <h2 id="main_status">main_status</h2>
+                <h2 id="main">main</h2>
                 <table>
                     <tr>
                         <th>description</th>
-                        <td>The status of the shipment divided into 5 statuses. If there are 2 times the same statuses,
-                          only the last one gets the main status.</td>
+                        <td>All statuses are divided into 5 main "categories". Only the last status in a category gets
+                          this attribute, meaning if there are consecutive duplicate statuses still only the most recent
+                          status gets the `main` attribute. Other statuses get the null value</td>
                     </tr>
                     <tr>
                         <td>pattern</td>
@@ -3378,7 +3379,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <p>
                   <strong>recipient</strong><br>
                   Data type: <a href="#string">string</a><br>
-                  Carrier tracking page
                 </p>
                 <p>
                   <strong>recipient</strong><br>
@@ -3402,7 +3402,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 </p>
                 <p>
                     <strong>status.main</strong><br>
-                    Data type: <a href="#main_status">main_status</a><br>
+                    Data type: <a href="#main">main</a><br>
                 </p>
                 <p>
                     <strong>status.final</strong><br>
