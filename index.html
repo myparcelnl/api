@@ -3368,8 +3368,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <p>
                   <strong>link_consumer_portal</strong><br>
                   Data type: <a href="#string">string</a><br>
-                  URL for custom track and trace page. If the consumer portal is turned off, the carrier tracking page
-                  is used. You can also pass a language parameter: <span class="nice">?lang=en_GB</span>
+                  URL for custom track and trace page. More information about this service is found
+                  <a href="https://blog.myparcel.nl/jouw-track-en-trace-pagina" target="_blank">here</a>. If the
+                  consumer portal is turned off, the carrier tracking page is used. You can also pass a language
+                  parameter: <span class="nice">?lang=en_GB</span>.
                 </p>
                 <p>
                   <strong>link_tracktrace</strong><br>
@@ -3414,6 +3416,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     Data type: <a href="#7_M">TrackTraceHistory</a><br>
                 </p>
                 <p>
+                    <strong>delivery_moment_type</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    `expected` or `estimated`<br>
+                </p>
+                <p>
                     <strong>delivery_moment</strong><br>
                     Data type: <a href="#7_S">DateTimeStartEnd</a><br>
                 </p>
@@ -3428,7 +3435,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
         "code": "I01",
         "description": "Zending bezorgd",
         "time": "2019-02-16 15:09:53",
-        "link_consumer_portal": "https://potlodenshop.myparcel.me/track-trace/3SMYPA126329191/2182KD/NL",
+        "link_consumer_portal": "https://yoursubomain.myparcel.me/track-trace/3SMYPA126329191/2182KD/NL",
         "link_tracktrace": "https://postnl.nl/tracktrace/?B=3SMYPA126329190&P=2182KD&D=NL&T=C&L=NL",
         "recipient": {
           "cc": "NL",
