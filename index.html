@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-us">
 <head>
     <meta charset="UTF-8" />
@@ -115,7 +115,7 @@
                 <p>Example of a 200 Status code in our API (you can try this in your browser, then you know our API is online)</p>
                 <p>
                     <strong>Request:</strong>
-                <pre>
+                    <pre>
 GET https://api.myparcel.nl/
 Request Headers (example!):
 GET / HTTP/1.1
@@ -126,8 +126,8 @@ Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
 Accept-Encoding: gzip, deflate, sdch, br
 </pre>
-                <strong>Response:</strong>
-                <pre>
+                    <strong>Response:</strong>
+                    <pre>
 {
   "title":"MyParcel API",
   "status":"OK"
@@ -178,7 +178,7 @@ Connection: keep-alive
                 <p>
                     No credentials have been sent with the request. Or the wrong credentials are send.
                     Tip: check if the API key is properly attached in the header <br>
-                <pre>Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==</pre>
+                    <pre>Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==</pre>
                 </p>
                 <h3>2.A.III 402 - Payment Required</h3>
                 <p>
@@ -222,7 +222,7 @@ Connection: keep-alive
                 <p>
                     All content must be encoded in UTF-8 and include the charset=utf-8.<br><br>
                     example:
-                <pre>Content-Type: application/json;charset=utf-8</pre>
+                    <pre>Content-Type: application/json;charset=utf-8</pre>
                 </p>
                 <h1 id="4">4. Data Types</h1>
                 <p>
@@ -233,21 +233,22 @@ Connection: keep-alive
                     <li><a href="#array">array</a></li>
                     <li><a href="#boolean">boolean</a></li>
                     <li><a href="#carrier">carrier</a></li>
+                    <li><a href="#coordinates">coordinates</a></li>
                     <li><a href="#country_code">country_code</a></li>
                     <li><a href="#currency">currency</a></li>
                     <li><a href="#date">date</a></li>
                     <li><a href="#delivery_type">delivery_type</a></li>
+                    <li><a href="#description">description</a></li>
                     <li><a href="#integer">integer</a></li>
-                    <li><a href="#coordinates">coordinates</a></li>
                     <li><a href="#isic_code">isic_code</a></li>
                     <li><a href="#label_position">label_position</a></li>
+                    <li><a href="#main">main</a></li>
                     <li><a href="#month_digit">month_digit</a></li>
                     <li><a href="#package_contents">package_contents</a></li>
                     <li><a href="#package_type">package_type</a></li>
                     <li><a href="#paper_size">paper_size</a></li>
                     <li><a href="#price">price</a></li>
                     <li><a href="#shipment_status">shipment_status</a></li>
-                    <li><a href="#main">main</a></li>
                     <li><a href="#sort_order">sort_order</a></li>
                     <li><a href="#string">string</a></li>
                     <li><a href="#text">text</a></li>
@@ -304,6 +305,21 @@ Connection: keep-alive
                                 <li> (bpost)</li>
                             </ol>
                         </td>
+                    </tr>
+                </table>
+                <h2 id="coordinates">coordinates</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>The position of the postNL locations</td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>[-+]?[\d]{1,2}\.\d+</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>52.192150633052</td>
                     </tr>
                 </table>
                 <h2 id="country_code">country_code</h2>
@@ -374,6 +390,21 @@ Connection: keep-alive
                         </td>
                     </tr>
                 </table>
+                <h2 id="description">description</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>You can translate the endpoint by sending the correct header (Accept-Language: en_GB)</td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>.{0,255}</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>Zending bezorgd</td>
+                    </tr>
+                </table>
                 <h2 id="integer">integer</h2>
                 <table>
                     <tr>
@@ -387,21 +418,6 @@ Connection: keep-alive
                     <tr>
                         <td>example</td>
                         <td>10. 20. NOT 2,3</td>
-                    </tr>
-                </table>
-                <h2 id="coordinates">coordinates</h2>
-                <table>
-                    <tr>
-                        <th>description</th>
-                        <td>The position of the postNL locations</td>
-                    </tr>
-                    <tr>
-                        <td>pattern</td>
-                        <td>[-+]?[\d]{1,2}\.\d+</td>
-                    </tr>
-                    <tr>
-                        <td>example</td>
-                        <td>52.192150633052</td>
                     </tr>
                 </table>
                 <h2 id="isic_code">isic_code</h2>
@@ -438,6 +454,33 @@ Connection: keep-alive
                                 <li>(bottom-left)</li>
                                 <li>(bottom-right)</li>
                             </ol>
+                        </td>
+                    </tr>
+                </table>
+                <h2 id="main">main</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>
+                            All statuses are divided into 5 main "categories". Only the last status in a category gets
+                            this attribute, meaning if there are consecutive duplicate statuses still only the most recent
+                            status gets the `main` attribute. Other statuses get the value `null`.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>[a-z]</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>
+                            <ul>
+                                <li>registered</li>
+                                <li>handed_to_carrier</li>
+                                <li>sorting</li>
+                                <li>distribution</li>
+                                <li>delivered</li>
+                            </ul>
                         </td>
                     </tr>
                 </table>
@@ -581,31 +624,6 @@ Connection: keep-alive
                         </td>
                     </tr>
                 </table>
-                <h2 id="main">main</h2>
-                <table>
-                    <tr>
-                        <th>description</th>
-                        <td>All statuses are divided into 5 main "categories". Only the last status in a category gets
-                          this attribute, meaning if there are consecutive duplicate statuses still only the most recent
-                          status gets the `main` attribute. Other statuses get the null value</td>
-                    </tr>
-                    <tr>
-                        <td>pattern</td>
-                        <td>[a-z]</td>
-                    </tr>
-                    <tr>
-                        <td>example</td>
-                        <td>
-                            <ul>
-                                <li>registered</li>
-                                <li>handed_to_carrier</li>
-                                <li>sorting</li>
-                                <li>distribution</li>
-                                <li>delivered</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
                 <h2 id="sort_order">sort_order</h2>
                 <table>
                     <tr>
@@ -634,21 +652,6 @@ Connection: keep-alive
                     <tr>
                         <td>example</td>
                         <td>3SMYPA123456789; Siriusdreef 66; Nederland; </td>
-                    </tr>
-                </table>
-                <h2 id="description">description</h2>
-                <table>
-                    <tr>
-                        <th>description</th>
-                        <td>You can translate the endpoint by sending the correct header (Accept-Language: en_GB)</td>
-                    </tr>
-                    <tr>
-                        <td>pattern</td>
-                        <td>.{0,255}</td>
-                    </tr>
-                    <tr>
-                        <td>example</td>
-                        <td>Zending bezorgd</td>
                     </tr>
                 </table>
                 <h2 id="text">text</h2>
@@ -803,8 +806,8 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     with the ShipmentOptions.delivery_type field. Currently delivery types are only available for NL and BE
                     shipments with package type 1. Delivery types 1-5 for NL and 1,4 for BE. The address of the package determines the delivery types available.
                     You need to use the DeliveryOptions interface to fetch the delivery types for a specific address. It is also
-            possible to specify a date on which the package has to be delivered with the ShipmentOptions.delivery_date field.
-            With delivery types 1 & 3 ShipmentOptions.delivery_date is required.
+                    possible to specify a date on which the package has to be delivered with the ShipmentOptions.delivery_date field.
+                    With delivery types 1 & 3 ShipmentOptions.delivery_date is required.
                 </p>
                 <h4>1. Morning</h4>
                 <p>
@@ -952,7 +955,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>
                     Only <a href="#package_type">package type</a> 1 (package) can be insured so <a href="#package_type">package type</a> is set to 1. Insurance amount needs to be
                     specified
-                    in cents and needs to be one of these amounts (10000, 25000, 50000, 500000, <= 500000). The package
+                    in cents and needs to be one of these amounts (10000, 25000, 50000, 500000, &lt;= 500000). The package
                     needs
                     to be insured up to 5000 euros so we set insurance.amount to 500000 cents. All NL insured packages
                     need
@@ -1102,7 +1105,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>
                     For these examples we are going to create shipments.<br>
                     <br>
-                <h2>Create national shipments</h2>
+                    <h2>Create national shipments</h2>
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1487,7 +1490,6 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   }
 }
 </pre>
-
                 <h2 id="6_C">6.C Delete Shipment</h2>
                 <p>
                     <strong>
@@ -1637,7 +1639,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>
                     <strong>Proceed with actual request</strong><br>
                     <strong>Request</strong>
-                <pre>
+                    <pre>
 POST https://api.myparcel.nl/return_shipments
 User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw== </pre>
@@ -1821,7 +1823,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                 </p>
                 <p>
                     <strong>Request</strong>
-                <pre>
+                    <pre>
 GET https://api.myparcel.nl/shipments?q=Niels&amp;status=1
 User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
@@ -1829,7 +1831,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                 </p>
                 <p>
                     <strong>Response</strong>
-                <pre>
+                    <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
@@ -2886,23 +2888,22 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <strong>cooled_delivery</strong><br>
                     Data type: <a href="#boolean">boolean</a><br>
                     Required: No.<br>
-            Cooled_delivery is only valid for cc=NL and with shipment_type 1 or 3. <br>
+                    Cooled_delivery is only valid for cc=NL and with shipment_type 1 or 3. <br>
                 </p>
                 <p>
                     <strong>label_description</strong><br>
                     Data type: <a href="#string">string</a><br>
                     Required: No.<br>
                     This description will appear on the shipment label.<strong>
-                    Note: This will be overridden
-                    for return shipment by the following: Retour – 3SMYPAMYPAXXXXXX
-                </strong>
+                        Note: This will be overridden
+                        for return shipment by the following: Retour – 3SMYPAMYPAXXXXXX
+                    </strong>
                 </p>
                 <p>
                     <strong>age_check</strong><br>
                     Data type: <a href="#boolean">boolean</a><br>
                     Required: No.<br>
                     The recipient must sign for the package and must be at least 18 years old.
-                </strong>
                 </p>
                 <h3 id="7_C_2">7.C.2 Example</h3>
                 <p>Example a</p>
@@ -2999,10 +3000,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     Data type: <a href="#boolean">boolean</a><br>
                     Required: No<br>
                     When this setting is true the recipient address will be saved in the address book.<strong>
-                    Only for
-                    valid
-                    for POST request.
-                </strong>
+                        Only for
+                        valid
+                        for POST request.
+                    </strong>
                 </p>
                 <p>
                     <strong>delivery_notification</strong><br>
@@ -3043,9 +3044,9 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <strong>invoice</strong><br>
                     Data type: <a href="#string">string</a><br>
                     Required: Yes for <strong>commercial goods, commercial samples</strong> and <strong>
-                    return
-                    shipment
-                </strong> package contents.<br>
+                        return
+                        shipment
+                    </strong> package contents.<br>
                     The invoice number for the commercial goods or samples of <strong>package contents</strong>.
                 </p>
                 <p>
@@ -3371,56 +3372,47 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <p>
                     <strong>code</strong><br>
                     Data type: <a href="#string">string</a><br>
-                  </p>
-                <p>
-                  <strong>description</strong><br>
-                  Data type: <a href="#description">description</a><br>
                 </p>
                 <p>
-                  <strong>time</strong><br>
-                  Data type: <a href="#time">time</a><br>
+                    <strong>description</strong><br>
+                    Data type: <a href="#description">description</a><br>
                 </p>
                 <p>
-                  <strong>link_consumer_portal</strong><br>
-                  Data type: <a href="#string">string</a><br>
-                  URL for custom track and trace page. More information about this service is found
-                  <a href="https://blog.myparcel.nl/jouw-track-en-trace-pagina" target="_blank">here</a>. If the
-                  consumer portal is turned off, the carrier tracking page is used. You can also pass a language
-                  parameter: <span class="nice">?lang=en_GB</span>.
+                    <strong>time</strong><br>
+                    Data type: <a href="#time">time</a><br>
                 </p>
                 <p>
-                  <strong>link_tracktrace</strong><br>
-                  Data type: <a href="#string">string</a><br>
-                  Carrier tracking page
+                    <strong>link_consumer_portal</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    URL for custom track and trace page. More information about this service is found
+                    <a href="https://blog.myparcel.nl/jouw-track-en-trace-pagina" target="_blank">here</a>. If the
+                    consumer portal is turned off, the carrier tracking page is used. You can also pass a language
+                    parameter: <span class="nice">?lang=en_GB</span>.
                 </p>
                 <p>
-                  <strong>recipient</strong><br>
-                  Data type: <a href="#7_B">Address</a><br>
+                    <strong>link_tracktrace</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    Carrier tracking page
                 </p>
                 <p>
-                  <strong>sender</strong><br>
-                  Data type: <a href="#7_B">Address</a><br>
+                    <strong>recipient</strong><br>
+                    Data type: <a href="#7_B">Address</a><br>
                 </p>
                 <p>
-                  <strong>options</strong><br>
-                  Data type: <a href="#7_C">ShipmentOptions</a><br>
+                    <strong>sender</strong><br>
+                    Data type: <a href="#7_B">Address</a><br>
                 </p>
                 <p>
-                  <strong>pickup</strong><br>
-                  Data type: <a href="#7_O">PickupLocation</a><br>
+                    <strong>options</strong><br>
+                    Data type: <a href="#7_C">ShipmentOptions</a><br>
                 </p>
                 <p>
-                    <strong>status.current</strong><br>
-                    Data type: <a href="#shipment_status">shipment_status</a><br>
+                    <strong>pickup</strong><br>
+                    Data type: <a href="#7_O">PickupLocation</a><br>
                 </p>
                 <p>
-                    <strong>status.main</strong><br>
-                    Data type: <a href="#main">main</a><br>
-                </p>
-                <p>
-                    <strong>status.final</strong><br>
-                    Data type: <a href="#boolean">boolean</a><br>
-                    When `true` no new statuses are expected<br>
+                    <strong>status</strong><br>
+                    Data type: <a href="#7_S">TrackTraceStatus</a><br>
                 </p>
                 <p>
                     <strong>history</strong><br>
@@ -3433,7 +3425,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 </p>
                 <p>
                     <strong>delivery_moment</strong><br>
-                    Data type: <a href="#7_S">DateTimeStartEnd</a><br>
+                    Data type: <a href="#7_T">DeliveryMoment</a><br>
                 </p>
                 <h3 id="7_L_2">7.L.2 Example</h3>
                 <p>GET example</p>
@@ -3766,34 +3758,43 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "url": "https://api.myparcel.nl/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
 }
 </pre>
-                <h2 id="7_S">7.S DateTimeStartEnd Object Definition</h2>
+                <h2 id="7_S">7.S TrackTraceStatus Object Definition</h2>
                 <h3 id="7_S_1">7.S.1 Overview</h3>
-                <p>An object with a start and end DateTime.</p>
+                <p>An object with a current status, main and final.</p>
                 <p>
-                    <strong>delivery_moment.start.date</strong><br>
-                    Data type: <a href="#timestamp">timestamp</a><br>
+                    <strong>current</strong><br>
+                    Data type: <a href="#shipment_status">shipment_status</a><br>
                 </p>
                 <p>
-                    <strong>delivery_moment.start.timezone_type</strong><br>
-                    Data type: <a href="#integer">integer</a><br>
+                    <strong>main</strong><br>
+                    Data type: <a href="#main">main</a><br>
                 </p>
                 <p>
-                    <strong>delivery_moment.start.timezone</strong><br>
-                    Data type: <a href="#string">string</a><br>
-                </p>
-                <p>
-                    <strong>delivery_moment.end.date</strong><br>
-                    Data type: <a href="#timestamp">timestamp</a><br>
-                </p>
-                <p>
-                    <strong>delivery_moment.end.timezone_type</strong><br>
-                    Data type: <a href="#integer">integer</a><br>
-                </p>
-                <p>
-                    <strong>delivery_moment.end.timezone</strong><br>
-                    Data type: <a href="#string">string</a><br>
+                    <strong>final</strong><br>
+                    Data type: <a href="#boolean">boolean</a><br>
+                    When `true` no new statuses are expected<br>
                 </p>
                 <h3 id="7_S_2">7.S.2 Example</h3>
+                <p>Example</p>
+                <pre>
+"status": {
+  "current": 7,
+  "main": "delivered",
+  "final": true
+}
+</pre>
+                <h2 id="7_T">7.T DeliveryMoment Object Definition</h2>
+                <h3 id="7_T_1">7.T.1 Overview</h3>
+                <p>An object with a start and end DateTime.</p>
+                <p>
+                    <strong>start</strong><br>
+                    Data type: <a href="#7_U">DateTimeStartEnd</a><br>
+                </p>
+                <p>
+                    <strong>end</strong><br>
+                    Data type: <a href="#7_U">DateTimeStartEnd</a><br>
+                </p>
+                <h3 id="7_T_2">7.T.2 Example</h3>
                 <p>Example</p>
                 <pre>
 "delivery_moment": {
@@ -3807,6 +3808,30 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     "timezone_type": 3,
     "timezone": "Europe/Amsterdam"
   }
+}
+</pre>
+                <h2 id="7_U">7.U DateTimeStartEnd Object Definition</h2>
+                <h3 id="7_U_1">7.U.1 Overview</h3>
+                <p>An object with a date, timezone_type and timezone.</p>
+                <p>
+                    <strong>date</strong><br>
+                    Data type: <a href="#timestamp">timestamp</a><br>
+                </p>
+                <p>
+                    <strong>timezone_type</strong><br>
+                    Data type: <a href="#integer">integer</a><br>
+                </p>
+                <p>
+                    <strong>timezone</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                </p>
+                <h3 id="7_U_2">7.U.2 Example</h3>
+                <p>Example</p>
+                <pre>
+{
+    "date": "2019-02-19 17:15:00.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
 }
 </pre>
                 <h1 id="8">8. Delivery options</h1>
@@ -3823,11 +3848,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <strong>Objects</strong><br>
                     Upon success two <a href="#array">arrays</a> are returned; one for <a href="#9_A">DeliveryOptions</a> and one
                     for <a href="#9_B">PickupOptions</a> objects is returned. This object contains delivery date, time and pricing. Upon error an Error object is returned.
-                    <br/>
+                    <br />
                     <div class="postman-run-button"></div>
-                    <br/>
-                    <br/>
-                        To show delivery options to customers, you can use our javascript <a href="http://github.com/myparcelnl/checkout" target="_blank">code</a>. Use our <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">sandbox</a> for an example and easier integration.
+                    <br />
+                    <br />
+                    To show delivery options to customers, you can use our javascript <a href="http://github.com/myparcelnl/checkout" target="_blank">code</a>. Use our <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">sandbox</a> for an example and easier integration.
                     <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">
                         <div class="box" style="width: 370px;">
                             <img src="https://monosnap.com/image/mOGXF5KFCjVALnbjg67IgPB99bjLuV.png">
@@ -3942,7 +3967,8 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     "human": "Example"
   }]
 }
-</pre></td>
+</pre>
+                        </td>
                     </tr>
                 </table>
                 <h3 id="8_A_3">8.A.3 Parameters</h3>
@@ -4707,8 +4733,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 <h2 id="9_C">9.C OpeningHours Object Definition</h2>
                 <h3 id="9_C_1">9.C.1 Overview</h3>
                 <!--<p>
-                        This object...
-                    </p>-->
+            This object...
+        </p>-->
                 <p>
                     <strong>monday</strong><br>
                     Data type: <a href="#array">array</a> of <a href="#string">string</a><br>
@@ -4760,8 +4786,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 <h2 id="9_D">9.D DeliveryOptionTime Object Definition</h2>
                 <h3 id="9_D_1">9.D.1 Overview</h3>
                 <!--<p>
-                        This object...
-                    </p>-->
+            This object...
+        </p>-->
                 <p>
                     <strong>start</strong><br>
                     Data type: <a href="#time">time</a><br>
@@ -4810,8 +4836,8 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 <h2 id="9_E">9.E PickupOptionTime Object Definition</h2>
                 <h3 id="9_E_1">9.E.1 Overview</h3>
                 <!--<p>
-                        This object...
-                    </p>-->
+            This object...
+        </p>-->
                 <p>
                     <strong>start</strong><br>
                     Data type: <a href="#time">time</a><br>
@@ -4846,7 +4872,6 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     Use this endpoint to subscribe to an event in our API. Upon success a HTTP/1.1 200 OK with
                     subscription ids is returned. You must use HTTPS for callback because it's secure and tamper proof.
                     You can only have one webhook at a time for each shop so adding the same webhook overwrites any existing one. <b>Tip:</b> You can test webhooks with <a href="https://webhook.site/">Webhook Tester</a>
-
                     We currently only have one available hook: shipment_status_change. Whenever the <a href="#shipment_status">status</a> of a shipment changes this webhook will send you an update with the new value.
                 </p>
                 <div class="postman-run-button"></div>
@@ -4992,7 +5017,6 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
   }
 }
 </pre>
-
                 <h2 id="10_C">10.C Delete subscription</h2>
                 <h3 id="10_C_1">10.C.1 Overview</h3>
                 <p>
@@ -5065,7 +5089,6 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                 <p><strong>Response</strong></p>
                 <pre>HTTP/1.1 204 No Content</pre>
-
                 <h1 id="11">11. Webhook Object Definitions</h1>
                 <h2 id="11_A">11.A Subscription Object Definition</h2>
                 <h3 id="11_A_1">11.A.1 Overview</h3>
@@ -5129,7 +5152,6 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     callback URL specified in the Subscription object whenever a shipment status
                     changes.
                 </p>
-
                 <p>
                     <strong>shipment_id</strong><br>
                     Data type: <a href="#string">string</a><br>
@@ -5224,15 +5246,15 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                         <span class="site-footer-owner">MyParcel</span>
                     </p>
                     <p>
-                            <span class="site-footer-credits">
-                                <strong>Adres </strong>Siriusdreef 66-68, 2132 WT Hoofddorp<br />
-                                <strong>Telefoon </strong>023 30 30 315&nbsp;
-                                <strong>E-mail</strong> &nbsp;info@myparcel.nl<br />
-                                <strong>Website </strong><a href="https://www.myparcel.nl">www.myparcel.nl</a>&nbsp;
-                                <strong>IBAN </strong>NL48ABNA0447850539&nbsp;
-                                <strong>KvK </strong>Amsterdam 34 09 97 58 <br />
-                                <strong>BTW-nr. </strong>NL8045.33.258.B01
-                            </span>
+                        <span class="site-footer-credits">
+                            <strong>Adres </strong>Siriusdreef 66-68, 2132 WT Hoofddorp<br />
+                            <strong>Telefoon </strong>023 30 30 315&nbsp;
+                            <strong>E-mail</strong> &nbsp;info@myparcel.nl<br />
+                            <strong>Website </strong><a href="https://www.myparcel.nl">www.myparcel.nl</a>&nbsp;
+                            <strong>IBAN </strong>NL48ABNA0447850539&nbsp;
+                            <strong>KvK </strong>Amsterdam 34 09 97 58 <br />
+                            <strong>BTW-nr. </strong>NL8045.33.258.B01
+                        </span>
                         <br />
                         &nbsp;
                     </p>
