@@ -4871,7 +4871,11 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 <p>
                     Use this endpoint to subscribe to an event in our API. Upon success a HTTP/1.1 200 OK with
                     subscription ids is returned. You must use HTTPS for callback because it's secure and tamper proof.
-                    You can only have one webhook at a time for each shop so adding the same webhook overwrites any existing one. <b>Tip:</b> You can test webhooks with <a href="https://webhook.site/">Webhook Tester</a>
+                    You can only have one webhook at a time for each shop so adding the same webhook overwrites any existing one.
+                    It is necessary to use lower case characters in the URL of the webhook call.
+                </p>
+                <p>
+                    <b>Tip:</b> You can test webhooks with <a href="https://webhook.site/">Webhook Tester</a>
                     We currently only have one available hook: shipment_status_change. Whenever the <a href="#shipment_status">status</a> of a shipment changes this webhook will send you an update with the new value.
                 </p>
                 <div class="postman-run-button"></div>
