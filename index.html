@@ -3013,6 +3013,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     delivered.
                 </p>
                 <p>
+                    <strong>disable_auto_detect_pickup</strong><br>
+                    Data type: <a href="#boolean">boolean</a><br>
+                    Required: No.<br>
+                    When this setting is true MyParcel do not auto detect pickup addresses.
+                </p>
+                <p>
                     <strong>delivery_notification_email</strong><br>
                     Data type: <a href="#array">array</a> of <a href="#string">string</a><br>
                     Required: No.<br>
@@ -3023,6 +3029,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                 <pre>
 {
   "save_recipient_address": 1,
+  "disable_auto_detect_pickup": 1,
   "delivery_notification": 1,
   "delivery_notification_email": "testing@myparcel.nl"
 }
