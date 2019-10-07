@@ -5145,6 +5145,16 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>GET Example</p>
                 <pre>
 {
+  "id": 79798,
+  "account_id": 126594,
+  "shop_id": 39399,
+  "hook": "shipment_status_change",
+  "url": "https://seoshop.nl/myparcel/notifications"
+}
+</pre>
+The above is an example of the Webhook Object. However, you receive the following content:
+                <pre>
+{
   "data": {
     "webhook_subscriptions": [{
       "id": 79798,
@@ -5156,6 +5166,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
   }
 }
 </pre>
+
                 <h2 id="11_B">11.B ShipmentStatusChangeEvent Object Definition</h2>
                 <h3 id="11_B_1">11.B.1 Overview</h3>
                 <p>
@@ -5212,7 +5223,6 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 </table>
                 <h3 id="11_B_3">11.B.3 Example</h3>
                 <pre>
-[
   {
     "shipment_id": "25482412",
     "account_id": 7003,
@@ -5220,7 +5230,22 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
     "status": 2,
     "barcode": "3SMYPA749883621"
   }
-]
+</pre>
+The above is an example of the ShipmentStatusChangeEvent Object. However, the following notification is sent to your callback URL:
+<pre>
+{
+    "data": {
+        "hooks": [
+            {
+                "shipment_id": "25482412",
+                "account_id": 7003,
+                "shop_id": 1897,
+                "status": 2,
+                "barcode": "3SMYPA749883621"
+            }
+        ]
+    }
+}
 </pre>
                 <h2 id="11_C">11.C SubscriptionIds Object Definition</h2>
                 <h3>Overview</h3>
