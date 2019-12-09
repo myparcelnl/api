@@ -26,7 +26,7 @@ if ($error) {
   echo "cURL Error #:" . $err;
 } else {
 
-  $associativeArray = json_decode($result, TRUE);
+  $associativeArray = json_decode($response, TRUE);
 
   /*
   The array
