@@ -248,8 +248,10 @@ Connection: keep-alive
                     <li><a href="#package_type">package_type</a></li>
                     <li><a href="#paper_size">paper_size</a></li>
                     <li><a href="#price">price</a></li>
+                    <li><a href="#printer_identifier">printer_identifier</a></li>
                     <li><a href="#shipment_status">shipment_status</a></li>
                     <li><a href="#sort_order">sort_order</a></li>
+                    <li><a href="#webhook_status">webhook_status</a></li>
                     <li><a href="#string">string</a></li>
                     <li><a href="#text">text</a></li>
                     <li><a href="#time">time</a></li>
@@ -582,6 +584,23 @@ Connection: keep-alive
                         <td>{"amount": 10000, "currency": "EUR"}</td>
                     </tr>
                 </table>
+                <h2 id="printer_identifier">printer identifier</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>
+                          In this field you can enter your printer identifier. This field is also sent with the webhook shipment_label_created. You are responsible for controlling your own printer based on a printer identifier.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>.{0,255}</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>pinter_12</td>
+                    </tr>
+                </table>
                 <h2 id="shipment_status">shipment_status</h2>
                 <table>
                     <tr>
@@ -638,6 +657,21 @@ Connection: keep-alive
                         <td>example</td>
                         <td>ASC (ascending), DESC (descending)</td>
                     </tr>
+                </table>
+                <h2 id="webhook_status">webhook status</h2>
+                <table>
+                  <tr>
+                    <th>description</th>
+                    <td>A webhook status</td>
+                  </tr>
+                  <tr>
+                    <td>pattern</td>
+                    <td>[a-z]*</td>
+                  </tr>
+                  <tr>
+                    <td>example</td>
+                    <td>success, failed</td>
+                  </tr>
                 </table>
                 <h2 id="string">string</h2>
                 <table>
@@ -1049,6 +1083,10 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                         <td>
                             Content-type: application/vnd.unrelated_return_shipment+json; charset=utf-8 (For <a href="#7_J">UnrelatedReturnShipments</a> JSON request)
                         </td>
+                    </tr>
+                    <tr>
+                        <th>Optional request headers</th>
+                        <td>Accept: application/vnd.shipment_label+json;charset=utf-8 (To generate a label immediately. You will receive a URL that points to a pdf)</td>
                     </tr>
                     <tr>
                         <th>URI parameters</th>
@@ -2432,6 +2470,13 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     "signature": 1,
     "return": 1
   },
+  "general_settings": {
+    "save_recipient_address": 1,
+    "disable_auto_detect_pickup": 1,
+    "delivery_notification": 1,
+    "delivery_notification_email": "testing@myparcel.nl"
+    "printer_identifier": "printer_id_12"
+  },
   "carrier": 1
 }
 </pre>
@@ -3024,6 +3069,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     Required: No.<br>
                     This email addresses that will receive a delivery notification.
                 </p>
+                <p>
+                    <strong>printer_identifier</strong><br>
+                    Data type: <a href="#printer_identifier">printer_identifier</a> of <a href="#string">string</a><br>
+                    Required: No.<br>
+                  In this field you can enter your printer identifier. This field is also sent with the webhook shipment_label_created. You are responsible for controlling your own printer based on a printer identifier.
+                </p>
                 <h3 id="7_D_2">7.D.2 Example</h3>
                 <p>Example</p>
                 <pre>
@@ -3032,6 +3083,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "disable_auto_detect_pickup": 1,
   "delivery_notification": 1,
   "delivery_notification_email": "testing@myparcel.nl"
+  "printer_identifier": "printer_id_12"
 }
 </pre>
                 <h2 id="7_E">7.E CustomsDeclaration Object Definition</h2>
@@ -4878,12 +4930,17 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 <p>
                     Use this endpoint to subscribe to an event in our API. Upon success a HTTP/1.1 200 OK with
                     subscription ids is returned. You must use HTTPS for callback because it's secure and tamper proof.
-                    You can only have one webhook at a time for each shop so adding the same webhook overwrites any existing one.
-                    We always send the webhook to a URL with lowercase caraters. Therefore it is necessary to use lowercase characters in the URL of the webhook call.
+                    You can only have one webhook type at a time for each shop so adding the same webhook overwrites any existing one.
+                    We always send the webhook to a URL with lowercase characters. Therefore it is necessary to use lowercase characters in the URL of the webhook call.
                 </p>
                 <p>
-                    <b>Tip:</b> You can test webhooks with <a href="https://webhook.site/">Webhook Tester</a>
-                    We currently only have one available hook: shipment_status_change. Whenever the <a href="#shipment_status">status</a> of a shipment changes this webhook will send you an update with the new value. We will not send an update with a status 1 and status 2.
+                    We currently have two available hooks: <span class="nice">shipment_status_change</span> and <span class="nice">shipment_label_created</span>:
+                    <ul>
+                      <li>shipment_status_change: Whenever the <a href="#shipment_status">status</a> of a shipment changes this webhook will send you an update with the new value. We will not send an update with a status 1 and status 2.</li>
+                      <li>shipment_label_created: Whenever a label is created this webhook will send you a message with the url of the label.</li>
+                    </ul>
+                    <b>Tip:</b> You can test webhooks with <a href="https://webhook.site/" target="_blank">Webhook Tester</a>
+                    <b>Tip:</b> You can also use the backoffice to update the webhook url.
                 </p>
                 <div class="postman-run-button"></div>
                 <h3 id="10_A_2">10.A.2 Reference</h3>
@@ -5112,7 +5169,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 </p>
                 <p>
                     <strong>hook</strong><br>
-                    Data type: <a href="#string">string</a><br>
+                    Data type: <a href="#string">string</a><br> (shipment_label_created or shipment_status_change)
                     Required: Yes.<br>
                     The event from which you want to receive notifications.
                 </p>
@@ -5218,7 +5275,7 @@ The above is an example of the Webhook Object. However, you receive the followin
                         <td>X-MyParcel-HookId: d91e16cbfbcfec0b17cfafb3a9bf3c1b206a9dd0</td>
                     </tr>
                     <tr>
-                        <td>X-MyParcel-Authorization: basic BASE64(API_KEY)</td>
+                        <td>X-MyParcel-Authorization: ZWUyZTA4MjQzMWIxZWZhNGU3MzBkZWRjOGExYmU3ZTE3NjExMDEyMg== (Base64 of your api key))</td>
                     </tr>
                 </table>
                 <h3 id="11_B_3">11.B.3 Example</h3>
@@ -5247,7 +5304,92 @@ The above is an example of the ShipmentStatusChangeEvent Object. However, the fo
     }
 }
 </pre>
-                <h2 id="11_C">11.C SubscriptionIds Object Definition</h2>
+                <h2 id="11_C">11.C ShipmentLabelCreated Object Definition</h2>
+                <h3 id="11_C_1">11.C.1 Overview</h3>
+                <p>
+                    This object contains the shipment label created event. This object is sent to the
+                    callback URL specified in the Subscription object whenever a shipment label
+                    is created.
+                </p>
+                <p>
+                    <strong>status</strong><br>
+                    Data type: <a href="#webhook_status">webhook status</a> success or failed<br>
+                </p>
+                <p>
+                    <strong>shipment_ids</strong><br>
+                    Data type: <a href="#array">array</a> of <a href="#7_H">ShipmentId</a> objects.<br>
+                </p>
+                <p>
+                    <strong>printer_identifier</strong><br>
+                    Data type: <a href="#printer_identifier">string</a><br>
+                </p>
+                <p>
+                    <strong>pdf</strong><br>
+                    Data type: <a href="#string">url</a><br>
+                    This field contains a URL that leads to a PDF.
+                </p>
+                <h3 id="11_C_2">11.C.2 Reference</h3>
+                <p>
+                    We send the following headers to your environment:
+                </p>
+                <table>
+                    <tr>
+                        <th rowspan="5">Headers</th>
+                        <td>User-Agent: MyParcel/Webhook-Notifier</td>
+                    </tr>
+                    <tr>
+                        <td>Content-Type: application/json; charset=utf-8</td>
+                    </tr>
+                    <tr>
+                        <td>X-MyParcel-Hook: shipment_label_created</td>
+                    </tr>
+                    <tr>
+                        <td>X-MyParcel-HookId: d91e16cbfbcfec0b17cfafb3a9bf3c1b206a9dd0</td>
+                    </tr>
+                    <tr>
+                        <td>X-MyParcel-Authorization: ZWUyZTA4MjQzMWIxZWZhNGU3MzBkZWRjOGExYmU3ZTE3NjExMDEyMg== (Base64 of your API key))</td>
+                    </tr>
+                </table>
+                <h3 id="11_C_3">11.C.3 Example</h3>
+                <pre>
+  {
+    "status": "success",
+    "shipment_ids": [
+      15001826
+    ],
+    "printer_identifier": "YOUR_PRINTER_ID",
+    "pdf": "http://jos.api.staging.myparcel.nl/pdfs/f569bc5a247fcec09d6a8cba16ff7629ca8062f3"
+  }
+</pre>
+<pre>
+  {
+    "status": "failed",
+    "shipment_ids": [
+      15001820
+    ],
+    "printer_identifier": "",
+    "pdf": "",
+    "reason": "payment required"
+  }
+</pre>
+The above is an example of the ShipmentLabelCreated Object. However, the following notification is sent to your callback URL:
+<pre>
+  {
+    "data": {
+      "hooks": [
+        {
+          "status": "success",
+          "shipment_ids": [
+            15001826
+          ],
+          "printer_identifier": "YOUR_PRINTER_ID",
+          "pdf": "http://jos.api.staging.myparcel.nl/pdfs/f569bc5a247fcec09d6a8cba16ff7629ca8062f3"
+        }
+      ]
+    }
+  }
+</pre>
+                <h2 id="11_D">11.C SubscriptionIds Object Definition</h2>
                 <h3>Overview</h3>
                 <p>
                     This object contains an <a href="#array">array</a> of <a href="#11_D">SubscriptionId</a> objects.<br>
@@ -5257,7 +5399,7 @@ The above is an example of the ShipmentStatusChangeEvent Object. However, the fo
                     Required: n/a.<br>
                     <a href="#array">array</a> of <a href="#11_D">SubscriptionId</a> objects.
                 </p>
-                <h2 id="11_D">11.D SubscriptionId Object Definition</h2>
+                <h2 id="11_E">11.D SubscriptionId Object Definition</h2>
                 <h3>Overview</h3>
                 <p>
                     <strong>id</strong><br>
