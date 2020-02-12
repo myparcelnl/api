@@ -289,6 +289,27 @@ Connection: keep-alive
                         <td>0 (false), 1 (true)</td>
                     </tr>
                 </table>
+                <h2 id="platform">platform</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>Platform name</td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>[a-z]</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>
+                            <ul>
+                                <li>myparcel</li>
+                                <li>belgie</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                </table>
                 <h2 id="carrier">carrier</h2>
                 <table>
                     <tr>
@@ -4567,7 +4588,12 @@ HTTP/1.1 204 No Content
                 <table>
                     <tr>
                         <th>URI</th>
-                        <td>https://api.myparcel.nl/delivery_options</td>
+                        <td>
+                            <ul>
+                                <li>https://api.myparcel.nl/delivery_options</li>
+                                <li>https://api.myparcel.nl/pickup_locations</li>
+                            </ul>
+                        </td>
                     </tr>
                     <tr>
                         <th>Methods</th>
@@ -4582,7 +4608,7 @@ HTTP/1.1 204 No Content
                         <td>None.</td>
                     </tr>
                     <tr>
-                        <th rowspan="14">Query parameters</th>
+                        <th rowspan="15">Query parameters</th>
                         <td>cc = <a href="#country_code">country_code</a></td>
                     </tr>
                     <tr>
@@ -4592,10 +4618,13 @@ HTTP/1.1 204 No Content
                         <td>number = <a href="#string">string</a></td>
                     </tr>
                     <tr>
+                        <td>platform = <a href="#platform">platform</a></td>
+                    </tr>
+                    <tr>
                         <td>carrier = <a href="#carrier">carrier</a></td>
                     </tr>
                     <tr>
-                        <td>delivery_time = <a href="#time">time</a></td>
+                        <td>delivery_time = <a href="#time">time</a></td> <!--bestaat  deze nog -->
                     </tr>
                     <tr>
                         <td>delivery_date = <a href="#date">date</a></td>
@@ -4616,7 +4645,7 @@ HTTP/1.1 204 No Content
                         <td>deliverydays_window = <a href="#integer">integer</a></td>
                     </tr>
                     <tr>
-                        <td>exclude_delivery_type = <a href="#delivery_type">delivery_type</a></td>
+                        <td>exclude_delivery_type = <a href="#delivery_type">delivery_type</a></td> <!--bestaat deze nog -->
                     </tr>
                     <tr>
                         <td>latitude = <a href="#coordinates">coordinates</a></td>
@@ -4633,11 +4662,11 @@ HTTP/1.1 204 No Content
                         <td>HTTP/1.1 200 OK</td>
                     </tr>
                     <tr>
-                        <td>Content-Type: application/json; charset=utf-8</td>
+                        <td>Content-Type: application/json;version=2.0 charset=utf-8</td>
                     </tr>
                     <tr>
                         <th>Response body</th>
-                        <td><a href="#array">array</a> of <a href="#9_A">DeliveryOptions</a> and <a href="#array">array</a> of <a href="#9_B">PickupOptions</a> objects</td>
+                        <td><a href="#array">array</a> of <a href="#9_A">DeliveryOptions</a> or <a href="#array">array</a> of <a href="#9_B">PickupOptions</a> objects</td>
                     </tr>
                     <tr>
                         <th>Error response</th>
@@ -4693,6 +4722,12 @@ HTTP/1.1 204 No Content
                     Data type: <a href="#string">string</a><br>
                     Required: yes<br>
                     The street number for which to fetch the delivery options.
+                </p>
+                <p>
+                    <strong>platform</strong><br>
+                    Data type: <a href="#platform">platform</a><br>
+                    Required: no<br>
+                    The platform where you want the data from
                 </p>
                 <p>
                     <strong>delivery_time</strong><br>
@@ -4780,9 +4815,10 @@ HTTP/1.1 204 No Content
                     <strong>Request</strong>
                 </p>
                 <pre>
-GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=1 HTTP/1.1
+GET https://api.myparcel.nl/delivery_options/?platform=myparcel&carrier=postnl&cc=nl&number=66&postal_code=2132WT HTTP/1.1
 User-Agent: CustomApiCall/2
-</pre>
+accept: application/json;charset=utf-8;version=2.0
+                </pre>
                 <p><strong>Response</strong></p>
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
@@ -4923,6 +4959,156 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 }
 </pre>
                 <p>
+                    <strong>Get pickup options for 2132WT, 66 for PostNL</strong><br>
+                    <strong>Request</strong>
+                </p>
+                <pre>
+GET https://api.myparcel.nl/pickup_locations/?carrierName=postnl&platform=myparcel&carrier=postnl&cc=nl&number=66&postal_code=2132WT HTTP/1.1
+User-Agent: CustomApiCall/2
+accept: application/json;charset=utf-8;version=2.0
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+    "data": {
+        "pickup_locations": [
+            {
+                "address": {
+                    "cc": "NL",
+                    "city": "Hoofddorp",
+                    "street": "Polderplein",
+                    "postal_code": "2132BA",
+                    "number": "3"
+                },
+                "possibilities": [
+                    {
+                        "delivery_type_id": 4,
+                        "delivery_type_name": "pickup",
+                        "moment": {
+                            "start": {
+                                "date": "2020-02-13 16:00:00.000000",
+                                "timezone_type": 3,
+                                "timezone": "Europe/Amsterdam"
+                            }
+                        }
+                    }
+                ],
+                "location": {
+                    "location_name": "Primera Sanders",
+                    "retail_network_id": "PNPNL-01",
+                    "distance": "1696",
+                    "latitude": "52.30329367",
+                    "longitude": "4.69476214",
+                    "location_code": "176227",
+                    "phone_number": null,
+                    "opening_hours": {
+                        "monday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-17 11:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-17 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "tuesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-18 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-18 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "wednesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-19 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-19 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "thursday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-13 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-13 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "friday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-14 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-14 21:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "saturday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-15 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-15 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "sunday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-16 12:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-16 17:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+</pre>
+                <p>
                     <strong>
                         Get delivery options for 2132WT, 66 for PostNL cutoff time 16h00, dropoff days
                         Mon - Sat, dropoff delay is zero, delivery window is 2 days and morning is excluded as delivery
@@ -4932,336 +5118,508 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <strong>Request</strong>
                 </p>
                 <pre>
-GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=1&amp;cutoff_time=16:00:00&amp;dropoff_days=1;2;3;4;5;6&amp;monday_delivery=1&amp;dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1
+GET https://api.myparcel.nl/delivery_options/?platform=myparcel&carrier=postnl&cc=nl&number=66&postal_code=2132WT&cutoff_time=16:00:00&dropoff_days=1;2;3;4;5;6&monday_delivery=1&dropoff_delay=0&deliverydays_window=2&exclude_delivery_type=1   HTTP/1.1
 User-Agent: CustomApiCall/2
+Accept: application/json;charset=utf-8;version=2.0
 </pre>
                 <p><strong>Response</strong></p>
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
-{
-   "data":{
-      "delivery":[
-         {
-            "date":"2017-05-06",
-            "time":[
-               {
-                  "start":"08:30:00",
-                  "end":"21:30:00",
-                  "price":{
-                     "currency":"EUR",
-                     "amount":0
-                  },
-                  "price_comment":"standard",
-                  "comment":"",
-                  "type":2
-               }
-            ]
-         },
-         {
-            "date":"2017-05-08",
-            "time":[
-               {
-                  "start":"10:30:00",
-                  "end":"13:00:00",
-                  "price":{
-                     "currency":"EUR",
-                     "amount":0
-                  },
-                  "price_comment":"standard",
-                  "comment":"",
-                  "type":2
-               }
-            ]
-         }
-      ],
-      "pickup":[
-         {
-            "date":"2017-05-06",
-            "time":[
-               {
-                  "start":"16:00:00",
-                  "type":4,
-                  "price":{
-                     "amount":0,
-                     "currency":"EUR"
-                  }
-               },
-               {
-                  "start":"08:30:00",
-                  "type":5,
-                  "price":{
-                     "amount":125,
-                     "currency":"EUR"
-                  }
-               }
-            ],
-            "location":"Staples Office Centre",
-            "street":"Jacobus Spijkerdreef",
-            "number":"10",
-            "postal_code":"2132PZ",
-            "city":"Hoofddorp",
-            "start_time":"08:30:00",
-            "price":125,
-            "price_comment":"retailexpress",
-            "comment":"Dit is een Business Point. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-            "phone_number":"023-5576310",
-            "opening_hours":{
-               "monday":[
-                  "08:00-18:30"
-               ],
-               "tuesday":[
-                  "08:00-18:30"
-               ],
-               "wednesday":[
-                  "08:00-18:30"
-               ],
-               "thursday":[
-                  "08:00-18:30"
-               ],
-               "friday":[
-                  "08:00-18:30"
-               ],
-               "saturday":[
-                  "08:00-17:00"
-               ],
-               "sunday":[
 
-               ]
-            },
-            "distance":"1798",
-            "latitude": "52.286582",
-            "longitude": "4.682377",
-            "location_code":"173187"
-         },
-         {
-            "date":"2017-05-06",
-            "time":[
-               {
-                  "start":"16:00:00",
-                  "type":4,
-                  "price":{
-                     "amount":0,
-                     "currency":"EUR"
-                  }
-               }
-            ],
-            "location":"Primera Sanders",
-            "street":"Polderplein",
-            "number":"3",
-            "postal_code":"2132BA",
-            "city":"Hoofddorp",
-            "start_time":"16:00:00",
-            "price":0,
-            "price_comment":"retail",
-            "comment":"Dit is een Postkantoor. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-            "phone_number":"023-5640556",
-            "opening_hours":{
-               "monday":[
-                  "11:00-18:00"
-               ],
-               "tuesday":[
-                  "09:00-18:00"
-               ],
-               "wednesday":[
-                  "09:00-18:00"
-               ],
-               "thursday":[
-                  "09:00-18:00"
-               ],
-               "friday":[
-                  "09:00-21:00"
-               ],
-               "saturday":[
-                  "09:00-17:00"
-               ],
-               "sunday":[
-                  "12:00-17:00"
-               ]
-            },
-            "distance":"1696",
-            "latitude": "52.192150633052",
-            "longitude": "4.44249030539514",
-            "location_code":"176227"
-         }
-      ]
-   }
+    "data": {
+        "deliveries": [
+            {
+                "date": {
+                    "date": "2020-02-13 00:00:00.000000",
+                    "timezone_type": 3,
+                    "timezone": "Europe/Amsterdam"
+                },
+                "possibilities": [
+                    {
+                        "type": "standard",
+                        "shipment_options": [
+                            {
+                                "name": "age_check",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "large_format",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "only_recipient",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "signature",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "return",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            }
+                        ],
+                        "collect_date": null,
+                        "delivery_time_frames": [
+                            {
+                                "type": "start",
+                                "date_time": {
+                                    "date": "2020-02-13 09:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            },
+                            {
+                                "type": "end",
+                                "date_time": {
+                                    "date": "2020-02-13 12:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 }
 </pre>
                 <p>
                     <strong>
-                        Get delivery options and pickup locations for Belgium
+                        Get pickup options for 2132WT, 66 for PostNL cutoff time 16h00, dropoff days
+                        Mon - Sat, dropoff delay is zero, delivery window is 2 days and morning is excluded as delivery
+                        type
+                    </strong><br>
+                    <br>
+                    <strong>Request</strong>
+                </p>
+                <pre>
+GET https://api.myparcel.nl/pickup_locations/?platform=myparcel&carrier=postnl&cc=nl&number=66&postal_code=2132WT&cutoff_time=16:00:00&dropoff_days=1;2;3;4;5;6&monday_delivery=1&dropoff_delay=0&deliverydays_window=2&exclude_delivery_type=1 HTTP/1.1
+User-Agent: CustomApiCall/2
+Accept: application/json;charset=utf-8;version=2.0
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+
+    {
+    "data": {
+        "pickup_locations": [
+            {
+                "address": {
+                    "cc": "NL",
+                    "city": "Hoofddorp",
+                    "street": "Polderplein",
+                    "postal_code": "2132BA",
+                    "number": "3"
+                },
+                "possibilities": [
+                    {
+                        "delivery_type_id": 4,
+                        "delivery_type_name": "pickup",
+                        "moment": {
+                            "start": {
+                                "date": "2020-02-13 16:00:00.000000",
+                                "timezone_type": 3,
+                                "timezone": "Europe/Amsterdam"
+                            }
+                        }
+                    }
+                ],
+                "location": {
+                    "location_name": "Primera Sanders",
+                    "retail_network_id": "PNPNL-01",
+                    "distance": "1696",
+                    "latitude": "52.30329367",
+                    "longitude": "4.69476214",
+                    "location_code": "176227",
+                    "phone_number": null,
+                    "opening_hours": {
+                        "monday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-17 11:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-17 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "tuesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-18 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-18 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "wednesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-19 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-19 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "thursday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-13 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-13 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "friday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-14 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-14 21:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "saturday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-15 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-15 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "sunday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-16 12:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-16 17:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+</pre>
+
+                <p>
+                    <strong>
+                        Get delivery options for Belgium
                     </strong>
                     <br>
                     <br>
                     <strong>Request</strong>
                 </p>
                 <pre>
-GET https://api.myparcel.nl/delivery_options?cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1
+GET https://api.myparcel.nl/pickup_locations/?platform=myparcel&carrier=postnl&cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1
 User-Agent: CustomApiCall/2
+Accept: application/json;charset=utf-8;version=2.0
 </pre>
                 <p><strong>Response</strong></p>
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-  "data": {
-    "delivery": [
-      {
-        "date": "2017-07-29",
-        "time": [
-          {
-            "start": "08:00:00",
-            "end": "21:30:00",
-            "price": {
-              "currency": "EUR",
-              "amount": 0
+    "data": {
+        "deliveries": [
+            {
+                "date": {
+                    "date": "2020-02-13 00:00:00.000000",
+                    "timezone_type": 3,
+                    "timezone": "Europe/Amsterdam"
+                },
+                "possibilities": [
+                    {
+                        "type": "standard",
+                        "shipment_options": [
+                            {
+                                "name": "large_format",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            }
+                        ],
+                        "collect_date": null,
+                        "delivery_time_frames": [
+                            {
+                                "type": "start",
+                                "date_time": {
+                                    "date": "2020-02-13 08:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            },
+                            {
+                                "type": "end",
+                                "date_time": {
+                                    "date": "2020-02-13 21:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ]
+                    }
+                ]
             },
-            "price_comment": "standard",
-            "comment": "",
-            "type": 2
-          }
+            {
+                "date": {
+                    "date": "2020-02-14 00:00:00.000000",
+                    "timezone_type": 3,
+                    "timezone": "Europe/Amsterdam"
+                },
+                "possibilities": [
+                    {
+                        "type": "standard",
+                        "shipment_options": [
+                            {
+                                "name": "large_format",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            }
+                        ],
+                        "collect_date": null,
+                        "delivery_time_frames": [
+                            {
+                                "type": "start",
+                                "date_time": {
+                                    "date": "2020-02-14 08:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            },
+                            {
+                                "type": "end",
+                                "date_time": {
+                                    "date": "2020-02-14 21:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
         ]
-      }
-    ],
-    "pickup": [
-      {
-        "date": "2017-07-29",
-        "time": [
-          {
-            "start": "16:00:00",
-            "type": 4,
-            "price": {
-              "amount": 0,
-              "currency": "EUR"
+    }
+}
+</pre>
+                <p>
+                    <strong>
+                        Get pickup options for Belgium
+                    </strong>
+                    <br>
+                    <br>
+                    <strong>Request</strong>
+                </p>
+                <pre>
+GET https://api.myparcel.nl/pickup_locations/?platform=myparcel&carrier=postnl&cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1
+User-Agent: CustomApiCall/2
+Accept: application/json;charset=utf-8;version=2.0
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+    "data": {
+        "pickup_locations": [
+            {
+                "address": {
+                    "cc": "BE",
+                    "city": "Saint-Gilles",
+                    "street": "Chaussée de Charleroi",
+                    "postal_code": "1060",
+                    "number": "269"
+                },
+                "possibilities": [
+                    {
+                        "delivery_type_id": 4,
+                        "delivery_type_name": "pickup",
+                        "moment": {
+                            "start": {
+                                "date": "2020-02-13 16:00:00.000000",
+                                "timezone_type": 3,
+                                "timezone": "Europe/Amsterdam"
+                            }
+                        }
+                    }
+                ],
+                "location": {
+                    "location_name": "Librairie Papyrus",
+                    "retail_network_id": "PNPBE-01",
+                    "distance": "2396",
+                    "latitude": "50.823476",
+                    "longitude": "4.353791",
+                    "location_code": "212969",
+                    "phone_number": null,
+                    "opening_hours": {
+                        "monday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-17 06:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-17 18:25:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "tuesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-18 06:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-18 18:25:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "wednesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-19 06:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-19 18:25:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "thursday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-13 06:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-13 18:25:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "friday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-14 06:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-14 18:25:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "saturday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-15 07:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-15 17:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "sunday": []
+                    }
+                }
             }
-          }
-        ],
-        "location": "BELLES NOUVELLES",
-        "street": "AVENUE MONTJOIE",
-        "number": "20",
-        "postal_code": "1180",
-        "city": "UCCLE",
-        "cc": "BE",
-        "start_time": "16:00:00",
-        "price": 0,
-        "price_comment": "retail",
-        "comment": "",
-        "phone_number": "",
-        "opening_hours": {
-          "monday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "tuesday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "wednesday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "thursday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "friday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "saturday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "sunday": {
-
-          }
-        },
-        "distance": "616",
-        "latitude": "50.810441",
-        "longitude": "4.368223",
-        "location_code": "BE0S01",
-        "retail_network_id": "LD-01"
-      },
-      {
-        "date": "2017-07-29",
-        "time": [
-          {
-            "start": "16:00:00",
-            "type": 4,
-            "price": {
-              "amount": 0,
-              "currency": "EUR"
-            }
-          }
-        ],
-        "location": "KARIBOO C'EST LE BOUQUET",
-        "street": "RUE EMILE CLAUS",
-        "number": "58",
-        "postal_code": "1180",
-        "city": "UCCLE",
-        "cc": "BE",
-        "start_time": "16:00:00",
-        "price": 0,
-        "price_comment": "retail",
-        "comment": "",
-        "phone_number": "",
-        "opening_hours": {
-          "monday": [
-            "13:00-18:00"
-          ],
-          "tuesday": [
-            [
-              "09:00-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "wednesday": [
-            [
-              "09:00-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "thursday": [
-            [
-              "09:00-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "friday": [
-            [
-              "09:00-12:00",
-              "12:00-20:00"
-            ]
-          ],
-          "saturday": [
-            [
-              "09:00-12:00",
-              "12:00-20:00"
-            ]
-          ],
-          "sunday": [
-            "10:00-16:00"
-          ]
-        },
-        "distance": "983",
-        "latitude": "50.815598",
-        "longitude": "4.367427",
-        "location_code": "BE0T57",
-        "retail_network_id": "LD-01"
-      }
-    ]
-  }
+        ]
+    }
 }
 </pre>                    <h1 id="9">9. Delivery options Object Definitions</h1>
                 <p>If you use the endpoint delivery_options you get two objects. DeliveryOptions Object and PickupOptions Object. OpeningHours Object contains the opening hours of pickup locations.</p>
