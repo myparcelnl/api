@@ -1612,7 +1612,6 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 </pre>
                 <p><strong>Response</strong></p>
                 <pre>HTTP/1.1 204 No Content </pre>
-                </p>
 
                 <h2 id="6_D">6.D Generate unrelated return shipment url</h2>
                 <h3 id="6_D_1">6.D.1 Overview</h3>
@@ -5313,19 +5312,19 @@ The above is an example of the ShipmentStatusChangeEvent Object. However, the fo
                 </p>
                 <p>
                     <strong>status</strong><br>
-                    Data type: <a href="#webhook_status">webhook status</a> success or failed<br>
+                    Data type: <a href="#webhook_status">webhook status</a><br>
                 </p>
                 <p>
                     <strong>shipment_ids</strong><br>
-                    Data type: <a href="#array">array</a> of <a href="#7_H">ShipmentId</a> objects.<br>
+                    Data type: <a href="#array">array</a> of <a href="#integer">integer</a><br>
                 </p>
                 <p>
                     <strong>printer_identifier</strong><br>
-                    Data type: <a href="#printer_identifier">string</a><br>
+                    Data type: <a href="#printer_identifier">printer_identifier</a><br>
                 </p>
                 <p>
                     <strong>pdf</strong><br>
-                    Data type: <a href="#string">url</a><br>
+                    Data type: <a href="#string">string</a><br>
                     This field contains a URL that leads to a PDF.
                 </p>
                 <h3 id="11_C_2">11.C.2 Reference</h3>
@@ -5391,7 +5390,7 @@ The above is an example of the ShipmentLabelCreated Object. However, the followi
     }
   }
 </pre>
-                <h2 id="11_D">11.C SubscriptionIds Object Definition</h2>
+                <h2 id="11_D">11.D SubscriptionIds Object Definition</h2>
                 <h3>Overview</h3>
                 <p>
                     This object contains an <a href="#array">array</a> of <a href="#11_D">SubscriptionId</a> objects.<br>
@@ -5401,7 +5400,7 @@ The above is an example of the ShipmentLabelCreated Object. However, the followi
                     Required: n/a.<br>
                     <a href="#array">array</a> of <a href="#11_D">SubscriptionId</a> objects.
                 </p>
-                <h2 id="11_E">11.D SubscriptionId Object Definition</h2>
+                <h2 id="11_E">11.E SubscriptionId Object Definition</h2>
                 <h3>Overview</h3>
                 <p>
                     <strong>id</strong><br>
