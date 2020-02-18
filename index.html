@@ -45,7 +45,7 @@
             <div class="box">
                 <p>
                     Do you want to connect with MyParcel using PHP, C# or Ruby? Then you can use the following github
-                  projects instead of the API. Create an issue on github to contact the programmer.
+                    projects instead of the API. Create an issue on github to contact the programmer.
                 </p>
                 <ul>
                     <li><a href="https://github.com/myparcelnl/sdk" target="_blank">PHP</a></li>
@@ -115,7 +115,7 @@
                 <p>Example of a 200 Status code in our API (you can try this in your browser, then you know our API is online)</p>
                 <p>
                     <strong>Request:</strong>
-                    <pre>
+                <pre>
 GET https://api.myparcel.nl/
 Request Headers (example):
 GET / HTTP/1.1
@@ -126,8 +126,8 @@ Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
 Accept-Encoding: gzip, deflate, sdch, br
 </pre>
-                    <strong>Response:</strong>
-                    <pre>
+                <strong>Response:</strong>
+                <pre>
 {
   "title":"MyParcel API",
   "status":"OK"
@@ -178,7 +178,7 @@ Connection: keep-alive
                 <p>
                     No credentials have been sent with the request. Or the wrong credentials are send.
                     Tip: check if the API key is properly attached in the header <br>
-                    <pre>Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==</pre>
+                <pre>Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==</pre>
                 </p>
                 <h3>2.A.III 402 - Payment Required</h3>
                 <p>
@@ -222,7 +222,7 @@ Connection: keep-alive
                 <p>
                     All content must be encoded in UTF-8 and include the charset=utf-8.<br><br>
                     example:
-                    <pre>Content-Type: application/json;charset=utf-8</pre>
+                <pre>Content-Type: application/json;charset=utf-8</pre>
                 </p>
                 <h1 id="4">4. Data Types</h1>
                 <p>
@@ -289,6 +289,28 @@ Connection: keep-alive
                         <td>0 (false), 1 (true)</td>
                     </tr>
                 </table>
+                <h2 id="platform">platform</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>Platform name</td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>[a-z]</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>
+                            <ul>
+                                <li>myparcel</li>
+                                <li>flespakket</li>
+                                <li>belgie</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                </table>
                 <h2 id="carrier">carrier</h2>
                 <table>
                     <tr>
@@ -301,12 +323,7 @@ Connection: keep-alive
                     </tr>
                     <tr>
                         <td>example</td>
-                        <td>
-                            <ol>
-                                <li> (postnl)</li>
-                                <li> (bpost)</li>
-                            </ol>
-                        </td>
+                        <td>1 (postnl), 2 (bpost), 4 (dpd)</td>
                     </tr>
                 </table>
                 <h2 id="coordinates">coordinates</h2>
@@ -589,7 +606,7 @@ Connection: keep-alive
                     <tr>
                         <th>description</th>
                         <td>
-                          In this field you can enter your printer identifier. This field is also sent with the webhook shipment_label_created. You are responsible for controlling your own printer based on a printer identifier.
+                            In this field you can enter your printer identifier. This field is also sent with the webhook shipment_label_created. You are responsible for controlling your own printer based on a printer identifier.
                         </td>
                     </tr>
                     <tr>
@@ -660,18 +677,18 @@ Connection: keep-alive
                 </table>
                 <h2 id="webhook_status">webhook status</h2>
                 <table>
-                  <tr>
-                    <th>description</th>
-                    <td>A webhook status</td>
-                  </tr>
-                  <tr>
-                    <td>pattern</td>
-                    <td>[a-z]+</td>
-                  </tr>
-                  <tr>
-                    <td>example</td>
-                    <td>success, failed</td>
-                  </tr>
+                    <tr>
+                        <th>description</th>
+                        <td>A webhook status</td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>[a-z]+</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>success, failed</td>
+                    </tr>
                 </table>
                 <h2 id="string">string</h2>
                 <table>
@@ -1128,22 +1145,22 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 </table>
                 <h3 id="6_B_3">6.B.3 Request Headers</h3>
                 <p>
-                    <strong>Content-Type: application/vnd.shipment+json</strong><br>
+                    <strong>Content-Type: application/vnd.shipment+json;version=1.1</strong><br>
                     Specify this content-type when you want to create standard shipments.<br>
                     <br>
-                    <strong>Content-Type: application/vnd.return_shipment+json</strong><br>
+                    <strong>Content-Type: application/vnd.return_shipment+json;version=1.1</strong><br>
                     Specify this content-type when you want to create related return shipments.<br>
                     Parent shipment cannot be a concept (<a href="#shipment_status">shipment_status</a> 1).<br>
                     When a label is generated, the status of the shipment is converted to registered (<a href="#shipment_status">shipment_status</a> 2).<br>
                     <br>
-                    <strong>Content-Type: application/vnd.unrelated_return_shipment+json</strong><br>
+                    <strong>Content-Type: application/vnd.unrelated_return_shipment+json;version=1.1</strong><br>
                     Specify this content-type when you want to create unrelated return shipments.
                 </p>
                 <h3 id="6_B_4">6.B.4 Examples</h3>
                 <p>
                     For these examples we are going to create shipments.<br>
                     <br>
-                    <h2>Create national shipments</h2>
+                <h2>Create national shipments</h2>
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1218,6 +1235,68 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
   }
 }
 </pre>
+                <h2>Create national multi collo shipments</h2>
+                <p><strong>Request</strong></p>
+                <pre>
+POST https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json;charset=utf-8;version=1.1
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [{
+      "reference_identifier" : "FOO-222-BAR-42",
+      "recipient": {
+        "cc": "NL",
+        "region": "Zuid-Holland",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 1,
+        "only_recipient": 1,
+        "signature": 1,
+        "return": 1,
+        "insurance": {
+          "amount": 50000,
+          "currency": "EUR"
+        },
+        "large_format": 0,
+        "label_description": "My custom description",
+        "age_check":1
+      },
+      "secondary_shipments": [
+         {},
+         {}
+      ],
+      "carrier": 1
+    }]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+    "data": {
+        "ids": [
+            {
+                "id": 12345,
+                "reference_identifier": "FOO-222-BAR-42"
+            }
+        ]
+    }
+}
+</pre>
+
+
+
+
                 <h2>Create International shipment</h2>
                 <p><strong>Request</strong></p>
                 <pre>
@@ -1385,6 +1464,71 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
       "reference_identifier":null
     }]
   }
+}
+</pre>
+                <h2>Create multi collo shipment with NL pickup location</h2>
+                <p><strong>Request</strong></p>
+                <pre>
+POST https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json; charset=utf-8;version=1.1
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [{
+      "reference_identifier" : "FOO-222-BAR-42",
+      "recipient": {
+        "cc": "NL",
+        "region": "Zuid-Holland",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 1,
+        "only_recipient": 1,
+        "signature": 1,
+        "return": 1,
+        "insurance": {
+          "amount": 50000,
+          "currency": "EUR"
+        },
+        "large_format": 0,
+        "label_description": "My custom description",
+        "age_check":1
+      },
+      "pickup": {
+        "postal_code": "2132BH",
+        "street": "Burgemeester van Stamplein",
+        "city": "Hoofddorp",
+        "number": "270",
+        "location_name": "Albert Heijn"
+      },
+      "secondary_shipments": [
+         {},
+         {}
+      ],
+      "carrier": 1
+    }]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
+{
+    "data": {
+        "ids": [
+            {
+                "id": 12345,
+                "reference_identifier": "FOO-222-BAR-42"
+            }
+        ]
+    }
 }
 </pre>
                 <h2>Create shipment with BE pickup location</h2>
@@ -1676,7 +1820,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>
                     <strong>Proceed with actual request</strong><br>
                     <strong>Request</strong>
-                    <pre>
+                <pre>
 POST https://api.myparcel.nl/return_shipments
 User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw== </pre>
@@ -1860,7 +2004,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                 </p>
                 <p>
                     <strong>Request</strong>
-                    <pre>
+                <pre>
 GET https://api.myparcel.nl/shipments?q=Niels&amp;status=1
 User-Agent: CustomApiCall/2
 HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
@@ -1868,12 +2012,13 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                 </p>
                 <p>
                     <strong>Response</strong>
-                    <pre>
+                <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
     "search_results": {
       "shipments": [{
+       "id": 12345,
         "reference_identifier" : "FOO-222-BAR-42",
         "recipient": {
           "cc": "NL",
@@ -1915,6 +2060,8 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
           "currency": "EUR"
         },
         "barcode": "3SMYPA77773333",
+        "secondary_shipments": null,
+        "multi_collo_main_shipment_id": null,
         "created": "2017-01-31 08:00:00",
         "modified": "2017-01-31 09:00:00"
       }],
@@ -1936,6 +2083,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     For accounts with <strong>Prepayment</strong> payment method a HTTP/1.1 402 Payment
                     Required with a <a href="#7_P">PaymentInstructions</a> object is returned if the label has not been paid for
                     yet.<br><br>
+                    When a label for a multi collo shipment is requested, labels for all shipments part of the multi collo shipment
+                    will be generated. Each shipment within a multi collo shipment MUST be labeled with a specific label
+                    containing a unique barcode.
+                    <br><br>
                     Upon error HTTP/1.1 4xx < MESSAGE >
                     with a response body containing an Error is
                     returned.
@@ -2288,6 +2439,387 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   }
 }
 </pre>
+
+                <h2 id="6_H">6.H Multi collo shipments</h2>
+                <h3 id="6_H_1">6.H.1 Overview</h3>
+                <p>
+                    This section describes the working of multi collo shipments.<br>
+                    The multi collo shipment is a special type of shipment which requires a specific way of handling.<br>
+                    A multi collo shipment is a shipment which contains multiple packages for the same address and the same
+                    delivery date. It contains of one 'main' shipment and at least one 'secondary' shipment.<br>
+                    Working with multi collo shipments does not require using specific endpoints but
+                    existing endpoints have specific behaviour in combination with multi collo shipments.
+                </p>
+
+                <h3 id="6_H_2">6.H.2 Create</h3>
+                <p>
+                    This section extends the <a href="#6_B">base functionaltity</a>.
+                    <br><br>
+                    Creating a multi collo shipment basically means using one extra property 'secondary_shipments'.<br>
+                    This property can be used to pass an array of json objects. Each object represents an extra shipment
+                    to be part of the multi collo shipment. <br>
+                    All required properties of the main shipment are inherited by the secondary shipments so there is
+                    no need to pass data with a secondary shipment but it is allowed to pass specific data.<br>
+                    This might be useful for example to pass a specific reference identifier per secondary shipment.
+                    <br>
+                    Shipment options MUST be provided only with the main shipment.
+                    <br>
+                    Secondary shipments only can be used in combination with <a href="#package_type">package type</a> 1
+                    and can only be used for shipments to NL en BE.
+                    <br>
+                </p>
+                <pre>
+"secondary_shipments": [
+   {
+      "reference_identifier": "SECONDARY-SHIPMENT"
+   }
+]
+</pre>
+                <h3 id="6_H_3">6.H.3 Update</h3>
+                <table>
+                    <tr>
+                        <th>URI</th>
+                        <td>https://api.myparcel.nl/shipments</td>
+                    </tr>
+                    <tr>
+                        <th>Methods</th>
+                        <td>PUT</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">Required request headers</th>
+                        <td>Authorization: basic BASE64(API_KEY)<br>
+                            Content-Type: application/vnd.shipment+json;version=1.1</td>
+                    </tr>
+                </table>
+                <p>
+                    Updating a secondary shipment can be done in several ways using different endpoints.
+                </p>
+                <h4>Add secondary shipment</h4>
+                <p>
+                    Adding an existing shipment to an existing multi collo shipment can be done in two ways.
+                    <br><br>
+                    1. Post complete shipment with an extra shipment passed in the secondary shipments property.
+                    <br>
+                    For adding shipment 34567 to an existing multi collo shipment, the secondary_shipments property
+                    should look like this:
+                </p>
+                <pre>
+"secondary_shipments": [
+    {"id": 12345},
+    {"id": 34567}
+]
+</pre>
+                <p>
+                    <br>
+                    2. Update a single existing shipment with a reference to a multi collo shipment via the
+                    'multi_collo_main_shipment_id'.
+                    <br>
+                    For adding shipment 34567 to an existing multi collo shipment 12345, the multi_collo_main_shipment_id
+                    should look like this:
+                </p>
+                <pre>
+    "multi_collo_main_shipment_id": 34567
+</pre>
+                <p>
+                    Adding a non-existent shipment to an existing multi collo shipment can be done via the secondary_shipments
+                    property of the main shipment.
+                    <br>
+                    For adding a new shipment to an existing multi collo shipment, the secondary_shipments property
+                    should look like this:
+                </p>
+                <pre>
+"secondary_shipments": [
+    {"id": 12345},
+    {}
+]
+</pre>
+                <p>
+                    Note that the existing secondary shipments should always be passed as well because they will be
+                    deleted otherwise.
+                </p>
+
+                <h4>Remove secondary shipment</h4>
+                <p>
+                    Removing a secondary shipment from a multi collo shipment can be done in 3 different ways.
+                    <br><br>
+                    1. Delete secondary shipment<br>
+                    Make use of the <a href="#6_C">delete endpoint</a> when passing the id of the secondary shipment.
+                    This will cause the secondary shipment to be deleted and removed from the multi collo shipment.
+                    <br><br>
+                    2. Omit the secondary shipment in an <a href="#6_H_3">update</a> request on the multi collo main shipment.
+                    This will cause the secondary shipment to be deleted and be removed from the multi collo shipment.
+                    <br><br>
+                    3. Unlink a secondary shipment from the multi collo shipment.<br>
+                    This is done by a PUT request for a specific secondary shipment with an empty reference to the
+                    multi collo main shipment. This will cause the shipment to be removed from the multi collo shipment
+                    and still be available as normal shipment.
+                    <br>
+                    The data passed in the PUT request for secondary shipment 1234 to remove it from its multi collo shipment
+                    should contain besides all other required data:
+                </p>
+                <pre>
+{
+   "id": 1234,
+   "multi_collo_main_shipment_id": null
+}
+</pre>
+                <h3 id="6_H_4">6.H.4 Delete</h3>
+                <p>
+                    This section extends the <a href="#6_C">base functionality</a>.
+
+                    <br>
+                    Deleting a multi collo main shipment will result in a complete removal of the
+                    main and secondary shipments of the multi collo shipment.
+                    <br>
+                    <br>
+                    Deleting a secondary shipment will result in deleting the shipment and removal of the
+                    secondary shipment from the multi collo shipment.
+                </p>
+
+                <h3 id="6_H_5">6.H.5 Examples</h3>
+
+                <h2>Create national multi collo shipment</h2>
+                <p><strong>Request</strong></p>
+                <pre>
+POST https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json;charset=utf-8;version=1.1
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [{
+      "reference_identifier" : "FOO-222-BAR-42",
+      "recipient": {
+        "cc": "NL",
+        "region": "Zuid-Holland",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 1,
+        "only_recipient": 1,
+        "signature": 1,
+        "return": 1,
+        "insurance": {
+          "amount": 50000,
+          "currency": "EUR"
+        },
+        "large_format": 0,
+        "label_description": "My custom description",
+        "age_check":1
+      },
+      "secondary_shipments": [
+         {"reference_identifier": "REF-SECONDARY-SHIPMENT"},
+         {}
+      ],
+      "carrier": 1
+    }]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+    "data": {
+        "ids": [
+            {
+                "id": 12345,
+                "reference_identifier": "FOO-222-BAR-42"
+            }
+        ]
+    }
+}
+</pre>
+                <h2>Add new shipment to existing multi collo shipment</h2>
+                <p>This example adds a new shipment to multi collo shipment 12345</p>
+                <p><strong>Request</strong></p>
+                <pre>
+PUT https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json;charset=utf-8;version=1.1
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [{
+      "id": 12345,
+      "reference_identifier" : "FOO-222-BAR-42",
+      "recipient": {
+        "cc": "NL",
+        "region": "Zuid-Holland",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 1,
+        "label_description": "My custom description"
+      },
+      "secondary_shipments": [
+         {
+            "id": 12346,
+	        "reference_identifier" : "SECONDARY-SHIPMENT"
+    	 },
+         {}
+      ],
+      "carrier": 1
+    }]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 204 No Content
+</pre>
+
+                <h2>Add existing shipment to existing multi collo shipment</h2>
+                <p>This example adds existing shipment 12346 to multi collo shipment 12345</p>
+                <p><strong>Request</strong></p>
+                <pre>
+PUT https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json;charset=utf-8;version=1.1
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [{
+      "id": 12346,
+      "reference_identifier" : "FOO-222-BAR-42",
+      "recipient": {
+        "cc": "NL",
+        "region": "Zuid-Holland",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 1,
+        "label_description": "My custom description"
+      },
+      "carrier": 1,
+      "multi_collo_main_shipment_id": 12345
+    }]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 204 No Content
+</pre>
+
+                <h2>Delete and remove shipment from multi collo shipment</h2>
+                <p>This example deletes and removes existing shipment 12346 from multi collo shipment 12345 by
+                    omitting the shipment in the secondary shipment property</p>
+                <p><strong>Request</strong></p>
+                <pre>
+PUT https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json;charset=utf-8;version=1.1
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [{
+      "id": 12345,
+      "reference_identifier" : "FOO-222-BAR-42",
+      "recipient": {
+        "cc": "NL",
+        "region": "Zuid-Holland",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 1,
+        "label_description": "My custom description"
+      },
+      "secondary_shipments": [
+         {
+            "id": 12347,
+            "reference_identifier" : "SECONDARY-SHIPMENT"
+    	 }
+      ],
+      "carrier": 1
+    }]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 204 No Content
+</pre>
+
+                <h2>Remove shipment from multi collo shipment without deletion</h2>
+                <p>This example removes existing shipment 12346 from multi collo shipment 12345 by
+                    removing the relation to the multi collo main shipment.
+                </p>
+                <p><strong>Request</strong></p>
+                <pre>
+PUT https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json;charset=utf-8;version=1.1
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [{
+      "id": 12346,
+      "reference_identifier" : "FOO-222-BAR-42",
+      "recipient": {
+        "cc": "NL",
+        "region": "Zuid-Holland",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 1,
+        "label_description": "My custom description"
+      },
+      "carrier": 1,
+      "multi_collo_main_shipment_id": null
+    }]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 204 No Content
+</pre>
+
+                <h2>Delete and remove shipment from a multi collo shipment via DELETE request</h2>
+                <p>This example deletes and removes existing shipment 12346 from multi collo shipment by
+                    deleting the secondary shipment.
+                </p>
+                <p><strong>Request</strong></p>
+                <pre>
+DELETE https://api.myparcel.nl/shipments/12346 HTTP/1.1
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 204 No Content
+</pre>
                 <h1 id="7">7. Shipment related Object Definitions</h1>
                 <h2 id="7_A">7.A Shipment Object Definition</h2>
                 <h3 id="7_A_1">7.A.1 Overview</h3>
@@ -2406,6 +2938,22 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     The shipment price.
                 </p>
                 <p>
+                    <strong>secondary_shipments</strong>
+                    Data type: an array of <a href="#7_A">shipment</a><br>
+                    Required: no<br>
+                    You can specify secondary shipments for the shipment with this object.
+                    This property is used to create a multi collo shipment: multiple
+                    packages to be delivered to the same address at the same time.
+                    Secondary shipment can be passed as empty json objects as all required data will be copied from
+                    the main shipment. When data is passed with the secondary shipment this data will be used in favor
+                    of the main shipment data.
+                </p>
+                <p>
+                    <strong>multi_collo_main_shipment_id</strong>
+                    Data type: <a href="#integer">integer</a><br>
+                    In case of a multi collo shipment this field contains the id of the main shipment.
+                </p>
+                <p>
                     <strong>created</strong><br>
                     Data type: <a href="#timestamp">timestamp</a><br>
                     Required: n/a.<br>
@@ -2478,6 +3026,34 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   },
   "carrier": 1
 }
+</pre>
+
+                <br>
+                <p>POST example national multi collo shipment</p>
+                <pre>
+{
+      "reference_identifier" : "FOO-222-BAR-42",
+      "recipient": {
+        "cc": "NL",
+        "region": "Zuid-Holland",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+      },
+      "options": {
+        "package_type": 1,
+        "label_description": "My custom description"
+      },
+      "secondary_shipments": [
+         {},
+         {}
+      ],
+      "carrier": 1
+    }
 </pre>
                 <br>
                 <p>POST example international shipment</p>
@@ -2567,7 +3143,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 }
 </pre>
                 <br>
-                <p>GET example national shipment</p>
+                <p>GET example national shipment A</p>
                 <pre>
 {
 
@@ -2617,7 +3193,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 }
 </pre>
                 <br>
-                <p>GET example national shipment b</p>
+                <p>GET example national shipment B</p>
                 <pre>
 {
   "recipient": {
@@ -2648,7 +3224,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
     "phone": "0213030315",
     "email": "testing@myparcel.nl"
   },
-  "carrier": 2,
+  "carrier": 1,
   "status": 2,
   "price": {
     "amount": 535,
@@ -2658,6 +3234,99 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
   "created": "2017-01-31 08:00:00",
   "modified": "2017-01-31 09:00:00"
 }
+</pre>
+                <br>
+                <p>GET example national multi collo shipment</p>
+                <pre>
+{
+    "id": 12345,
+    "account_id": 1,
+    "shop_id": 1,
+    "shipment_type": 3,
+    "recipient": {
+        "cc": "NL",
+        "region": "Zuid-Holland",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "66",
+        "postal_code": "2132WT",
+        "person": "Mr. Parcel",
+        "phone": "0213030315",
+        "email": "testing@myparcel.nl"
+    },
+    "sender": {
+        "cc": "NL",
+        "postal_code": "2132WT",
+        "city": "Hoofddorp",
+        "street": "Siriusdreef",
+        "number": "26",
+        "person": "Mrs. Parcel",
+        "company": "MyParcel",
+        "email": "testing@myparcel.nl",
+        "phone": "12345678"
+    },
+    "status": 1,
+    "options": {
+        "package_type": 1,
+        "label_description": "My custom description"
+    },
+    "reference_identifier": "FOO-222-BAR-42",
+    "transaction_status": "unpaid",
+    "barcode": null,
+    "price": {
+        "amount": 595,
+        "currency": "EUR"
+    },
+    "region": "NL",
+    "payment_status": "unpaid",
+    "carrier_id": 1,
+    "secondary_shipments": [
+        {
+            "id": 12346,
+            "account_id": 1,
+            "shop_id": 1,
+            "shipment_type": 3,
+            "recipient": {
+                "cc": "NL",
+                "region": "Zuid-Holland",
+                "city": "Hoofddorp",
+                "street": "Siriusdreef",
+                "number": "66",
+                "postal_code": "2132WT",
+                "person": "Mr. Parcel"
+            },
+            "sender": {
+                "cc": "NL",
+                "postal_code": "2231MJ",
+                "city": "Rijnsburg",
+                "street": "Siriusdreef",
+                "number": "26",
+                "person": "Frisby Test",
+                "company": "Test1",
+                "email": "test1@test.nl",
+                "phone": "12345678"
+            },
+            "status": 1,
+            "options": {
+                "package_type": 1,
+                "label_description": "My custom description"
+            },
+            "reference_identifier": null,
+            "transaction_status": "unpaid",
+            "price": {
+                "amount": 595,
+                "currency": "EUR"
+            },
+            "barcode": "",
+            "region": "NL",
+            "payment_status": "unpaid",
+            "carrier_id": 1,
+            "multi_collo_main_shipment_id": 12345
+        }
+    ],
+    "multi_collo_main_shipment_id": 12345
+}
+
 </pre>
                 <h2 id="7_B">7.B Address Object Definition</h2>
                 <h3 id="7_B_1">7.B.1 Overview</h3>
@@ -2939,9 +3608,9 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     Data type: <a href="#string">string</a><br>
                     Required: No.<br>
                     This description will appear on the shipment label.<strong>
-                        Note: This will be overridden
-                        for return shipment by the following: Retour – 3SMYPAMYPAXXXXXX
-                    </strong>
+                    Note: This will be overridden
+                    for return shipment by the following: Retour – 3SMYPAMYPAXXXXXX
+                </strong>
                 </p>
                 <p>
                     <strong>age_check</strong><br>
@@ -3044,10 +3713,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     Data type: <a href="#boolean">boolean</a><br>
                     Required: No<br>
                     When this setting is true the recipient address will be saved in the address book.<strong>
-                        Only for
-                        valid
-                        for POST request.
-                    </strong>
+                    Only for
+                    valid
+                    for POST request.
+                </strong>
                 </p>
                 <p>
                     <strong>delivery_notification</strong><br>
@@ -3072,7 +3741,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <strong>printer_identifier</strong><br>
                     Data type: <a href="#printer_identifier">printer_identifier</a> of <a href="#string">string</a><br>
                     Required: No.<br>
-                  In this field you can enter your printer identifier. This field is also sent with the webhook shipment_label_created. You are responsible for controlling your own printer based on a printer identifier.
+                    In this field you can enter your printer identifier. This field is also sent with the webhook shipment_label_created. You are responsible for controlling your own printer based on a printer identifier.
                 </p>
                 <h3 id="7_D_2">7.D.2 Example</h3>
                 <p>Example</p>
@@ -3102,9 +3771,9 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <strong>invoice</strong><br>
                     Data type: <a href="#string">string</a><br>
                     Required: Yes for <strong>commercial goods, commercial samples</strong> and <strong>
-                        return
-                        shipment
-                    </strong> package contents.<br>
+                    return
+                    shipment
+                </strong> package contents.<br>
                     The invoice number for the commercial goods or samples of <strong>package contents</strong>.
                 </p>
                 <p>
@@ -3907,21 +4576,26 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     Upon success two <a href="#array">arrays</a> are returned; one for <a href="#9_A">DeliveryOptions</a> and one
                     for <a href="#9_B">PickupOptions</a> objects is returned. This object contains delivery date, time and pricing. Upon error an Error object is returned.
                     <br />
-                    <div class="postman-run-button"></div>
-                    <br />
-                    <br />
-                    To show delivery options to customers, you can use our javascript <a href="http://github.com/myparcelnl/checkout" target="_blank">code</a>. Use our <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">sandbox</a> for an example and easier integration.
-                    <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">
-                        <div class="box" style="width: 370px;">
-                            <img src="https://monosnap.com/image/mOGXF5KFCjVALnbjg67IgPB99bjLuV.png">
-                        </div>
-                    </a>
+                <div class="postman-run-button"></div>
+                <br />
+                <br />
+                To show delivery options to customers, you can use our javascript <a href="http://github.com/myparcelnl/checkout" target="_blank">code</a>. Use our <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">sandbox</a> for an example and easier integration.
+                <a href="https://myparcelnl.github.io/checkout/sandbox/" target="_blank">
+                    <div class="box" style="width: 370px;">
+                        <img src="https://monosnap.com/image/mOGXF5KFCjVALnbjg67IgPB99bjLuV.png">
+                    </div>
+                </a>
                 </p>
                 <h3 id="8_A_2">8.A.2 Reference</h3>
                 <table>
                     <tr>
                         <th>URI</th>
-                        <td>https://api.myparcel.nl/delivery_options</td>
+                        <td>
+                            <ul>
+                                <li>https://api.myparcel.nl/delivery_options</li>
+                                <li>https://api.myparcel.nl/pickup_locations</li>
+                            </ul>
+                        </td>
                     </tr>
                     <tr>
                         <th>Methods</th>
@@ -3936,7 +4610,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <td>None.</td>
                     </tr>
                     <tr>
-                        <th rowspan="14">Query parameters</th>
+                        <th rowspan="15">Query parameters</th>
                         <td>cc = <a href="#country_code">country_code</a></td>
                     </tr>
                     <tr>
@@ -3946,10 +4620,13 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <td>number = <a href="#string">string</a></td>
                     </tr>
                     <tr>
+                        <td>platform = <a href="#platform">platform</a></td>
+                    </tr>
+                    <tr>
                         <td>carrier = <a href="#carrier">carrier</a></td>
                     </tr>
                     <tr>
-                        <td>delivery_time = <a href="#time">time</a></td>
+                        <td>delivery_time = <a href="#time">time</a></td> <!--bestaat  deze nog -->
                     </tr>
                     <tr>
                         <td>delivery_date = <a href="#date">date</a></td>
@@ -3970,7 +4647,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <td>deliverydays_window = <a href="#integer">integer</a></td>
                     </tr>
                     <tr>
-                        <td>exclude_delivery_type = <a href="#delivery_type">delivery_type</a></td>
+                        <td>exclude_delivery_type = <a href="#delivery_type">delivery_type</a></td> <!--bestaat deze nog -->
                     </tr>
                     <tr>
                         <td>latitude = <a href="#coordinates">coordinates</a></td>
@@ -3987,11 +4664,11 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <td>HTTP/1.1 200 OK</td>
                     </tr>
                     <tr>
-                        <td>Content-Type: application/json; charset=utf-8</td>
+                        <td>Content-Type: application/json;version=2.0 charset=utf-8</td>
                     </tr>
                     <tr>
                         <th>Response body</th>
-                        <td><a href="#array">array</a> of <a href="#9_A">DeliveryOptions</a> and <a href="#array">array</a> of <a href="#9_B">PickupOptions</a> objects</td>
+                        <td><a href="#array">array</a> of <a href="#9_A">DeliveryOptions</a> or <a href="#array">array</a> of <a href="#9_B">PickupOptions</a> objects</td>
                     </tr>
                     <tr>
                         <th>Error response</th>
@@ -4047,6 +4724,12 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     Data type: <a href="#string">string</a><br>
                     Required: yes<br>
                     The street number for which to fetch the delivery options.
+                </p>
+                <p>
+                    <strong>platform</strong><br>
+                    Data type: <a href="#platform">platform</a><br>
+                    Required: no<br>
+                    The platform where you want the data from
                 </p>
                 <p>
                     <strong>delivery_time</strong><br>
@@ -4134,9 +4817,10 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <strong>Request</strong>
                 </p>
                 <pre>
-GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=1 HTTP/1.1
+GET https://api.myparcel.nl/delivery_options?platform=myparcel&carrier=postnl&cc=nl&number=66&postal_code=2132WT HTTP/1.1
 User-Agent: CustomApiCall/2
-</pre>
+accept: application/json;charset=utf-8;version=2.0
+                </pre>
                 <p><strong>Response</strong></p>
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
@@ -4277,6 +4961,156 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 }
 </pre>
                 <p>
+                    <strong>Get pickup options for 2132WT, 66 for PostNL</strong><br>
+                    <strong>Request</strong>
+                </p>
+                <pre>
+GET https://api.myparcel.nl/pickup_locations?carrierName=postnl&platform=myparcel&carrier=postnl&cc=nl&number=66&postal_code=2132WT HTTP/1.1
+User-Agent: CustomApiCall/2
+accept: application/json;charset=utf-8;version=2.0
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+    "data": {
+        "pickup_locations": [
+            {
+                "address": {
+                    "cc": "NL",
+                    "city": "Hoofddorp",
+                    "street": "Polderplein",
+                    "postal_code": "2132BA",
+                    "number": "3"
+                },
+                "possibilities": [
+                    {
+                        "delivery_type_id": 4,
+                        "delivery_type_name": "pickup",
+                        "moment": {
+                            "start": {
+                                "date": "2020-02-13 16:00:00.000000",
+                                "timezone_type": 3,
+                                "timezone": "Europe/Amsterdam"
+                            }
+                        }
+                    }
+                ],
+                "location": {
+                    "location_name": "Primera Sanders",
+                    "retail_network_id": "PNPNL-01",
+                    "distance": "1696",
+                    "latitude": "52.30329367",
+                    "longitude": "4.69476214",
+                    "location_code": "176227",
+                    "phone_number": null,
+                    "opening_hours": {
+                        "monday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-17 11:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-17 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "tuesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-18 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-18 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "wednesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-19 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-19 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "thursday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-13 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-13 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "friday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-14 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-14 21:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "saturday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-15 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-15 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "sunday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-16 12:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-16 17:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+</pre>
+                <p>
                     <strong>
                         Get delivery options for 2132WT, 66 for PostNL cutoff time 16h00, dropoff days
                         Mon - Sat, dropoff delay is zero, delivery window is 2 days and morning is excluded as delivery
@@ -4286,336 +5120,509 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <strong>Request</strong>
                 </p>
                 <pre>
-GET https://api.myparcel.nl/delivery_options?cc=NL&amp;postal_code=2132WT&amp;number=66&amp;carrier=1&amp;cutoff_time=16:00:00&amp;dropoff_days=1;2;3;4;5;6&amp;monday_delivery=1&amp;dropoff_delay=0&amp;deliverydays_window=2&amp;exclude_delivery_type=1  HTTP/1.1
+GET https://api.myparcel.nl/delivery_options?platform=myparcel&carrier=postnl&cc=nl&number=66&postal_code=2132WT&cutoff_time=16:00:00&dropoff_days=1;2;3;4;5;6&monday_delivery=1&dropoff_delay=0&deliverydays_window=2&exclude_delivery_type=1   HTTP/1.1
+
 User-Agent: CustomApiCall/2
+Accept: application/json;charset=utf-8;version=2.0
 </pre>
                 <p><strong>Response</strong></p>
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
-{
-   "data":{
-      "delivery":[
-         {
-            "date":"2017-05-06",
-            "time":[
-               {
-                  "start":"08:30:00",
-                  "end":"21:30:00",
-                  "price":{
-                     "currency":"EUR",
-                     "amount":0
-                  },
-                  "price_comment":"standard",
-                  "comment":"",
-                  "type":2
-               }
-            ]
-         },
-         {
-            "date":"2017-05-08",
-            "time":[
-               {
-                  "start":"10:30:00",
-                  "end":"13:00:00",
-                  "price":{
-                     "currency":"EUR",
-                     "amount":0
-                  },
-                  "price_comment":"standard",
-                  "comment":"",
-                  "type":2
-               }
-            ]
-         }
-      ],
-      "pickup":[
-         {
-            "date":"2017-05-06",
-            "time":[
-               {
-                  "start":"16:00:00",
-                  "type":4,
-                  "price":{
-                     "amount":0,
-                     "currency":"EUR"
-                  }
-               },
-               {
-                  "start":"08:30:00",
-                  "type":5,
-                  "price":{
-                     "amount":125,
-                     "currency":"EUR"
-                  }
-               }
-            ],
-            "location":"Staples Office Centre",
-            "street":"Jacobus Spijkerdreef",
-            "number":"10",
-            "postal_code":"2132PZ",
-            "city":"Hoofddorp",
-            "start_time":"08:30:00",
-            "price":125,
-            "price_comment":"retailexpress",
-            "comment":"Dit is een Business Point. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-            "phone_number":"023-5576310",
-            "opening_hours":{
-               "monday":[
-                  "08:00-18:30"
-               ],
-               "tuesday":[
-                  "08:00-18:30"
-               ],
-               "wednesday":[
-                  "08:00-18:30"
-               ],
-               "thursday":[
-                  "08:00-18:30"
-               ],
-               "friday":[
-                  "08:00-18:30"
-               ],
-               "saturday":[
-                  "08:00-17:00"
-               ],
-               "sunday":[
 
-               ]
-            },
-            "distance":"1798",
-            "latitude": "52.286582",
-            "longitude": "4.682377",
-            "location_code":"173187"
-         },
-         {
-            "date":"2017-05-06",
-            "time":[
-               {
-                  "start":"16:00:00",
-                  "type":4,
-                  "price":{
-                     "amount":0,
-                     "currency":"EUR"
-                  }
-               }
-            ],
-            "location":"Primera Sanders",
-            "street":"Polderplein",
-            "number":"3",
-            "postal_code":"2132BA",
-            "city":"Hoofddorp",
-            "start_time":"16:00:00",
-            "price":0,
-            "price_comment":"retail",
-            "comment":"Dit is een Postkantoor. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-            "phone_number":"023-5640556",
-            "opening_hours":{
-               "monday":[
-                  "11:00-18:00"
-               ],
-               "tuesday":[
-                  "09:00-18:00"
-               ],
-               "wednesday":[
-                  "09:00-18:00"
-               ],
-               "thursday":[
-                  "09:00-18:00"
-               ],
-               "friday":[
-                  "09:00-21:00"
-               ],
-               "saturday":[
-                  "09:00-17:00"
-               ],
-               "sunday":[
-                  "12:00-17:00"
-               ]
-            },
-            "distance":"1696",
-            "latitude": "52.192150633052",
-            "longitude": "4.44249030539514",
-            "location_code":"176227"
-         }
-      ]
-   }
+    "data": {
+        "deliveries": [
+            {
+                "date": {
+                    "date": "2020-02-13 00:00:00.000000",
+                    "timezone_type": 3,
+                    "timezone": "Europe/Amsterdam"
+                },
+                "possibilities": [
+                    {
+                        "type": "standard",
+                        "shipment_options": [
+                            {
+                                "name": "age_check",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "large_format",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "only_recipient",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "signature",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "return",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            }
+                        ],
+                        "collect_date": null,
+                        "delivery_time_frames": [
+                            {
+                                "type": "start",
+                                "date_time": {
+                                    "date": "2020-02-13 09:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            },
+                            {
+                                "type": "end",
+                                "date_time": {
+                                    "date": "2020-02-13 12:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 }
 </pre>
                 <p>
                     <strong>
-                        Get delivery options and pickup locations for Belgium
+                        Get pickup options for 2132WT, 66 for PostNL cutoff time 16h00, dropoff days
+                        Mon - Sat, dropoff delay is zero, delivery window is 2 days and morning is excluded as delivery
+                        type
+                    </strong><br>
+                    <br>
+                    <strong>Request</strong>
+                </p>
+                <pre>
+GET https://api.myparcel.nl/pickup_locations?platform=myparcel&carrier=postnl&cc=nl&number=66&postal_code=2132WT&cutoff_time=16:00:00&dropoff_days=1;2;3;4;5;6&monday_delivery=1&dropoff_delay=0&deliverydays_window=2&exclude_delivery_type=1 HTTP/1.1
+User-Agent: CustomApiCall/2
+Accept: application/json;charset=utf-8;version=2.0
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+
+    {
+    "data": {
+        "pickup_locations": [
+            {
+                "address": {
+                    "cc": "NL",
+                    "city": "Hoofddorp",
+                    "street": "Polderplein",
+                    "postal_code": "2132BA",
+                    "number": "3"
+                },
+                "possibilities": [
+                    {
+                        "delivery_type_id": 4,
+                        "delivery_type_name": "pickup",
+                        "moment": {
+                            "start": {
+                                "date": "2020-02-13 16:00:00.000000",
+                                "timezone_type": 3,
+                                "timezone": "Europe/Amsterdam"
+                            }
+                        }
+                    }
+                ],
+                "location": {
+                    "location_name": "Primera Sanders",
+                    "retail_network_id": "PNPNL-01",
+                    "distance": "1696",
+                    "latitude": "52.30329367",
+                    "longitude": "4.69476214",
+                    "location_code": "176227",
+                    "phone_number": null,
+                    "opening_hours": {
+                        "monday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-17 11:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-17 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "tuesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-18 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-18 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "wednesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-19 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-19 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "thursday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-13 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-13 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "friday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-14 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-14 21:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "saturday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-15 09:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-15 18:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "sunday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-16 12:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-16 17:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+</pre>
+
+                <p>
+                    <strong>
+                        Get delivery options for Belgium
                     </strong>
                     <br>
                     <br>
                     <strong>Request</strong>
                 </p>
                 <pre>
-GET https://api.myparcel.nl/delivery_options?cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1
+GET https://api.myparcel.nl/delivery_options?platform=myparcel&carrier=postnl&cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1
 User-Agent: CustomApiCall/2
+Accept: application/json;charset=utf-8;version=2.0
 </pre>
                 <p><strong>Response</strong></p>
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-  "data": {
-    "delivery": [
-      {
-        "date": "2017-07-29",
-        "time": [
-          {
-            "start": "08:00:00",
-            "end": "21:30:00",
-            "price": {
-              "currency": "EUR",
-              "amount": 0
+    "data": {
+        "deliveries": [
+            {
+                "date": {
+                    "date": "2020-02-13 00:00:00.000000",
+                    "timezone_type": 3,
+                    "timezone": "Europe/Amsterdam"
+                },
+                "possibilities": [
+                    {
+                        "type": "standard",
+                        "shipment_options": [
+                            {
+                                "name": "large_format",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            }
+                        ],
+                        "collect_date": null,
+                        "delivery_time_frames": [
+                            {
+                                "type": "start",
+                                "date_time": {
+                                    "date": "2020-02-13 08:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            },
+                            {
+                                "type": "end",
+                                "date_time": {
+                                    "date": "2020-02-13 21:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ]
+                    }
+                ]
             },
-            "price_comment": "standard",
-            "comment": "",
-            "type": 2
-          }
+            {
+                "date": {
+                    "date": "2020-02-14 00:00:00.000000",
+                    "timezone_type": 3,
+                    "timezone": "Europe/Amsterdam"
+                },
+                "possibilities": [
+                    {
+                        "type": "standard",
+                        "shipment_options": [
+                            {
+                                "name": "large_format",
+                                "schema": {
+                                    "type": "boolean",
+                                    "enum": [
+                                        true,
+                                        false
+                                    ]
+                                }
+                            }
+                        ],
+                        "collect_date": null,
+                        "delivery_time_frames": [
+                            {
+                                "type": "start",
+                                "date_time": {
+                                    "date": "2020-02-14 08:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            },
+                            {
+                                "type": "end",
+                                "date_time": {
+                                    "date": "2020-02-14 21:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
         ]
-      }
-    ],
-    "pickup": [
-      {
-        "date": "2017-07-29",
-        "time": [
-          {
-            "start": "16:00:00",
-            "type": 4,
-            "price": {
-              "amount": 0,
-              "currency": "EUR"
+    }
+}
+</pre>
+                <p>
+                    <strong>
+                        Get pickup options for Belgium
+                    </strong>
+                    <br>
+                    <br>
+                    <strong>Request</strong>
+                </p>
+                <pre>
+GET https://api.myparcel.nl/pickup_locations?platform=myparcel&carrier=postnl&cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1
+User-Agent: CustomApiCall/2
+Accept: application/json;charset=utf-8;version=2.0
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+    "data": {
+        "pickup_locations": [
+            {
+                "address": {
+                    "cc": "BE",
+                    "city": "Saint-Gilles",
+                    "street": "Chaussée de Charleroi",
+                    "postal_code": "1060",
+                    "number": "269"
+                },
+                "possibilities": [
+                    {
+                        "delivery_type_id": 4,
+                        "delivery_type_name": "pickup",
+                        "moment": {
+                            "start": {
+                                "date": "2020-02-13 16:00:00.000000",
+                                "timezone_type": 3,
+                                "timezone": "Europe/Amsterdam"
+                            }
+                        }
+                    }
+                ],
+                "location": {
+                    "location_name": "Librairie Papyrus",
+                    "retail_network_id": "PNPBE-01",
+                    "distance": "2396",
+                    "latitude": "50.823476",
+                    "longitude": "4.353791",
+                    "location_code": "212969",
+                    "phone_number": null,
+                    "opening_hours": {
+                        "monday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-17 06:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-17 18:25:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "tuesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-18 06:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-18 18:25:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "wednesday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-19 06:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-19 18:25:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "thursday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-13 06:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-13 18:25:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "friday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-14 06:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-14 18:25:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "saturday": [
+                            {
+                                "start": {
+                                    "date": "2020-02-15 07:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                    "date": "2020-02-15 17:00:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            }
+                        ],
+                        "sunday": []
+                    }
+                }
             }
-          }
-        ],
-        "location": "BELLES NOUVELLES",
-        "street": "AVENUE MONTJOIE",
-        "number": "20",
-        "postal_code": "1180",
-        "city": "UCCLE",
-        "cc": "BE",
-        "start_time": "16:00:00",
-        "price": 0,
-        "price_comment": "retail",
-        "comment": "",
-        "phone_number": "",
-        "opening_hours": {
-          "monday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "tuesday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "wednesday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "thursday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "friday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "saturday": [
-            [
-              "07:30-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "sunday": {
-
-          }
-        },
-        "distance": "616",
-        "latitude": "50.810441",
-        "longitude": "4.368223",
-        "location_code": "BE0S01",
-        "retail_network_id": "LD-01"
-      },
-      {
-        "date": "2017-07-29",
-        "time": [
-          {
-            "start": "16:00:00",
-            "type": 4,
-            "price": {
-              "amount": 0,
-              "currency": "EUR"
-            }
-          }
-        ],
-        "location": "KARIBOO C'EST LE BOUQUET",
-        "street": "RUE EMILE CLAUS",
-        "number": "58",
-        "postal_code": "1180",
-        "city": "UCCLE",
-        "cc": "BE",
-        "start_time": "16:00:00",
-        "price": 0,
-        "price_comment": "retail",
-        "comment": "",
-        "phone_number": "",
-        "opening_hours": {
-          "monday": [
-            "13:00-18:00"
-          ],
-          "tuesday": [
-            [
-              "09:00-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "wednesday": [
-            [
-              "09:00-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "thursday": [
-            [
-              "09:00-12:00",
-              "12:00-19:00"
-            ]
-          ],
-          "friday": [
-            [
-              "09:00-12:00",
-              "12:00-20:00"
-            ]
-          ],
-          "saturday": [
-            [
-              "09:00-12:00",
-              "12:00-20:00"
-            ]
-          ],
-          "sunday": [
-            "10:00-16:00"
-          ]
-        },
-        "distance": "983",
-        "latitude": "50.815598",
-        "longitude": "4.367427",
-        "location_code": "BE0T57",
-        "retail_network_id": "LD-01"
-      }
-    ]
-  }
+        ]
+    }
 }
 </pre>                    <h1 id="9">9. Delivery options Object Definitions</h1>
                 <p>If you use the endpoint delivery_options you get two objects. DeliveryOptions Object and PickupOptions Object. OpeningHours Object contains the opening hours of pickup locations.</p>
@@ -4934,12 +5941,12 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 </p>
                 <p>
                     We currently have two available hooks: <span class="nice">shipment_status_change</span> and <span class="nice">shipment_label_created</span>:
-                    <ul>
-                      <li>shipment_status_change: Whenever the <a href="#shipment_status">status</a> of a shipment changes this webhook will send you an update with the new value. We will not send an update with a status 1 and status 2.</li>
-                      <li>shipment_label_created: Whenever a label is created this webhook will send you a message with the url of the label.</li>
-                    </ul>
-                    <b>Tip:</b> You can test webhooks with <a href="https://webhook.site/" target="_blank">Webhook Tester</a>
-                    <b>Tip:</b> You can also use the backoffice to update the webhook url.
+                <ul>
+                    <li>shipment_status_change: Whenever the <a href="#shipment_status">status</a> of a shipment changes this webhook will send you an update with the new value. We will not send an update with a status 1 and status 2.</li>
+                    <li>shipment_label_created: Whenever a label is created this webhook will send you a message with the url of the label.</li>
+                </ul>
+                <b>Tip:</b> You can test webhooks with <a href="https://webhook.site/" target="_blank">Webhook Tester</a>
+                <b>Tip:</b> You can also use the backoffice to update the webhook url.
                 </p>
                 <div class="postman-run-button"></div>
                 <h3 id="10_A_2">10.A.2 Reference</h3>
@@ -5208,7 +6215,7 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
   "url": "https://seoshop.nl/myparcel/notifications"
 }
 </pre>
-The above is an example of the Webhook Object. However, you receive the following content:
+                The above is an example of the Webhook Object. However, you receive the following content:
                 <pre>
 {
   "data": {
@@ -5287,8 +6294,8 @@ The above is an example of the Webhook Object. However, you receive the followin
     "barcode": "3SMYPA749883621"
   }
 </pre>
-The above is an example of the ShipmentStatusChangeEvent Object. However, the following notification is sent to your callback URL:
-<pre>
+                The above is an example of the ShipmentStatusChangeEvent Object. However, the following notification is sent to your callback URL:
+                <pre>
 {
     "data": {
         "hooks": [
@@ -5361,7 +6368,7 @@ The above is an example of the ShipmentStatusChangeEvent Object. However, the fo
 
   }
 </pre>
-<pre>
+                <pre>
   {
     "status": "failed",
     "shipment_ids": [
@@ -5372,8 +6379,8 @@ The above is an example of the ShipmentStatusChangeEvent Object. However, the fo
     "reason": "payment required"
   }
 </pre>
-The above is an example of the ShipmentLabelCreated Object. However, the following notification is sent to your callback URL:
-<pre>
+                The above is an example of the ShipmentLabelCreated Object. However, the following notification is sent to your callback URL:
+                <pre>
   {
     "data": {
       "hooks": [
@@ -5413,12 +6420,12 @@ The above is an example of the ShipmentLabelCreated Object. However, the followi
                     <a target="_blank" href="https://github.com/myparcelnl/api/commits">Click here</a> for the latest version of the API documentation. Last version update is done on <span id="current_version_date"></span>.
                 </p>
                 <script>
-                    $.get('https://api.github.com/repos/myparcelnl/api/commits', function (data) {
-                        var day = data[0].commit.author.date.split('T')[0];
-                        var parts = day.split('-');
-                        $('#current_version_date').html(parts[2] + '-' + parts[1] + '-' + parts[0]);
-                        $('#current_version').html(data[0].commit.message);
-                    });
+                  $.get('https://api.github.com/repos/myparcelnl/api/commits', function (data) {
+                    var day = data[0].commit.author.date.split('T')[0];
+                    var parts = day.split('-');
+                    $('#current_version_date').html(parts[2] + '-' + parts[1] + '-' + parts[0]);
+                    $('#current_version').html(data[0].commit.message);
+                  });
                 </script>
                 <footer class="site-footer">
                     <p>
@@ -5443,22 +6450,26 @@ The above is an example of the ShipmentLabelCreated Object. However, the followi
     </div>
 </div>
 <script>
-    // Set postman button attributes in one place
-    postman_buttons = document.getElementsByClassName('postman-run-button');
+  // Set postman button attributes in one place
+  postman_buttons = document.getElementsByClassName('postman-run-button');
 
-    for (i = 0; i < postman_buttons.length; i++) {
-        postman_buttons[i].setAttribute('data-postman-action', 'collection/import');
-        postman_buttons[i].setAttribute('data-postman-var-1', '065786285c2e5ed75509');
-        postman_buttons[i].setAttribute('data-postman-param', 'env%5BMyParcel%20public%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIn0seyJrZXkiOiJVc2VyLUFnZW50IiwidmFsdWUiOiJ7e1VzZXItQWdlbnR9fSIsImRlc2NyaXB0aW9uIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJhdXRoX3Rva2VuIiwidmFsdWUiOiIiLCJkZXNjcmlwdGlvbiI6IiIsImVuYWJsZWQiOnRydWV9XQ==');
+  for (i = 0; i < postman_buttons.length; i++) {
+
+    postman_buttons[i].setAttribute('data-postman-action', 'collection/import');
+    postman_buttons[i].setAttribute('data-postman-var-1', 'dba95f07ac8bce8a0259');
+
+    if (i === 0) {
+      postman_buttons[i].setAttribute('data-postman-param', 'env%5BMyParcel%20public%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIn0seyJrZXkiOiJVc2VyLUFnZW50IiwidmFsdWUiOiJ7e1VzZXItQWdlbnR9fSIsImRlc2NyaXB0aW9uIjoiIiwiZW5hYmxlZCI6dHJ1ZX1d');
     }
+  }
 
-    (function (p,o,s,t,m,a,n) {
-        !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
-        !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
-            (n = o.createElement("script")),
-                (n.id = s+t), (n.async = 1), (n.src = m), n
-        ));
-    }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+  (function (p,o,s,t,m,a,n) {
+    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
+      (n = o.createElement("script")),
+        (n.id = s+t), (n.async = 1), (n.src = m), n
+    ));
+  }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
 </script>
 
 </body>
