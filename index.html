@@ -2090,12 +2090,21 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     Upon error HTTP/1.1 4xx < MESSAGE >
                     with a response body containing an Error is
                     returned.
+                    <br><br>
+
+                    If you want to retrieve large numbers of labels in one response, you can use the v2 endpoint.
+                    Because it concerns a large quantities of labels, it may happen that the PDF file takes longer to receive.
                 </p>
                 <h3 id="6_F_2">6.F.2 Reference </h3>
                 <table>
                     <tr>
                         <th>URI</th>
-                        <td>https://api.myparcel.nl/shipment_labels/id[;id]</td>
+                        <td>
+                            <ul>
+                                <li>https://api.myparcel.nl/shipment_labels/id[;id]</li>
+                                <li>https://api.myparcel.nl/v2/shipment_labels/id[;id] (For <a href="#7_R">ShipmentLabelDownloadLink</a>)</li>
+                            </ul>
+                        </td>
                     </tr>
                     <tr>
                         <th>Methods</th>
