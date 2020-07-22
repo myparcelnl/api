@@ -1840,7 +1840,7 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
 {
   "data": {
     "download_url": {
-     "link": "https://api.myparcel.nl/return_shipment_labels/902223ede2f50288ecfbbd21a8c8fd7e"
+     "link": "https://myparcel.me/returns/902223ede2f50288ecfbbd21a8c8fd7e"
      }
   }
 }
@@ -4068,6 +4068,12 @@ HTTP/1.1 204 No Content
                     The name to include in the email.
                 </p>
                 <p>
+                    <strong>sender</strong><br>
+                    Data type: <a href="#7_B">Address</a><br>
+                    Required: No.<br>
+                    The sender where the package comes from.
+                </p>
+                <p>
                     <strong>options</strong><br>
                     Data type: <a href="#7_C">ShipmentOptions</a><br>
                     Required: No.<br>
@@ -4080,6 +4086,19 @@ HTTP/1.1 204 No Content
   "carrier": 1,
   "email": "testing@myparcel.nl",
   "name": "Mr. Parcel",
+  "sender": {
+    "cc": "NL",
+    "city": "Amsterdam",
+    "street": "J.H. Hisgenpad",
+    "number": "298",
+    "postal_code": "1025 WK",
+    "email": "parcel@myparcel.nl",
+    "person": "Mr. Parcel",
+    "street_additional_info": "",
+    "number_suffix": "",
+    "company": "MyParcel B.V.",
+    "phone": "0118418888"
+  },
   "options": {
     "package_type": 1,
     "only_recipient": 0,
@@ -4091,6 +4110,7 @@ HTTP/1.1 204 No Content
     }
   }
 }
+
 </pre>
                 <h2 id="7_K">7.K DownloadUrl Object Definition</h2>
                 <h3 id="7_K_1">7.K.1 Overview</h3>
