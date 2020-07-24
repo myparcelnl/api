@@ -26,7 +26,7 @@
         </div>
         <section class="page-header col-xs-8 col-xs-offset-4 col-lg-9 col-lg-offset-3">
             <h1 class="project-name">
-                MyParcel NL API Documentation
+                MyParcel API Documentation
             </h1>
             <p class="project-tagline">
                 Last adjustments: <span id="current_version"></span>
@@ -333,14 +333,20 @@ Connection: keep-alive
                     </tr>
                     <tr>
                         <td>example</td>
-                        <td>1 (postnl), 2 (bpost), 4 (dpd)</td>
+                        <td>
+                            <ul>
+                                <li>1 (postnl)</li>
+                                <li>2 (bpost)</li>
+                                <li>4 (DPD)</li>
+                            </ul>
+                        </td>
                     </tr>
                 </table>
                 <h2 id="coordinates">coordinates</h2>
                 <table>
                     <tr>
                         <th>description</th>
-                        <td>The position of the postNL locations</td>
+                        <td>The position of the pickup locations</td>
                     </tr>
                     <tr>
                         <td>pattern</td>
@@ -404,7 +410,7 @@ Connection: keep-alive
                     </tr>
                     <tr>
                         <td>pattern</td>
-                        <td>[1 – 5]</td>
+                        <td>[1 – 4]</td>
                     </tr>
                     <tr>
                         <td>example</td>
@@ -414,7 +420,6 @@ Connection: keep-alive
                                 <li>standard</li>
                                 <li>evening</li>
                                 <li>pickup</li>
-                                <li>pickup express</li>
                             </ol>
                         </td>
                     </tr>
@@ -560,7 +565,7 @@ Connection: keep-alive
                 <table>
                     <tr>
                         <th>description</th>
-                        <td>package_type</td>
+                        <td>The different shipments you can create. For SendMyParcel only package type 1 (package) is allowed.</td>
                     </tr>
                     <tr>
                         <td>pattern</td>
@@ -757,8 +762,13 @@ Connection: keep-alive
                     </tr>
                     <tr>
                         <td>example</td>
-                        <td>2015-01-01 08:00:00</td>
-                        <td>2015-01-01 08:00:00.000000</td>
+                        <td>
+                            <ul>
+                                <li>2015-01-01 08:00:00</li>
+                                <li>2015-01-01 08:00:00.000000</li>
+                            </ul>
+                        </td>
+                    </tr>
                     </tr>
                 </table>
                 <h2 id="weekday_digit">weekday_digit</h2>
@@ -807,7 +817,9 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     our API he/she needs to create an <strong>API Key.</strong> This API Key will be assigned the <strong>Broker</strong> role.
                     Currently the Merchant is not able to create or assign another Role to a API Key. When the Merchant
                     wants to invalidate an API Key he/she just disables the API Key. An Intermediate system, such as
-                    the <a href="https://backoffice.myparcel.nl/">MyParcel.nl UI</a>, has its own API Key but cannot access user resources. For this it needs to request
+                    the <a href="https://backoffice.myparcel.nl/">MyParcelNL backoffice</a> or
+                    <a href="https://backoffice.sendmyparcel.be">SendMyParcel backoffice</a>,
+                    has its own API Key but cannot access user resources. For this it needs to request
                     a <strong>Session</strong>
                     Token so that it can perform actions on behalf of the user. The API Key and Session Token are send
                     in
@@ -833,7 +845,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <h3>Contents</h3>
                 <h3 id="6_A_1">6.A.1 Package types</h3>
                 <p>
-                    There are three different packages types available and determine the type of shipment. The value is
+                    There are four different packages types available and determine the type of shipment. The value is
                     send
                     with the <a href="#7_C">ShipmentOptions</a>.package_type field.
                 </p>
@@ -1170,7 +1182,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>
                     For these examples we are going to create shipments.<br>
                     <br>
-                <h2>Create national shipments</h2>
+                <h2>Create national PostNL shipments</h2>
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1243,6 +1255,96 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
       "reference_identifier":"FOO-223-BAR-43"
     }]
   }
+}
+</pre>
+                <h2>Create national bpost shipments</h2>
+                <p><strong>Request</strong></p>
+                <pre>
+POST https://api.sendmyparcel.be/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json;charset=utf-8
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [
+      {
+        "recipient": {
+          "cc": "BE",
+          "postal_code": "2000",
+          "city": "Antwerpen",
+          "street": "Wormerplein",
+          "number": "16",
+          "box_number": "",
+          "person": "test"
+        },
+        "options": {
+          "package_type": 1,
+          "signature": 0,
+          "insurance": {
+            "amount": 0,
+            "currency": "EUR"
+          }
+        },
+        "carrier": 2,
+        "reference_identifier": "bpost shipment"
+    }]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+    "data": {
+        "ids": [
+            {
+                "id": 49566653,
+                "reference_identifier": "bpost shipment"
+            }
+        ]
+    }
+}
+</pre>
+                <h2>Create national DPD shipments</h2>
+                <p><strong>Request</strong></p>
+                <pre>
+POST https://api.sendmyparcel.be/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json;charset=utf-8
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [
+      {
+        "recipient": {
+          "cc": "BE",
+          "postal_code": "2000",
+          "city": "Antwerpen",
+          "street": "Wormerplein",
+          "number": "16",
+          "box_number": "",
+          "person": "test"
+        },
+        "options": {
+          "package_type": 1
+        },
+        "carrier": 4,
+        "reference_identifier": "Order 123456"
+    }]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+"data": {
+    "ids": [
+        {
+            "id": 49566517,
+            "reference_identifier": "Order 123456"
+        }
+    ]
 }
 </pre>
                 <h2>Create national multi collo shipments</h2>
@@ -1423,7 +1525,7 @@ Content-Type:application/json;charset=utf-8
   }
 }
 </pre>
-                <h2>Create shipment with NL pickup location</h2>
+                <h2>Create PostNL shipment with NL pickup location</h2>
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1474,6 +1576,113 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
       "reference_identifier":null
     }]
   }
+}
+</pre>
+
+
+                <h2>Create bpost shipment with BE pickup location</h2>
+                <p><strong>Request</strong></p>
+                <pre>
+POST https://api.sendmyparcel.be/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json; charset=utf-8
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [
+      {
+        "carrier": 2,
+        "recipient": {
+          "cc": "BE",
+          "city": "Antwerpen",
+          "street": "Adriaan Brouwerstraat",
+          "number": "16",
+          "person": "Test",
+          "postal_code": "2000"
+        },
+        "options": {
+          "package_type": 1,
+          "delivery_type":4
+        },
+        "pickup": {
+          "city": "ANTWERPEN",
+          "location_code": "618925",
+          "location_name": "KLAPKRANT",
+          "number": "15",
+          "postal_code": "2000",
+          "street": "KLAPDORP"
+        },
+        "reference_identifier": "order-012356"
+      }
+    ]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
+{
+    "data": {
+        "ids": [
+            {
+                "id": 49571535,
+                "reference_identifier": "order-012356"
+            }
+        ]
+    }
+}
+</pre>
+                <h2>Create DPD shipment with BE pickup location</h2>
+                <p><strong>Request</strong></p>
+                <pre>
+POST https://api.sendmyparcel.be/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json; charset=utf-8
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [
+      {
+        "carrier": 4,
+        "recipient": {
+          "cc": "BE",
+          "city": "Antwerpen",
+          "street": "Adriaan Brouwerstraat",
+          "number": "16",
+          "person": "Test",
+          "postal_code": "2000"
+        },
+        "options": {
+          "package_type": 1,
+          "delivery_type":4
+        },
+        "pickup":{
+           "postal_code":"2000",
+           "location_name":"PRESS WINKEL",
+           "city":"Antwerpen",
+           "street":"HOOGSTRAAT",
+           "number":"75",
+           "cc":"BE",
+           "location_code":"BE11468"
+        },
+        "reference_identifier": "DPD pickup"
+      }
+    ]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
+{
+    "data": {
+        "ids": [
+            {
+                "id": 49571535,
+                "reference_identifier": "DPD pickup"
+            }
+        ]
+    }
 }
 </pre>
                 <h2>Create multi collo shipment with NL pickup location</h2>
@@ -2922,7 +3131,7 @@ HTTP/1.1 204 No Content
                 <p>
                     <strong>pickup</strong><br>
                     Data type: <a href="#7_O">PickupLocation</a><br>
-                    Required: Yes for options.delivery_type 4 and 5.<br>
+                    Required: Yes for options.delivery_type 4.<br>
                     The pickup location for this shipment.
                 </p>
                 <p>
@@ -4810,6 +5019,15 @@ HTTP/1.1 204 No Content
                     Monday delivery is only possible when the package is delivered before 15.00 on Saturday at the designated PostNL locations. Click <a href="https://blog.myparcel.nl/maandagbezorging" target="_blank">here</a> for more information concerning Monday delivery and the locations.<br>
                     <strong>Note: To activate Monday delivery, value 6 must be given with <a href="#dropoff_days">dropoff_days</a>, value 1 must be given by <a href="#monday_delivery">monday_delivery</a>. And on Saturday the <a href="#cutoff_time">cutoff_time</a> must be before 15:00 (14:30 recommended) so that Monday will be shown.</strong>
                 </p>
+                <p id="saturday_delivery">
+                    <strong>saturday_delivery</strong><br>
+                    Data type: <a href="#boolean">boolean</a><br>
+                    Required: no<br>
+                    Saturday delivery is only possible when the package is delivered before 15.00 on Friday at the
+                    designated bpost locations.<br>
+                    <strong>Note: To activate Saturday delivery, value 6 must be given with <a href="#dropoff_days">dropoff_days</a>,
+                        value 1 must be given by <a href="#saturday_delivery">saturday_delivery</a>.</strong>
+                </p>
                 <p>
                     <strong>dropoff_delay</strong><br>
                     Data type: <a href="#integer">integer</a><br>
@@ -5422,7 +5640,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <strong>Request</strong>
                 </p>
                 <pre>
-GET https://api.myparcel.nl/delivery_options?platform=myparcel&carrier=postnl&cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1
+GET https://api.myparcel.nl/delivery_options?platform=belgie&carrier=bpost&cc=be&number=49&postal_code=1000  HTTP/1.1
 User-Agent: CustomApiCall/2
 Accept: application/json;charset=utf-8;version=2.0
 </pre>
@@ -5431,93 +5649,55 @@ Accept: application/json;charset=utf-8;version=2.0
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
     "data": {
-        "deliveries": [
+    "delivery": [
             {
-                "date": {
-                    "date": "2020-02-13 00:00:00.000000",
-                    "timezone_type": 3,
-                    "timezone": "Europe/Amsterdam"
-                },
-                "possibilities": [
+                "date": "2020-07-27",
+                "time": [
                     {
-                        "type": "standard",
-                        "shipment_options": [
-                            {
-                                "name": "large_format",
-                                "schema": {
-                                    "type": "boolean",
-                                    "enum": [
-                                        true,
-                                        false
-                                    ]
-                                }
-                            }
-                        ],
-                        "collect_date": null,
-                        "delivery_time_frames": [
-                            {
-                                "type": "start",
-                                "date_time": {
-                                    "date": "2020-02-13 08:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            },
-                            {
-                                "type": "end",
-                                "date_time": {
-                                    "date": "2020-02-13 21:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ]
+                        "start": "08:00:00",
+                        "end": "17:00:00",
+                        "price": {
+                        "currency": "EUR",
+                            "amount": 0
+                        },
+                        "price_comment": "standard",
+                        "comment": "",
+                        "type": 2
                     }
                 ]
             },
             {
-                "date": {
-                    "date": "2020-02-14 00:00:00.000000",
-                    "timezone_type": 3,
-                    "timezone": "Europe/Amsterdam"
-                },
-                "possibilities": [
+                "date": "2020-07-28",
+                "time": [
                     {
-                        "type": "standard",
-                        "shipment_options": [
-                            {
-                                "name": "large_format",
-                                "schema": {
-                                    "type": "boolean",
-                                    "enum": [
-                                        true,
-                                        false
-                                    ]
-                                }
-                            }
-                        ],
-                        "collect_date": null,
-                        "delivery_time_frames": [
-                            {
-                                "type": "start",
-                                "date_time": {
-                                    "date": "2020-02-14 08:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            },
-                            {
-                                "type": "end",
-                                "date_time": {
-                                    "date": "2020-02-14 21:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ]
+                        "start": "08:00:00",
+                        "end": "17:00:00",
+                        "price": {
+                        "currency": "EUR",
+                            "amount": 0
+                        },
+                        "price_comment": "standard",
+                        "comment": "",
+                        "type": 2
                     }
                 ]
-            }
+            },
+            {
+                "date": "2020-07-29",
+                "time": [
+                    {
+                        "start": "08:00:00",
+                        "end": "17:00:00",
+                        "price": {
+                        "currency": "EUR",
+                            "amount": 0
+                        },
+                        "price_comment": "standard",
+                        "comment": "",
+                        "type": 2
+                    }
+                ]
+            },
         ]
     }
 }
@@ -5531,7 +5711,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     <strong>Request</strong>
                 </p>
                 <pre>
-GET https://api.myparcel.nl/pickup_locations?platform=myparcel&carrier=postnl&cc=be&carrier=1&number=49&postal_code=1000  HTTP/1.1
+GET https://api.myparcel.nl/pickup_locations?platform=belgie&carrier=bpost&cc=be&number=49&postal_code=1000  HTTP/1.1
 User-Agent: CustomApiCall/2
 Accept: application/json;charset=utf-8;version=2.0
 </pre>
@@ -5540,22 +5720,23 @@ Accept: application/json;charset=utf-8;version=2.0
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
     "data": {
-        "pickup_locations": [
+    "pickup_locations": [
             {
                 "address": {
-                    "cc": "BE",
-                    "city": "Saint-Gilles",
-                    "street": "Chaussée de Charleroi",
-                    "postal_code": "1060",
-                    "number": "269"
+                "cc": "BE",
+                    "city": "BRUSSEL",
+                    "street": "ANSPACHLAAN",
+                    "postal_code": "1000",
+                    "number": "1",
+                    "number_suffix": null
                 },
                 "possibilities": [
                     {
                         "delivery_type_id": 4,
                         "delivery_type_name": "pickup",
                         "moment": {
-                            "start": {
-                                "date": "2020-02-13 16:00:00.000000",
+                        "start": {
+                            "date": "2020-07-27 16:00:00.000000",
                                 "timezone_type": 3,
                                 "timezone": "Europe/Amsterdam"
                             }
@@ -5563,23 +5744,35 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     }
                 ],
                 "location": {
-                    "location_name": "Librairie Papyrus",
-                    "retail_network_id": "PNPBE-01",
-                    "distance": "2396",
-                    "latitude": "50.823476",
-                    "longitude": "4.353791",
-                    "location_code": "212969",
+                "location_name": "BRUSSEL DE BROUCKERE",
+                    "retail_network_id": "",
+                    "distance": "242",
+                    "latitude": "50.8506",
+                    "longitude": "4.35185",
+                    "location_code": "20100",
                     "phone_number": null,
                     "opening_hours": {
-                        "monday": [
+                    "monday": [
                             {
                                 "start": {
-                                    "date": "2020-02-17 06:00:00.000000",
+                                "date": "2020-07-27 08:30:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 },
                                 "end": {
-                                    "date": "2020-02-17 18:25:00.000000",
+                                "date": "2020-07-27 12:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            },
+                            {
+                                "start": {
+                                "date": "2020-07-27 13:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                "date": "2020-07-27 18:00:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 }
@@ -5588,12 +5781,24 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         "tuesday": [
                             {
                                 "start": {
-                                    "date": "2020-02-18 06:00:00.000000",
+                                "date": "2020-07-28 08:30:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 },
                                 "end": {
-                                    "date": "2020-02-18 18:25:00.000000",
+                                "date": "2020-07-28 12:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            },
+                            {
+                                "start": {
+                                "date": "2020-07-28 13:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                "date": "2020-07-28 18:00:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 }
@@ -5602,12 +5807,24 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         "wednesday": [
                             {
                                 "start": {
-                                    "date": "2020-02-19 06:00:00.000000",
+                                "date": "2020-07-29 08:30:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 },
                                 "end": {
-                                    "date": "2020-02-19 18:25:00.000000",
+                                "date": "2020-07-29 12:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            },
+                            {
+                                "start": {
+                                "date": "2020-07-29 13:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                "date": "2020-07-29 18:00:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 }
@@ -5616,12 +5833,24 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         "thursday": [
                             {
                                 "start": {
-                                    "date": "2020-02-13 06:00:00.000000",
+                                "date": "2020-07-30 08:30:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 },
                                 "end": {
-                                    "date": "2020-02-13 18:25:00.000000",
+                                "date": "2020-07-30 12:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            },
+                            {
+                                "start": {
+                                "date": "2020-07-30 13:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                "date": "2020-07-30 18:00:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 }
@@ -5630,12 +5859,24 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         "friday": [
                             {
                                 "start": {
-                                    "date": "2020-02-14 06:00:00.000000",
+                                "date": "2020-07-31 08:30:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 },
                                 "end": {
-                                    "date": "2020-02-14 18:25:00.000000",
+                                "date": "2020-07-31 12:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                }
+                            },
+                            {
+                                "start": {
+                                "date": "2020-07-31 13:30:00.000000",
+                                    "timezone_type": 3,
+                                    "timezone": "Europe/Amsterdam"
+                                },
+                                "end": {
+                                "date": "2020-07-31 18:00:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 }
@@ -5644,12 +5885,12 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                         "saturday": [
                             {
                                 "start": {
-                                    "date": "2020-02-15 07:00:00.000000",
+                                "date": "2020-07-25 10:00:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 },
                                 "end": {
-                                    "date": "2020-02-15 17:00:00.000000",
+                                "date": "2020-07-25 13:00:00.000000",
                                     "timezone_type": 3,
                                     "timezone": "Europe/Amsterdam"
                                 }
@@ -5789,7 +6030,7 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                     Required: n/a.<br>
                 </p>
                 <h3 id="9_B_2">9.B.2 Example</h3>
-                <p>Example a</p>
+                <p>Example</p>
                 <pre>
 {
   "date": "2017-02-01",
