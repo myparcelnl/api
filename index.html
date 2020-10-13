@@ -2311,18 +2311,15 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     returned.
                     <br><br>
 
-                    If you want to retrieve large numbers of labels in one response, you can use the v2 endpoint.
-                    Because it concerns a large quantities of labels, it may happen that the PDF file takes longer to receive.
+                  If you want to retrieve more than 25 labels in one response, you can use <b>Accept: application/vnd.shipment_label_link+json; charset=utf8</b>.
+                  You will receive a URL to a label, but the label is not immediately available and will return a HTTP status of 404 until it is ready. Depending on the number of labels, this process will take between 3 seconds and 3 minutes. You can regularly check whether the label is available or you can use the <a href="#10">label created webhooks</a>.
                 </p>
                 <h3 id="6_F_2">6.F.2 Reference </h3>
                 <table>
                     <tr>
                         <th>URI</th>
                         <td>
-                            <ul>
-                                <li>https://api.myparcel.nl/shipment_labels/id[;id]</li>
-                                <li>https://api.myparcel.nl/v2/shipment_labels/id[;id] (For <a href="#7_R">ShipmentLabelDownloadLink</a>)</li>
-                            </ul>
+                            https://api.myparcel.nl/shipment_labels/id[;id]
                         </td>
                     </tr>
                     <tr>
@@ -2330,17 +2327,27 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <td>GET</td>
                     </tr>
                     <tr>
-                        <th rowspan="4">Required request headers</th>
+                        <th rowspan="5">Required request headers</th>
                         <td>Authorization: basic BASE64(API_KEY)</td>
                     </tr>
                     <tr>
                         <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
                     </tr>
                     <tr>
-                        <td>Accept: application/pdf (For the PDF binary. This is the default.)</td>
+                        <td>Accept: application/pdf (For the PDF binary. This is the default.)<br/>
+                          <i>For processing less than 25 labels.</i>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Accept: application/json; charset=utf8 (For <a href="#7_R">ShipmentLabelDownloadLink</a>)</td>
+                        <td>Accept: application/json; charset=utf8 (For <a href="#7_R">ShipmentLabelDownloadLink</a>)<br/>
+                          <i>For processing less than 25 labels.</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          Accept: application/vnd.shipment_label_link+json; charset=utf8 (For <a href="#7_R">ShipmentLabelDownloadLink</a>)<br/>
+                          <i>For processing multiple labels. Recommended if you request more than 25 labels.</i>
+                        </td>
                     </tr>
                     <tr>
                         <th>URI parameters</th>
@@ -2358,7 +2365,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <td>None.</td>
                     </tr>
                     <tr>
-                        <th rowspan="3">Response</th>
+                        <th rowspan="2">Response</th>
                         <td>
                             HTTP/1.1 200 OK
                             Content-Disposition: attachment; filename="< PDF_FILE >"
@@ -2368,13 +2375,7 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                     <tr>
                         <td>
                             HTTP/1.1 200 OK
-                            Content-Type: application/json (When using "Accept: application/json; charset=utf8)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            HTTP/1.1 402 Payment Required
-                            Content-Type: application/json (When payment is required.)
+                            Content-Type: application/json (When using "Accept: application/json; charset=utf8" or "Accept: application/vnd.shipment_label_link+json; charset=utf8")
                         </td>
                     </tr>
                     <tr>
@@ -2382,18 +2383,20 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
                         <td>Shipment label PDF</td>
                     </tr>
                     <tr>
-                        <td><a href="#7_R">ShipmentLabelDownloadLink</a> (When using "Accept: application/json; charset=utf8)"</td>
+                        <td><a href="#7_R">ShipmentLabelDownloadLink</a></td>
                     </tr>
                     <tr>
-                        <td><a href="#7_P">PaymentInstructions</a> (When payment is required)</td>
+                        <td><a href="#7_P">PaymentInstructions</a></td>
                     </tr>
                     <tr>
                         <th>Error response</th>
-                        <td>HTTP/1.1 4xx < MESSAGE > </td>
+                        <td>HTTP/1.1 402 Payment Required</td>
                     </tr>
                     <tr>
                         <th>Error response body</th>
-                        <td>Error</td>
+                        <td>
+                          Content-Type: application/json (When payment is required)
+                        </td>
                     </tr>
                 </table>
                 <h3 id="6_F_3">6.F.3 Parameters </h3>
@@ -2444,6 +2447,25 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
   "data": {
     "pdfs": {
       "url": "https://api.myparcel.nl/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
+    }
+  }
+}
+  </pre>
+                <p><strong>Get shipment label download link to handle multiple labels</strong></p>
+                <p><strong>Request</strong></p>
+                <pre>
+GET https://api.myparcel.nl/shipment_labels/12 HTTP/1.1
+User-Agent: CustomApiCall/2
+Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+Accept: application/vnd.shipment_label_link+json; charset=utf8
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+  "data": {
+    "pdfs": {
+      "url": "/pdfs/461efc8b5c7e71dbd0c39a25067bda9455b0ca5a"
     }
   }
 }
