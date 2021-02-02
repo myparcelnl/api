@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-us">
 <head>
     <meta charset="UTF-8" />
@@ -249,6 +249,7 @@ Connection: keep-alive
                     <li><a href="#date">date</a></li>
                     <li><a href="#delivery_type">delivery_type</a></li>
                     <li><a href="#description">description</a></li>
+                    <li><a href="#eori_number">eori_number</a></li>
                     <li><a href="#integer">integer</a></li>
                     <li><a href="#isic_code">isic_code</a></li>
                     <li><a href="#label_position">label_position</a></li>
@@ -266,6 +267,7 @@ Connection: keep-alive
                     <li><a href="#text">text</a></li>
                     <li><a href="#time">time</a></li>
                     <li><a href="#timestamp">timestamp</a></li>
+                    <li><a href="#vat_number">vat_number</a></li>
                     <li><a href="#weekday_digit">weekday_digit</a></li>
                     <li><a href="#weekday_string">weekday_string</a></li>
                 </ul>
@@ -437,6 +439,21 @@ Connection: keep-alive
                     <tr>
                         <td>example</td>
                         <td>Zending bezorgd</td>
+                    </tr>
+                </table>
+                <h2 id="eori_number">eori_number</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>Economic Operators Registration and Identification. This field is required for DPD shipments to United Kingdom. In this field you can enter the EORI number of the sender in case of a B2C shipment and the EORI number of the recipient in case of a B2B shipment.</td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>[A-Z]{2}[0-9]{9,12}</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>NL012345678</td>
                     </tr>
                 </table>
                 <h2 id="integer">integer</h2>
@@ -769,6 +786,21 @@ Connection: keep-alive
                             </ul>
                         </td>
                     </tr>
+                    </tr>
+                </table>
+                <h2 id="vat_number">vat_number</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>This field is required for DPD shipments to United Kingdom. In this field you can enter the VAT number of the sender in case of a B2C shipment and the VAT number of the recipient in case of a B2B shipment.</td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>*</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>NL000099998B57</td>
                     </tr>
                 </table>
                 <h2 id="weekday_digit">weekday_digit</h2>
