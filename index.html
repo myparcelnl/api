@@ -4283,6 +4283,12 @@ HTTP/1.1 204 No Content
                     The shipment options. If this is not provided then the default shop return shipment options are
                     used.
                 </p>
+                <p>
+                    <strong>general_settings</strong><br>
+                    Data type: <a href="#7_D">ShipmentGeneralSettings</a><br>
+                    Required: no<br>
+                    You can specify general settings for the shipment with this object. For return shipments only the <a href="#printer_identifier">printer_identifier</a> property is accepted.
+                </p>
                 <h3 id="7_I_2">7.I.2 Example</h3>
                 <p>POST example</p>
                 <pre>
@@ -4300,12 +4306,15 @@ HTTP/1.1 204 No Content
       "amount": 10000,
       "currency": "EUR"
     }
+  },
+  "general_settings": {
+    "printer_identifier": "printer_id_12"
   }
 }
 </pre>
                 <h2 id="7_J">7.J UnrelatedReturnShipment Object Definition</h2>
                 <h3 id="7_J_1">7.J.1 Overview</h3>
-                <p>You can create a unrelated return shipment with this object.</p>
+                <p>You can create an unrelated return shipment with this object.</p>
                 <p>
                     <strong>shop_id</strong><br>
                     Data type: <a href="#integer">integer</a><br>
@@ -4342,6 +4351,12 @@ HTTP/1.1 204 No Content
                     Required: No.<br>
                     The shipment options. If this is not provided then the default shop returnshipment options are used.
                 </p>
+                <p>
+                    <strong>general_settings</strong><br>
+                    Data type: <a href="#7_D">ShipmentGeneralSettings</a><br>
+                    Required: no<br>
+                    You can specify general settings for the shipment with this object. For return shipments only the <a href="#printer_identifier">printer_identifier</a> property is accepted.
+                </p>
                 <h3 id="7_J_2">7.J.2 Example</h3>
                 <p>POST example</p>
                 <pre>
@@ -4371,6 +4386,9 @@ HTTP/1.1 204 No Content
       "amount": 10000,
       "currency": "EUR"
     }
+  },
+  "general_settings": {
+    "printer_identifier": "printer_id_12"
   }
 }
 </pre>
