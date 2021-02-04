@@ -4920,6 +4920,12 @@ HTTP/1.1 204 No Content
                     <tr>
                         <td>number = <a href="#string">string</a></td>
                     </tr>
+		    <tr>
+                        <td>city = <a href="#string">string</a></td>
+                    </tr>
+	            <tr>
+                        <td>street = <a href="#string">string</a></td>
+                    </tr>
                     <tr>
                         <td>platform = <a href="#platform">platform</a></td>
                     </tr>
@@ -5025,6 +5031,18 @@ HTTP/1.1 204 No Content
                     Data type: <a href="#string">string</a><br>
                     Required: yes<br>
                     The street number for which to fetch the delivery options.
+                </p>
+                <p>
+                    <strong>city</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    Required: no<br>
+                    Only available for carriers bpost and DPD. This can be used to narrow the search results for locations outside NL.
+                </p>
+                <p>
+                    <strong>street</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    Required: no<br>
+                    This can be used to narrow the search results for locations outside NL.
                 </p>
                 <p>
                     <strong>platform</strong><br>
