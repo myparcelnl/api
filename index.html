@@ -104,6 +104,14 @@
                     DELETE is used to delete an existing object (piece of data). This method always returns HTTP/1.1
                     204 No Content unless otherwise specified.
                 </p>
+
+                <h2 id="1_D">1.D Rate limiting</h2>
+                <p>
+                    Rate limits apply to many of our endpoints. You cannot receive data after you have exceeded
+                    the limit. The limit automatically resets after x minutes.<br><br>
+                    Example: The limit is 100 requests per 5 minutes. If you reach 100 in 3 minutes, you will be able to continue 2 minutes later.
+                </p>
+
                 <h1 id="2">2. Responses</h1>
                 <p>
                     As stated earlier data is usually send back in JSON format. Exceptions to this rule
@@ -2522,14 +2530,8 @@ application/pdf (...PDF content)</pre>
 
                 <h3 id="6_G_2">6.G.2 Limitations </h3>
                 <p>
-                    There are limitation on getting the track and trace data. If you want to receive multiple track and trace
-                    data from multiple shipments, than it is possible to put multiple ID's in one request. <br><br>
-
-                    The reason we recommend this is because there is a limitation of x requests in x minutes.
-                    If you exceed this limit, than it is not possible to retrieve track and trace data anymore.
-                    The limit will be removed automatically after the x minutes have passed.<br><br>
-
-                    For example: the limit is 100 requests per 5 minutes, if you reach 100 in 3 minutes, you will be able to continue after 2 minutes.
+                    For retrieving Track & Trace data, we recommend passing multiple shipment IDs at once to avoid
+                    hitting the <a href="#1_D">rate limit</a>.
                 </p>
 
                 <h3 id="6_G_3">6.G.3 Reference </h3>
@@ -4895,7 +4897,12 @@ HTTP/1.1 204 No Content
 </pre>
                 <h1 id="8">8. Delivery options</h1>
                 <h2 id="8_A">8.A Get delivery options</h2>
+                <p>
+                    A rate limiting has been applied to the delivery options endpoint.
+                    For more information, see <a href="#1_D">rate limiting</a>.
+                </p>
                 <h3 id="8_A_1">8.A.1 Overview</h3>
+
                 <p>
                     <strong>Defaults</strong><br>
                     Get the delivery options for a given location and carrier. If none of the optional
@@ -4917,16 +4924,6 @@ HTTP/1.1 204 No Content
                         <img src="https://monosnap.com/image/mOGXF5KFCjVALnbjg67IgPB99bjLuV.png">
                     </div>
                 </a>
-                </p>
-
-                <h3 id="8_A_2">8.A.2 Limitations </h3>
-                <p>
-                    There are limitation on getting the delivery options data of x requests in x minutes.
-
-                    If you exceed this limit, than it is not possible to retrieve delivery options data anymore.
-                    The limitation will be removed automatically after the x minutes have passed.<br><br>
-
-                    For example: the limit is 100 requests per 5 minutes, if you reach 100 in 3 minutes, you will be able to continue after 2 minutes.
                 </p>
 
                 <h3 id="8_A_3">8.A.3 Reference</h3>
