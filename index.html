@@ -104,6 +104,15 @@
                     DELETE is used to delete an existing object (piece of data). This method always returns HTTP/1.1
                     204 No Content unless otherwise specified.
                 </p>
+                <h2 id="1_D">1.D Rate limiting</h2>
+                <p>
+                    Rate limits apply to many of our endpoints. You cannot receive data after you have exceeded
+                    the limit. The rate limiting will be reached when you make more than 100 requests per minute.
+                    The limit automatically resets after 1 minute.<br><br>
+
+                    Example: If you make 100 requests to the same endpoint within 15 seconds, you will be able to continue 45 seconds later.
+
+                </p>
                 <h1 id="2">2. Responses</h1>
                 <p>
                     As stated earlier data is usually send back in JSON format. Exceptions to this rule
@@ -2519,7 +2528,14 @@ application/pdf (...PDF content)</pre>
                 <h2 id="6_G">6.G Track Shipment</h2>
                 <h3 id="6_G_1">6.G.1 Overview </h3>
                 <p>Get detailed track and trace information for a shipment. Upon success HTTP/1.1 200 OK is returned with an <a href="#array">array</a> of <a href="#7_L">TrackTrace</a> objects.</p>
-                <h3 id="6_G_2">6.G.2 Reference </h3>
+
+                <h3 id="6_G_2">6.G.2 Limitations </h3>
+                <p>
+                    For retrieving Track & Trace data, we recommend passing multiple shipment IDs at once to avoid
+                    hitting the <a href="#1_D">rate limit</a>.
+                </p>
+
+                <h3 id="6_G_3">6.G.3 Reference </h3>
                 <table>
                     <tr>
                         <th>URI</th>
@@ -2580,7 +2596,7 @@ application/pdf (...PDF content)</pre>
                         <td>Error</td>
                     </tr>
                 </table>
-                <h3 id="6_G_3">6.G.3 Parameters </h3>
+                <h3 id="6_G_4">6.G.4 Parameters </h3>
                 <p>
                     <strong>id</strong><br>
                     Data type: <a href="#integer">integer</a><br>
@@ -2613,7 +2629,7 @@ application/pdf (...PDF content)</pre>
                     Only the delivery_moment option is available. Delivery moment is not included by default for performance reasons. Example:
                 </p>
                 <div class="nice">extra_info=delivery_moment</div>
-                <h3 id="6_G_4">6.G.4 Example </h3>
+                <h3 id="6_G_5">6.G.5 Example </h3>
                 <p><strong>Request</strong></p>
                 <pre>
 GET https://api.myparcel.nl/tracktraces/1212321?extra_info=delivery_moment HTTP/1.1
@@ -4882,6 +4898,11 @@ HTTP/1.1 204 No Content
 </pre>
                 <h1 id="8">8. Delivery options</h1>
                 <h2 id="8_A">8.A Get delivery options</h2>
+                <p>
+                    This endpoint has a rate limit.
+
+                    For more information, see <a href="#1_D">rate limiting</a>.
+                </p>
                 <h3 id="8_A_1">8.A.1 Overview</h3>
                 <p>
                     <strong>Defaults</strong><br>
