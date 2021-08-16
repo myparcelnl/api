@@ -107,8 +107,9 @@
                 <h2 id="1_D">1.D Rate limiting</h2>
                 <p>
                     Rate limits apply to many of our endpoints. You cannot receive data after you have exceeded
-                    the limit. The limit automatically resets after x minutes.<br><br>
-                    Example: The limit is 100 requests per 5 minutes. If you reach 100 in 3 minutes, you will be able to continue 2 minutes later.
+                    the limit. The rate limiting will be reached when you make more than 100 requests per minute
+                    The limit automatically resets after 1 minutes.<br><br>
+                    Example: The limit is 100 requests per 1 minutes. If you reach 100 in 15 seconds, you will be able to continue 45 seconds later.
                 </p>
                 <h1 id="2">2. Responses</h1>
                 <p>
