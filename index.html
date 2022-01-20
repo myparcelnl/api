@@ -259,6 +259,7 @@ Connection: keep-alive
                     <li><a href="#delivery_type">delivery_type</a></li>
                     <li><a href="#description">description</a></li>
                     <li><a href="#eori_number">eori_number</a></li>
+                    <li><a href="#float">float</a></li>
                     <li><a href="#integer">integer</a></li>
                     <li><a href="#isic_code">isic_code</a></li>
                     <li><a href="#label_position">label_position</a></li>
@@ -463,6 +464,21 @@ Connection: keep-alive
                     <tr>
                         <td>example</td>
                         <td>NL012345678</td>
+                    </tr>
+                </table>
+                <h2 id="float">float</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>Numeric value with decimal fractions</td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>[0-9]*\.?[0-9]+</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>51.70326781</td>
                     </tr>
                 </table>
                 <h2 id="integer">integer</h2>
@@ -2684,6 +2700,18 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
           "age_check": 0
         },
         "pickup": null,
+        "delayed": false,
+        "location": {
+          "name": "Depot Den Bosch",
+          "cc": "NL",
+          "city": "S-Hertogenbosch",
+          "postal_code": "5222AL",
+          "street": "Ketelaarskampweg",
+          "number": "7",
+          "number_suffix": null,
+          "longitude": 5.27349901,
+          "latitude": 51.70326781
+        },
         "status": {
           "current": 7,
           "main": "delivered",
@@ -2695,28 +2723,46 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
             "status": 2,
             "main": "registered",
             "description": "De zending is aangemeld bij PostNL en wordt volgbaar",
-            "time": "2019-02-15 00:00:00"
+            "time": "2019-02-15 00:00:00",
+            "delayed": false,
+            "location": {
+              "name": "Depot Den Bosch",
+              "cc": "NL",
+              "city": "S-Hertogenbosch",
+              "postal_code": "5222AL",
+              "street": "Ketelaarskampweg",
+              "number": "7",
+              "number_suffix": null,
+              "longitude": 5.27349901,
+              "latitude": 51.70326781
+            }
           },
           {
             "code": "B01",
             "status": 3,
             "main": "handed_to_carrier",
             "description": "Zending is ontvangen door PostNL",
-            "time": "2019-02-15 17:09:55"
+            "time": "2019-02-15 17:09:55",
+            "delayed": false,
+            "location": null
           },
           {
             "code": "J01",
             "status": 4,
             "main": "sorting",
             "description": "Zending gesorteerd in sorteercentrum",
-            "time": "2019-02-16 08:13:29"
+            "time": "2019-02-16 08:13:29",
+            "delayed": false,
+            "location": null
           },
           {
             "code": "J05",
             "status": 5,
             "main": "distribution",
             "description": "Bezorger is onderweg",
-            "time": "2019-02-16 08:35:51"
+            "time": "2019-02-16 08:35:51",
+            "delayed": false,
+            "location": null
           }
         ],
         "delivery_moment_type": "estimated",
@@ -4473,6 +4519,15 @@ HTTP/1.1 204 No Content
                     Data type: <a href="#7_O">PickupLocation</a><br>
                 </p>
                 <p>
+                    <strong>delayed</strong><br>
+                    Data type: <a href="#boolean">boolean</a><br>
+                    Indicates whether the current event code means the shipment has been delayed.<br>
+                </p>
+                <p>
+                    <strong>location</strong><br>
+                    Data type: <a href="#7_V">TrackTraceLocation</a><br>
+                </p>
+                <p>
                     <strong>status</strong><br>
                     Data type: <a href="#7_S">TrackTraceStatus</a><br>
                 </p>
@@ -4536,6 +4591,18 @@ HTTP/1.1 204 No Content
           "age_check": 0
         },
         "pickup": null,
+        "delayed": false,
+        "location": {
+          "name": "Depot Den Bosch",
+          "cc": "NL",
+          "city": "S-Hertogenbosch",
+          "postal_code": "5222AL",
+          "street": "Ketelaarskampweg",
+          "number": "7",
+          "number_suffix": null,
+          "longitude": 5.27349901,
+          "latitude": 51.70326781
+        },
         "status": {
           "current": 7,
           "main": "delivered",
@@ -4578,13 +4645,34 @@ HTTP/1.1 204 No Content
                     Data type: <a href="#time">time</a><br>
                     Required: n/a.<br>
                 </p>
+                <p>
+                    <strong>delayed</strong><br>
+                    Data type: <a href="#boolean">boolean</a><br>
+                    Indicates whether the current event code means the shipment has been delayed.<br>
+                </p>
+                <p>
+                    <strong>location</strong><br>
+                    Data type: <a href="#7_V">TrackTraceLocation</a><br>
+                </p>
                 <h3 id="7_M_2">7.M.2 Example</h3>
-                <p>POST example</p>
+                <p>GET example</p>
                 <pre>
 {
   "code": "C3",
   "description": "The package is at the sorting center",
-  "time": "2015-01-02 05:00:00"
+  "time": "2015-01-02 05:00:00",
+  "delayed": false,
+  "location": {
+    "name": "Depot Den Bosch",
+    "cc": "NL",
+    "city": "S-Hertogenbosch",
+    "postal_code": "5222AL",
+    "street": "Ketelaarskampweg",
+    "number": "7",
+    "number_suffix": null,
+    "longitude": 5.27349901,
+    "latitude": 51.70326781
+  }
 }
 </pre>
                 <h2 id="7_N">7.N PhysicalProperties Object Definition</h2>
@@ -4894,6 +4982,73 @@ HTTP/1.1 204 No Content
     "date": "2019-02-19 17:15:00.000000",
     "timezone_type": 3,
     "timezone": "Europe/Amsterdam"
+}
+
+</pre>
+                <h2 id="7_V">7.U TrackTraceLocation Object Definition</h2>
+                <h3 id="7_V_1">7.U.1 Overview</h3>
+                <p>
+                    An object with a location where the track and trace event took place.
+                    This data is only available when it has been provided by the carrier of the shipment.
+                </p>
+                <p>
+                    <strong>name</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    nullable: false<br>
+                </p>
+                <p>
+                    <strong>cc</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    nullable: true<br>
+                </p>
+                <p>
+                    <strong>city</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    nullable: true<br>
+                </p>
+                <p>
+                    <strong>postal_code</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    nullable: true<br>
+                </p>
+                <p>
+                    <strong>street</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    nullable: true<br>
+                </p>
+                <p>
+                    <strong>number</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    nullable: true<br>
+                </p>
+                <p>
+                    <strong>number_suffix</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    nullable: true<br>
+                </p>
+                <p>
+                    <strong>longitude</strong><br>
+                    Data type: <a href="#float">float</a><br>
+                    nullable: true<br>
+                </p>
+                <p>
+                    <strong>latitude</strong><br>
+                    Data type: <a href="#float">float</a><br>
+                    nullable: true<br>
+                </p>
+                <h3 id="7_V_2">7.U.2 Example</h3>
+                <p>Example</p>
+                <pre>
+{
+    "name": "Depot Den Bosch",
+    "cc": "NL",
+    "city": "S-Hertogenbosch",
+    "postal_code": "5222AL",
+    "street": "Ketelaarskampweg",
+    "number": "7",
+    "number_suffix": null,
+    "longitude": 5.27349901,
+    "latitude": 51.70326781
 }
 </pre>
                 <h1 id="8">8. Delivery options</h1>
