@@ -237,6 +237,7 @@ Connection: keep-alive
                     <li><a href="#country_code">country_code</a></li>
                     <li><a href="#currency">currency</a></li>
                     <li><a href="#date">date</a></li>
+                    <li><a href="#delivered">delivered</a></li>
                     <li><a href="#delivery_type">delivery_type</a></li>
                     <li><a href="#description">description</a></li>
                     <li><a href="#integer">integer</a></li>
@@ -367,6 +368,26 @@ Connection: keep-alive
                     <tr>
                         <td>example</td>
                         <td>2015-01-01</td>
+                    </tr>
+                </table>
+                <h2 id="delivered">delivered</h2>
+                <table>
+                    <tr>
+                        <th>description</th>
+                        <td>
+                            This field is set to 1 if either the <a href="#shipment_status">shipment_status</a> is in a
+                            'delivered' state, or the shipment has been marked as 'delivered' manually.
+                            Can be used to update a shipment to mark it as 'delivered' manually, which is only used for
+                            display/filtering purposes, and doesn't change the actual shipment status.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>pattern</td>
+                        <td>[0-1]{1}</td>
+                    </tr>
+                    <tr>
+                        <td>example</td>
+                        <td>1 (delivered) or 0 (not delivered)</td>
                     </tr>
                 </table>
                 <h2 id="delivery_type">delivery_type</h2>
@@ -1864,6 +1885,9 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                         <td>status= <a href="#shipment_status">shipment_status</a></td>
                     </tr>
                     <tr>
+                        <td>delivered= <a href="#delivered">delivered</a></td>
+                    </tr>
+                    <tr>
                         <td>from= <a href="#timestamp">timestamp</a></td>
                     </tr>
                     <tr>
@@ -1936,6 +1960,12 @@ HTTP/1.1 Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVk
                     Data type: <a href="#shipment_status">shipment_status</a><br>
                     Use this parameter to specify the shipment status to filter on. You can specify multiple status by
                     semi-colon separating them on the URI.
+                </p>
+                <p>
+                    <strong>delivered</strong><br />
+                    Data type: <a href="#delivered">delivered</a><br>
+                    Use this parameter to filter on delivery status. By default, this indicates that the shipment_status
+                    is one of the 'delivered' statuses, but a shipment can also be marked as 'delivered' manually.
                 </p>
                 <p>
                     <strong>from</strong><br />
@@ -2871,7 +2901,14 @@ HTTP/1.1 204 No Content
                     Data type: <a href="#shipment_status">shipment_status</a><br>
                     Required: no<br>
                     This is the internal shipment status. What we do is filter and translate the
-                    shipment status provided by the carrier in order to reduce the number of statusses.
+                    shipment status provided by the carrier in order to reduce the number of statuses.
+                </p>
+                <p>
+                    <strong>delivered</strong><br>
+                    Data type: <a href="#delivered">delivered</a><br>
+                    Required: no<br>
+                    Indicates that the shipment_status is one of the 'delivered' statuses, but a shipment can also be
+                    marked as 'delivered' manually.
                 </p>
                 <p>
                     <strong>options</strong><br>
