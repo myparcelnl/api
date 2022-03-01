@@ -42,6 +42,11 @@
                 Our API is build in such a way to easily handle bulk operations. We try to follow the REST
                 architecture as much as possible but deviate from it when we need to achieve high performance.
             </p>
+            <p>
+                This documentation is applicable to MyParcel.nl, Flespakket and SendMyParcel.be. Keep in mind that some
+                examples will only be applicable to one of those platforms, since there are differences in carriers,
+                shipping options and package types between the different platforms.
+            </p>
             <div class="box">
                 <p>
                     Do you want to connect with MyParcel using PHP, C# or Ruby? Then you can use the following github
@@ -115,9 +120,9 @@
                 </p>
                 <h1 id="2">2. Responses</h1>
                 <p>
-                    As stated earlier data is usually send back in JSON format. Exceptions to this rule
-                    are shipment label, invoice and CSV export. Shipment label and invoice are send
-                    back in PDF format while CSV export is send back in CSV format.
+                    As stated earlier data is usually sent back in JSON format. Exceptions to this rule
+                    are shipment label, invoice and CSV export. Shipment label and invoice are sent
+                    back in PDF format while CSV export is sent back in CSV format.
                     Usually a response will have a response body. Exceptions are DELETE requests
                     which will only contain a status code (204) indicating success.
                     A failed request with a 4xx status code will always send back a response body with
@@ -129,7 +134,9 @@
                 <p>
                     HTTP status codes are used to indicate success or failure of a request. Here's a list of
                     supported status codes.
-                    For a more comprehensive list of HTTP status codes <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">visit Wikipedia </a> or W3C.
+                    For a more comprehensive list of HTTP status codes <a
+                        href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">visit
+                    Wikipedia </a> or W3C.
                 </p>
                 <p>Example of a 200 Status code in our API (you can try this in your browser, then you know our API is online)</p>
                 <p>
@@ -182,7 +189,7 @@ Connection: keep-alive
                 <h2 id="2_A_II">2.A.II 3xx</h2>
                 <h3>2.A.II 304 - Not Modified</h3>
                 <p>
-                    This status is used by the server when the resource is the same the one the client has.
+                    This status is used by the server when the resource is the same as the one the client has.
                 </p>
                 <h2 id="2_A_III">2.A.III 4xx</h2>
                 <p>
@@ -195,13 +202,13 @@ Connection: keep-alive
                 </p>
                 <h3>2.A.III 401 - Unauthorized</h3>
                 <p>
-                    No credentials have been sent with the request. Or the wrong credentials are send.
-                    Tip: check if the API key is properly attached in the header <br>
+                    No credentials have been sent with the request, or the wrong credentials are sent.
+                    Tip: check if the API key is properly attached in the header: <br>
                 <pre>Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==</pre>
                 </p>
                 <h3>2.A.III 402 - Payment Required</h3>
                 <p>
-                    When payment is required. An Invoice object is always sent with this response.
+                    When payment is required. An Invoice object may be sent with this response.
                 </p>
                 <h3>2.A.III 403 - Forbidden</h3>
                 <p>
@@ -227,7 +234,7 @@ Connection: keep-alive
                 <h3>2.A.III 422 - Unprocessable Entity</h3>
                 <p>
                     When the client sends a request object with invalid data.
-                    The error message will specify what's wrong with the Request or the Data send to the API.
+                    The error message will specify what's wrong with the request or the data sent to the API.
                 </p>
                 <h3>2.A.III 409 - Conflict</h3>
                 <p>
@@ -240,12 +247,12 @@ Connection: keep-alive
                 <h1 id="3">3. Character encoding</h1>
                 <p>
                     All content must be encoded in UTF-8 and include the charset=utf-8.<br><br>
-                    example:
+                    Example:
                 <pre>Content-Type: application/json;charset=utf-8</pre>
                 </p>
                 <h1 id="4">4. Data Types</h1>
                 <p>
-                    Our API defines it's own data types.
+                    Our API defines its own data types.
                 </p>
                 <h2>4.1 Contents</h2>
                 <ul>
@@ -347,9 +354,12 @@ Connection: keep-alive
                         <td>example</td>
                         <td>
                             <ul>
-                                <li>1 (postnl)</li>
-                                <li>2 (bpost)</li>
-                                <li>4 (DPD)</li>
+                                <li>1 (PostNL)</li>
+                                <li>2 (bpost. Only available on Sendmyparcel.be)</li>
+                                <li>3 (CheapCargo/pallets)</li>
+                                <li>4 (DPD. Only available on Sendmyparcel.be)</li>
+                                <li>5 (Instabox. Only available on MyParcel.nl)</li>
+                                <li>8 (UPS. Only available on MyParcel.nl)</li>
                             </ul>
                         </td>
                     </tr>
@@ -422,7 +432,7 @@ Connection: keep-alive
                     </tr>
                     <tr>
                         <td>pattern</td>
-                        <td>[1 – 4]</td>
+                        <td>[1 – 7]</td>
                     </tr>
                     <tr>
                         <td>example</td>
@@ -455,7 +465,11 @@ Connection: keep-alive
                 <table>
                     <tr>
                         <th>description</th>
-                        <td>Economic Operators Registration and Identification. This field is required for DPD shipments to United Kingdom. In this field you can enter the EORI number of the sender in case of a B2C shipment and the EORI number of the recipient in case of a B2B shipment.</td>
+                        <td>
+                            Economic Operators Registration and Identification. This field is required for DPD shipments
+                            to United Kingdom. In this field you can enter the EORI number of the sender in case of a
+                            B2C shipment and the EORI number of the recipient in case of a B2B shipment.
+                        </td>
                     </tr>
                     <tr>
                         <td>pattern</td>
@@ -500,7 +514,13 @@ Connection: keep-alive
                 <table>
                     <tr>
                         <th>description</th>
-                        <td>International Standard Industry Classification</td>
+                        <td>
+                            International Standard Industry Classification. This is mandatory for the customs form when
+                            shipping outside EU. Codes can be found on the
+                            <a target="_blank"
+                               href="https://tarief.douane.nl/arctictariff-public-web/#!/taric/nomenclature/sbn?d=I&cc=&l=nl&ql=nl&ea=false">Douane</a>
+                            website.
+                        </td>
                     </tr>
                     <tr>
                         <td>pattern</td>
@@ -658,12 +678,14 @@ Connection: keep-alive
                         <td>{"amount": 10000, "currency": "EUR"}</td>
                     </tr>
                 </table>
-                <h2 id="printer_identifier">printer identifier</h2>
+                <h2 id="printer_identifier">printer_identifier</h2>
                 <table>
                     <tr>
                         <th>description</th>
                         <td>
-                            In this field you can enter your printer identifier. This field is also sent with the webhook shipment_label_created. You are responsible for controlling your own printer based on a printer identifier.
+                            In this field you can enter your printer identifier. This field is also sent with the
+                            webhook shipment_label_created. You are responsible for controlling your own printer based
+                            on a printer identifier.
                         </td>
                     </tr>
                     <tr>
@@ -672,7 +694,7 @@ Connection: keep-alive
                     </tr>
                     <tr>
                         <td>example</td>
-                        <td>pinter_12</td>
+                        <td>printer_12</td>
                     </tr>
                 </table>
                 <h2 id="shipment_status">shipment_status</h2>
@@ -712,7 +734,6 @@ Connection: keep-alive
                                 <li>36 inactive - delivered - at recipient</li>
                                 <li>37 inactive - delivered - ready for pickup</li>
                                 <li>38 inactive - delivered - package picked up</li>
-                                <li>99 inactive - unknown</li>
                             </ul>
                         </td>
                     </tr>
@@ -759,7 +780,7 @@ Connection: keep-alive
                     </tr>
                     <tr>
                         <td>example</td>
-                        <td>3SMYPA123456789; Siriusdreef 66; Nederland; </td>
+                        <td>3SMYPA123456789; Antareslaan 31; Nederland; </td>
                     </tr>
                 </table>
                 <h2 id="text">text</h2>
@@ -862,7 +883,7 @@ Connection: keep-alive
                 <p>
                     HTTP basic access authentication on top of SSL is used for authentication. Every request must include
                     an Authorization header with base64 encoded API Key. Go to
-                    <a target="_blank" href="https://www.base64encode.org/">base64encode.org</a> to convert your key base64.
+                    <a target="_blank" href="https://www.base64encode.org/">base64encode.org</a> to convert your key to base64.
                 </p>
                 <pre>
 GET /somelink HTTP/1.1
@@ -915,19 +936,19 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 </p>
                 <h4>2. Mailbox package</h4>
                 <p>
-                    This package type is only available for NL shipment that fit into a mailbox. It does not support
+                    This package type is only available on MyParcel.nl and Flespakket for NL shipment that fit into a mailbox. It does not support
                     additional options.<br>
                     <strong>Note: If you still make the request with additional options, bear in mind that you need to pay more than is necessary!</strong>
                 </p>
                 <h4>3. Letter</h4>
                 <p>
-                    This package type is available for NL, EU and Global shipments. The label for this shipment is unpaid
+                    This package type is available on MyParcel.nl for NL, EU and Global shipments. The label for this shipment is unpaid
                     meaning that you will need to pay the postal office/courier to sent this letter/package. Therefore,
                     it does not support additional options.
                 </p>
                 <h4>4. Digital stamp</h4>
                 <p>
-                    This package type is only available for NL shipments and does not support any additional options. Its price is calculated using the package <a href="#7_N">weight</a>.
+                    This package type is only available on MyParcel.nl for NL shipments and does not support any additional options. Its price is calculated using the package <a href="#7_N">weight</a>.<br>
                     <strong>Note: This shipment will appear on your invoice on <a href="#shipment_status">shipment_status</a> 2 (pending - registered) as opposed to all other package types, which won't appear on your invoice until shipment status 3 (enroute - handed to carrier).</strong>
                 </p>
                 <h3 id="6_A_2">6.A.2 Delivery types</h3>
@@ -949,7 +970,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>This is the standard delivery type.</p>
                 <h4>3. Evening</h4>
                 <p>
-                    This options is only available for certain NL addresses. It allows a Customer/Consumer to have their
+                    This options is only available on MyParcel.nl and Flespakket for certain NL addresses. It allows a Customer/Consumer to have their
                     package delivered in the evening on the specified delivery date.
                 </p>
                 <h4>4. Pickup</h4>
@@ -958,7 +979,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>
                     The same as pickup but the package is available for pickup before 8:30AM on the delivery date
                     specified
-                    at the drop off location.
+                    at the drop off location. Only available on MyParcel.nl and Flespakket.
                 </p>
                 <h3 id="6_A_3">6.A.3 Options</h3>
                 <p>
@@ -999,7 +1020,7 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 </p>
                 <h4>age_check</h4>
                 <p>
-                    The Customer/Consumer must sign for the package and only receive it when he is at least 18 years.
+                    Only available on MyParcel.nl and Flespakket. The Customer/Consumer must sign for the package and only receive it when he is at least 18 years.
                 </p>
                 <h3 id="6_A_4">6.A.4 Examples</h3>
                 <h4>Pickup</h4>
@@ -1010,25 +1031,28 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 {
   "data": {
-    "shipments": [{
-      ...
-      "options": {
-        "package_type": 1,
-        "only_recipient": 0,
-        "signature": 1,
-        "delivery_type": 4
-      },
-      "pickup": {
+    "shipments": [
+      {
         ...
-      }...
-    }]
+        "options": {
+          "package_type": 1,
+          "only_recipient": 0,
+          "signature": 1,
+          "delivery_type": 4
+        },
+        "pickup": {
+          ...
+        }
+        ...
+      }
+    ]
   }
 }
 </pre>
                 <p>
                     Let's go through this example. This package will be picked up by the customer so it needs to
                     package_type
-                    1(package) with <a href="#delivery_type">delivery type</a> 4 (Pickup). All pickup packages need to have signature set. A pickup location needs to be specified as well. Pickup express is almost identical to pickup.
+                    1 (package) with <a href="#delivery_type">delivery type</a> 4 (Pickup). All pickup packages need to have signature set. A pickup location needs to be specified as well. Pickup express is almost identical to pickup.
                     Instead of <a href="#delivery_type">delivery type</a> 4 (Pickup), you need to specify <a href="#delivery_type">delivery type</a> 5 (Pickup express).
                 </p>
                 <h4>Evening</h4>
@@ -1039,22 +1063,24 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 {
   "data": {
-    "shipments": [{
-      ...
-      "options": {
-        "package_type": 1,
-        "delivery_type": 3,
-        "only_recipient": 1,
+    "shipments": [
+      {
         ...
+        "options": {
+          "package_type": 1,
+          "delivery_type": 3,
+          "only_recipient": 1,
+          ...
+        }
       }
-    }]
+    ]
   }
 }
 </pre>
                 <p>
                     Let's go through this example. This package will be delivered to the consumer in the evening so it
                     needs
-                    package_type 1(package) with delivery_type 3(evening). All evening and morning packages need to have
+                    package_type 1(package) with delivery_type 3 (evening). All evening and morning packages need to have
                     only_recipient set.
                 </p>
                 <h4>NL insured</h4>
@@ -1066,19 +1092,21 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 {
   "data": {
-    "shipments": [{
-      ...
-      "options": {
-        "package_type": 1,
-        "insurance": {
-          "amount": 500000,
-          "currency": "EUR"
-        },
-        "signature": 1,
-        "only_recipient": 1
+    "shipments": [
+      {
+        ...
+        "options": {
+          "package_type": 1,
+          "insurance": {
+            "amount": 500000,
+            "currency": "EUR"
+          },
+          "signature": 1,
+          "only_recipient": 1
           ...
+        }
       }
-    }]
+    ]
   }
 }
 </pre>
@@ -1100,9 +1128,10 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     shipment is must be insured up to 500 euros.
                 </p>
                 <pre>
-  {
-    "data": {
-      "shipments": [{
+{
+  "data": {
+    "shipments": [
+      {
         ...
         "options": {
           "package_type": 1,
@@ -1113,9 +1142,10 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
           "large_format": 1
         }
         ...
-      }]
-    }
+      }
+    ]
   }
+}
 </pre>
                 <p>
                     This package is an EU package so the type must be set to 1. All EU and Global shipments <strong>must</strong> be
@@ -1189,8 +1219,11 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                         <td>None.</td>
                     </tr>
                     <tr>
-                        <th>Query parameters</th>
-                        <td>None.</td>
+                        <th rowspan="2">Query parameters</th>
+                        <td>format = <a href="#paper_size">paper_size</a> (when using accept header: application/vnd.shipment_label+json;charset=utf-8)</td>
+                    </tr>
+                    <tr>
+                        <td>positions = <a href="#label_position">label_position</a> (when using accept header: application/vnd.shipment_label+json;charset=utf-8)</td>
                     </tr>
                     <tr>
                         <th rowspan="3">Request body</th>
@@ -1239,7 +1272,9 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <p>
                     For these examples we are going to create shipments.<br>
                     <br>
-                <h2>Create national PostNL shipments</h2>
+                <h2>Create domestic PostNL shipments</h2>
+                The following example creates a PostNL shipment to a Dutch recipient address.
+                Domestic PostNL shipments are also supported on Sendmyparcel.be, using a Belgian address instead.
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1248,54 +1283,57 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
-      "reference_identifier" : "FOO-222-BAR-42",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "only_recipient": 1,
-        "signature": 1,
-        "return": 1,
-        "insurance": {
-          "amount": 50000,
-          "currency": "EUR"
+    "shipments": [
+      {
+        "reference_identifier": "FOO-222-BAR-42",
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Hoofddorp",
+          "street": "Antareslaan",
+          "number": "31",
+          "postal_code": "2132JE",
+          "person": "Mr. Parcel",
+          "phone": "0233030315",
+          "email": "testing@myparcel.nl"
         },
-        "large_format": 0,
-        "label_description": "My custom description",
-        "age_check":1
+        "options": {
+          "package_type": 1,
+          "only_recipient": 1,
+          "signature": 1,
+          "return": 1,
+          "insurance": {
+            "amount": 50000,
+            "currency": "EUR"
+          },
+          "large_format": 0,
+          "label_description": "My custom description",
+          "age_check": 1
+        },
+        "carrier": 1
       },
-      "carrier": 1
-    }, {
-      "reference_identifier" : "FOO-223-BAR-43",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Amsterdam",
-        "street": "Dorpstraat",
-        "number": "123",
-        "postal_code": "1020BC",
-        "person": "Mrs. Parcel",
-        "phone": "02012343546",
-        "email": "info@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "only_recipient": 0,
-        "signature": 0,
-        "return": 0
-      },
-      "carrier": 1
-    }]
+      {
+        "reference_identifier": "FOO-223-BAR-43",
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Amsterdam",
+          "street": "Dorpstraat",
+          "number": "123",
+          "postal_code": "1020BC",
+          "person": "Mrs. Parcel",
+          "phone": "02012343546",
+          "email": "info@myparcel.nl"
+        },
+        "options": {
+          "package_type": 1,
+          "only_recipient": 0,
+          "signature": 0,
+          "return": 0
+        },
+        "carrier": 1
+      }
+    ]
   }
 }
 </pre>
@@ -1304,17 +1342,21 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
   "data": {
-    "ids": [{
-      "id": 12345,
-      "reference_identifier":"FOO-222-BAR-42"
-    }, {
-      "id": 68794,
-      "reference_identifier":"FOO-223-BAR-43"
-    }]
+    "ids": [
+      {
+        "id": 12345,
+        "reference_identifier": "FOO-222-BAR-42"
+      },
+      {
+        "id": 68794,
+        "reference_identifier": "FOO-223-BAR-43"
+      }
+    ]
   }
 }
 </pre>
-                <h2>Create national bpost shipments</h2>
+                <h2>Create domestic bpost shipments</h2>
+                Note: Bpost shipments are only supported on Sendmyparcel.be.
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1344,7 +1386,8 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         },
         "carrier": 2,
         "reference_identifier": "bpost shipment"
-    }]
+      }
+    ]
   }
 }
 </pre>
@@ -1352,17 +1395,18 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-    "data": {
-        "ids": [
-            {
-                "id": 49566653,
-                "reference_identifier": "bpost shipment"
-            }
-        ]
-    }
+  "data": {
+    "ids": [
+      {
+        "id": 49566653,
+        "reference_identifier": "bpost shipment"
+      }
+    ]
+  }
 }
 </pre>
-                <h2>Create national DPD shipments</h2>
+                <h2>Create domestic DPD shipments</h2>
+                Note: DPD shipments are only supported on Sendmyparcel.be.
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1387,7 +1431,8 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         },
         "carrier": 4,
         "reference_identifier": "Order 123456"
-    }]
+      }
+    ]
   }
 }
 </pre>
@@ -1395,16 +1440,79 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-"data": {
+  "data": {
     "ids": [
-        {
-            "id": 49566517,
-            "reference_identifier": "Order 123456"
-        }
+      {
+        "id": 49566517,
+        "reference_identifier": "Order 123456"
+      }
     ]
+  }
 }
 </pre>
-                <h2>Create national multi collo shipments</h2>
+
+                <h2>Create domestic Instabox shipments</h2>
+                Note: Instabox shipments are only supported on MyParcel.nl.<br>
+                <strong>Creating Instabox shipments requires selecting a drop off point. To receive nearby drop off points, see <a href="#12_A">Drop off points</a> endpoint.</strong>
+                <p><strong>Request</strong></p>
+                <pre>
+POST https://api.myparcel.nl/shipments HTTP/1.1
+Content-Type:application/vnd.shipment+json;version=1.1;charset=utf-8
+User-Agent: CustomApiCall/2
+Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
+{
+  "data": {
+    "shipments": [
+      {
+        "reference_identifier": "FOO-222-BAR-42",
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Hoofddorp",
+          "street": "Antareslaan",
+          "number": "31",
+          "postal_code": "2132JE",
+          "person": "Mr. Parcel",
+          "phone": "0233030315",
+          "email": "testing@myparcel.nl"
+        },
+        "options": {
+          "package_type": 1,
+          "label_description": "My custom description",
+          "same_day_delivery": 1
+        },
+        "carrier": 5,
+        "drop_off_point": {
+          "location_code": "e9149b66-7bee-439b-bab0-7a5d92ddc519",
+          "location_name": "Instabox",
+          "cc": "NL",
+          "city": "Hoofddorp",
+          "postal_code": "2132WV",
+          "street": "Diamantlaan",
+          "number": "77"
+        }
+      }
+    ]
+  }
+}
+</pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+  "data": {
+    "ids": [
+      {
+        "id": 49566518,
+        "reference_identifier": "FOO-222-BAR-42"
+      }
+    ]
+  }
+}
+</pre>
+
+                <h2>Create domestic PostNL multi collo shipments</h2>
+                Note: multi collo shipments are only available on MyParcel.nl and Flespakket.
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1413,38 +1521,40 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
-      "reference_identifier" : "FOO-222-BAR-42",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "only_recipient": 1,
-        "signature": 1,
-        "return": 1,
-        "insurance": {
-          "amount": 50000,
-          "currency": "EUR"
+    "shipments": [
+      {
+        "reference_identifier" : "FOO-222-BAR-42",
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Hoofddorp",
+          "street": "Antareslaan",
+          "number": "31",
+          "postal_code": "2132JE",
+          "person": "Mr. Parcel",
+          "phone": "0233030315",
+          "email": "testing@myparcel.nl"
         },
-        "large_format": 0,
-        "label_description": "My custom description",
-        "age_check":1
-      },
-      "secondary_shipments": [
-         {},
-         {}
-      ],
-      "carrier": 1
-    }]
+        "options": {
+          "package_type": 1,
+          "only_recipient": 1,
+          "signature": 1,
+          "return": 1,
+          "insurance": {
+            "amount": 50000,
+            "currency": "EUR"
+          },
+          "large_format": 0,
+          "label_description": "My custom description",
+          "age_check":1
+        },
+        "secondary_shipments": [
+          {},
+          {}
+        ],
+        "carrier": 1
+      }
+    ]
   }
 }
 </pre>
@@ -1452,21 +1562,24 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-    "data": {
-        "ids": [
-            {
-                "id": 12345,
-                "reference_identifier": "FOO-222-BAR-42"
-            }
-        ]
-    }
+  "data": {
+    "ids": [
+      {
+        "id": 12345,
+        "reference_identifier": "FOO-222-BAR-42"
+      }
+    ]
+  }
 }
 </pre>
 
-
-
-
                 <h2>Create International shipment</h2>
+                Creating shipments to an international destination is possible depending on the chosen carrier:
+                <ul>
+                    <li>PostNL and Bpost shipments are available worldwide.</li>
+                    <li>DPD shipments are available in the EU.</li>
+                    <li>Instabox is only available in NL.</li>
+                </ul>
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1475,51 +1588,56 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
-      "recipient": {
-        "cc": "JP",
-        "region": "埼玉県",
-        "city": "さいたま市",
-        "street": "埼玉県さいたま市浦和区 常盤9－21－21",
-        "person": "Tanaka san",
-        "company": "さいたま国際キリスト教会",
-        "email": "saitamakyokai@gmail.com",
-        "phone": "0081-48-825-6637"
-      },
-      "options": {
-        "package_type": 1
-      },
-      "customs_declaration": {
-        "contents": 1,
-        "invoice": "1231235345345",
-        "weight": 30,
-        "items": [{
-          "description": "Sample Product",
-          "amount": 10,
-          "weight": 20,
-          "item_value": {
-            "amount": 7000,
-            "currency": "EUR"
-          },
-          "classification": "0181",
-          "country": "NL"
-        }, {
-          "description": "Sample Product 2",
-          "amount": 5,
-          "weight": 10,
-          "item_value": {
-            "amount": 1000,
-            "currency": "EUR"
-          },
-          "classification": "0181",
-          "country": "BE"
-        }]
-      },
-      "physical_properties": {
-        "weight": 30
-      },
-      "carrier": 1
-    }]
+    "shipments": [
+      {
+        "recipient": {
+          "cc": "JP",
+          "region": "埼玉県",
+          "city": "さいたま市",
+          "street": "埼玉県さいたま市浦和区 常盤9－21－21",
+          "person": "Tanaka san",
+          "company": "さいたま国際キリスト教会",
+          "email": "saitamakyokai@gmail.com",
+          "phone": "0081-48-825-6637"
+        },
+        "options": {
+          "package_type": 1
+        },
+        "customs_declaration": {
+          "contents": 1,
+          "invoice": "1231235345345",
+          "weight": 30,
+          "items": [
+            {
+              "description": "Sample Product",
+              "amount": 10,
+              "weight": 20,
+              "item_value": {
+                "amount": 7000,
+                "currency": "EUR"
+              },
+              "classification": "0181",
+              "country": "NL"
+            },
+            {
+              "description": "Sample Product 2",
+              "amount": 5,
+              "weight": 10,
+              "item_value": {
+                "amount": 1000,
+                "currency": "EUR"
+              },
+              "classification": "0181",
+              "country": "BE"
+            }
+          ]
+        },
+        "physical_properties": {
+          "weight": 30
+        },
+        "carrier": 1
+      }
+    ]
   }
 }
 </pre>
@@ -1528,14 +1646,17 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
-    "ids": [{
-      "id": 3485394579,
-      "reference_identifier":null
-    }]
+    "ids": [
+      {
+        "id": 3485394579,
+        "reference_identifier": null
+      }
+    ]
   }
 }
 </pre>
                 <h2>Create digital stamp shipments</h2>
+                Note: Digital stamp shipments are available on MyParcel.nl and to Dutch destinations only.
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1544,29 +1665,31 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
-      "reference_identifier" : "FOO-DPZ-BAR-46",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 4,
-        "label_description": "This is a digital stamp shipment!"
-      },
-      "physical_properties": {
-        "weight": 30
-      },
-      "carrier": 1
-    }
-  ]}
+    "shipments": [
+      {
+        "reference_identifier": "FOO-DPZ-BAR-46",
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Hoofddorp",
+          "street": "Antareslaan",
+          "number": "31",
+          "postal_code": "2132JE",
+          "person": "Mr. Parcel",
+          "phone": "0233030315",
+          "email": "testing@myparcel.nl"
+        },
+        "options": {
+          "package_type": 4,
+          "label_description": "This is a digital stamp shipment!"
+        },
+        "physical_properties": {
+          "weight": 30
+        },
+        "carrier": 1
+      }
+    ]
+  }
 }
 </pre>
                 <p><strong>Response</strong></p>
@@ -1575,14 +1698,17 @@ HTTP/1.1 200 OK
 Content-Type:application/json;charset=utf-8
 {
   "data": {
-    "ids": [{
-      "id": 39234953,
-      "reference_identifier":null
-    }]
+    "ids": [
+      {
+        "id": 39234953,
+        "reference_identifier": null
+      }
+    ]
   }
 }
 </pre>
                 <h2>Create PostNL shipment with NL pickup location</h2>
+                Note: Only available on MyParcel.nl and Flespakket.
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1591,16 +1717,16 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
+    "shipments": [
       "recipient": {
         "cc": "NL",
         "region": "Zuid-Holland",
         "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
+        "street": "Antareslaan",
+        "number": "31",
+        "postal_code": "2132JE",
         "person": "Mr. Parcel",
-        "phone": "0213030315",
+        "phone": "0233030315",
         "email": "testing@myparcel.nl"
       },
       "options": {
@@ -1619,7 +1745,8 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
         "location_name": "Albert Heijn"
       },
       "carrier": 1
-    }]
+      }
+    ]
   }
 }
 </pre>
@@ -1628,16 +1755,19 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
-    "ids": [{
-      "id": 12345,
-      "reference_identifier":null
-    }]
+    "ids": [
+      {
+        "id": 12345,
+        "reference_identifier":null
+      }
+    ]
   }
 }
 </pre>
 
 
                 <h2>Create bpost shipment with BE pickup location</h2>
+                Note: only available on SendMyParcel.be.
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.sendmyparcel.be/shipments HTTP/1.1
@@ -1679,17 +1809,18 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
-    "data": {
-        "ids": [
-            {
-                "id": 49571535,
-                "reference_identifier": "order-012356"
-            }
-        ]
-    }
+  "data": {
+    "ids": [
+      {
+        "id": 49571535,
+        "reference_identifier": "order-012356"
+      }
+    ]
+  }
 }
 </pre>
                 <h2>Create DPD shipment with BE pickup location</h2>
+                Note: only available on SendMyParcel.be.
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.sendmyparcel.be/shipments HTTP/1.1
@@ -1732,17 +1863,18 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
-    "data": {
-        "ids": [
-            {
-                "id": 49571535,
-                "reference_identifier": "DPD pickup"
-            }
-        ]
-    }
+  "data": {
+    "ids": [
+      {
+        "id": 49571535,
+        "reference_identifier": "DPD pickup"
+      }
+    ]
+  }
 }
 </pre>
                 <h2>Create multi collo shipment with NL pickup location</h2>
+                Note: Only available on MyParcel.nl and Flespakket.
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1751,45 +1883,47 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
-      "reference_identifier" : "FOO-222-BAR-42",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "only_recipient": 1,
-        "signature": 1,
-        "return": 1,
-        "insurance": {
-          "amount": 50000,
-          "currency": "EUR"
+    "shipments": [
+      {
+        "reference_identifier" : "FOO-222-BAR-42",
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Hoofddorp",
+          "street": "Antareslaan",
+          "number": "31",
+          "postal_code": "2132JE",
+          "person": "Mr. Parcel",
+          "phone": "0233030315",
+          "email": "testing@myparcel.nl"
         },
-        "large_format": 0,
-        "label_description": "My custom description",
-        "age_check":1
-      },
-      "pickup": {
-        "postal_code": "2132BH",
-        "street": "Burgemeester van Stamplein",
-        "city": "Hoofddorp",
-        "number": "270",
-        "location_name": "Albert Heijn"
-      },
-      "secondary_shipments": [
-         {},
-         {}
-      ],
-      "carrier": 1
-    }]
+        "options": {
+          "package_type": 1,
+          "only_recipient": 1,
+          "signature": 1,
+          "return": 1,
+          "insurance": {
+            "amount": 50000,
+            "currency": "EUR"
+          },
+          "large_format": 0,
+          "label_description": "My custom description",
+          "age_check":1
+        },
+        "pickup": {
+          "postal_code": "2132BH",
+          "street": "Burgemeester van Stamplein",
+          "city": "Hoofddorp",
+          "number": "270",
+          "location_name": "Albert Heijn"
+        },
+        "secondary_shipments": [
+          {},
+          {}
+        ],
+        "carrier": 1
+      }
+    ]
   }
 }
 </pre>
@@ -1797,14 +1931,14 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
-    "data": {
-        "ids": [
-            {
-                "id": 12345,
-                "reference_identifier": "FOO-222-BAR-42"
-            }
-        ]
-    }
+  "data": {
+    "ids": [
+      {
+        "id": 12345,
+        "reference_identifier": "FOO-222-BAR-42"
+      }
+    ]
+  }
 }
 </pre>
                 <h2>Create shipment with BE pickup location</h2>
@@ -1815,45 +1949,45 @@ Content-Type:application/vnd.shipment+json; charset=utf-8
 User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
-    "data":{
-        "shipments":[
-            {
-            "recipient":{
-                "cc":"BE",
-                "postal_code":"2000",
-                "city":"Antwerpen",
-                "region":"België",
-                "street":"Adriaan Brouwerstraat 12",
-                "street_additional_info":"",
-                "person":"Mr. Parcel"
-            },
-            "pickup":{
-                "city":"ANTWERPEN",
-                "street":"HOOGSTRAAT",
-                "postal_code":"2000",
-                "number":"75",
-                "location_code":"BE0Q07",
-                "retail_network_id":"LD-01",
-                "location_name":"K&J TRADING"
-            },
-            "options":{
-                "package_type":1,
-                "delivery_type":4,
-                "delivery_date":"2017-08-09 16:00:00",
-                "only_recipient":0,
-                "signature":1,
-                "return":0,
-                "insurance":{
-                    "amount":50000,
-                    "currency":"EUR"
-                },
-                "large_format":0,
-                "cooled_delivery":0
-            },
-            "carrier":1
-            }
-        ]
-    }
+  "data": {
+    "shipments": [
+      {
+        "recipient": {
+          "cc": "BE",
+          "postal_code": "2000",
+          "city": "Antwerpen",
+          "region": "België",
+          "street": "Adriaan Brouwerstraat 12",
+          "street_additional_info": "",
+          "person": "Mr. Parcel"
+        },
+        "pickup": {
+          "city": "ANTWERPEN",
+          "street": "HOOGSTRAAT",
+          "postal_code": "2000",
+          "number": "75",
+          "location_code": "BE0Q07",
+          "retail_network_id": "LD-01",
+          "location_name": "K&J TRADING"
+        },
+        "options": {
+          "package_type": 1,
+          "delivery_type": 4,
+          "delivery_date": "2017-08-09 16:00:00",
+          "only_recipient": 0,
+          "signature": 1,
+          "return": 0,
+          "insurance": {
+            "amount": 50000,
+            "currency": "EUR"
+          },
+          "large_format": 0,
+          "cooled_delivery": 0
+        },
+        "carrier": 1
+      }
+    ]
+  }
 }
 </pre>
                 <p><strong>Response</strong></p>
@@ -1861,14 +1995,17 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
-    "ids": [{
-      "id": 12345,
-      "reference_identifier":null
-    }]
+    "ids": [
+      {
+        "id": 12345,
+        "reference_identifier": null
+      }
+    ]
   }
 }
 </pre>
                 <h2>Create related return shipment</h2>
+                Note: the following example creates a PostNL return shipment. On SendMyParcel.be return shipments are only available with Bpost (carrier: 2).
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments HTTP/1.1
@@ -1877,22 +2014,24 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "return_shipments": [{
-      "parent": 5,
-      "carrier": 1,
-      "email": "testing@myparcel.nl",
-      "name": "Mr. Parcel",
-      "options": {
-        "package_type": 1,
-        "only_recipient": 0,
-        "signature": 1,
-        "return": 0,
-        "insurance": {
-          "amount": 10000,
-          "currency": "EUR"
+    "return_shipments": [
+      {
+        "parent": 5,
+        "carrier": 1,
+        "email": "testing@myparcel.nl",
+        "name": "Mr. Parcel",
+        "options": {
+          "package_type": 1,
+          "only_recipient": 0,
+          "signature": 1,
+          "return": 0,
+          "insurance": {
+            "amount": 10000,
+            "currency": "EUR"
+          }
         }
       }
-    }]
+    ]
   }
 }
 </pre>
@@ -1901,13 +2040,17 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
-    "ids": [{
-      "id": 12345,
-      "reference_identifier":null
-    }]
+    "ids": [
+      {
+        "id": 12345,
+        "reference_identifier": null
+      }
+    ]
   }
-}</pre>
+}
+</pre>
                 <h2>Create unrelated return shipment</h2>
+                Note: the following example creates a PostNL return shipment. On SendMyParcel.be return shipments are only available with Bpost (carrier: 2).
                 <p><strong>Request</strong></p>
                 <pre>
 POST https://api.myparcel.nl/shipments
@@ -1917,34 +2060,39 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "return_shipments": [{
-      "options": {
-        "package_type": 1,
-        "only_recipient": 0,
-        "signature": 0,
-        "return": 0,
-        "insurance": {
-          "amount": 0,
-          "currency": "EUR"
+    "return_shipments": [
+      {
+        "options": {
+          "package_type": 1,
+          "only_recipient": 0,
+          "signature": 0,
+          "return": 0,
+          "insurance": {
+            "amount": 0,
+            "currency": "EUR"
+          },
+          "large_format": 0,
+          "label_description": "My custom description"
         },
-        "large_format": 0,
-        "label_description": "My custom description"
-      },
-      "carrier": 1,
-      "email": "testing@myparcel.nl",
-      "name": "Test"
-    }]
+        "carrier": 1,
+        "email": "testing@myparcel.nl",
+        "name": "Test"
+      }
+    ]
   }
-}</pre>
+}
+</pre>
                 <p><strong>Response</strong></p>
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
-    "ids": [{
-      "id": 12345,
-      "reference_identifier":null
-    }]
+    "ids": [
+      {
+        "id": 12345,
+        "reference_identifier": null
+      }
+    ]
   }
 }
 </pre>
@@ -2293,60 +2441,63 @@ HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
     "search_results": {
-      "shipments": [{
-       "id": 12345,
-        "reference_identifier" : "FOO-222-BAR-42",
-        "recipient": {
-          "cc": "NL",
-          "region": "Zuid-Holland",
-          "city": "Hoofddorp",
-          "street": "Siriusdreef",
-          "number": "66",
-          "postal_code": "2132WT",
-          "person": "Mr. Parcel",
-          "phone": "0213030315",
-          "email": "testing@myparcel.nl"
-        },
-        "options": {
-          "package_type": 1,
-          "only_recipient": 1,
-          "signature": 1,
-          "return": 1,
-          "insurance": {
-            "amount": 50000,
+      "shipments": [
+        {
+          "id": 12345,
+          "reference_identifier": "FOO-222-BAR-42",
+          "recipient": {
+            "cc": "NL",
+            "region": "Zuid-Holland",
+            "city": "Hoofddorp",
+            "street": "Antareslaan",
+            "number": "31",
+            "postal_code": "2132JE",
+            "person": "Mr. Parcel",
+            "phone": "0233030315",
+            "email": "testing@myparcel.nl"
+          },
+          "options": {
+            "package_type": 1,
+            "only_recipient": 1,
+            "signature": 1,
+            "return": 1,
+            "insurance": {
+              "amount": 50000,
+              "currency": "EUR"
+            },
+            "large_format": 0
+          },
+          "sender": {
+            "cc": "NL",
+            "region": "Zuid-Holland",
+            "city": "Amsterdam",
+            "street": "Dorpstraat",
+            "number": "123",
+            "postal_code": "1020BC",
+            "person": "Mrs. Parcel",
+            "phone": "02012343546",
+            "email": "info@myparcel.nl"
+          },
+          "carrier_id": 1,
+          "status": 1,
+          "price": {
+            "amount": 535,
             "currency": "EUR"
           },
-          "large_format": 0
-        },
-        "sender": {
-          "cc": "NL",
-          "region": "Zuid-Holland",
-          "city": "Amsterdam",
-          "street": "Dorpstraat",
-          "number": "123",
-          "postal_code": "1020BC",
-          "person": "Mrs. Parcel",
-          "phone": "02012343546",
-          "email": "info@myparcel.nl"
-        },
-        "carrier_id": 1,
-        "status": 1,
-        "price": {
-          "amount": 535,
-          "currency": "EUR"
-        },
-        "barcode": "3SMYPA77773333",
-        "secondary_shipments": null,
-        "multi_collo_main_shipment_id": null,
-        "created": "2017-01-31 08:00:00",
-        "modified": "2017-01-31 09:00:00"
-      }],
+          "barcode": "3SMYPA77773333",
+          "secondary_shipments": null,
+          "multi_collo_main_shipment_id": null,
+          "created": "2017-01-31 08:00:00",
+          "modified": "2017-01-31 09:00:00"
+        }
+      ],
       "page": 1,
       "size": 30,
       "results": 50
     }
   }
-}</pre>
+}
+            </pre>
                 </p>
                 <h2 id="6_F">6.F Get Shipment label</h2>
                 <h3 id="6_F_1">6.F.1 Overview </h3>
@@ -2931,38 +3082,42 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
-      "reference_identifier" : "FOO-222-BAR-42",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "only_recipient": 1,
-        "signature": 1,
-        "return": 1,
-        "insurance": {
-          "amount": 50000,
-          "currency": "EUR"
+    "shipments": [
+      {
+        "reference_identifier": "FOO-222-BAR-42",
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Hoofddorp",
+          "street": "Antareslaan",
+          "number": "31",
+          "postal_code": "2132JE",
+          "person": "Mr. Parcel",
+          "phone": "0233030315",
+          "email": "testing@myparcel.nl"
         },
-        "large_format": 0,
-        "label_description": "My custom description",
-        "age_check":1
-      },
-      "secondary_shipments": [
-         {"reference_identifier": "REF-SECONDARY-SHIPMENT"},
-         {}
-      ],
-      "carrier": 1
-    }]
+        "options": {
+          "package_type": 1,
+          "only_recipient": 1,
+          "signature": 1,
+          "return": 1,
+          "insurance": {
+            "amount": 50000,
+            "currency": "EUR"
+          },
+          "large_format": 0,
+          "label_description": "My custom description",
+          "age_check": 1
+        },
+        "secondary_shipments": [
+          {
+            "reference_identifier": "REF-SECONDARY-SHIPMENT"
+          },
+          {}
+        ],
+        "carrier": 1
+      }
+    ]
   }
 }
 </pre>
@@ -2970,14 +3125,14 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-    "data": {
-        "ids": [
-            {
-                "id": 12345,
-                "reference_identifier": "FOO-222-BAR-42"
-            }
-        ]
-    }
+  "data": {
+    "ids": [
+      {
+        "id": 12345,
+        "reference_identifier": "FOO-222-BAR-42"
+      }
+    ]
+  }
 }
 </pre>
                 <h2>Add new shipment to existing multi collo shipment</h2>
@@ -2990,33 +3145,35 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
-      "id": 12345,
-      "reference_identifier" : "FOO-222-BAR-42",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "label_description": "My custom description"
-      },
-      "secondary_shipments": [
-         {
+    "shipments": [
+      {
+        "id": 12345,
+        "reference_identifier": "FOO-222-BAR-42",
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Hoofddorp",
+          "street": "Antareslaan",
+          "number": "31",
+          "postal_code": "2132JE",
+          "person": "Mr. Parcel",
+          "phone": "0233030315",
+          "email": "testing@myparcel.nl"
+        },
+        "options": {
+          "package_type": 1,
+          "label_description": "My custom description"
+        },
+        "secondary_shipments": [
+          {
             "id": 12346,
-	        "reference_identifier" : "SECONDARY-SHIPMENT"
-    	 },
-         {}
-      ],
-      "carrier": 1
-    }]
+            "reference_identifier": "SECONDARY-SHIPMENT"
+          },
+          {}
+        ],
+        "carrier": 1
+      }
+    ]
   }
 }
 </pre>
@@ -3035,27 +3192,29 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
-      "id": 12346,
-      "reference_identifier" : "FOO-222-BAR-42",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "label_description": "My custom description"
-      },
-      "carrier": 1,
-      "multi_collo_main_shipment_id": 12345
-    }]
+    "shipments": [
+      {
+        "id": 12346,
+        "reference_identifier": "FOO-222-BAR-42",
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Hoofddorp",
+          "street": "Antareslaan",
+          "number": "31",
+          "postal_code": "2132JE",
+          "person": "Mr. Parcel",
+          "phone": "0233030315",
+          "email": "testing@myparcel.nl"
+        },
+        "options": {
+          "package_type": 1,
+          "label_description": "My custom description"
+        },
+        "carrier": 1,
+        "multi_collo_main_shipment_id": 12345
+      }
+    ]
   }
 }
 </pre>
@@ -3075,32 +3234,34 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
-      "id": 12345,
-      "reference_identifier" : "FOO-222-BAR-42",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "label_description": "My custom description"
-      },
-      "secondary_shipments": [
-         {
+    "shipments": [
+      {
+        "id": 12345,
+        "reference_identifier": "FOO-222-BAR-42",
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Hoofddorp",
+          "street": "Antareslaan",
+          "number": "31",
+          "postal_code": "2132JE",
+          "person": "Mr. Parcel",
+          "phone": "0233030315",
+          "email": "testing@myparcel.nl"
+        },
+        "options": {
+          "package_type": 1,
+          "label_description": "My custom description"
+        },
+        "secondary_shipments": [
+          {
             "id": 12347,
-            "reference_identifier" : "SECONDARY-SHIPMENT"
-    	 }
-      ],
-      "carrier": 1
-    }]
+            "reference_identifier": "SECONDARY-SHIPMENT"
+          }
+        ],
+        "carrier": 1
+      }
+    ]
   }
 }
 </pre>
@@ -3121,27 +3282,29 @@ User-Agent: CustomApiCall/2
 Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 {
   "data": {
-    "shipments": [{
-      "id": 12346,
-      "reference_identifier" : "FOO-222-BAR-42",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "label_description": "My custom description"
-      },
-      "carrier": 1,
-      "multi_collo_main_shipment_id": null
-    }]
+    "shipments": [
+      {
+        "id": 12346,
+        "reference_identifier": "FOO-222-BAR-42",
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Hoofddorp",
+          "street": "Antareslaan",
+          "number": "31",
+          "postal_code": "2132JE",
+          "person": "Mr. Parcel",
+          "phone": "0233030315",
+          "email": "testing@myparcel.nl"
+        },
+        "options": {
+          "package_type": 1,
+          "label_description": "My custom description"
+        },
+        "carrier": 1,
+        "multi_collo_main_shipment_id": null
+      }
+    ]
   }
 }
 </pre>
@@ -3318,11 +3481,11 @@ HTTP/1.1 204 No Content
     "cc": "NL",
     "region": "Zuid-Holland",
     "city": "Hoofddorp",
-    "street": "Siriusdreef",
-    "number": "66",
-    "postal_code": "2132WT",
+    "street": "Antareslaan",
+    "number": "31",
+    "postal_code": "2132JE",
     "person": "Mr. Parcel",
-    "phone": "0213030315",
+    "phone": "0233030315",
     "email": "testing@myparcel.nl"
   },
   "options": {
@@ -3343,7 +3506,7 @@ HTTP/1.1 204 No Content
                 <p>POST example national shipment b</p>
                 <pre>
 {
-  "reference_identifier" : "FOO-333-BAR-42",
+  "reference_identifier": "FOO-333-BAR-42",
   "recipient": {
     "cc": "NL",
     "region": "Zuid-Holland",
@@ -3376,34 +3539,34 @@ HTTP/1.1 204 No Content
                 <p>POST example national multi collo shipment</p>
                 <pre>
 {
-      "reference_identifier" : "FOO-222-BAR-42",
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "label_description": "My custom description"
-      },
-      "secondary_shipments": [
-         {},
-         {}
-      ],
-      "carrier": 1
-    }
+  "reference_identifier": "FOO-222-BAR-42",
+  "recipient": {
+    "cc": "NL",
+    "region": "Zuid-Holland",
+    "city": "Hoofddorp",
+    "street": "Antareslaan",
+    "number": "31",
+    "postal_code": "2132JE",
+    "person": "Mr. Parcel",
+    "phone": "0233030315",
+    "email": "testing@myparcel.nl"
+  },
+  "options": {
+    "package_type": 1,
+    "label_description": "My custom description"
+  },
+  "secondary_shipments": [
+    {},
+    {}
+  ],
+  "carrier": 1
+}
 </pre>
                 <br>
                 <p>POST example international shipment</p>
                 <pre>
 {
-  "reference_identifier" : "さいた-ᚱ	ᚾᛟ/42",
+  "reference_identifier": "さいた-ᚱ	ᚾᛟ/42",
   "recipient": {
     "cc": "JP",
     "region": "埼玉県",
@@ -3421,27 +3584,30 @@ HTTP/1.1 204 No Content
     "contents": 1,
     "invoice": "1231235345345",
     "weight": 30,
-    "items": [{
-      "description": "Sample Product",
-      "amount": 10,
-      "weight": 20,
-      "item_value": {
-        "amount": 7000,
-        "currency": "EUR"
+    "items": [
+      {
+        "description": "Sample Product",
+        "amount": 10,
+        "weight": 20,
+        "item_value": {
+          "amount": 7000,
+          "currency": "EUR"
+        },
+        "classification": "0181",
+        "country": "NL"
       },
-      "classification": "0181",
-      "country": "NL"
-    }, {
-      "description": "Sample Product 2",
-      "amount": 5,
-      "weight": 10,
-      "item_value": {
-        "amount": 1000,
-        "currency": "EUR"
-      },
-      "classification": "0181",
-      "country": "BE"
-    }]
+      {
+        "description": "Sample Product 2",
+        "amount": 5,
+        "weight": 10,
+        "item_value": {
+          "amount": 1000,
+          "currency": "EUR"
+        },
+        "classification": "0181",
+        "country": "BE"
+      }
+    ]
   },
   "physical_properties": {
     "weight": 30
@@ -3454,35 +3620,37 @@ HTTP/1.1 204 No Content
                 <pre>
 {
   "data": {
-    "shipments": [{
-      "recipient": {
-        "cc": "NL",
-        "region": "Zuid-Holland",
-        "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-      },
-      "options": {
-        "package_type": 1,
-        "delivery_type": 4,
-        "delivery_date": "2015-07-12 00:00:00",
-        "only_recipient": 0,
-        "signature": 1,
-        "return": 0
-      },
-      "pickup": {
-        "postal_code": "2132BH",
-        "street": "Burgemeester van Stamplein",
-        "city": "Hoofddorp",
-        "number": "270",
-        "location_name": "Albert Heijn"
-      },
-      "carrier": 1
-    }]
+    "shipments": [
+      {
+        "recipient": {
+          "cc": "NL",
+          "region": "Zuid-Holland",
+          "city": "Hoofddorp",
+          "street": "Antareslaan",
+          "number": "31",
+          "postal_code": "2132JE",
+          "person": "Mr. Parcel",
+          "phone": "0233030315",
+          "email": "testing@myparcel.nl"
+        },
+        "options": {
+          "package_type": 1,
+          "delivery_type": 4,
+          "delivery_date": "2015-07-12 00:00:00",
+          "only_recipient": 0,
+          "signature": 1,
+          "return": 0
+        },
+        "pickup": {
+          "postal_code": "2132BH",
+          "street": "Burgemeester van Stamplein",
+          "city": "Hoofddorp",
+          "number": "270",
+          "location_name": "Albert Heijn"
+        },
+        "carrier": 1
+      }
+    ]
   }
 }
 </pre>
@@ -3490,17 +3658,16 @@ HTTP/1.1 204 No Content
                 <p>GET example national shipment A</p>
                 <pre>
 {
-
-  "reference_identifier" : "FOO-222-BAR-42",
+  "reference_identifier": "FOO-222-BAR-42",
   "recipient": {
     "cc": "NL",
     "region": "Zuid-Holland",
     "city": "Hoofddorp",
-    "street": "Siriusdreef",
-    "number": "66",
-    "postal_code": "2132WT",
+    "street": "Antareslaan",
+    "number": "31",
+    "postal_code": "2132JE",
     "person": "Mr. Parcel",
-    "phone": "0213030315",
+    "phone": "0233030315",
     "email": "testing@myparcel.nl"
   },
   "options": {
@@ -3561,11 +3728,11 @@ HTTP/1.1 204 No Content
     "cc": "NL",
     "region": "Zuid-Holland",
     "city": "Hoofddorp",
-    "street": "Siriusdreef",
-    "number": "66",
-    "postal_code": "2132WT",
+    "street": "Antareslaan",
+    "number": "31",
+    "postal_code": "2132JE",
     "person": "Mr. Parcel",
-    "phone": "0213030315",
+    "phone": "0233030315",
     "email": "testing@myparcel.nl"
   },
   "carrier": 1,
@@ -3583,92 +3750,92 @@ HTTP/1.1 204 No Content
                 <p>GET example national multi collo shipment</p>
                 <pre>
 {
-    "id": 12345,
-    "account_id": 1,
-    "shop_id": 1,
-    "shipment_type": 3,
-    "recipient": {
+  "id": 12345,
+  "account_id": 1,
+  "shop_id": 1,
+  "shipment_type": 3,
+  "recipient": {
+    "cc": "NL",
+    "region": "Zuid-Holland",
+    "city": "Hoofddorp",
+    "street": "Antareslaan",
+    "number": "31",
+    "postal_code": "2132JE",
+    "person": "Mr. Parcel",
+    "phone": "0233030315",
+    "email": "testing@myparcel.nl"
+  },
+  "sender": {
+    "cc": "NL",
+    "postal_code": "2132JE",
+    "city": "Hoofddorp",
+    "street": "Antareslaan",
+    "number": "31",
+    "person": "Mrs. Parcel",
+    "company": "MyParcel",
+    "email": "testing@myparcel.nl",
+    "phone": "12345678"
+  },
+  "status": 1,
+  "options": {
+    "package_type": 1,
+    "label_description": "My custom description"
+  },
+  "reference_identifier": "FOO-222-BAR-42",
+  "transaction_status": "unpaid",
+  "barcode": null,
+  "price": {
+    "amount": 595,
+    "currency": "EUR"
+  },
+  "region": "NL",
+  "payment_status": "unpaid",
+  "carrier_id": 1,
+  "secondary_shipments": [
+    {
+      "id": 12346,
+      "account_id": 1,
+      "shop_id": 1,
+      "shipment_type": 3,
+      "recipient": {
         "cc": "NL",
         "region": "Zuid-Holland",
         "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "66",
-        "postal_code": "2132WT",
-        "person": "Mr. Parcel",
-        "phone": "0213030315",
-        "email": "testing@myparcel.nl"
-    },
-    "sender": {
+        "street": "Antareslaan",
+        "number": "31",
+        "postal_code": "2132JE",
+        "person": "Mr. Parcel"
+      },
+      "sender": {
         "cc": "NL",
-        "postal_code": "2132WT",
+        "postal_code": "",
         "city": "Hoofddorp",
-        "street": "Siriusdreef",
-        "number": "26",
-        "person": "Mrs. Parcel",
-        "company": "MyParcel",
-        "email": "testing@myparcel.nl",
+        "street": "Antareslaan",
+        "number": "2132JE",
+        "person": "Frisby Test",
+        "company": "Test1",
+        "email": "test1@test.nl",
         "phone": "12345678"
-    },
-    "status": 1,
-    "options": {
+      },
+      "status": 1,
+      "options": {
         "package_type": 1,
         "label_description": "My custom description"
-    },
-    "reference_identifier": "FOO-222-BAR-42",
-    "transaction_status": "unpaid",
-    "barcode": null,
-    "price": {
+      },
+      "reference_identifier": null,
+      "transaction_status": "unpaid",
+      "price": {
         "amount": 595,
         "currency": "EUR"
-    },
-    "region": "NL",
-    "payment_status": "unpaid",
-    "carrier_id": 1,
-    "secondary_shipments": [
-        {
-            "id": 12346,
-            "account_id": 1,
-            "shop_id": 1,
-            "shipment_type": 3,
-            "recipient": {
-                "cc": "NL",
-                "region": "Zuid-Holland",
-                "city": "Hoofddorp",
-                "street": "Siriusdreef",
-                "number": "66",
-                "postal_code": "2132WT",
-                "person": "Mr. Parcel"
-            },
-            "sender": {
-                "cc": "NL",
-                "postal_code": "2231MJ",
-                "city": "Rijnsburg",
-                "street": "Siriusdreef",
-                "number": "26",
-                "person": "Frisby Test",
-                "company": "Test1",
-                "email": "test1@test.nl",
-                "phone": "12345678"
-            },
-            "status": 1,
-            "options": {
-                "package_type": 1,
-                "label_description": "My custom description"
-            },
-            "reference_identifier": null,
-            "transaction_status": "unpaid",
-            "price": {
-                "amount": 595,
-                "currency": "EUR"
-            },
-            "barcode": "",
-            "region": "NL",
-            "payment_status": "unpaid",
-            "carrier_id": 1,
-            "multi_collo_main_shipment_id": 12345
-        }
-    ],
-    "multi_collo_main_shipment_id": 12345
+      },
+      "barcode": "",
+      "region": "NL",
+      "payment_status": "unpaid",
+      "carrier_id": 1,
+      "multi_collo_main_shipment_id": 12345
+    }
+  ],
+  "multi_collo_main_shipment_id": 12345
 }
 
 </pre>
@@ -3703,7 +3870,7 @@ HTTP/1.1 204 No Content
                     <strong>street</strong><br>
                     Data type: <a href="#string">string</a><br>
                     Required: yes.<br>
-                    The address street name.
+                    The address street name. When shipping to an international destination, you may include street number in this field.
                 </p>
                 <p>
                     <strong>street_additional_info</strong><br>
@@ -3714,7 +3881,7 @@ HTTP/1.1 204 No Content
                 <p>
                     <strong>number</strong><br>
                     Data type: <a href="#string">string</a><br>
-                    Required: Yes for NL.<br>
+                    Required: Yes for domestic shipments in NL and BE.<br>
                     Street number.
                 </p>
                 <p>
@@ -3754,11 +3921,11 @@ HTTP/1.1 204 No Content
   "cc": "NL",
   "region": "Zuid-Holland",
   "city": "Hoofddorp",
-  "street": "Siriusdreef",
-  "number": "66",
-  "postal_code": "2132WT",
+  "street": "Antareslaan",
+  "number": "31",
+  "postal_code": "2132JE",
   "person": "Mr. Parcel",
-  "phone": "0213030315",
+  "phone": "0233030315",
   "email": "parcel@myparcel.nl"
 }
 </pre>
@@ -3768,12 +3935,11 @@ HTTP/1.1 204 No Content
   "cc": "NL",
   "region": "Zuid-Holland",
   "city": "Hoofddorp",
-  "street": "Siriusdreef",
-  "number": "66",
-  "number_suffix": "68",
-  "postal_code": "2132WT",
+  "street": "Antareslaan",
+  "number": "31",
+  "postal_code": "2132JE",
   "person": "Mrs. Parcel",
-  "phone": "0213030315",
+  "phone": "0233030315",
   "email": "parcel@myparcel.nl"
 }
 </pre>
@@ -3811,12 +3977,12 @@ HTTP/1.1 204 No Content
   "cc": "NL",
   "region": "Zuid-Holland",
   "city": "Hoofddorp",
-  "street": "Siriusdreef",
-  "number": "66",
+  "street": "Antareslaan",
+  "number": "31",
   "person": "Jan Peter",
   "company": "MyParcel B.V.",
   "email": "janpeter@bedrijven.nl",
-  "phone": "0203030315"
+  "phone": "0233030315"
 }
 </pre>
                 <p>Example i</p>
@@ -3846,12 +4012,12 @@ HTTP/1.1 204 No Content
   "groups""124",
   "nl",
   "Hoofddorp",
-  "Siriusdreef",
-  "66",
+  "Antareslaan",
+  "31",
   "Claus Stuter",
   "MyParcel B.V.",
   "claus@stuter.nl",
-  "0203030315",
+  "0233030315",
 }
 </pre>
                 <p>Example CSV b</p>
@@ -3866,27 +4032,27 @@ HTTP/1.1 204 No Content
   "company",
   "email",
   "phone""nl",
-  "2132WT",
+  "2132JE",
   "Hoofddorp",
-  "Siriusdreef",
-  "66",
+  "Antareslaan",
+  "31",
   "Mrs. Parcel",
   "MyParcel",
   "parcel@myparcel.nl",
-  "0213030315"
+  "0233030315"
 }</pre>
                 <p>Example CSV c</p>
                 <pre>
 {
   "nl",
-  "2132WT",
+  "2132JE",
   "Hoofddorp",
-  "Siriusdreef",
-  "66",
+  "Antareslaan",
+  "31",
   "Arie Test",
   "MyParcel",
   "arie@myparcel.nl",
-  "0213030319"
+  "0233030315"
 }</pre>
                 <h2 id="7_C">7.C ShipmentOptions Object Definition</h2>
                 <h3 id="7_C_1">7.C.1 Overview</h3>
@@ -3981,17 +4147,17 @@ HTTP/1.1 204 No Content
 </pre>
                 <p>Example b</p>
                 <pre>
-  {
-    "package_type": 1,
-    "only_recipient": 0,
-    "signature": 1,
-    "return": 0,
-    "insurance": {
-      "amount": 10000,
-      "currency": "EUR"
-    },
-    "label_description": "My custom description"
-  }
+{
+  "package_type": 1,
+  "only_recipient": 0,
+  "signature": 1,
+  "return": 0,
+  "insurance": {
+    "amount": 10000,
+    "currency": "EUR"
+  },
+  "label_description": "My custom description"
+}
 </pre>
                 <p>Example c</p>
                 <pre>
@@ -4139,27 +4305,30 @@ HTTP/1.1 204 No Content
   "contents": 1,
   "invoice": "1231235345345",
   "weight": 30,
-  "items": [{
-  "description": "Sample Product",
-    "amount": 10,
-    "weight": 20,
-    "item_value": {
-      "amount": 7000,
-      "currency": "EUR"
+  "items": [
+    {
+      "description": "Sample Product",
+      "amount": 10,
+      "weight": 20,
+      "item_value": {
+        "amount": 7000,
+        "currency": "EUR"
+      },
+      "classification": "0181",
+      "country": "NL"
     },
-    "classification": "0181",
-    "country": "NL"
-  }, {
-  "description": "Sample NBG Product",
-    "amount": 5,
-    "weight": 10,
-    "item_value": {
-      "amount": 1000,
-      "currency": "EUR"
-    },
-    "classification": "0181",
-    "country": "BE"
-  }]
+    {
+      "description": "Sample NBG Product",
+      "amount": 5,
+      "weight": 10,
+      "item_value": {
+        "amount": 1000,
+        "currency": "EUR"
+      },
+      "classification": "0181",
+      "country": "BE"
+    }
+  ]
 }
   </pre>
                 <p>POST example a</p>
@@ -4168,27 +4337,30 @@ HTTP/1.1 204 No Content
   "contents": 3,
   "invoice": "4567789004",
   "weight": 30,
-  "items": [{
-    "description": "NIV Product Audio CD",
-    "amount": 3,
-    "weight": 10,
-    "item_value": {
-      "amount": 10000,
-      "currency": "EUR"
+  "items": [
+    {
+      "description": "NIV Product Audio CD",
+      "amount": 3,
+      "weight": 10,
+      "item_value": {
+        "amount": 10000,
+        "currency": "EUR"
+      },
+      "classification": "0181",
+      "country": "US"
     },
-    "classification": "0181",
-    "country": "US"
-  }, {
-    "description": "Sample JP Product",
-    "amount": 10,
-    "weight": 20,
-    "item_value": {
-      "amount": 800000,
-      "currency": "YEN"
-    },
-    "classification": "0181",
-    "country": "JP"
-  }]
+    {
+      "description": "Sample JP Product",
+      "amount": 10,
+      "weight": 20,
+      "item_value": {
+        "amount": 800000,
+        "currency": "YEN"
+      },
+      "classification": "0181",
+      "country": "JP"
+    }
+  ]
 }
 </pre>
                 <h2 id="7_F">7.F CustomsItem Object Definition</h2>
@@ -4248,43 +4420,43 @@ HTTP/1.1 204 No Content
                 <p>POST example b</p>
                 <pre>
 {
- "description":"Sample NBG Product",
- "amount":5,
- "weight":10,
- "item_value":{
-    "amount":1000,
-    "currency":"EUR"
- },
- "classification":"0181",
- "country":"BE"
+  "description": "Sample NBG Product",
+  "amount": 5,
+  "weight": 10,
+  "item_value": {
+    "amount": 1000,
+    "currency": "EUR"
+  },
+  "classification": "0181",
+  "country": "BE"
 }
 </pre>
                 <p>POST example c</p>
                 <pre>
 {
- "description":"NIV Product Audio CD",
- "amount":3,
- "weight":10,
- "item_value":{
-    "amount":10000,
-    "currency":"EUR"
- },
- "classification":"0181",
- "country":"US"
+  "description": "NIV Product Audio CD",
+  "amount": 3,
+  "weight": 10,
+  "item_value": {
+    "amount": 10000,
+    "currency": "EUR"
+  },
+  "classification": "0181",
+  "country": "US"
 }
 </pre>
                 <p>POST example d</p>
                 <pre>
 {
- "description":"Sample JP Product",
- "amount":10,
- "weight":20,
- "item_value":{
-    "amount":800000,
-    "currency":"YEN"
- },
- "classification":"0181",
- "country":"JP"
+  "description": "Sample JP Product",
+  "amount": 10,
+  "weight": 20,
+  "item_value": {
+    "amount": 800000,
+    "currency": "YEN"
+  },
+  "classification": "0181",
+  "country": "JP"
 }
 </pre>
                 <h2 id="7_G">7.G ShipmentIds Object Definition</h2>
@@ -4787,13 +4959,13 @@ HTTP/1.1 204 No Content
                 <p>POST example for BE pickup location</p>
                 <pre>
 {
-    "city":"ANTWERPEN",
-    "street":"HOOGSTRAAT",
-    "postal_code":"2000",
-    "number":"75",
-    "location_code":"BE0Q07",
-    "retail_network_id":"LD-01",
-    "location_name":"K&J TRADING"
+  "city": "ANTWERPEN",
+  "street": "HOOGSTRAAT",
+  "postal_code": "2000",
+  "number": "75",
+  "location_code": "BE0Q07",
+  "retail_network_id": "LD-01",
+  "location_name": "K&J TRADING"
 }
 </pre>
                 <h2 id="7_P">7.P PaymentInstructions Object Definition</h2>
@@ -4979,9 +5151,9 @@ HTTP/1.1 204 No Content
                 <p>Example</p>
                 <pre>
 {
-    "date": "2019-02-19 17:15:00.000000",
-    "timezone_type": 3,
-    "timezone": "Europe/Amsterdam"
+  "date": "2019-02-19 17:15:00.000000",
+  "timezone_type": 3,
+  "timezone": "Europe/Amsterdam"
 }
 
 </pre>
@@ -5040,15 +5212,15 @@ HTTP/1.1 204 No Content
                 <p>Example</p>
                 <pre>
 {
-    "name": "Depot Den Bosch",
-    "cc": "NL",
-    "city": "S-Hertogenbosch",
-    "postal_code": "5222AL",
-    "street": "Ketelaarskampweg",
-    "number": "7",
-    "number_suffix": null,
-    "longitude": 5.27349901,
-    "latitude": 51.70326781
+  "name": "Depot Den Bosch",
+  "cc": "NL",
+  "city": "S-Hertogenbosch",
+  "postal_code": "5222AL",
+  "street": "Ketelaarskampweg",
+  "number": "7",
+  "number_suffix": null,
+  "longitude": 5.27349901,
+  "latitude": 51.70326781
 }
 </pre>
                 <h1 id="8">8. Delivery options</h1>
@@ -5105,7 +5277,7 @@ HTTP/1.1 204 No Content
                         <td>None.</td>
                     </tr>
                     <tr>
-                        <th rowspan="15">Query parameters</th>
+                        <th rowspan="17">Query parameters</th>
                         <td>cc = <a href="#country_code">country_code</a></td>
                     </tr>
                     <tr>
@@ -5197,11 +5369,13 @@ HTTP/1.1 204 No Content
     "pickup": [],
     "message": "No results"
   },
-  "errors": [{
-    "code": 9,
-    "message": "Example",
-    "human": "Example"
-  }]
+  "errors": [
+    {
+      "code": 9,
+      "message": "Example",
+      "human": "Example"
+    }
+  ]
 }
 </pre>
                         </td>
@@ -5348,137 +5522,183 @@ accept: application/json;charset=utf-8;version=2.0
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
   "data": {
-    "delivery": [{
-      "date": "2017-02-01",
-      "time": [{
-        "start": "08:00:00",
-        "end": "12:00:00",
-        "price": {
-          "currency": "EUR",
-          "amount": 1000
-        },
-        "price_comment": "morning",
-        "comment": "",
-        "type": 1
-      }, {
-        "start": "11:30:00",
-        "end": "13:30:00",
-        "price": {
-          "currency": "EUR",
-          "amount": 0
-        },
-        "price_comment": "standard",
-        "comment": "",
-        "type": 2
-      }]
-    }, {
-      "date": "2017-02-02",
-      "time": [{
-        "start": "08:00:00",
-        "end": "12:00:00",
-        "price": {
-          "currency": "EUR",
-          "amount": 1000
-        },
-        "price_comment": "morning",
-        "comment": "",
-        "type": 1
-      }, {
-        "start": "11:00:00",
-        "end": "13:00:00",
-        "price": {
-          "currency": "EUR",
-          "amount": 0
-        },
-        "price_comment": "standard",
-        "comment": "",
-        "type": 2
-      }]
-    }],
-    "pickup": [{
-      "date": "2017-02-01",
-      "time": [{
-        "start": "16:00:00",
-        "type": 4,
-        "price": {
-          "amount": 0,
-          "currency": "EUR"
-        }
-      }, {
-        "start": "08:30:00",
-        "type": 5,
-        "price": {
-          "amount": 125,
-          "currency": "EUR"
-        }
-      }],
-      "location": "Staples Office Centre",
-      "street": "Jacobus Spijkerdreef",
-      "number": "10",
-      "postal_code": "2132PZ",
-      "city": "Hoofddorp",
-      "start_time": "08:30:00",
-      "price": 125,
-      "price_comment": "retailexpress",
-      "comment": "Dit is een Business Point. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-      "phone_number": "023-5576310",
-      "opening_hours": {
-        "monday": ["08:00-18:30"],
-        "tuesday": ["08:00-18:30"],
-        "wednesday": ["08:00-18:30"],
-        "thursday": ["08:00-18:30"],
-        "friday": ["08:00-18:30"],
-        "saturday": ["08:00-17:00"],
-        "sunday": []
+    "delivery": [
+      {
+        "date": "2017-02-01",
+        "time": [
+          {
+            "start": "08:00:00",
+            "end": "12:00:00",
+            "price": {
+              "currency": "EUR",
+              "amount": 1000
+            },
+            "price_comment": "morning",
+            "comment": "",
+            "type": 1
+          },
+          {
+            "start": "11:30:00",
+            "end": "13:30:00",
+            "price": {
+              "currency": "EUR",
+              "amount": 0
+            },
+            "price_comment": "standard",
+            "comment": "",
+            "type": 2
+          }
+        ]
       },
-      "distance": "1934",
-      "latitude": "52.286582",
-      "longitude": "4.682377",
-      "location_code": "173187"
-    }, {
-      "date": "2017-02-01",
-      "time": [{
-        "start": "16:00:00",
-        "type": 4,
-        "price": {
-          "amount": 0,
-          "currency": "EUR"
-        }
-      }],
-      "location": "Primera Sanders",
-      "street": "Polderplein",
-      "number": "3",
-      "postal_code": "2132BA",
-      "city": "Hoofddorp",
-      "start_time": "16:00:00",
-      "price": 0,
-      "price_comment": "retail",
-      "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
-      "phone_number": "023-5640556",
-      "opening_hours": {
-        "monday": ["11:00-18:00"],
-        "tuesday": ["09:00-18:00"],
-        "wednesday": ["09:00-18:00"],
-        "thursday": ["09:00-18:00"],
-        "friday": ["09:00-21:00"],
-        "saturday": ["09:00-17:00"],
-        "sunday": ["12:00-17:00"]
+      {
+        "date": "2017-02-02",
+        "time": [
+          {
+            "start": "08:00:00",
+            "end": "12:00:00",
+            "price": {
+              "currency": "EUR",
+              "amount": 1000
+            },
+            "price_comment": "morning",
+            "comment": "",
+            "type": 1
+          },
+          {
+            "start": "11:00:00",
+            "end": "13:00:00",
+            "price": {
+              "currency": "EUR",
+              "amount": 0
+            },
+            "price_comment": "standard",
+            "comment": "",
+            "type": 2
+          }
+        ]
+      }
+    ],
+    "pickup": [
+      {
+        "date": "2017-02-01",
+        "time": [
+          {
+            "start": "16:00:00",
+            "type": 4,
+            "price": {
+              "amount": 0,
+              "currency": "EUR"
+            }
+          },
+          {
+            "start": "08:30:00",
+            "type": 5,
+            "price": {
+              "amount": 125,
+              "currency": "EUR"
+            }
+          }
+        ],
+        "location": "Staples Office Centre",
+        "street": "Jacobus Spijkerdreef",
+        "number": "10",
+        "postal_code": "2132PZ",
+        "city": "Hoofddorp",
+        "start_time": "08:30:00",
+        "price": 125,
+        "price_comment": "retailexpress",
+        "comment": "Dit is een Business Point. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+        "phone_number": "023-5576310",
+        "opening_hours": {
+          "monday": [
+            "08:00-18:30"
+          ],
+          "tuesday": [
+            "08:00-18:30"
+          ],
+          "wednesday": [
+            "08:00-18:30"
+          ],
+          "thursday": [
+            "08:00-18:30"
+          ],
+          "friday": [
+            "08:00-18:30"
+          ],
+          "saturday": [
+            "08:00-17:00"
+          ],
+          "sunday": []
+        },
+        "distance": "1934",
+        "latitude": "52.286582",
+        "longitude": "4.682377",
+        "location_code": "173187"
       },
-      "distance": "1687",
-      "latitude": "52.192150633052",
-      "longitude": "4.44249030539514",
-      "location_code": "176227"
-    }, {
-      "date": "2017-02-01",
-      "time": [{
-        "start": "16:00:00",
-        "type": 4,
-        "price": {
-          "amount": 0,
-          "currency": "EUR"
-        }
-      }]
-    }]
+      {
+        "date": "2017-02-01",
+        "time": [
+          {
+            "start": "16:00:00",
+            "type": 4,
+            "price": {
+              "amount": 0,
+              "currency": "EUR"
+            }
+          }
+        ],
+        "location": "Primera Sanders",
+        "street": "Polderplein",
+        "number": "3",
+        "postal_code": "2132BA",
+        "city": "Hoofddorp",
+        "start_time": "16:00:00",
+        "price": 0,
+        "price_comment": "retail",
+        "comment": "Dit is een Postkantoor. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+        "phone_number": "023-5640556",
+        "opening_hours": {
+          "monday": [
+            "11:00-18:00"
+          ],
+          "tuesday": [
+            "09:00-18:00"
+          ],
+          "wednesday": [
+            "09:00-18:00"
+          ],
+          "thursday": [
+            "09:00-18:00"
+          ],
+          "friday": [
+            "09:00-21:00"
+          ],
+          "saturday": [
+            "09:00-17:00"
+          ],
+          "sunday": [
+            "12:00-17:00"
+          ]
+        },
+        "distance": "1687",
+        "latitude": "52.192150633052",
+        "longitude": "4.44249030539514",
+        "location_code": "176227"
+      },
+      {
+        "date": "2017-02-01",
+        "time": [
+          {
+            "start": "16:00:00",
+            "type": 4,
+            "price": {
+              "amount": 0,
+              "currency": "EUR"
+            }
+          }
+        ]
+      }
+    ]
   }
 }
 </pre>
@@ -5495,141 +5715,141 @@ accept: application/json;charset=utf-8;version=2.0
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-    "data": {
-        "pickup_locations": [
-            {
-                "address": {
-                    "cc": "NL",
-                    "city": "Hoofddorp",
-                    "street": "Polderplein",
-                    "postal_code": "2132BA",
-                    "number": "3"
-                },
-                "possibilities": [
-                    {
-                        "delivery_type_id": 4,
-                        "delivery_type_name": "pickup",
-                        "moment": {
-                            "start": {
-                                "date": "2020-02-13 16:00:00.000000",
-                                "timezone_type": 3,
-                                "timezone": "Europe/Amsterdam"
-                            }
-                        }
-                    }
-                ],
-                "location": {
-                    "location_name": "Primera Sanders",
-                    "retail_network_id": "PNPNL-01",
-                    "distance": "1696",
-                    "latitude": "52.30329367",
-                    "longitude": "4.69476214",
-                    "location_code": "176227",
-                    "phone_number": null,
-                    "opening_hours": {
-                        "monday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-17 11:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-17 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "tuesday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-18 09:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-18 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "wednesday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-19 09:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-19 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "thursday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-13 09:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-13 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "friday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-14 09:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-14 21:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "saturday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-15 09:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-15 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "sunday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-16 12:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-16 17:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ]
-                    }
-                }
+  "data": {
+    "pickup_locations": [
+      {
+        "address": {
+          "cc": "NL",
+          "city": "Hoofddorp",
+          "street": "Polderplein",
+          "postal_code": "2132BA",
+          "number": "3"
+        },
+        "possibilities": [
+          {
+            "delivery_type_id": 4,
+            "delivery_type_name": "pickup",
+            "moment": {
+              "start": {
+                "date": "2020-02-13 16:00:00.000000",
+                "timezone_type": 3,
+                "timezone": "Europe/Amsterdam"
+              }
             }
-        ]
-    }
+          }
+        ],
+        "location": {
+          "location_name": "Primera Sanders",
+          "retail_network_id": "PNPNL-01",
+          "distance": "1696",
+          "latitude": "52.30329367",
+          "longitude": "4.69476214",
+          "location_code": "176227",
+          "phone_number": null,
+          "opening_hours": {
+            "monday": [
+              {
+                "start": {
+                  "date": "2020-02-17 11:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-17 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "tuesday": [
+              {
+                "start": {
+                  "date": "2020-02-18 09:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-18 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "wednesday": [
+              {
+                "start": {
+                  "date": "2020-02-19 09:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-19 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "thursday": [
+              {
+                "start": {
+                  "date": "2020-02-13 09:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-13 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "friday": [
+              {
+                "start": {
+                  "date": "2020-02-14 09:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-14 21:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "saturday": [
+              {
+                "start": {
+                  "date": "2020-02-15 09:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-15 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "sunday": [
+              {
+                "start": {
+                  "date": "2020-02-16 12:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-16 17:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
 }
 </pre>
                 <p>
@@ -5650,94 +5870,94 @@ Accept: application/json;charset=utf-8;version=2.0
                 <p><strong>Response</strong></p>
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
-
-    "data": {
-        "deliveries": [
-            {
-                "date": {
-                    "date": "2020-02-13 00:00:00.000000",
-                    "timezone_type": 3,
-                    "timezone": "Europe/Amsterdam"
-                },
-                "possibilities": [
-                    {
-                        "type": "standard",
-                        "shipment_options": [
-                            {
-                                "name": "age_check",
-                                "schema": {
-                                    "type": "boolean",
-                                    "enum": [
-                                        true,
-                                        false
-                                    ]
-                                }
-                            },
-                            {
-                                "name": "large_format",
-                                "schema": {
-                                    "type": "boolean",
-                                    "enum": [
-                                        true,
-                                        false
-                                    ]
-                                }
-                            },
-                            {
-                                "name": "only_recipient",
-                                "schema": {
-                                    "type": "boolean",
-                                    "enum": [
-                                        true,
-                                        false
-                                    ]
-                                }
-                            },
-                            {
-                                "name": "signature",
-                                "schema": {
-                                    "type": "boolean",
-                                    "enum": [
-                                        true,
-                                        false
-                                    ]
-                                }
-                            },
-                            {
-                                "name": "return",
-                                "schema": {
-                                    "type": "boolean",
-                                    "enum": [
-                                        true,
-                                        false
-                                    ]
-                                }
-                            }
-                        ],
-                        "collect_date": null,
-                        "delivery_time_frames": [
-                            {
-                                "type": "start",
-                                "date_time": {
-                                    "date": "2020-02-13 09:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            },
-                            {
-                                "type": "end",
-                                "date_time": {
-                                    "date": "2020-02-13 12:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            }
+{
+  "data": {
+    "deliveries": [
+      {
+        "date": {
+          "date": "2020-02-13 00:00:00.000000",
+          "timezone_type": 3,
+          "timezone": "Europe/Amsterdam"
+        },
+        "possibilities": [
+          {
+            "type": "standard",
+            "shipment_options": [
+              {
+                "name": "age_check",
+                "schema": {
+                  "type": "boolean",
+                  "enum": [
+                    true,
+                    false
+                  ]
+                }
+              },
+              {
+                "name": "large_format",
+                "schema": {
+                  "type": "boolean",
+                  "enum": [
+                    true,
+                    false
+                  ]
+                }
+              },
+              {
+                "name": "only_recipient",
+                "schema": {
+                  "type": "boolean",
+                  "enum": [
+                    true,
+                    false
+                  ]
+                }
+              },
+              {
+                "name": "signature",
+                "schema": {
+                  "type": "boolean",
+                  "enum": [
+                    true,
+                    false
+                  ]
+                }
+              },
+              {
+                "name": "return",
+                "schema": {
+                  "type": "boolean",
+                  "enum": [
+                    true,
+                    false
+                  ]
+                }
+              }
+            ],
+            "collect_date": null,
+            "delivery_time_frames": [
+              {
+                "type": "start",
+                "date_time": {
+                  "date": "2020-02-13 09:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              },
+              {
+                "type": "end",
+                "date_time": {
+                  "date": "2020-02-13 12:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ]
+          }
         ]
-    }
+      }
+    ]
+  }
 }
 </pre>
                 <p>
@@ -5757,143 +5977,142 @@ Accept: application/json;charset=utf-8;version=2.0
                 <p><strong>Response</strong></p>
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
-
-    {
-    "data": {
-        "pickup_locations": [
-            {
-                "address": {
-                    "cc": "NL",
-                    "city": "Hoofddorp",
-                    "street": "Polderplein",
-                    "postal_code": "2132BA",
-                    "number": "3"
-                },
-                "possibilities": [
-                    {
-                        "delivery_type_id": 4,
-                        "delivery_type_name": "pickup",
-                        "moment": {
-                            "start": {
-                                "date": "2020-02-13 16:00:00.000000",
-                                "timezone_type": 3,
-                                "timezone": "Europe/Amsterdam"
-                            }
-                        }
-                    }
-                ],
-                "location": {
-                    "location_name": "Primera Sanders",
-                    "retail_network_id": "PNPNL-01",
-                    "distance": "1696",
-                    "latitude": "52.30329367",
-                    "longitude": "4.69476214",
-                    "location_code": "176227",
-                    "phone_number": null,
-                    "opening_hours": {
-                        "monday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-17 11:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-17 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "tuesday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-18 09:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-18 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "wednesday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-19 09:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-19 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "thursday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-13 09:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-13 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "friday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-14 09:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-14 21:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "saturday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-15 09:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-15 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "sunday": [
-                            {
-                                "start": {
-                                    "date": "2020-02-16 12:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                    "date": "2020-02-16 17:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ]
-                    }
-                }
+{
+  "data": {
+    "pickup_locations": [
+      {
+        "address": {
+          "cc": "NL",
+          "city": "Hoofddorp",
+          "street": "Polderplein",
+          "postal_code": "2132BA",
+          "number": "3"
+        },
+        "possibilities": [
+          {
+            "delivery_type_id": 4,
+            "delivery_type_name": "pickup",
+            "moment": {
+              "start": {
+                "date": "2020-02-13 16:00:00.000000",
+                "timezone_type": 3,
+                "timezone": "Europe/Amsterdam"
+              }
             }
-        ]
-    }
+          }
+        ],
+        "location": {
+          "location_name": "Primera Sanders",
+          "retail_network_id": "PNPNL-01",
+          "distance": "1696",
+          "latitude": "52.30329367",
+          "longitude": "4.69476214",
+          "location_code": "176227",
+          "phone_number": null,
+          "opening_hours": {
+            "monday": [
+              {
+                "start": {
+                  "date": "2020-02-17 11:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-17 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "tuesday": [
+              {
+                "start": {
+                  "date": "2020-02-18 09:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-18 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "wednesday": [
+              {
+                "start": {
+                  "date": "2020-02-19 09:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-19 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "thursday": [
+              {
+                "start": {
+                  "date": "2020-02-13 09:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-13 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "friday": [
+              {
+                "start": {
+                  "date": "2020-02-14 09:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-14 21:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "saturday": [
+              {
+                "start": {
+                  "date": "2020-02-15 09:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-15 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "sunday": [
+              {
+                "start": {
+                  "date": "2020-02-16 12:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-02-16 17:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
 }
 </pre>
 
@@ -5914,58 +6133,58 @@ Accept: application/json;charset=utf-8;version=2.0
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-    "data": {
+  "data": {
     "delivery": [
-            {
-                "date": "2020-07-27",
-                "time": [
-                    {
-                        "start": "08:00:00",
-                        "end": "17:00:00",
-                        "price": {
-                        "currency": "EUR",
-                            "amount": 0
-                        },
-                        "price_comment": "standard",
-                        "comment": "",
-                        "type": 2
-                    }
-                ]
+      {
+        "date": "2020-07-27",
+        "time": [
+          {
+            "start": "08:00:00",
+            "end": "17:00:00",
+            "price": {
+              "currency": "EUR",
+              "amount": 0
             },
-            {
-                "date": "2020-07-28",
-                "time": [
-                    {
-                        "start": "08:00:00",
-                        "end": "17:00:00",
-                        "price": {
-                        "currency": "EUR",
-                            "amount": 0
-                        },
-                        "price_comment": "standard",
-                        "comment": "",
-                        "type": 2
-                    }
-                ]
-            },
-            {
-                "date": "2020-07-29",
-                "time": [
-                    {
-                        "start": "08:00:00",
-                        "end": "17:00:00",
-                        "price": {
-                        "currency": "EUR",
-                            "amount": 0
-                        },
-                        "price_comment": "standard",
-                        "comment": "",
-                        "type": 2
-                    }
-                ]
-            },
+            "price_comment": "standard",
+            "comment": "",
+            "type": 2
+          }
         ]
-    }
+      },
+      {
+        "date": "2020-07-28",
+        "time": [
+          {
+            "start": "08:00:00",
+            "end": "17:00:00",
+            "price": {
+              "currency": "EUR",
+              "amount": 0
+            },
+            "price_comment": "standard",
+            "comment": "",
+            "type": 2
+          }
+        ]
+      },
+      {
+        "date": "2020-07-29",
+        "time": [
+          {
+            "start": "08:00:00",
+            "end": "17:00:00",
+            "price": {
+              "currency": "EUR",
+              "amount": 0
+            },
+            "price_comment": "standard",
+            "comment": "",
+            "type": 2
+          }
+        ]
+      }
+    ]
+  }
 }
 </pre>
                 <p>
@@ -5985,189 +6204,189 @@ Accept: application/json;charset=utf-8;version=2.0
                 <pre>
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
-    "data": {
+  "data": {
     "pickup_locations": [
-            {
-                "address": {
-                "cc": "BE",
-                    "city": "BRUSSEL",
-                    "street": "ANSPACHLAAN",
-                    "postal_code": "1000",
-                    "number": "1",
-                    "number_suffix": null
-                },
-                "possibilities": [
-                    {
-                        "delivery_type_id": 4,
-                        "delivery_type_name": "pickup",
-                        "moment": {
-                        "start": {
-                            "date": "2020-07-27 16:00:00.000000",
-                                "timezone_type": 3,
-                                "timezone": "Europe/Amsterdam"
-                            }
-                        }
-                    }
-                ],
-                "location": {
-                "location_name": "BRUSSEL DE BROUCKERE",
-                    "retail_network_id": "",
-                    "distance": "242",
-                    "latitude": "50.8506",
-                    "longitude": "4.35185",
-                    "location_code": "20100",
-                    "phone_number": null,
-                    "opening_hours": {
-                    "monday": [
-                            {
-                                "start": {
-                                "date": "2020-07-27 08:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                "date": "2020-07-27 12:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            },
-                            {
-                                "start": {
-                                "date": "2020-07-27 13:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                "date": "2020-07-27 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "tuesday": [
-                            {
-                                "start": {
-                                "date": "2020-07-28 08:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                "date": "2020-07-28 12:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            },
-                            {
-                                "start": {
-                                "date": "2020-07-28 13:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                "date": "2020-07-28 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "wednesday": [
-                            {
-                                "start": {
-                                "date": "2020-07-29 08:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                "date": "2020-07-29 12:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            },
-                            {
-                                "start": {
-                                "date": "2020-07-29 13:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                "date": "2020-07-29 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "thursday": [
-                            {
-                                "start": {
-                                "date": "2020-07-30 08:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                "date": "2020-07-30 12:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            },
-                            {
-                                "start": {
-                                "date": "2020-07-30 13:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                "date": "2020-07-30 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "friday": [
-                            {
-                                "start": {
-                                "date": "2020-07-31 08:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                "date": "2020-07-31 12:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            },
-                            {
-                                "start": {
-                                "date": "2020-07-31 13:30:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                "date": "2020-07-31 18:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "saturday": [
-                            {
-                                "start": {
-                                "date": "2020-07-25 10:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                },
-                                "end": {
-                                "date": "2020-07-25 13:00:00.000000",
-                                    "timezone_type": 3,
-                                    "timezone": "Europe/Amsterdam"
-                                }
-                            }
-                        ],
-                        "sunday": []
-                    }
-                }
+      {
+        "address": {
+          "cc": "BE",
+          "city": "BRUSSEL",
+          "street": "ANSPACHLAAN",
+          "postal_code": "1000",
+          "number": "1",
+          "number_suffix": null
+        },
+        "possibilities": [
+          {
+            "delivery_type_id": 4,
+            "delivery_type_name": "pickup",
+            "moment": {
+              "start": {
+                "date": "2020-07-27 16:00:00.000000",
+                "timezone_type": 3,
+                "timezone": "Europe/Amsterdam"
+              }
             }
-        ]
-    }
+          }
+        ],
+        "location": {
+          "location_name": "BRUSSEL DE BROUCKERE",
+          "retail_network_id": "",
+          "distance": "242",
+          "latitude": "50.8506",
+          "longitude": "4.35185",
+          "location_code": "20100",
+          "phone_number": null,
+          "opening_hours": {
+            "monday": [
+              {
+                "start": {
+                  "date": "2020-07-27 08:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-07-27 12:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              },
+              {
+                "start": {
+                  "date": "2020-07-27 13:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-07-27 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "tuesday": [
+              {
+                "start": {
+                  "date": "2020-07-28 08:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-07-28 12:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              },
+              {
+                "start": {
+                  "date": "2020-07-28 13:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-07-28 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "wednesday": [
+              {
+                "start": {
+                  "date": "2020-07-29 08:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-07-29 12:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              },
+              {
+                "start": {
+                  "date": "2020-07-29 13:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-07-29 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "thursday": [
+              {
+                "start": {
+                  "date": "2020-07-30 08:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-07-30 12:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              },
+              {
+                "start": {
+                  "date": "2020-07-30 13:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-07-30 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "friday": [
+              {
+                "start": {
+                  "date": "2020-07-31 08:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-07-31 12:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              },
+              {
+                "start": {
+                  "date": "2020-07-31 13:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-07-31 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "saturday": [
+              {
+                "start": {
+                  "date": "2020-07-25 10:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                },
+                "end": {
+                  "date": "2020-07-25 13:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Amsterdam"
+                }
+              }
+            ],
+            "sunday": []
+          }
+        }
+      }
+    ]
+  }
 }
 </pre>                    <h1 id="9">9. Delivery options Object Definitions</h1>
                 <p>If you use the endpoint delivery_options you get two objects. DeliveryOptions Object and PickupOptions Object. OpeningHours Object contains the opening hours of pickup locations.</p>
@@ -6189,27 +6408,30 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 <pre>
 {
   "date": "2017-02-01",
-  "time": [{
-    "start": "08:00:00",
-    "end": "12:00:00",
-    "price": {
-      "currency": "EUR",
-      "amount": 1000
+  "time": [
+    {
+      "start": "08:00:00",
+      "end": "12:00:00",
+      "price": {
+        "currency": "EUR",
+        "amount": 1000
+      },
+      "price_comment": "morning",
+      "comment": "",
+      "type": 1
     },
-    "price_comment": "morning",
-    "comment": "",
-    "type": 1
-    }, {
-    "start": "11:30:00",
-    "end": "13:30:00",
-    "price": {
-      "currency": "EUR",
-      "amount": 0
-    },
-    "price_comment": "standard",
-    "comment": "",
-    "type": 2
-    }]
+    {
+      "start": "11:30:00",
+      "end": "13:30:00",
+      "price": {
+        "currency": "EUR",
+        "amount": 0
+      },
+      "price_comment": "standard",
+      "comment": "",
+      "type": 2
+    }
+  ]
 }
 </pre>
                 <h2 id="9_B">9.B PickupOptions Object Definition</h2>
@@ -6305,21 +6527,24 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 <pre>
 {
   "date": "2017-02-01",
-  "time": [{
-    "start": "16:00:00",
-    "type": 4,
-    "price": {
-      "amount": 0,
-      "currency": "EUR"
-    }
-  }, {
-    "start": "08:30:00",
-    "type": 5,
-    "price": {
+  "time": [
+    {
+      "start": "16:00:00",
+      "type": 4,
+      "price": {
+        "amount": 0,
+        "currency": "EUR"
+      }
+    },
+    {
+      "start": "08:30:00",
+      "type": 5,
+      "price": {
         "amount": 125,
         "currency": "EUR"
+      }
     }
-  }],
+  ],
   "location": "Staples Office Centre",
   "street": "Jacobus Spijkerdreef",
   "number": "10",
@@ -6331,12 +6556,24 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
   "phone_number": "023-5576310",
   "comment": "Dit is een Business Point. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
   "opening_hours": {
-    "monday": ["08:00-18:30"],
-    "tuesday": ["08:00-18:30"],
-    "wednesday": ["08:00-18:30"],
-    "thursday": ["08:00-18:30"],
-    "friday": ["08:00-18:30"],
-    "saturday": ["08:00-17:00"],
+    "monday": [
+      "08:00-18:30"
+    ],
+    "tuesday": [
+      "08:00-18:30"
+    ],
+    "wednesday": [
+      "08:00-18:30"
+    ],
+    "thursday": [
+      "08:00-18:30"
+    ],
+    "friday": [
+      "08:00-18:30"
+    ],
+    "saturday": [
+      "08:00-17:00"
+    ],
     "sunday": []
   },
   "distance": "1934",
@@ -6486,14 +6723,14 @@ HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
                 <p>
                     Use this endpoint to subscribe to an event in our API. Upon success a HTTP/1.1 200 OK with
                     subscription ids is returned. You must use HTTPS for callback because it's secure and tamper proof.
-                    You can only have one webhook type at a time for each shop so adding the same webhook overwrites any existing one.
+                    You can only have one webhook of each type at a time for a shop so adding the same webhook overwrites any existing one.
                     We always send the webhook to a URL with lowercase characters. Therefore it is necessary to use lowercase characters in the URL of the webhook call.
                 </p>
                 <p>
                     We currently have two available hooks: <span class="nice">shipment_status_change</span> and <span class="nice">shipment_label_created</span>:
                 <ul>
                     <li>shipment_status_change: Whenever the <a href="#shipment_status">status</a> of a shipment changes this webhook will send you an update with the new value. We will not send an update with a status 1.</li>
-                    <li>shipment_label_created: Whenever a label is created this webhook will send you a message with the url of the label.</li>
+                    <li>shipment_label_created: When a label is created asynchronously (for example when <a href="#6_B_2">creating shipments using accept header application/vnd.shipment_label+json;charset=utf-8</a>) this webhook will send you a message with the url of the label.</li>
                 </ul>
                 <b>Tip:</b> You can test webhooks with <a href="https://webhook.site/" target="_blank">Webhook Tester</a>
                 <b>Tip:</b> You can also use the backoffice to update the webhook url.
@@ -6557,10 +6794,12 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 Content-Type:application/json; charset=utf-8
 {
   "data": {
-    "webhook_subscriptions": [{
-      "hook": "shipment_status_change",
-      "url": "https://seoshop.nl/myparcel/notifications"
-    }]
+    "webhook_subscriptions": [
+      {
+        "hook": "shipment_status_change",
+        "url": "https://seoshop.nl/myparcel/notifications"
+      }
+    ]
   }
 }
 </pre>
@@ -6569,9 +6808,11 @@ Content-Type:application/json; charset=utf-8
 HTTP/1.1 200 OK Content-Type:application/json; charset=utf-8
 {
   "data": {
-    "ids": [{
-      "id": 3
-    }]
+    "ids": [
+      {
+        "id": 3
+      }
+    ]
   }
 }
 </pre>
@@ -6633,11 +6874,13 @@ Authorization: basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
 HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
 {
   "data": {
-    "webhook_subscriptions": [{
-      "id": 123,
-      "hook": "shipment_status_change",
-      "url": "https://seoshop.nl/myparcel/notifications"
-    }]
+    "webhook_subscriptions": [
+      {
+        "id": 123,
+        "hook": "shipment_status_change",
+        "url": "https://seoshop.nl/myparcel/notifications"
+      }
+    ]
   }
 }
 </pre>
@@ -6769,13 +7012,15 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 <pre>
 {
   "data": {
-    "webhook_subscriptions": [{
-      "id": 79798,
-      "account_id": 126594,
-      "shop_id": 39399,
-      "hook": "shipment_status_change",
-      "url": "https://seoshop.nl/myparcel/notifications"
-    }]
+    "webhook_subscriptions": [
+      {
+        "id": 79798,
+        "account_id": 126594,
+        "shop_id": 39399,
+        "hook": "shipment_status_change",
+        "url": "https://seoshop.nl/myparcel/notifications"
+      }
+    ]
   }
 }
 </pre>
@@ -6836,36 +7081,37 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 </table>
                 <h3 id="11_B_3">11.B.3 Example</h3>
                 <pre>
-  {
-    "shipment_id": "25482412",
-    "account_id": 7003,
-    "shop_id": 1897,
-    "status": 2,
-    "barcode": "3SMYPA749883621"
-  }
+{
+  "shipment_id": "25482412",
+  "account_id": 7003,
+  "shop_id": 1897,
+  "status": 2,
+  "barcode": "3SMYPA749883621"
+}
 </pre>
                 The above is an example of the ShipmentStatusChangeEvent Object. However, the following notification is sent to your callback URL:
                 <pre>
 {
-    "data": {
-        "hooks": [
-            {
-                "shipment_id": "25482412",
-                "account_id": 7003,
-                "shop_id": 1897,
-                "status": 2,
-                "barcode": "3SMYPA749883621"
-            }
-        ]
-    }
+  "data": {
+    "hooks": [
+      {
+        "shipment_id": "25482412",
+        "account_id": 7003,
+        "shop_id": 1897,
+        "status": 2,
+        "barcode": "3SMYPA749883621"
+      }
+    ]
+  }
 }
 </pre>
                 <h2 id="11_C">11.C ShipmentLabelCreated Object Definition</h2>
                 <h3 id="11_C_1">11.C.1 Overview</h3>
                 <p>
                     This object contains the shipment label created event. This object is sent to the
-                    callback URL specified in the Subscription object whenever a shipment label
-                    is created.
+                    callback URL specified in the Subscription object when a label is created asynchronously (for
+                    example when <a href="#6_B_2">creating shipments using accept header
+                    application/vnd.shipment_label+json;charset=utf-8</a>).
                 </p>
                 <p>
                     <strong>status</strong><br>
@@ -6908,44 +7154,43 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                 </table>
                 <h3 id="11_C_3">11.C.3 Example</h3>
                 <pre>
-  {
-    "status": "success",
-    "shipment_ids": [
-      15001826
-    ],
-    "printer_identifier": "YOUR_PRINTER_ID",
-    "pdf": "https://api.myparcel.nl/pdfs/f569bc5a247fcec09d6a8cba16ff7629ca8062f3"
+{
+  "status": "success",
+  "shipment_ids": [
+    15001826
+  ],
+  "printer_identifier": "YOUR_PRINTER_ID",
+  "pdf": "https://api.myparcel.nl/pdfs/f569bc5a247fcec09d6a8cba16ff7629ca8062f3"
 
-  }
+}
 </pre>
                 <pre>
-  {
-    "status": "failed",
-    "shipment_ids": [
-      15001820
-    ],
-    "printer_identifier": "",
-    "pdf": "",
-    "reason": "payment required"
-  }
+{
+  "status": "failed",
+  "shipment_ids": [
+    15001820
+  ],
+  "printer_identifier": "",
+  "pdf": "",
+  "reason": "payment required"
+}
 </pre>
                 The above is an example of the ShipmentLabelCreated Object. However, the following notification is sent to your callback URL:
                 <pre>
-  {
-    "data": {
-      "hooks": [
-        {
-          "status": "success",
-          "shipment_ids": [
-            15001826
-          ],
-          "printer_identifier": "YOUR_PRINTER_ID",
-          "pdf": "https://api.myparcel.nl/pdfs/f569bc5a247fcec09d6a8cba16ff7629ca8062f3"
-
-        }
-      ]
-    }
+{
+  "data": {
+    "hooks": [
+      {
+        "status": "success",
+        "shipment_ids": [
+          15001826
+        ],
+        "printer_identifier": "YOUR_PRINTER_ID",
+        "pdf": "https://api.myparcel.nl/pdfs/f569bc5a247fcec09d6a8cba16ff7629ca8062f3"
+      }
+    ]
   }
+}
 </pre>
                 <h2 id="11_D">11.D SubscriptionIds Object Definition</h2>
                 <h3>Overview</h3>
@@ -6965,7 +7210,872 @@ Authorization:basic eUVJV1hFc3ZhMkxPeWRvVlM1bDVVZVJwamJNdVZQQXJSUGhFVkpCYw==
                     Required: n/a.<br>
                     <a href="#11_A">Subscription</a>.id
                 </p>
-                <h1 id="12">12. Document changes</h1>
+
+
+                <h1 id="12">12. Drop off points</h1>
+                <h2 id="12_A">12.A Get drop off points</h2>
+                <h3 id="12_A_1">12.A.1 Overview</h3>
+                <p>
+                    Use this endpoint to receive a list of nearby drop off points, where shipments can be dropped off upon shipping.
+                    Results are ordered by distance from the provided postal code or coordinates.<br>
+                    When creating Instabox shipments, it is required to provide a drop off point.
+                </p>
+
+                <h3 id="12_A_2">12.A.2 Reference</h3>
+                <table>
+                    <tr>
+                        <th>URI</th>
+                        <td>https://api.myparcel.nl/drop_off_points</td>
+                    </tr>
+                    <tr>
+                        <th>Methods</th>
+                        <td>GET</td>
+                    </tr>
+                    <tr>
+                        <th>Required request headers</th>
+                        <td><a href="#1_B">User-Agent: CustomApiCall/2</a></td>
+                    </tr>
+                    <tr>
+                        <th>URI parameters</th>
+                        <td>None.</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="6">Query parameters</th>
+                        <td>postal_code = <a href="#string">string</a></td>
+                    </tr>
+                    <tr>
+                        <td>cc = <a href="#country_code">country_code</a></td>
+                    </tr>
+                    <tr>
+                        <td>carrier_id = <a href="#carrier">carrier</a></td>
+                    </tr>
+                    <tr>
+                        <td>distance = <a href="#integer">integer</a></td>
+                    </tr>
+                    <tr>
+                        <td>latitude = <a href="#coordinates">coordinates</a></td>
+                    </tr>
+                    <tr>
+                        <td>longitude = <a href="#coordinates">coordinates</a></td>
+                    </tr>
+                    <tr>
+                        <th>Request body</th>
+                        <td>None.</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">Response</th>
+                        <td>HTTP/1.1 200 OK</td>
+                    </tr>
+                    <tr>
+                        <td>Content-Type: application/json;charset=utf-8</td>
+                    </tr>
+                    <tr>
+                        <th>Response body</th>
+                        <td><a href="#array">array</a> of drop off point objects</td>
+                    </tr>
+                </table>
+                <h3 id="12_A_3">12.A.3 Parameters</h3>
+                <p>
+                    <strong>postal_code</strong><br>
+                    Data type: <a href="#string">string</a><br>
+                    Required: yes, unless longitude and latitude are used<br>
+                    The postal code for which to fetch drop off points in the area.
+                </p>
+                <p>
+                    <strong>cc</strong><br>
+                    Data type: <a href="#country_code">country_code</a><br>
+                    Required: no<br>
+                    The country code for which to fetch the drop off points. This endpoint can only be used in the Netherlands (cc=NL).
+                </p>
+                <p>
+                    <strong>carrier_id</strong><br>
+                    Data type: <a href="#carrier">carrier</a><br>
+                    Required: no<br>
+                    PostNL (1), Instabox (5), and UPS (8) are available.
+                </p>
+                <p>
+                    <strong>distance</strong><br>
+                    Data type: <a href="#integer">integer</a><br>
+                    Required: no<br>
+                    Provide the radius in kilometers for which you want to find drop off points. The default distance differs by carrier.
+                </p>
+                <p>
+                    <strong>latitude</strong><br>
+                    Data type: <a href="#coordinates">coordinates</a><br>
+                    Required: no<br>
+                    This provides the ability to find drop off points by coordinates. Should be used together with longitude.
+                </p>
+                <p>
+                    <strong>longitude</strong><br>
+                    Data type: <a href="#coordinates">coordinates</a><br>
+                    Required: no<br>
+                    This provides the ability to find drop off points by coordinates. Should be used together with latitude.
+                </p>
+                <h3 id="12_A_4">12.A.4 Example</h3>
+                <p>
+                    <strong>Get drop off points for 2132JE for Instabox</strong><br>
+                    <strong>Request</strong>
+                </p>
+                <pre>
+GET https://api.myparcel.nl/delivery_options?carrier_id=5&postal_code=2132JE HTTP/1.1
+User-Agent: CustomApiCall/2
+accept: application/json;charset=utf-8
+                </pre>
+                <p><strong>Response</strong></p>
+                <pre>
+HTTP/1.1 200 OK Content-Type:application/json;charset=utf-8
+{
+  "data": {
+    "drop_off_points": [
+      {
+        "location_code": "e9149b66-7bee-439b-bab0-7a5d92ddc519",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Hoofddorp",
+        "postal_code": "2132WV",
+        "street": "Diamantlaan",
+        "number": "77",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.68156004,
+        "latitude": 52.29063034,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 2076,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "09108a62-10a7-45ec-8b96-ab03b92182af",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Hoofddorp",
+        "postal_code": "2131PZ",
+        "street": "Paxlaan",
+        "number": "10",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.68188469,
+        "latitude": 52.30899335,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 2588,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "4757b869-b97f-4b98-a436-133cff0d8007",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "SCHIPHOL-RIJK",
+        "postal_code": "1119NB",
+        "street": "Koolhovenlaan",
+        "number": "1",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.76706,
+        "latitude": 52.28593,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 3895,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "2dc21869-17b2-49d7-b676-394761aa6a57",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Aalsmeer",
+        "postal_code": "1431GD",
+        "street": "Turfstekerstraat",
+        "number": "27",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.775219,
+        "latitude": 52.259905,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 5786,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "9b39e848-1430-4a8b-b92a-0198edd4c841",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Cruquius",
+        "postal_code": "2143CH",
+        "street": "Spaarneweg",
+        "number": "75",
+        "number_suffix": "C",
+        "phone": null,
+        "reference": null,
+        "longitude": 4.628213,
+        "latitude": 52.333788,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 7160,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "5cf69210-a9d5-4f0b-b232-1ab0cf39e71f",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Aalsmeer",
+        "postal_code": "1432CE",
+        "street": "Schinkeldijkje",
+        "number": "4",
+        "number_suffix": "B",
+        "phone": null,
+        "reference": null,
+        "longitude": 4.82139,
+        "latitude": 52.29148,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 7482,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "ea91722d-f4ba-40f0-a87f-c0c72f683125",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amstelhoek",
+        "postal_code": "1427 AX",
+        "street": "Mennonietenbuurt",
+        "number": "29",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.82958,
+        "latitude": 52.23026,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 10743,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "da2ba2c9-03a7-47dd-abcc-b6c98cd72382",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amsterdam",
+        "postal_code": "1067PL",
+        "street": "Daam van Harenstraat",
+        "number": "14",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.80402,
+        "latitude": 52.37428,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 10887,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "13420d8b-c290-4a15-bd71-3244d3b035b0",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Haarlem",
+        "postal_code": "2031BJ",
+        "street": "Hendrik Figeeweg",
+        "number": "5",
+        "number_suffix": "A",
+        "phone": null,
+        "reference": null,
+        "longitude": 4.652859,
+        "latitude": 52.389378,
+        "available_days": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 11291,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "e3ccc1d5-ec90-4738-84a6-35596abede1b",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amstelveen",
+        "postal_code": "1183HK",
+        "street": "Kostverlorenhof",
+        "number": "150",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.87691,
+        "latitude": 52.31295,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 11437,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "354f88db-2bcd-4eb7-bb28-d7e7adc56804",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amsterdam",
+        "postal_code": "1076SZ",
+        "street": "Marathonweg",
+        "number": "21",
+        "number_suffix": "-23",
+        "phone": null,
+        "reference": null,
+        "longitude": 4.861751,
+        "latitude": 52.34824,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 11841,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "1025f656-fee9-4d5a-ad86-60c91370294c",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amsterdam",
+        "postal_code": "1046 AG",
+        "street": "Pleimuiden",
+        "number": "10",
+        "number_suffix": "C",
+        "phone": null,
+        "reference": null,
+        "longitude": 4.78694,
+        "latitude": 52.390865,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 11893,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "373c2d08-dcad-4f31-9c01-5e95a284f7ba",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Lisse",
+        "postal_code": "2161LE",
+        "street": "Vennestraat",
+        "number": "52",
+        "number_suffix": "g",
+        "phone": null,
+        "reference": null,
+        "longitude": 4.54992,
+        "latitude": 52.25069,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 12017,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "d1c9f43b-b796-45d5-9aa5-bbaaedf26b66",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amsterdam",
+        "postal_code": "1053GB",
+        "street": "Kinkerstraat",
+        "number": "270",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.8645501,
+        "latitude": 52.3652267,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 13050,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "290e43b0-7666-4c28-a02a-3743c818fc3a",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Lisse",
+        "postal_code": "2161 DH",
+        "street": "Heereweg",
+        "number": "448",
+        "number_suffix": "B",
+        "phone": null,
+        "reference": null,
+        "longitude": 4.53643847,
+        "latitude": 52.23953247,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 13381,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "9f0b602e-af0c-432a-b6d8-507644b393fe",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amsterdam",
+        "postal_code": "1072ER",
+        "street": "Ceintuurbaan",
+        "number": "11",
+        "number_suffix": "HS",
+        "phone": null,
+        "reference": null,
+        "longitude": 4.887313,
+        "latitude": 52.352459,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 13585,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "992de390-4dd5-43f5-a331-6ba995111ed7",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amsterdam",
+        "postal_code": "1078PZ",
+        "street": "Rijnstraat",
+        "number": "59",
+        "number_suffix": "H",
+        "phone": null,
+        "reference": null,
+        "longitude": 4.90515,
+        "latitude": 52.34651,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 14384,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "6efb5bd8-1f97-4a58-b187-68bd0207d027",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amsterdam",
+        "postal_code": "1016LR",
+        "street": "Rozengracht",
+        "number": "25",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.88179,
+        "latitude": 52.37367,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 14550,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "db927fda-c3da-4242-bce9-e3c56eb8004e",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amsterdam",
+        "postal_code": "1013SZ",
+        "street": "Spaarndammerbuurt",
+        "number": "490",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.88,
+        "latitude": 52.388908,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 15544,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "c25ec25d-2554-4fa6-a9d9-e1d9b45f5ff7",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Nieuwkoop",
+        "postal_code": "2421AX",
+        "street": "Dorpsstraat",
+        "number": "153",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.78182,
+        "latitude": 52.15176,
+        "available_days": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 16564,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "22350eb5-26f4-43bf-b720-76714214840b",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amsterdam",
+        "postal_code": "1098RB",
+        "street": "Christiaan Huygensplein",
+        "number": "12",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.93873,
+        "latitude": 52.34937,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 16613,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "db9eb896-be2b-4cc4-8b95-9b0a5a001155",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Amsterdam",
+        "postal_code": "1032KK",
+        "street": "Klaprozenweg",
+        "number": "21",
+        "number_suffix": "A",
+        "phone": null,
+        "reference": null,
+        "longitude": 4.9106586,
+        "latitude": 52.3964524,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 17662,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "ab130002-28ad-4155-978f-8bcc42fe779e",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Vinkeveen",
+        "postal_code": "3645DP",
+        "street": "Herenweg",
+        "number": "12",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.93652,
+        "latitude": 52.21272,
+        "available_days": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 17806,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "354f34ba-21f2-4e14-ba01-5ea3c878ea00",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Diemen",
+        "postal_code": "1112AT",
+        "street": "Visseringweg",
+        "number": "82",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.97182,
+        "latitude": 52.33219,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 18191,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      },
+      {
+        "location_code": "3546a7a1-0442-42a1-ab5d-7fde04e9024e",
+        "location_name": "Instabox",
+        "cc": "NL",
+        "state": null,
+        "city": "Noordwijk",
+        "postal_code": "2203GB",
+        "street": "Rederijkersplein",
+        "number": "6",
+        "number_suffix": null,
+        "phone": null,
+        "reference": null,
+        "longitude": 4.45187,
+        "latitude": 52.24139,
+        "available_days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "cut_off_time": "10:00",
+        "carrier_id": 5,
+        "distance": 18622,
+        "occupancy": null,
+        "occupancy_today": null,
+        "default_drop_off_point": null,
+        "opening_hours": null
+      }
+    ]
+  }
+}
+</pre>
+
+
+                <h1 id="14">14. Document changes</h1>
                 <p>
                     <a target="_blank" href="https://github.com/myparcelnl/api/commits">Click here</a> for the latest version of the API documentation. Last version update is done on <span id="current_version_date"></span>.
                 </p>
