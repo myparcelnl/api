@@ -5323,6 +5323,9 @@ HTTP/1.1 204 No Content
                         <td>exclude_delivery_type = <a href="#delivery_type">delivery_type</a></td> <!--bestaat deze nog -->
                     </tr>
                     <tr>
+                        <td>exclude_parcel_lockers = <a href="#boolean">boolean</a></td>
+                    </tr>
+                    <tr>
                         <td>latitude = <a href="#coordinates">coordinates</a></td>
                     </tr>
                     <tr>
@@ -5494,6 +5497,12 @@ HTTP/1.1 204 No Content
                     This options allows the Merchant to exclude delivery types from the available
                     delivery options. You can specify multiple delivery types by semi-colon separating
                     them. The standard delivery type cannot be excluded.
+                </p>
+                <p>
+                    <strong>exclude_parcel_lockers</strong><br>
+                    Data type: <a href="#boolean">boolean</a><br>
+                    Required: no<br>
+                    This options allows to filter out pickup locations that are parcel lockers.
                 </p>
                 <p>
                     <strong>latitude</strong><br>
